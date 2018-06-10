@@ -1,0 +1,19 @@
+title: "Personal Science of the Microbiome: Experiments"
+author: "Richard Sprague"
+date: "`r Sys.Date()`"
+
+site: bookdown::bookdown_site
+book_filename: "psm"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+
+
+rmd_files: ["index.Rmd",
+"01-intro.Rmd",
+"02-microbes.Rmd",
+"03-methods.Rmd",
+"06-references.Rmd"
+]
+

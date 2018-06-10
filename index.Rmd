@@ -1,0 +1,40 @@
+---
+title: "Personal Science Guide to the Microbiome"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [psm-refs.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+
+# Intro {-}
+
+Science is about curiosity, a passion for truth, and a never-ending process of systematic experimentation in pursuit of an understanding of the world around us.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
+
+This book will introduce you to one exciting area of personal science: understanding your own microbiome. Our [companion web site](https://app.personalscience.com) lets you upload your own data and compare it to others to make your own discoveries.
+
+Most of the examples are based on over 600 near-daily samples I took of my own microbiome over a three year period. Inspired by an experiment conducted at MIT^[@david_host_2014], during most of that time I also carefully tracked the food I ate, my sleep, and other variables like activity or location. Most of my near-daily samples were of my gut, but I also regularly tested my skin, nose, and mouth. Since I’m generally healthy, I didn’t have a specific goal in mind other than to try to understand better what these microbes are doing, so many of my tests were taken while undergoing simple experiments, like eating a specific type of food or visiting a new location. While not necessarily up to the rigorous standards of a formal scientific trial, these “n of 1” studies on myself helped me discover several new interesting facts about my own microbiome, many of which appear to contradict other published studies. In addition, hundreds of people sent me their own test results, letting me compare many different microbiomes. And of course, I also followed the latest developments in scientific publications and the general press as I eagerly tried to learn more.
+
+This book tells you what I learned.
+
+
+```{r loadAllData, echo=FALSE, warning = FALSE, message = FALSE}
+
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+
+source("R/loadMHGData.R")
+
+
+library(ggthemes)
+theme_set( theme_light(base_family = "MarkPro"))
+theme_set(theme_economist())# + scale_colour_economist())
+
+if(Sys.info()["sysname"]=="Darwin"){
+  quartzFonts(Candara = quartzFont(rep("Candara",4)), MarkPro = quartzFont(rep("MarkPro",4)))
+} else windowsFonts(Candara = windowsFont("Candara"), MarkPro = windowsFont("MarkPro"))
+
+
+```

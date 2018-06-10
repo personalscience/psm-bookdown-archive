@@ -1,0 +1,15 @@
+.Rproj.user
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
+libs/
+
+_bookdown_files/
+_bookdown_files/*
+_book/
+docs/
+/docs/
+docs*
+junk.txt
