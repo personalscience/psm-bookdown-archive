@@ -5,13 +5,14 @@
 .Ruserdata
 
 *.sh
+*.pdf
+*.md
+*.epub
+*.html
 
 libs/
 
 _bookdown_files/
 _bookdown_files/*
 _book/
-docs/
-/docs/
-docs*
 junk.txt
