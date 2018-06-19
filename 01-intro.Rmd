@@ -1,8 +1,29 @@
 # Getting Started {#Start}
 
+To study your own microbiome, you'll first need to run your microbes through a gene sequencer. Finding precisely which bits of DNA, and which microbes, are in your body is a miracle of modern technology that requires state-of-the-art equipment in a high tech lab. Fortunately, the costs to you as a consumer are plummeting and it's now easy to have your microbiome tested for under $100.
+
+The Personal Science app supports raw data from several microbiome companies.
+
+### uBiome
+The most popular laboratory is the San Francisco startup uBiome ^[from September 2012], 
+that originally began as crowdfunded campaign on
+Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like me who are curious to know what a 16S analysis will reveal about their own microbiome. Order a kit online at the [uBiome web site](https://shop.ubiome.com/pages/buynow).  We recommend the standard "Gut Kit" ($89). Be sure to use the offer code `PERSONAL SCIENCE` to get 15% off your order.
+
+Just send them a sample and a few weeks later they give you access to a private web page that will show you a breakdown of the types of bacteria they found.
+
+For microbiome hackers, the best part about uBiome is the raw data. 
+
+### Thryve
+Founded after CEO Richard Lin became frustrated at the lack of actionable microbiome insights to cure his own recurrent gut issues, [ThryveInside.com](https://thryveinside.com) is another standard 16S-based analysis. 
+
+### Others
+
+Another crowdsourced testing service is American Gut. ^[which dates from [November 2012](https://domains.google.com/registrar?s=americangut&hl=en#st=a&chp=w&w=americangut.org) ].  Other companies will sequence your microbiome as well, including DayTwo and Viome.  Stay tuned to our site for information about when we can support the raw data from other sites.
+
+
 So you tested your microbiome and now you want to know what it all means. Later we'll go into much more detail about the sampling process itself: differences between labs, how to get the best sample, how long it will take, etc. but let's start by assuming you've gone through all that. What will you learn?
 
-## Using the uBiome web interface
+## Using uBiome
 
 You just received an email that uBiome has finished processing your sample. Now what do you do?
 
@@ -26,88 +47,12 @@ Remember too that so far we're treating each individual organism as if it has th
 
 All we know at the phylum level is that, proportionately, certain large classes of bacteria are more well-represented than others. That may not sound like much to go on, but as we’ll see, scientists have been able to learn quite a bit from tiny clues like this.
 
-Click next on the "Insights" tab ( Figure \@ref(fig:explorerInsightsPage)) which may be more informative for beginners.If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
+But the real fun happens when we download the raw data and analyze it at the Personal Science site.
 
-```{r explorerInsightsPage, fig.cap = "The Insights tab provides a high-level view of what uBiome thinks is most actionable about your microbiome."}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerInsightsPageMar29.jpg"))
-```
 
-The one part of the Insights page that you _should_ take seriously is the section called "most uncommon bacteria". Let's jump to that section now.
 
-## How are you different?
+```{r child="using_psicom/how-to-download-ubiome-json.md", warning = FALSE}
 
-Since so little about the microbiome is well-understood, most of the time it will be hard to interpret your results by themselves. This is where the power of uBiome's citizen science can help, because the web page lets you easily compare your results with other people.  
-
-```{r explorerCompare, fig.cap = "The Compare view shows the differences between my sample and others in the uBiome database."}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerCompareMar29.jpg"))
 ```
 
 
-In this case, I can see that my sample has about 64% of the abundance of _Firmicutes_ as other people in the uBiome database. You can sort this field by abundance (ratio) and click on the various taxonomic categories to dig deeper into your microbiome and find microbes that are particularly rare in your sample. (Figure \@ref(fig:explorerRare))
-
-```{r explorerRare, fig.cap = "My sample shows very low levels of these microbes, compared to the hundreds of thousands of others in the uBiome database."}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExploreRareMar29.jpg"))
-```
-
-For example, I found that I have much less _Prevotella_ and _Butyvibrio_, two common microbes than the vast majority of uBiome customers.  I also found much higher-than-normal levels of _Deinococcus-Thermus_, an extremophile usually only found in harsh environments, like the impossibly acidic human stomach. Why would I have so many more than other people like me?
-
-One clue is the similarly-high levels of Proteobacteria, which as we just noted is often high in people with gastro-intestinal issues. Maybe I was exposed to something that released a bit of stomach acid, and its extremophile _Deinococcus_ into my colon.
-
-_Verrucomicrobia_ is elevated too, though not by much. This is a Phylum that is generally associated with soil microbes, though it's not unusual to find it in the gut as well.
-
-I looked back at my notes during the period of a few days before this sample, and interestingly I had been doing work in my garden at the time. We have deer and other animals that come near our house...is it possible that I was exposed to some animal excrement, maybe some of which somehow made it into my gut?
-
-It's just a theory, and perhaps an unlikely one, but I wonder if my body was fighting some type of pathogen as a result of my outdoor activities. Now before we get too excited, keep in mind that I never felt the slightest bit ill during this period. Can I thank my microbiome? Perhaps I was exposed to something nasty, the kind of bug that under other circumstances might have wreaked havoc and left me terribly sick for days. Now I have no way of knowing for sure, but this tidbit makes me wonder if maybe my microbiome acted as a guardian angel, protecting me from something much worse.
-
-Similarly, your own results comparing to others may lead you to clues about aspects of your environment you didn't otherwise suspect.
-
-Incidentally, since this test I've sent dozens of additional samples to uBiome and never saw that _Deinococcus_ thing again. Good riddance? or maybe I should be thankful for the protection, and hope that little bits of it may still be present, undetectably in my stomach, waiting to fight another external enemy the next time I come in contact with something in the soil.
-
----
-
-[^1]: De Filippo, Carlotta, Duccio Cavalieri, Monica Di Paola, Matteo Ramazzotti, Jean Baptiste Poullet, Sebastien Massart, Silvia Collini, Giuseppe Pieraccini, and Paolo Lionetti. 2010. “Impact of Diet in Shaping Gut Microbiota Revealed by a Comparative Study in Children from Europe and Rural Africa.” _Proceedings of the National Academy of Sciences of the United States of America_ 107 \(33\): 14691–96. doi:10.1073/pnas.1005963107.
-
-## Diversity
-
-The general consensus is that diversity is good: a greater variety of microbes ensures more resillience against the daily threat of invaders. Many people, after taking just one test, often feel either reassured that their diversity is "good" or disappointed that it's "bad". But I find that day-to-day variability is great enough that it's almost never useful to use a single result. For example, here's my diversity during a typical week:
-
-
-```{r, plotOneWeekDiversity, echo= FALSE, warning = FALSE}
-plot_richness(subset_samples(sprague.family.norm, Date > "2017-03-15" & Date < "2017-03-27" & Site == "gut"), measures=c("InvSimpson"),x = "Date") +
-  scale_x_date(date_labels = "%m-%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
-  geom_smooth(method = "loess") + 
-  ggtitle("Gut diversity changes day-to-day")
-```
-
-If I had only tested on Monday, I may have been disappointed with my 0.38 score. Wait another day or two and, with no significant changes in diet, I was up to 0.72 -- before plunging to 0.37 by the weekend. Moral: don't take a single result too seriously.
-
-To get a sense of how much diversity can vary over a year:
-
-```{r, plotOneYearDiversity, echo= FALSE, warning = FALSE}
-plot_richness(subset_samples(sprague.family.norm, Date > "2016-06-01" & Site == "gut" & Reads > 10000), measures=c("InvSimpson"), x = "Date") +
-  scale_x_date(date_labels = "%m-%Y", date_breaks = "3 months", date_minor_breaks = "1 month") +
-  geom_smooth(method = "loess") + 
-  ggtitle(paste("Gut diversity year-to-year through",
-                tail(sample_data(gut.norm)$Date,1)))
-  
-```
-
-Although the blue moving-average line shows apparent stability, there are many days that are far above and below the average. Yes, at various times during this period I was eating different types of food, often in a deliberate attempt to influence my microbiome, but believe me: that is not the reason for the wild changes up and down. I also studied the mathematics behind how diversity is measured, hoping to find something more "accurate", but ultimately I concluded that, like many attempts to summarize the microbiome in a single number, the whole concept of diversity is a mirage. Everything depends.
-
-
-_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.
-].
-
-```{r summarPlotBifido}
-#mhg_taxa_plot(subset_samples(gut.norm, Date > "2016-06-01"),"Akkermansia")
-
-probiotic.day <- seq(as.Date("2016-10-23"),length=9, by=1)
-plot_bar(subset_taxa(subset_samples(gut.norm, Date %in% seq(as.Date("2016-07-01"), length = 180, by = 1)),
-                     Genus == "Bifidobacterium"), x = "Date") + 
-  geom_smooth(method = "loess", se = FALSE) +
-  annotate("point",x=probiotic.day, y = -0.03, color = "red")+
-  scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("Bifidobacterium")
-  
-```
-
-Incidentally, the red dots indicate days when I was taking a powerful probiotic supplement that contained _Bifidobacterium_. And that big spike in September? That was during a trip to New Orleans, when I ate a lot of red beans and rice.  At least for me, food seems to work better than taking supplements.
