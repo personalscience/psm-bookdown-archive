@@ -1,5 +1,18 @@
 # Microbes to Watch {#Microbes}
 
+
+Your gut as seen by consumer-priced sequencing technology contains many more unique microbial species than you can possibly track, at least hundreds in most people and potentially over 1000. I've seen 1083 different ones in my own results. And that's just using the comparatively crude 16S technology: more comprehensive estimates based on other technology find as many as 36,000 different species^[See @frank_molecular-phylogenetic_2007 [Open access download](http://www.pnas.org/content/104/34/13780.full)]!  With that much variety, how do we find the ones that matter?
+
+Fortunately, only about 14 strains of 10 species account for 80% of a typical gut microbiome^[See the detailed estimates here: @kraal_prevalence_2014]
+
+In this chapter, we'll just consider the most common microbes and the overall consensus on what they do.  Later, in the chapter on [experiments](#experiments), we'll show more about how you can _manipulate_ them.
+
+What you're really wondering is how does your sample compare to others? Do you have an unusual abundance (or lack) of a particular taxa? Is there something that might indicate a greater or lesser similarity between your sample and certain other types of people? That is a very difficult question which we'll address over and over in this book, but for now let's just look at overall abundances of the highest taxonomical level, the phylum.
+
+The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroidetes_, which generally make up 80% or more of the total sample.  Most people also have smaller amounts of _Actinobacteria_,  _Proteobacteria_ and _Verrucomicrobia_. This overall composition is so common in healthy people that it's tempting to assume their dominance is "natural" or "normal", but like much else with the microbiome, the situation is different outside the western world, a clue that it's difficult to summarize a single individual's microbiome as "good" or "bad." It all depends.
+
+Let's start with what we know based on the results from real people.
+
 ## Phylum
 
 Debunking the Firmicutes/Bacteroides ratio

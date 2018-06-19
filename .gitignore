@@ -4,6 +4,8 @@
 .RData
 .Ruserdata
 
+*.sh
+
 libs/
 
 _bookdown_files/
