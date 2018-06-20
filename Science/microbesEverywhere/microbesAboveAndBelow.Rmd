@@ -1,0 +1,49 @@
+### Microbes above and below
+
+Scientists studying a water-filled fracture two miles underground at the Mponeng gold mine near Johannesburg, South Africa, discovered _Candidatus Desulforudis audaxviator_ by accident, after noticing odd levels of hydrogen compounds, by-products of the activity of an isolated bacterial colony.^[Chivian, Dylan, Eoin L Brodie, Eric J Alm, David E Culley, Paramvir S Dehal, Todd Z DeSantis, Thomas M Gihring, et al. 2008. “Environmental Genomics Reveals a Single-Species Ecosystem Deep within Earth.” Science (New York, N.Y.) 322 (5899). American Association for the Advancement of Science: 275–78. doi:10.1126/science.1155495.] Interestingly, this organism is a member of the same _Firmicutes_ phylum that dominates human guts, though this particular bacterium evolved quite separately from us: it hasn’t been exposed to surface water for millions of years. A systematic study of its genome revealed that, unlike other bacteria that usually live in co-dependent colonies, this one can survive all by itself, feeding on tiny bits of radioactive energy from uranium decay in an environment far removed from all other energy sources. It’s not a great life: these creatures reproduce rarely, only once every few hundred or thousand years. But at least they don’t have to worry about being consumed by predators down there.
+
+Subglacial Lake Whillans is a lake buried under more than 800 meters of ice in the West Antarctic. [A careful underground bore hole](http://www.nature.com/nature/journal/v512/n7514/full/nature13667.html) inserted by a team from Louisiana State University in 2014 found more than 4,000 different species of bacteria surviving under that ice. The total bacterial count was not that different from what you’d find in surface lakes on other parts of the planet, a fact that is especially surprising for an environment that hasn’t had a ray of light in millions of years. The bacteria instead thrive on iron, sulphur, and nitrogen as energy sources. ^[http://earthsky.org/earth/diverse-microbes-found-deep-beneath-antarctic-ice-sheet]
+
+Those may not be the deepest examples. A Cold War-era Soviet team drilling the world’s deepest hole, were forced to abandon the project in 1994 at 12,261 meters (or 7.5 miles) underground, when they hit temperatures above 180 °C (or 356 °F), too hot for their equipment. Apparently the conditions weren’t too hot for life, though: the nine-inch diameter Kola Superdeep Borehole ^[http://www.atlasobscura.com/places/kola-superdeep-borehole] found 24 species of fossilized plankton among the two-billion-year-old rocks down there. Of course, fossils are not the same thing as living microbes, but even dead remnants at that depth is evidence of the tenacity of life.
+
+Closer to the surface, [a 2015 Chinese study](https://www.nature.com/articles/ncomms9159) showed that 86% of the variation in above-ground life is determined by variation in the life below ground, mostly bacteria that sustain the ability of roots to take nutrients out of the soil.
+
+Even the sky contains living microbes. Scientists at the Institut de Chimie de Clermont-Ferrand in France have for decades sampled clouds to determine their precise contents, and sure enough: they finds plenty of life there, usually between 1,000 and 10,000 bacterial cells per milliliter — not all that different from the amount [you’d find in alpine snow](http://www.livescience.com/26645-microbes-in-the-sky.html). Like every living organism, these cells must soak up water and other nutrients, converting them into energy and various by-products, which collectively have a massive effect on the overall atmosphere, more than enough to affect climate. ^[http://www.asmscience.org/content/journal/microbe/10.1128/microbe.7.119.1]
+
+```{r echo=FALSE}
+knitr::include_graphics("Science/assets/scienceMicrobesSky.jpg")
+```
+
+
+source: [ASMScience](http://www.asmscience.org/content/journal/microbe/10.1128/microbe.7.119.1)
+
+The upper atmosphere is a harsh place for life: regular freezing and thawing, constant bombardment of UV radiation from the sun during the day, cold, subzero freezing temperatures at night, high speed, unpredictable winds that quickly disperse any colonies. Plus, at any moment these organisms can find themselves flushed to the ground in a rainstorm, where they’ll need to adapt again.
+
+These extreme conditions are just another day in the life for one species commonly found in clouds, _Pseudomonas syringae_, which harbors a protein in its cellular wall that reacts to cold temperatures, alternately preventing and allowing a water molecule to turn into ice and back. It doesn’t take many of these reactions to generate precipitation. With so many cells constantly floating in the atmosphere, even small changes in concentration — perhaps due to human activity on the ground — can, at least theoretically, make the difference between rainfall and drought. How much of an effect is hard to say: you can imagine how difficult it is to study bacteria floating in the sky.
+
+Our inability to access these environments is often the biggest reason we remain ignorant of the life that is found there, but there have been many attempts to learn more. Formal studies about the viability of microbes in space have been conducted since the early 1960s ^[@hotchin_survival_1967], when Apollo-era scientists wanted to understand the dangers of space travel, both to any humans in space as well as to those of us on the ground who might be exposed to any intersteller visitors.  
+
+Although new and bizarre extremophiles are discovered regularly, so far it appears that even the hardiest of known organisms have a tough time when directly exposed to solar ultraviolet radiation. But the particularly resilient spore-making _Bacillus subtilis_, for example, it is estimated could survive for at least six years if it were shielded somehow from direct sunlight, say embedded inside a meteorite.^[See an extensive 2010 review of everything known about space microbes in @horneck_space_2010.  Or skip to the [handy summary table](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2832349/table/t3/) ]
+
+Several lichen species, including rock colonizing *Rhizocarpon geographicum* and *Xanthoria elegans*,  and the vagrant *Aspicilia fruticulosa*, remained alive after ten days of direct UV exposure on board a European Space Agency spacecraft. ^[@de_la_torre_survival_2010] Some especially hardy cyanobacteria that came with the lichens didn't survive, so perhaps  space offers a better chance for multicellular life, which has the luxury of outer protective pigmented layers.
+
+Traces of sea plankton, for example, have been found in space, on the surface of the International Space Station, where they are believed to have floated from the upper atmosphere. ^[http://tass.ru/en/non-political/745635] Why?! How did they get there! Who knows!
+
+What is known is that between a quarter and two-thirds of microbes in the air are entirely new and undiscovered organisms. A study of the “air microbiome” above New York City found bacteria and viruses that apparently originated in water, soil, vegetation, as well as in animals and humans, but even then few patterns emerge. Although there appear to be distinct microbial environments, on the land versus water, for example, overall many of these organisms are quite hardy and seem to find themselves migrating all over the place.
+
+
+
+Still other microbes thrive in radioactive environments, like the dangerous interior of a nuclear reactor. *Deinococcus radiodurans* is an extremophile member of Phylum Deinococcus-Thermus that boasts an impressive built-in DNA repair mechanism that lets it survive cold, vacuum, acid, light, dehydration – you name it. It remains unbothered by radiation levels more than 1,000 times higher than would kill a human.
+
+Microbes seem capable of living off just about anything. _Ideonella sakaiensis_, discovered in 2016 by a Japanese team^[http://www.sci-news.com/biology/ideonella-sakaiensis-bacterium-can-break-down-metabolize-plastic-03693.html], can break down and metabolize plastic. Termites owe their wood-eating abilities to a whole community of synergistic bacteria, archaea, and protists. Aphids can't live off sap without  _Buchnera_, a microbe that supplies them with essential amino acids.  Some microbes even play a role in the mineralization of copper and gold.^[http://pubs.rsc.org/en/Content/ArticleLanding/2018/MT/C7MT00312A#!divAbstract]
+
+
+
+<!--
+![Deinococcus radiodurans](https://upload.wikimedia.org/wikipedia/commons/7/73/Deinococcus\_radiodurans.jpg)
+-->
+
+```{r echo=FALSE}
+knitr::include_graphics("Science/assets/scienceRadiodurans.jpg")
+```
+

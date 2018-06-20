@@ -1,0 +1,76 @@
+### Microbes and food*
+
+
+We like our food pure and clean, and so do microbes. Well, _some_ microbes. Freshly-washed produce is a just a colonization opportunity for many species, for whom the lack of competition is a shot at a fresh start.
+
+Before washing, plants are covered in microbes, from the flowers and branches to the roots. Seeds planted in sterilized soil will germinate, but can't grow regardless of the nutrients, water, or sunlight you give them. The relationship between soil bacteria and plants is a complicated and understudied one, but what is known is that every plant hosts its own unique species of microbe in a symbiotic relationship as tight as any on earth. The microbes tangled in the roots of a corn or wheat plant, for example, are highly specific to that particular strain. Swap out the microbes, or -- worse -- sterilize the soil, and the plant can't take advantage of the nutrients sitting right at hand, because they are in a form that is useless until digested by microbes.
+
+After harvest and processing, our meals still contain a surprising variety of microbes. Of course, sometimes this is deliberate: some of us eat fermented foods like sauerkraut or yogurt to ingest the microbes that were grown to make their special flavor or texture. But even everyday foods, like raw vegetables, will naturally be covered with healthy levels of microbes.
+
+You will ingest somewhere between 1.4 million and 1.3 trillion microbes per day, depending on what type of diet you follow. Eat according to USDA guidelines and you'll be at the high end of the range, emphasizing fruits and vegetables, lean meat, dairy, and whole grains; the lower end is more typical of a vegan diet, or even a typical American convenience food-style diet of "junk food". Interestingly, you'll get roughly the same diversity of microbes no matter which diet you follow, although there can be a difference depending on whether the food is raw or cooked.^[
+@lang_microbes_2014 
+Lang, J. M., Eisen, J. A., & Zivkovic, A. M. (2014). The microbes we eat: abundance and taxonomy of microbes consumed in a day's worth of meals for three diet types. *PeerJ*, *2*, e659. http://doi.org/10.7717/peerj.659]
+
+We eat plants for their nutrients, but what exactly counts as a "nutrient" is often in the eye of the beholder. Plants don't like to be eaten any more than the rest of us, and they have developed powerful defense mechanisms to keep out predators, including microbes. In fact, it's those anti-microbial properties that make many plants medicinally useful. One estimate showed that of 18,000 plants available to Native Americans, only 1,625 were used as food; but 2,564 were used as drugs, many of which are specifically there to manipulate microbes. ^[Cowan, M M. 1999. "Plant Products as Antimicrobial Agents." *Clinical Microbiology Reviews* 12 (4): 564–82. http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=88925&tool=pmcentrez&rendertype=abstract.] Extrapolate that to the estimated 500,000 different plants on earth, only about 1-10% of which are useful as foods to humans, and it becomes clear that microbes play a big role in which plants thrive and which don't.
+
+You're not necessarily immune from accidental antibiotic ingestion if you simply avoid eating antibiotic-treated meat. Between 70% - 90% of the antibiotics given to farm animals are ultimately discharged in their manure, which if administered as fertilizer, can coat the soil used for growing food plants. Although antibiotics naturally degrade over time, the process can take months and under many conditions, giving ample time to be taken up in to plants that we eat, so even hard-core vegans may be getting more antibiotics than they like. ^[See "The Modern Farmer" chapter in @blaser_missing_2015]
+
+Meanwhile, junk food doesn't necessarily wreck your microbiome as much as you'd think. Careful experiments show surprisingly few differences between mice fed a high fructose, high fat diet -- unless there was something else messed up to begin with^[like a pre-existing marker for Crohn's disease. @martinez-medina_western_2014 http://www.ncbi.nlm.nih.gov/pubmed/23598352]
+
+And what about microbes in the kitchen? When food is contaminated by bacteria, in the vast majority of cases, the source is fecal. In other words, it's relatively rare for raw food to be contaminated by something from within -- the danger is almost always from pathogens that are brought in during food preparation.^[@myhrvold_modernist_2011 pp.104-]
+
+
+**Anti-microbials in food**
+
+Even plants that depend on pollinators, or those that spread their seeds by being ingested by birds, don't necessarily like to be eaten whole and completely. Leafy grasses attract ruminants like cows or sheep with large tasty fibrous leaves that the plant offers in order to bring in the high-nitrogen feces that will help the plants grow better.^[See one list of known plant-derived antimicrobials in @cowan_plant_1999 [here](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC88925/table/T1/)].
+
+
+One powerful deterrent to insects is the chemical caffeine, produced in abundance by plants in the genus *Coffea*, including the species [*Coffea arabica*](https://en.wikipedia.org/wiki/Coffea_arabica), commonly known as coffee. A powerful toxin against insect invaders, caffeine in the seeds of this plant will kill nearly all invaders. In fact, few insects are known to have any tolerance to caffeine –ensuring that the plant can continue to reproduce unmolested by predators.
+
+But no matter how clever, these self-defense mechanisms aren't foolproof. One beetle, the coffee berry borer is a notorious bane of Brazilian coffee growers for the way it munches on the coffee beans without any ill effects. When scientists studied this pest, they discovered something missing in the berry borer's feces: caffeine.^[http://phenomena.nationalgeographic.com/2015/07/14/this-beetle-is-ruining-your-coffee-with-the-help-of-bacteria/] How could these bugs eat so much caffeine without becoming poisoned? The reason turned out to be *Pseudomonas fulva,* a tiny inhabitant of the beetle's gut, and the only microbe with a gene called ndmA that can metabolize caffeine. Borer beetles without this microbe accumulate large amounts of unmetabolized caffeine and are unable to reproduce.
+
+**Probiotics**
+
+```{r probioticImage, out.width = "200pt", echo = FALSE}
+
+knitr::include_graphics("./Science/assets/Probiotic.jpg")
+```
+
+
+The International Scientific Association for Probiotics and Prebiotics (ISAPP) defines probiotics as "live microorganisms that, when administered in adequate amounts, confer a health benefit on the host". Experts reserve the term "probiotic" for supplements, as opposed to foods that happen to contain live, healthy microorganisms, but that distinction is lost on most people, who just want to be sure they consume enough "good" bacteria.^[Read more here: http://isappscience.org/consumers lengthy list of other resources, http://usprobioticguide.com Clinical Guide to Probiotic Products, [Expert Consensus Document](http://www.nature.com/nrgastro/journal/v11/n8/full/nrgastro.2014.66.html) published by the peer-reviewed scientific journal *Nature* (2014)]
+
+Perhaps this is a good time to keep up my regular rant about why I don't like the term "good" or "bad" when it comes to microbes. Everything depends on context: it's possible to have too much of a good thing, just as it's possible to have too little of some bad things. Nature knows how to manage a delicate balance and it's foolhardy to pretend we know all the consequences of a major change in either direction. Martin Blaser, in his excellent book *Missing Microbes*, reminds us of the native proverb:
+
+>Elk are there to feed the wolves; wolves are there to keep the elk strong."
+
+You may not want to get rid of *everything*, nor would you want to fill yourself up with too much of anything.
+
+
+Like anything you put into your body, you can't just assume it's *all* upside. 
+
+Presumably you're reading this because you are convinced that microbes have a powerful affect on the body, perhaps as powerful as prescription drugs, yet you wouldn't consider taking random prescription drugs just to see what happens. The billions of microbes you send into your gut is in a concentration and quantity far greater than anything you'd get from nature. Please remember that.
+
+Here's an analogy: let's say scientists discover a breed of parrot that is found in abundance in healthy ecosystems in Costa Rica, so they decide to introduce it to Yellowstone Park. They dump thousands of live parrots all over the park and when they count the overall species diversity the following day, they note with pride that the experiment worked: Yellowstone is now home to a new species, one that is associated with healthy ecosystems! Unfortunately, upon testing again a week later, they learn that the parrots are gone. What happened? You and I can laugh at the idiots who thought they could transplant a tropical species into Wyoming, but maybe that's exactly what you're doing if you try to introduce a new species that is not adapted to your microbiome. It may show up in a couple of early gut tests, but if it disappears soon thereafter, was it helpful at all? In the parrot example, it may actually be harmful if it served as food to dangerous predators.
+
+
+Fortunately, the body is pretty robust and, for better or for worse, it's hard to deliberately change the microbiome.
+
+
+**Fermented food**
+
+
+In some foods, living microbes aren't along just for the ride – they *are* the ride. Most raw foods will quickly spoil if left uneaten for too long. We say "spoiled", but really we mean the food is consumed by bacterial species who leave by-products that are not edible or pleasant for humans.
+
+Under the right circumstances, though, food can nourish microbes.^[The best overview of microbes and food is @scott_influence_2013]
+
+Before refrigerators,  long-term preservation of food was a constant concern. You either eat the food now or let the microbes eat it. 
+
+Yes, much of that yogurt makes it past the stomach and into the gut.
+
+**Fiber and your gut microbes**
+
+
+Short-chain fatty aides (SCFA) created when gut bacteria break down fiber.
+
+Pulverising and juicing reduces fiber content.  e.g. whole wheat grains have 12g, but fine-ground has only 3g.  a 200ml bottle of orange juice has 1.5g fiber, but four oranges has 12.
+

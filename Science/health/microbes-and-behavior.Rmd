@@ -1,0 +1,80 @@
+### Microbes and behavior* {#scienceMicrobesBehavior}
+
+There are surprising links between microbes and behavior.
+
+_Toxoplasma Gondii_ is a tiny microbe that, for some reason, only likes to reproduce from within the gut of a cat. It can be found in almost all warm-blooded mammals, including humans — about 30% of us, according to some estimates, and that's after a century of obsession with hygiene that has wiped out countless other tiny inhabitants of the body.
+
+_T. Gondii_ seem harmless because its hosts appear to show no differences before or after "infection" except in one creature: the rat. In this classic experiment^[@vyas_behavioral_2007], rodens that were infected with _Toxoplasma gondii_ were studied with special dyes that can show how the infection spreads, first in the gut and then to the brain. 
+
+```{r echo=FALSE, fig.cap = "From Vyas 2007"}
+
+knitr::include_graphics("Science/assets/scienceRatsTaxoplasmaF1large.jpg")
+
+# knitr::include_graphics("http://www.pnas.org/content/104/15/6442/F1.large.jpg")
+
+```
+
+When it finds itself ingested by a mouse or rat, it appears to fade away quietly. MRI scans show large amounts in the gut for a week or two, gradually decreasing until there is apparently nothing. By day 18, the last remnants of the infection are disappearing from the brain, except for tiny T. Gondii cysts. Not everywhere, but in just a few strategic places.
+
+Then something strange happens: the rat is now unnaturally attracted to cat urine. And note: its only attraction is to cat urine, not rabbits, not humans — only cats. Everything else about the rat appears normal. It still seems to be afraid of the other things that scare rats: other predators, stressful situations. But put a _T. Gondii_-affected rodent into a maze with different animal urine in the corners and it will rush to the cat side every time.
+
+How is it that _T. Gondii_ is able to be so precise in its effects? It seems to affect just rodents, and even then it only apparently makes them attracted to cats. It doesn’t apparently cause any other harm to its hosts, so — somehow — it must have found a resting place right at the spot in the mouse brain that affects its interest in cats.
+
+Although there doesn’t seem to be any major negative consequences to humans hosting _T. Gondii_, some scientists aren’t sure. One man in particular, Jaroslav Flegr, an evolutionary biologist at Charles University in Prague, thinks he has evidence that women who carry it might be more trusting than those who don’t. 
+
+Incidentally, some of the drugs used to treat schizophrenia have been shown to reduce levels of _T. Gondii_. 
+
+_T.Gondii_ isn’t the only microbe known to affect the behavior of its host. A more common example is the rabies virus, which upon infection somehow causes a mammal to be more agitated, more likely to strike out — or bite — other humans, thereby spreading itself.
+
+Or syphilis, the disease spread by _Treponema pallidum_ that causes its host to go insane. The microbe is somehow able to infect the mind of the victim.
+
+In general, sexually transmitted diseases are especially likely to have behavioral consequences. A sexual disease that produces symptoms is unlikely to spread, yet it still requires contact with a new victim. Perhaps the ideal vector is a behavioral change, making the host more likely to come in contact with a new host.
+
+
+
+
+There are many other examples of microbes that appear to affect the brain.
+
+5-HTP is an intermediate molecule between tryptophan and serotonin.  It is produced by Candida, Streptococcus, Escherichia, and Enterococcus.  
+
+Bacillus and Serratia make dopamine
+
+Escherichia, Bacillus, Saccharomyces make noradrenaline
+
+Lactobacillus can produce acetylcholine
+
+GABA can be produced by Lactobacillus and Bifidobacterium.
+
+
+
+_Bacteroides Fragilis_ is depleted in autistic patients. it is a gatekeeper for the immune system [ http://www.ncbi.nlm.nih.gov/pubmed/16009137]
+
+
+_Sutterella_ may have implications for autism, causes tics ?
+
+
+_Bifidobacterium infantis_:  see Sudo, Chida for gnobiotic mice that it prevents from becoming stressed.
+
+
+Mark Lyte and his colleagues, a microbiology team from the Minneapolis Medical Research Foundation, studied the effect of infecting mice with
+_Campylobacter_, one of the bacteria implicated in the Walkerton epidemic. The dose of bacteria was high enough to be detected in the intestine, but not so high that the mice developed overt illness. You probably won’t be surprised to learn that the campylobacter-infected mice exhibited more anxiety when navigating a maze than the control mice.
+
+
+_Lactobacillus rhamnosus_ is lower in pups born to pregnant mothers under stress. Intrigingly, this species is linked to levels of GABA, an important neurotransmitter targeted by anti-anxiety drugs like Valium and Xanax.^[See a detailed discussion in the New York Times: https://www.nytimes.com/2015/06/28/magazine/can-the-bacteria-in-your-gut-explain-your-mood.html] What's more, in mice the action of these microbes seems modulated by the vagus nerve -- mice who have their vagus nerve removed seem to be unaffected by GABA.^[@bravo_ingestion_2011]
+
+
+Scientists in Japan characterized the microbiome of 25 anorexia nervosa patients and compared them to healthy controls. The AN patients had a lower amount of total bacteria and specifically, lower amounts of _Clostridium coccoides_ group, _C. leptum_ subgroup, _Bacteroides fragilis_, and _Streptococcus_.^[http://www.microbiomeinstitute.org/blog/2016/1/7/gut-dysbiosis-in-anorexia-nervosa-patients]  
+
+Or consider the bacterium _Tropheryma whipplei_, the infectious cause of Whipple's disease. Sufferers often have neurological symptoms like memory loss and odd eye and face movements called _oculomasticatory myorhythmia_, which indicate that somehow the microbe has invaded the nervous system.
+
+Autism (which [we'll discuss later](#caseStudyAutism)), is often accompanied by a strange craving for propianate-heavy products like bread. You can see [videos](https://www.youtube.com/watch?v=WNKsTCXpdGI) showing how rats behave when given too much propionate. 
+
+We all know people who seem exceptionally fastidious, some who are diagnosed with Obsessive Compulsive Disorder (OCD).  The bacterium _Streptococcus_  become relatively more abundant after hand-washing, so they influence the basal ganglia to do more hand-washing? Is that a coincidence?
+
+Think about this too much, and you'll end up with the obvious question: what other weird microbes are infecting us right now? Can we explain some of our own behaviors this way? Is there a human equivalent of these infections, driving us to do things we “ordinarily” wouldn't do? And maybe these microbes are so ubiquitous, teeming all over us and in our brains, maybe there's no way to even know what “ordinary” or “normal” human behavior is.
+
+
+
+
+
+

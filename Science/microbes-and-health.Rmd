@@ -1,0 +1,100 @@
+## Microbes and health
+
+
+The great French scientist Louis Pasteur, working as a physician in the 1800s, was the first to popularize the idea that the world is covered in *germs*, invisible agents that he associated with food spoilage and disease. Simple steps at hygiene, he discovered, could make conditions inhospitable for them, enabling better food storage and dramatically fewer illnesses. Working as a chemistry professor in the 1850s, one of his students, the son of a local wine manufacturer, sought his help to solve problems with souring. Subsequent investigations led him to conclude that invisible yeasts were the culprit, and that exposure to air could affect the rate of fermentation. Pasteur's emphasis on controlling these microbes led to a general association of germs as pathogens, a bad, even evil force that we must destroy, every single time. The only good germ is a dead germ.
+
+And for good reason. The development of effective disinfectants, and then antibiotics -- germ killers –- was one of the greatest medical achievements of all time, saving the lives of a significant fraction of the human race. Before Pasteur, urban life was a precarious game of chance against diseases that seemed to come and go randomly. Thanks to the development of the Germ Theory of Disease, it was suddenly possible to imagine a world where deadly illnesses and infections could be controlled and perhaps eliminated. Now, every day of your life, modern amenities like running water and flush toilets keep you healthy simply by controlling the growth of microbes.
+
+Some can be quite nasty. The bacterium that causes Cholera, [*Vibrio cholerae*](https://en.wikipedia.org/wiki/Vibrio_cholerae), after infecting the small intestine, promptly hijacks the body’s natural defense systems into sending a large stream of water through the colon to flush out all other bacteria. Normally, this would be an appropriate response to an invasion, but by hiding above the colon, *Vibrio cholerae* continues to breed above the main flow of water. The resulting diarrhea is so fierce that the patient is literally unable to drink enough to make up for the outflow, and dies of dehydration within days. And in a final act of cruelty, that water that the body pushes out so fiercely is itself full of *V. cholerae*, who use the opportunity to infect others who come in contact with the water.
+
+Campylobacter jejuni: food poisoning from raw chicken
+
+
+The toxins produced by the *Clostridium* genus are among the most dangerous. Botulism (C. *Botulinin*) Tetanus ( _C. tetani_), gangrene (*C. perfringens*), and of course C. *Dificile*.
+
+
+Some bacteria simply use the darkness and wet warmth of the colon as a breeding ground, happily feasting on the materials they find there. They cause trouble not by what they eat, but by what they excrete: nasty toxins that mess up some other part of the body. *Clostridium botulinum* produces the neurotoxic protein botulinum that can weaken or freeze nerve cells. The most acutely lethal toxin known – only 2 billionths of a gram can kill -- botulinum is almost as deadly to people as the plutonium in a nuclear bomb. Just a few pounds under the right conditions would kill everyone on earth.
+
+Part of what makes pathogens so dangerous is it takes so few of them to be deadly. Some *Shigella* species, for example, become infectious with a starter colony of as few as ten organisms.^[@kothary_infective_2001]
+
+With such terrible killers lurking out there, it's tempting to divide all microbes into "bad" (pathogenic), "good" (probiotic) and "neutral" (commensal). You'll find plenty of lists that do just that.
+
+But often, perhaps usually, the distinction between good and bad is unclear. Consider the "viridans" _Streptococci_, a group name for a whole breed of related microbes commonly found harmlessly in human mouths. If a few of these escape the mouth and somehow enter the bloodstream, they can land on a heart valve and can cause a dangerous, life-threatening infection. But inside the mouth they are tough competitors to other bacteria that may want a foothold, like the *Streptococcus* that causes Strep Throat. Mix Viridans with Strep A, and Viridans wins every time. So is it good or bad? Well, it's bad if your Viridans makes it to the heart; but in its regular form it protects you from other infections.^[ see page 119  @blaser_missing_2015]  
+
+People with _Streptococcus lugdunensis_ in their noses appear protected from some staph infections, probably because _S. Lugdunensis_ produces a microbial antibiotic to kill off its competitors. But _S. lugdunensis_ can itself cause skin infections.
+
+Often it's the context that matters. *Staphylococcus aureus*, found in about a quarter of all Americans, is the agent behind a host of infections ranging from mild skin ailments to the deadly, often untreatable MRSA. But it seems to be harmless when in the presence of _Corynebacterium_ species.  ^[https://www.sciencedaily.com/releases/2016/08/160817091034.htm]  
+
+_Lactobacillus_ is especially good at crowding out pathogens.
+
+The body is pretty good at fighting off many pathogens. Around 94% of people who ingest _Salmonella_ will recover without any medical attention at all.^[Of course, it's difficult to tell how many people _don't_ go to the hospital; this is a risk estimate based on fairly generous assumptions about the amount of the pathogen in eggs and how many people eat them. @hope_overview_2002]
+
+99% of the "A survey of DNA fragments circulating in the blood suggests the microbes living within us are vastly more diverse than previously known. In fact, 99 percent of that DNA has never been seen before."^[https://news.stanford.edu/2017/08/22/nearly-microbes-inside-us-unknown-science/]
+
+
+###Food Allergies ***
+
+
+If you attended elementary school before the 1980s, you can remember a time before nut allergies, when school lunches served peanut butter to everyone without the slightest worry that it might cause problems.
+
+*Clostridia* may counter sensitivity to peanuts ^[http://www.sciencemag.org/news/2014/08/gut-microbe-stops-food-allergies]
+
+
+### Gluten
+
+It’s been well-established that a gluten free diet impacts the microbiome. This shouldn’t be too surprising, given that gluten is a nutrient for some bacteria but not others.  But what about people who show an unusual sensitivity, even allergy, to gluten? What’s the cause?
+
+Recently the idea of a gluten free diet has taken on fad diet status. Despite surprisingly little research evidence that it can quantitatively affect health, millions of people swear that gluten gives them various ailments from poor digestion to brain fog. If you don’t believe it, they’ll say, try it yourself and see; and sure enough, many of those who go off gluten claim big health benefits.  Eating is usually a zero-sum game: stop eating one thing (say, the gluten in wheat) and you’ll end up eating more of something else (rice or corn). Is it the switch to a different diet — and the anticipation of success that this brings — that makes people feel better, or is there something really significant about gluten itself?
+
+The experts say no, with one important exception. A tiny fraction of people *do* suffer from Celiac disease, a known disorder of the body’s ability to handle gluten. There are well-established tests that can definitely tell whether you have Celiac disease or not, and although the vast majority of people test negative, those who are true Celiacs will immediately and obviously benefit from a gluten free diet. But what’s driving the difference?
+
+As usual, the genetic evidence isn’t completely lock-tight. Although a third of the population have particular versions of the (DQ2 or DQ8) of a cellular receptor called the human leukocyte antigen (HLA), only a tiny minority go on to develop serious gluten sensitivities.  Some studies indicate gluten sensitivity arises at an early age, and that perhaps celiac disease can be prevented by exposing babies to gluten at just the right moment, but other studies say the opposite.^[@vriezinga_randomized_2014]
+
+These are all clues that the microbiome may be involved, and sure enough, many studies show a definite difference between healthy microbiomes and those with clinically-proven Celiac disease.^[@de_palma_effects_2009] But because Celiac sufferers tend to eat differently than non-sufferers, it can be hard to tell how much of the microbiome is a result of a different diet, and how much is due to the disorder.
+
+Another clue happens further up the digestive system. Spanish researchers looking at the small intestine found curiously similar microbiomes in both healthy and celiac patients. ^[@herran_gluten-degrading_2017]. The difference happened at the functional level of what those bacteria *do*, and not necessarily in just whether the microbe is present or absent. *Lactobacillus*, it turns out, is one of the best degraders of gluten^[@rizzello_highly_2007], but there are others: *Bacillus pumilus*, *Stenotrophomonas maltophilia*, *Pseudomonas aeruginosa*.  Most interestingly, unlike *Lactobacillus*, some of these bacteria can do more than just digest the gluten: they appear to contain enzymes that transform the gluten — pointing to the possibility that the enzymes produced by these microbes could be purified and used to eliminate traces of gluten from food products.
+
+So if Celiac disease is caused by a change in the way some microbes function, how did that change happen in the first place? One theory is that it’s a virus.  Researchers at the University of Chicago and University of Pittsburgh were able to supercharge the way mice react to gluten by infecting them with a reovirus that apparently changes something about the body’s immune response in the presence of the gluten protein. ^[http://www.today.com/health/celiac-disease-may-be-caused-virus-new-study-finds-t110119]
+
+
+Where did this modern plague come from?
+
+The first case to appear in medical journal didn’t happen until 1969 (Golbert), and examples were extremely rare before that. In fact, the very first mention of a food allergy happened about 100 years ago (Schloss).
+
+Martin Blaser thinks something odd has happened because of the overuse of antibiotics.
+
+Amish microbes are very diverse google: “Zupancic microbiota Old Order Amish” PLOS 2012
+
+partly because they drink lots of raw milk
+
+
+“We have probably seen the worst of the asthma epidemic which was at its height in the 80s and 90s"
+
+google: “Song cohabiting family members share microbiota with one another and with their dogs”
+
+ 
+Humans are able to synthesize just 30 plant-digesting enzymes. Contrast that to the species _Bacteroidetes thetaiotaomicron_ which can break down plant structures using over  260 different enzymes.^[see @spector_diet_2016 p.299]
+
+
+
+
+### Other conditions
+
+[Some people](https://lactobacto.com/sinusitis-treatment-summary/) claim you can treat migraine headaches, sinusitus, and other conditions by inserting _Lactobacillus_-containing Kimchi up the nostril. I've not tried it and can't vouch for it, but let me know if it works for you.
+
+
+```{r child="./health/microbes-and-hygiene.Rmd"}
+
+```
+
+```{r child="./health/healthDiversity.Rmd"}
+
+```
+
+
+```{r child="./health/microbes-and-behavior.Rmd"}
+
+```
+
+
+

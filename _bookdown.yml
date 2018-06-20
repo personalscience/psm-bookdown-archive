@@ -14,7 +14,7 @@ rmd_files: ["index.Rmd",
 "01-intro.Rmd",
 "using_psicom.Rmd",
 "02-microbes.Rmd",
-"03-methods.Rmd",
+"science.Rmd",
 "04-go-deeper.Rmd",
 "06-references.Rmd"
 ]

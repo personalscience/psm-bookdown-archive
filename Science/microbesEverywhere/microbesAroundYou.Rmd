@@ -1,0 +1,20 @@
+### Microbes around you
+
+
+You don't have to go to extreme conditions to find unusual microbes. Microbes thrive whereever humans live, and they are in our everyday environment too. The [PathoMap Project](http://www.pathomap.org/), studying DNA collected from the New York City area found that, like the air above, half of the microbes we walk past everyday are unknown to science. ^[Afshinnekoo, Ebrahim, Cem Meydan, Shanin Chowdhury, Dyala Jaroudi, Collin Boyer, Nick Bernstein, Julia M. Maritz, et al. “Geospatial Resolution of Human and Bacterial Diversity with City-Scale Metagenomics.” *Cell Systems* 1, no. 1 (n.d.): 72–87. doi:10.1016/j.cels.2015.01.001] Most of the organisms are apparently benign, with no obvious affect on humans one way or another. Even when known pathogens are found, including _Yersinia pestis_ (Bubonic plague) and _Bacillus anthracis_ (anthrax), the lack of reported infections indicates that probably these organisms are busying themselves for some other, unknown, and maybe even useful purpose^[A later, more careful analysis indicates these particular pathogens may not actually be present: http://msystems.asm.org/content/msys/1/3/e00050-16.full.pdf]
+
+```{r echo=FALSE}
+knitr::include_graphics("Science/assets/scienceNYCSubway.jpg")
+
+# http://www.cell.com/cms/attachment/2054936429/2060898672/gr1.jpg
+
+```
+
+
+
+Generally the microbes seem content to exist patiently with no apparent affect on the environment. A station flooded by Hurricane Sandy showed a similarity to a marine environment a year after the disaster.
+
+Humans are the source of many unusual microbes in our environment. Regularly shedding 1.5 million skin cells per hour, your body's leftover inhabitants can colonize a hotel room in less than six hours.^[http://www.wsj.com/articles/big-data-and-bacteria-mapping-the-new-york-subways-dna-1423159629]
+
+Your household pets carry microbes, of course, but simply having a pet seems associated with different microbes in humans.  One study showed that babies living in a household with pets have more _Clostridiaceae_, _Veillonella_ (especially for dogs), _Peptostreptococcaceae_ and _Coprococcus._ Cats in particular seemed associated with lower _Bifidobacterium_ while dogs seemed to spell doom for _Eggerthella_.^[@azad_infant_2013]
+

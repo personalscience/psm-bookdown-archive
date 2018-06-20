@@ -18,7 +18,7 @@ Sharing and analyzing your data is a three part process:
 3. View and analyze your results, either by themselves or in combination with a query you created.
 
 ```{r usingPsicomMainScreen1, fig.cap = "After uploading a sample, your main screen will look something like this."}
-knitr::include_graphics("./using_psicom/using_psicom_main_screen1.png")
+knitr::include_graphics("using_psicom/img/using_psicom_main_screen1.png")
 
 ```
 
@@ -29,7 +29,7 @@ Press the bright green "New Sample" button to add new raw data to your account.
 You should see a screen that looks like this (Figure: \@ref(fig:usingPSIcomUploadJSON)):
 
 ```{r usingPSIcomUploadJSON, fig.cap = "Copy and paste your raw uBiome JSON data here.", echo = FALSE, warning = FALSE, message = FALSE}
-knitr::include_graphics("./using_psicom/using_psicom_upload_json1.png")
+knitr::include_graphics("using_psicom/img/using_psicom_upload_json1.png")
 
 ```
 
@@ -60,7 +60,7 @@ These tags aren't very useful because people aren't likely to search for them.
 Next, search through the data uploaded by others in the Personal Science community. Let's say we want to find all the other users who have tagged their data `lyme`. Type that in the search field and see there are a total of (in this case) 18 samples with that tag. Give this search a name so you can use it later on the next screen.
 
 ```{r using_psicom_community_lyme, echo = FALSE, warning = FALSE, message = FALSE}
-knitr::include_graphics("./using_psicom/using_psicom_community_lyme1.png")
+knitr::include_graphics("using_psicom/img/using_psicom_community_lyme1.png")
 
 ```
 
@@ -75,7 +75,7 @@ To compare your sample with others, click on one of the checkboxes for the query
 
 
 ```{r usingPsicomCompareLyme1, fig.cap = "Select the 'lymesamples' query to see how your sample(s) marked with '*' compare with others", echo = FALSE, warning = FALSE, message = FALSE}
-knitr::include_graphics("./using_psicom/using_psicom_compare_lyme1.png")
+knitr::include_graphics("using_psicom/img/using_psicom_compare_lyme1.png")
 
 ```
 
@@ -89,7 +89,7 @@ If you click on any of the microbes listed in the "Unique to me" section, you wi
 
 
 ```{r usingPsicomCompareSutterella1, fig.cap = "Select any microbe and see a list of Take/Avoid actions that have been shown to affect the abundance", echo = FALSE, warning = FALSE, message = FALSE}
-knitr::include_graphics("./using_psicom/using_psicom_compare_sutterella1.png")
+knitr::include_graphics("using_psicom/img/using_psicom_compare_sutterella1.png")
 
 ```
 

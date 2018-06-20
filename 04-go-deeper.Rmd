@@ -1,7 +1,8 @@
 # Go Deeper {#GoDeeper}
 
+This chapter tells how to get more out of your uBiome results.
 
-Click next on the "Insights" tab ( Figure \@ref(fig:explorerInsightsPage)) which may be more informative for beginners.If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
+From [uBiome Explorer](https://explorer.ubiome.com) click on the "Insights" tab ( Figure \@ref(fig:explorerInsightsPage)) which may be more informative for beginners.If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
 
 ```{r explorerInsightsPage, fig.cap = "The Insights tab provides a high-level view of what uBiome thinks is most actionable about your microbiome."}
 knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerInsightsPageMar29.jpg"))
