@@ -51,7 +51,7 @@ But the real fun happens when we download the raw data and analyze it at the Per
 
 
 
-```{r child="using_psicom/how-to-download-ubiome-json.md", warning = FALSE}
+```{r child="using_psicom/how-to-download-ubiome-json.Rmd", warning = FALSE}
 
 ```
 

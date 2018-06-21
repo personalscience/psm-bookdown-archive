@@ -1,0 +1,30 @@
+## Download your uBiome Data {#downloaduBiome}
+
+To use your uBiome data, you'll need to download it from the uBiome web site.  (We'll make this process much easier in the final version of the app).
+
+Go to the [uBiome Explorer page](http://explorer.ubiome.com)  and click on the section labeled "Advanced" and then "Downloads" (Figure \@ref(fig:downloaduBiomeDataExplorerDownloads)) :
+
+```{r downloaduBiomeDataExplorerDownloads, fig.cap = "Select the Downloads feature in the uBiome web app."}
+knitr::include_graphics(file.path(getwd(),"img/ubiomeExplorerDownloads.jpg"))
+```
+
+---
+
+You’ll see a page of JSON text representing what uBiome found in your sample (Figure \@ref(fig:downloaduBiomeDataExplorerJSON)) :
+
+
+```{r downloaduBiomeDataExplorerJSON, fig.cap = "A typical page of JSON viewed in your browser."}
+knitr::include_graphics(file.path(getwd(),"img/uBiomeScreenShotTaxonomyJSON.png"))
+```
+
+
+
+ Most browsers offer a way to select the entire page (PC: control-A, Mac: command-A, iPhone: press and hold).  Do that, and then paste it to the JSON field of the ["Upload New Sample"](https://app.personalscience.com/ubiome/bacteria_json_create/) page. (Figure \@ref(fig:downloaduBiomeDataPastePSI))
+
+
+```{r downloaduBiomeDataPastePSI, fig.cap = "Paste the results to the Personal Science upload page."}
+knitr::include_graphics(file.path(getwd(),"img/psi-upload-sample.png"))
+```
+
+
+

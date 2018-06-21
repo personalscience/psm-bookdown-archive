@@ -16,6 +16,7 @@ rmd_files: ["index.Rmd",
 "02-microbes.Rmd",
 "science.Rmd",
 "04-go-deeper.Rmd",
+"Appendix.Rmd",
 "06-references.Rmd"
 ]
 
