@@ -2,7 +2,7 @@ bookdown::gitbook:
   css: style.css
   includes:
     in_header: [google_analytics.html]
-    after_body: disqus.html
+#    after_body: disqus.html
   split_by: section
   config:
     toc:

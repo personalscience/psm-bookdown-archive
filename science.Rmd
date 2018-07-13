@@ -1,6 +1,6 @@
-# Learn the Science {#science} 
+# The Science of the Microbiome {#science} 
 
-Living microbes are found everywhere on earth, often in surprising places. Let's look at some examples to get an idea of how ubiquitous and hardy they can be, both in nature and on our bodies. Finally, we'll discuss the technologies we use to study the human microbiome.
+Living microbes are found everywhere on earth, often in surprising places. This section looks at some examples to get an idea of how ubiquitous and hardy they can be, both in nature and on our bodies. Finally, we'll discuss the technologies we use to study the human microbiome.
 
 
 ```{r child="Science/microbesEverywhere.Rmd"}

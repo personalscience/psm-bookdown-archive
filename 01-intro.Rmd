@@ -4,6 +4,8 @@ To study your own microbiome, you'll first need to run your microbes through a g
 
 The Personal Science app supports raw data from several microbiome companies.
 
+## Raw data for your microbiome
+
 ### uBiome
 The most popular laboratory is the San Francisco startup uBiome ^[from September 2012], 
 that originally began as crowdfunded campaign on
@@ -33,7 +35,7 @@ The first stop is the [uBiome Explorer web dashboard](http://explorer.ubiome.com
 If you only have one sample, your page will look something like Figure \@ref(fig:explorerStartPage).
 
 ```{r explorerStartPage, fig.cap = "uBiome Explorer Insights Overview"}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerStartPageMar29Sample.jpg"))
+knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerStartPageSingleSample.jpg"))
 
 ```
 

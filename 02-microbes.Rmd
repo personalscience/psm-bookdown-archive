@@ -13,11 +13,15 @@ The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroi
 
 Let's start with what we know based on the results from real people.
 
-## Phylum
+## Phylum {#microbesPhylum}
 
-Debunking the Firmicutes/Bacteroides ratio
+[In this section: 
 
-## Genus
+* Debunking the Firmicutes/Bacteroides ratio
+
+]
+
+## Genus {#microbesGenus}
 
 
 _Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.

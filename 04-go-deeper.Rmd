@@ -2,39 +2,45 @@
 
 This chapter tells how to get more out of your uBiome results.
 
-From [uBiome Explorer](https://explorer.ubiome.com) click on the "Insights" tab ( Figure \@ref(fig:explorerInsightsPage)) which may be more informative for beginners.If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
+## Using the uBiome web interface
 
-```{r explorerInsightsPage, fig.cap = "The Insights tab provides a high-level view of what uBiome thinks is most actionable about your microbiome."}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerInsightsPageMar29.jpg"))
+Once you've received your uBiome results, the first page to visit is the [uBiome Explorer](https://explorer.ubiome.com/my-microbiome/). Here you'll see the "My microbiome" tab ( Figure \@ref(fig:explorerMainPage)) which provides a very high-level summary of your microbiome. If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
+
+```{r explorerMainPage, fig.cap = "The 'My microbiome' page provides a high-level view of what uBiome thinks is most actionable about your microbiome."}
+knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerStartPageSingleSample.jpg"))
 ```
 
-The one part of the Insights page that you _should_ take seriously is the section called "most uncommon bacteria". Let's jump to that section now.
+The one part of the Insights page that you _should_ take seriously is the section called "Unique Bacteria". These are microbes found in me but rarely in other people. In fact, fewer than 5% of the general population tested positive for these bacteria.  (Figure \@ref(fig:explorerRare))
+
+```{r explorerRare, fig.cap = "My sample is one of a tiny few that have these microbes"}
+knitr::include_graphics(file.path(getwd(),"assets/ubiomeExploreRareMay10.png"))
+```
+
+Of course, your natural first question is to wonder what these bacteria _do_? Do these microbes somehow relate to my own health condition? Because they're so rare, you'll probably find that an internet search comes up empty.
+
+For example, look at the first result: _Desulfotomaculum._  I'm lucky that there's a Wikipedia entry on this microbe, which notes that it is associated with canned food spoilage. Now that I think about it, I _did_ eat some canned food around the time that I took this sample; maybe I was contaminated?
+
+But look at the third one on the list: _Tessaracoccus_.  Here, the Wikipedia page simply tells the physical and chemical characteristics of the microbe, which might be useful to a laboratory scientist, but means nothing to me. 
+
+For each of the rare microbes on this list, what I really want to know is something about the _other_ people who have it. The Personal Science site lets me find that information.
+
+[Insert instructions for how to look up other PSI users with this microbe]
 
 ## How are you different?
 
-Since so little about the microbiome is well-understood, most of the time it will be hard to interpret your results by themselves. This is where the power of uBiome's citizen science can help, because the web page lets you easily compare your results with other people.  
+Since so little about the microbiome is well-understood, most of the time it will be hard to interpret your results by themselves. 
+
 
 ```{r explorerCompare, fig.cap = "The Compare view shows the differences between my sample and others in the uBiome database."}
 knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerCompareMar29.jpg"))
 ```
 
 
-In this case, I can see that my sample has about 64% of the abundance of _Firmicutes_ as other people in the uBiome database. You can sort this field by abundance (ratio) and click on the various taxonomic categories to dig deeper into your microbiome and find microbes that are particularly rare in your sample. (Figure \@ref(fig:explorerRare))
+In this case, I can see that my sample has about 65% of the abundance of _Firmicutes_ as other people in the uBiome database. You can sort this field by abundance (ratio) and click on the various taxonomic categories to dig deeper into your microbiome and find microbes that are particularly rare in your sample.
 
-```{r explorerRare, fig.cap = "My sample shows very low levels of these microbes, compared to the hundreds of thousands of others in the uBiome database."}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExploreRareMar29.jpg"))
-```
+More significantly, see my levels _Proteobacteria_, which is 2.85 times higher. As we've discussed [previously](#microbesPhylum), this group of microbes contain a number of pathogens, so a higher level may be associated with some type of gastrointestinal distress.
 
-For example, I found that I have much less _Prevotella_ and _Butyvibrio_, two common microbes than the vast majority of uBiome customers.  I also found much higher-than-normal levels of _Deinococcus-Thermus_, an extremophile usually only found in harsh environments, like the impossibly acidic human stomach. Why would I have so many more than other people like me?
+I have 7.23 times higher _Verrucomicrobia_ than other people. In human guts, this phylum is nearly always limited to a single species, _Akkermansia muciniphila_, which is generally considered a "good" microbe, but like everything else, the dose is the poison. You don't want either too much or too little of anything.
 
-One clue is the similarly-high levels of Proteobacteria, which as we just noted is often high in people with gastro-intestinal issues. Maybe I was exposed to something that released a bit of stomach acid, and its extremophile _Deinococcus_ into my colon.
 
-_Verrucomicrobia_ is elevated too, though not by much. This is a Phylum that is generally associated with soil microbes, though it's not unusual to find it in the gut as well.
 
-I looked back at my notes during the period of a few days before this sample, and interestingly I had been doing work in my garden at the time. We have deer and other animals that come near our house...is it possible that I was exposed to some animal excrement, maybe some of which somehow made it into my gut?
-
-It's just a theory, and perhaps an unlikely one, but I wonder if my body was fighting some type of pathogen as a result of my outdoor activities. Now before we get too excited, keep in mind that I never felt the slightest bit ill during this period. Can I thank my microbiome? Perhaps I was exposed to something nasty, the kind of bug that under other circumstances might have wreaked havoc and left me terribly sick for days. Now I have no way of knowing for sure, but this tidbit makes me wonder if maybe my microbiome acted as a guardian angel, protecting me from something much worse.
-
-Similarly, your own results comparing to others may lead you to clues about aspects of your environment you didn't otherwise suspect.
-
-Incidentally, since this test I've sent dozens of additional samples to uBiome and never saw that _Deinococcus_ thing again. Good riddance? or maybe I should be thankful for the protection, and hope that little bits of it may still be present, undetectably in my stomach, waiting to fight another external enemy the next time I come in contact with something in the soil.

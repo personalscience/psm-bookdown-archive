@@ -12,15 +12,17 @@ description: "An introduction to Personal Science and uncovering the secrets of 
 
 # Intro {-}
 
-Science is about curiosity, a passion for truth, and a never-ending process of systematic experimentation in pursuit of an understanding of the world around us.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
+Science is curiosity, a passion for truth, and a never-ending process of systematic experimentation in pursuit of an understanding of the world around us.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
 
-This book will introduce you to one exciting area of personal science: understanding your own microbiome. Our [companion web site](https://app.personalscience.com) lets you upload your own data and compare it to others to make your own discoveries.
+This book will introduce you to one exciting area of personal science: understanding your own microbiome. Our [companion web site](https://app.personalscience.com/account/login/) lets you upload your own data and compare it to others to make your own discoveries.
+
+*NOTE* You're reading an online e-book that will eventually be integrated into the main site. For now, treat it like an instruction manual.  _We want your feedback!_ so please email us at [info@personalscience.com](mailto:info@personalscience.com). To move to the next page, either hit the arrow buttons on your keyboard, or click the arrows at the very bottom of the page.  Enjoy!
 
 # What is Personal Science? 
 
-When you’re sick with a chronic disease, and you’re willing to try anything to feel better, one of the struggles is simply knowing the level of severity. What is the precise version or name of this disease? What makes me different from a healthy person, or from the healthy person I used to be? Are there other people with the same condition, and if so, how does my situation compare to theirs? Am I getting better or worse?
+If you suffer from a chronic condition, one of your first struggles is simply knowing the level of severity. What is the precise version or name of this disease? What makes me different from a healthy person, or from the healthy person I used to be? Are there other people with the same condition, and if so, how does my situation compare to theirs? Am I getting better or worse?
 
-Note that these are all questions about *context*. A first step in approaching your situation is to simply understand how you compare…how you compare to healthy people, to those who have the same condition as you do, to people who have partially or fully recovered.
+In other words, you want to know the *context*. A first step in approaching your situation is to simply understand how you compare…to healthy people, to those who have the same condition as you do, to people who have partially or fully recovered. Is your condition getting better or worse? Is it better or worse than other people like me?
 
 Even symptom tracking is just one aspect of the question of context. I want to know more precisely the conditions under which my problem gets better or worse. In other words, what is the *context*? (e.g. are my migraines triggered by high altitudes, by caffeine, by stress, by something else? All of these are just other ways of saying “context”).
 
@@ -34,7 +36,7 @@ One simple example: if I wake up in the morning with a headache, or if I feel na
 
 4.  I was bitten by a tick last Summer and underwent a course of antibiotics that supposedly cleared it up — at least that’s what the test said.
 
-5.  I’m a 90-year-old bedridden man on lots of medications
+5.  I’m a 90-year-old bedridden man on lots of medications.
 
 These examples are of course extreme — we intuitively understand that a diagnosis depends on the cause behind the symptoms — but even when the cause is known, our treatment options will be guided by *context*, by reference values.
 
