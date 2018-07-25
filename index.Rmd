@@ -12,6 +12,19 @@ description: "An introduction to Personal Science and uncovering the secrets of 
 
 # Intro {-}
 
+>>Healthy people are all alike; every unhealthy person is unhealthy in their own way. \
+-- Leo Tolstoy (sort of) _Anna Karenina_.
+
+---
+
+How healthy are you?
+
+This simple question is surprisingly difficult to answer quantitatively. Maybe you _feel_ healthy, but is that enough? To really understand your health, you'll need some context: How do you feel compared to ... yesterday?  a few years ago? How about compared to your close friends or family, or to an athlete or health expert you admire? The many ways you might add context to the question will greatly impact the answer.
+
+A quantitative answer requires a systematic approach that integrates data collection, experiments, hypotheses, and iteration -- tools that are familiar to any scientist. 
+
+---
+
 Science is curiosity, a passion for truth, and a never-ending process of systematic experimentation in pursuit of an understanding of the world around us.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
 
 This book will introduce you to one exciting area of personal science: understanding your own microbiome. Our [companion web site](https://app.personalscience.com/account/login/) lets you upload your own data and compare it to others to make your own discoveries.
