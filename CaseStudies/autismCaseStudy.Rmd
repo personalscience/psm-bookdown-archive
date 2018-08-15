@@ -1,0 +1,89 @@
+## Autism {#caseStudyAutism}
+
+```{r}
+
+kids.usernames <- c("fbmgb","preston","fbmgg")
+kids <- subset_samples(people.phylum, Username %in% kids.usernames)
+kids.phylum <- prune_taxa(taxa_sums(kids)>42,kids)
+
+kids.genus <- subset_samples(subset_samples(people.norm, Username %in% kids.usernames))
+kids.genus <- prune_taxa(taxa_sums(kids.genus)>42,kids.genus)
+
+kids.species <- subset_samples(subset_samples(people.species, Username %in% kids.usernames))
+kids.species <- prune_taxa(taxa_sums(kids.species)>42,kids.species)
+
+autism.phylum <- subset_samples(kids.phylum, Username == "fbmgb")
+autism.genus <- subset_samples(kids.genus, Username == "fbmgb")
+boys.phylum <- subset_samples(kids.phylum, Username == "preston")
+boys.genus <- subset_samples(kids.genus, Username == "preston")
+```
+
+What can we learn from the microbiome of a 4-year-old boy with Autism? A mother sent me the Explorer results of her 4-year-old, who suffers from Autistic Spectrum Disorder (ASD)
+
+Here's the overall picture of the phlyum-level microbes in his gut:
+
+```{r}
+kable(mhg_abundance(autism.phylum)/10000, digits = 2, col.names = "ASD")
+```
+
+Looks quite normal, especially for somebody on an omnivore diet. Lots of Firmicutes and reasonable Actinobacteria. Proteobacteria is a smidge high, though not unusual for a single sample.
+
+Let's look at more details, down to the genus level, and compare him to some similarly-aged (healthy) kids:
+
+```{r}
+
+kids.table <- mhg_abundance(kids.genus, colnames = "Label")/10000
+kable(kids.table[order(kids.table[,2], decreasing = TRUE),], digits = 2, col.names = c("Girl","ASD","Boy"))#sample_data(kids.genus)$Username)
+```
+
+Now, what about the autistic boy is unique?  Let's compare him to a similar-aged, healthy boy and see which microbes are present in the autistic case but _not_ the healthy case:
+
+```{r}
+kable(mhg_unique(subset_samples(kids.genus, Username == "fbmgb"), subset_samples(kids.genus, Username == "preston"))[1]/10000, digits = 2, col.names = "ASD")
+```
+
+The autistic boy has _Sutterella_, an organism that is missing in the healthy boy.
+
+How unusual is that level of _Sutterella_?  I don't have enough samples of healthy boys to do a real comparison, but just to get a rough idea of what we're dealing with, here's the range over a mix of 100+ health and unhealthy samples (mostly adults).  The red line indicates where the autistic boy fits on the range of _Sutterella_ abundances:
+
+```{r}
+
+
+ggplot(data=data.frame(abundance=as.numeric(otu_table(people.norm)["Sutterella"])/10000,
+  label = sample_data(people.norm)$Username,
+  date = sample_data(people.norm)$Date),
+  aes(x=abundance)) + 
+ stat_density() +
+  annotate(geom="segment", color = "red",
+           x = as.numeric(otu_table(subset_samples(kids.genus, Username == "fbmgb"))["Sutterella"])/10000,
+           xend = as.numeric(otu_table(subset_samples(kids.genus, Username == "fbmgb"))["Sutterella"])/10000 ,
+           y = -Inf, yend = Inf)
+
+
+```
+
+
+#### Microbes of known association with autism
+
+_Clostridium tetani_ may play a role in autism [ citation needed ], though unfortunately our 16S test can't see this microbe. Instead let's look for that microbe at the genus level:
+
+
+
+```{r}
+
+
+ggplot(data=data.frame(abundance=as.numeric(otu_table(people.norm)["Clostridium"])/10000,
+  label = sample_data(people.norm)$Username,
+  date = sample_data(people.norm)$Date),
+  aes(x=abundance)) + 
+ stat_density() +
+  annotate(geom="segment", color = "red",
+           x = as.numeric(otu_table(subset_samples(kids.genus, Username == "fbmgb"))["Clostridium"])/10000,
+           xend = as.numeric(otu_table(subset_samples(kids.genus, Username == "fbmgb"))["Clostridium"])/10000 ,
+           y = -Inf, yend = Inf)
+
+
+```
+
+Although obviously a single test can't say much, he is not especially unusual for this microbe, at least at the genus level.
+

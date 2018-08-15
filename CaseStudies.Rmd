@@ -1,0 +1,54 @@
+# Case Studies {#caseStudies}
+
+Hundreds of people have sent me their microbiome results. Here are some examples showing how I walk through specific cases. 
+
+```{r child="CaseStudies/caseStudyHealthy.Rmd"}
+```
+
+
+```{r child="CaseStudies/FatherAndSon.Rmd"}
+```
+
+
+<!-- ```{r child="CaseStudies/caseStudyFamilies.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/babybiome.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/alzheimers-disease.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "CaseStudies/colorectalCancer.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/caseStudyKeto.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/caseStudyExercise.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "CaseStudies/caseStudyParkinsons.Rmd"} -->
+<!-- ``` -->
+
+<!-- ```{r child = "CaseStudies/caseStudyLyme.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/caseStudyOther.Rmd"} -->
+<!-- ``` -->
+
+
+
+<!-- ```{r child = "CaseStudies/autismCaseStudy.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child = "CaseStudies/caseStudyGutIssues.Rmd"} -->
+<!-- ``` -->
+
+

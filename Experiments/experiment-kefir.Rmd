@@ -1,0 +1,167 @@
+## Kefir and the Microbiome {#experimentKefir}
+
+If you follow the microbiome at all, you’ll eventually discover the benefits of kefir. Google the phrase "one of the most potent probiotic foods available" and you’ll find kefir in all the top results. A [recent BBC documentary](http://www.bbc.com/news/health-38800977)  that tested people after consuming different types of "gut-friendly" foods found that kefir had by far the biggest effect.  My interest piqued when, after my [disappointment with kombucha](#experimentKombucha), I spoke with a man who happened to mention his good luck with kefir as a solution to his many gut issues. On a doctor’s recommendation, he tried kefir for a number of years with limited success, until — frustrated with the \$3/day expense of buying it at Trader Joe’s — he began making it himself at home. "What a difference!" he claimed.
+
+Did it work for me? Yes! I found a very noticeable change in my gut microbiome — the most significant I’ve seen among my many experiments. Look at my levels of _Leuconostoc_, one genus known to be found in kefir:
+
+```{r plotAmountsKefir, echo=FALSE ,cache = TRUE}
+
+
+food <- rikfood
+kefir <- "kefir"
+#kefir.day <- unique(food[str_detect(food$Name, kefir),"Date"])
+
+fromDate <- as.Date("2016-11-15")
+toDate <- as.Date("2017-07-01")
+kefir.day <- c(as.Date("2016-12-02"),unique(food[str_detect(food$Name, kefir),"Date"]))
+kefir.day <- kefir.day[kefir.day<toDate]
+
+
+# 
+# lactococcus <- subset_taxa(subset_taxa(subset_samples(gut.norm,Site=="gut"),
+#                            Genus == "Lactococcus"))
+
+
+kefir.top <- subset_taxa(gut.norm, Genus %in% c("Leuconostoc") ) #,"Fusicatenibacter"))
+
+plot_bar(subset_samples(kefir.top, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
+  ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + 
+  scale_x_date(date_labels = "%b20%y",
+                date_breaks = "1 month", date_minor_breaks = "2 weeks")
+
+
+# 
+# plot_bar(subset_taxa(subset_samples(transform_sample_counts(lactococcus,
+#                                                             function(x) x/1000000),
+#                                     Date >= "2016-12-01"),
+#             Genus == "Lactococcus"),
+#          x = "Date",
+#          fill="Genus") +
+#   scale_x_date(date_labels = "%b20%y",
+#                date_breaks = "1 month", date_minor_breaks = "2 weeks")
+#   
+```
+
+The blue dots in the chart are days when I drank kefir. Since I sample near-daily over the entire chart, we can see that both of these taxa suddenly appeared shortly after I began to consume kefir. I had almost none beforehand. Also note that the levels seem to dip when I go for a few days without drinking any, such as during my business trips out of town in mid-March and another in early-April.
+
+So it apparently has a big effect on the microbiome. What is this stuff anyway?
+
+The first thing to know about kefir is the pronunciation. Say “Keh-FEAR”, with the accent on the second syllable, not “KEE-fur” or “kEH-fir”. The Russian origin of the term is a reminder of a time in the distant past when — it’s unclear exactly where or how — the first batch was prepared and then passed along, its microbial components shared from person to person until it reached today’s status as a popular drink you can buy in most grocery stores.
+
+Making it at home brings more benefits than just saving money. Commercially-purchased drinks are subject to unavoidable regulatory, shelf-life, and consistency contraints that are important for business. But more than that, if you believe like I do that microbes are highly-customized to our environments, making at home will ensure that the kefir is well-adapted to your own personal microbial environment. The batch that survives and thrives in your kitchen will, by definition, have proven its ability to withstand whatever whatever conditions you face there.
+
+Making it yourself is surprisingly easy. It begins with a bundle of the component microbes, a cauliflower-shaped substance usually called the "grain" or "seed" that looks like this:
+
+
+```{r echo=FALSE}
+knitr::include_graphics("Experiments/assets/kefir_grain.jpg")
+```
+
+
+Instruction books often tell you to be careful how you handle the grains, but I find them robust enough that I pick them up with my bare fingers. I drop them into a glass of milk left sitting on the counter overnight and — voila! — twenty four hours later, the liquid has turned into kefir. Pull out the kefir grains from that glass, plop it into another, and you’re all set for tomorrow’s batch. Unlike yogurt, which requires heating and a stable temperature, kefir doesn’t appear to care about how it's handled, so long as you keep it at room temperature and can wait for twenty four hours. The reaction might vary by a few hours if the room is a bit colder or warmer, but otherwise I find it surprisingly consistent. Just set and forget.
+
+Once you have the grains, making more kefir is easy, but where do you get the grains in the first place?  It's supposedly possible to make them from scratch using a goat-hide bag filled with pasteurized milk and the intestinal flora of a sheep, but I haven't tried that myself.  I'm told it works so long as you shake every hour and maintain a constant temperature. 
+
+Even without going the goat-hide route, I found that getting started was the only hard part of the process. You can order some starter grains online for under $25, but for shipping purposes the manufacturers generally give them to you in a freeze-dried form that requires a week or so of preparation before the microbes are fully alive and kicking out drinkable quantities of kefir.
+
+I got mine by asking around until I found a neighbor who had been brewing his own. Anyone who makes homemade kefir will be happy to give you some extra grains. The fermentation process causes the grains to multiply, and you will find yourself throwing them out regularly.
+
+The grains themselves contain a combination of lactic acid bacteria (_Lactobacillus_, _Lactococcus_, _Leuconostoc_), acetic acid bacteria (_Acetobacter_), and yeast,  clumped together with casein (milk proteins) and complex sugars in a matrix of a unique polysaccharide called Kefiran. The nutritional content apparently varies depending on fermentation time and other factors, but there’s a lot of good stuff in there^[@otles2003 and http://files.cienciapatodos.webnode.pt/200000022-79ffe7af9e/Kefir.pdf] (Figure \@ref(fig:kefirOltesNutrition)).
+
+```{r kefirOltesNutrition, fig.cap = "Nutrional content of kefir."}
+knitr::include_graphics("./assets/kefir-oltes-nutrition.jpg")
+```
+
+
+
+A rigorous microbial analysis by an Irish lab ^[@walsh_microbial_2016. Also [a 2-minute Youtube presentation](https://www.youtube.com/watch?v=uyibFCgXexA)] recently showed precisely which microbes are present in kefir, at various stages in the fermentation process. This chart shows the composition of ordinary pasteurized milk as it changes from before adding kefir grains (time 0 at the bottom) until 24 hours have passed (top) and the milk has been transformed into just _Acetobacter_, _Lactobacillus_, and _Leuconostoc_.
+
+
+```{r echo=FALSE}
+knitr::include_graphics(rep("./assets/kefir-microbial-makeup.jpg"))
+```
+
+
+The uBiome test looks only at the 16S ribosomal gene, which unfortunately can’t detect yeasts, so I don’t have an easy way to track the yeasts in the kefir. 
+
+But I *can* run the kefir mixture through the same 16S pipeline that I use for my other samples. I put a swab into some kefir that I had left on the counter for a "second ferment", an additional 24-hour period after the grains from the first ferment. This is what I found:
+
+```{r kefirTable, echo = FALSE}
+
+kefirSample.genus <- subset_samples(sprague.genus.norm, Site == "custom") # SSR == 134894)
+kefirSample.genus <- prune_taxa(taxa_sums(kefirSample.genus)>0,kefirSample.genus)
+
+kable(head(mhg_abundance(kefirSample.genus)/10000,5), digits= 2, col.names = sample_data(kefirSample.genus)$Label)#, col.names = "Kefir Abundance (%)")
+```
+
+These are the only taxa that met the 0.07% abundance criteria discussed previously. But even without that cutoff, the uBiome pipeline shows no _Acetobacter_, despite its prominence in the study shown above.
+
+I wondered if this is simply due to the way uBiome labels the taxa that are found. Maybe the label _Acetobacter_ just isn't often assigned to uBiome samples. When I checked, I could find none in any of my own samples or of the hundreds of others that people have sent me. What's more, none was reported in a large population study^[See  @zhernakova_population-based_2016] either. So apparently it just doesn't show up often in humans, though I wonder why it wouldn't show up in the 16S sequencing of my kefir sample.
+
+The answer, according to the uBiome scientist I talked to, is that _Acetobacter_ is too similar to other genera for it to be accurately distinguished with a 16S test. So if we can't see at the genus level, let's look at a higher level, such as phylum. 
+
+```{r, echo = FALSE}
+
+kefirSample.order <- subset_samples(sprague.order.norm, Site == "custom")
+kefirSample.order <- prune_taxa(taxa_sums(kefirSample.order)>0,kefirSample.order)
+kefirSample.phylum <- subset_samples(sprague.phylum.norm, Site == "custom")
+kefirSample.phylum <- prune_taxa(taxa_sums(kefirSample.phylum)>0,kefirSample.phylum)
+
+#kable(head(mhg_abundance(kefirSample.order)/10000,5), digits= 2, col.names = "Kefir Abundance (Order %)")
+
+kable(head(mhg_abundance(kefirSample.phylum)/10000,5), digits= 2, col.names = c("Sample1","Sample2","Sample3"))
+```
+
+Because _Acetobacter_ is within Phylum _Proteobacteria_ and Order _Rhodospirillales_, we would expect to see some of those microbes if any of it were present. Looks like my kefir doesn't include anything remotely resembling _Acetobacter_.
+
+That's what's in the kefir grain itself.  How does regular drinking affect my gut microbiome? 
+
+To find any taxa that may have suddenly changed as a result of kefir-drinking, let's start with a simple heatplot.
+
+```{r kefirPlotHeat}
+kefir <- subset_taxa(gut.norm, Genus %in% c("Lactococcus","Fusicatenibacter")) #,"Lactobacillus", "Bifidobacterium"))
+kefir.genus <- subset_samples(gut.norm, Site == "gut" &  Date > "2016-06-01" & grepl("[K|k]efir",Notes))
+#kefir <- subset_taxa(gut.norm, Genus %in% c("Bifidobacterium","Lactobacillus"))
+
+#plot_top_heat(subset_samples(gut.norm, Date > "2016-12-01"))
+mhg_plot_top_heat(subset_samples(gut.norm, Date > "2016-12-01"), n = 25) 
+```
+
+Note the sudden appearance of the genus _Fusicatenibacter_. You rarely see such a dramatic and consistent change as a result of an experiment, but unfortunately, little is known about this genus. A member of the Clostria class of phylum Firmicutes, an internet search reveals little of interest. But it definitely appears in my samples after drinking kefir.
+
+In fact, look how the levels appear to coincide precisely with the periods when I drink kefir:
+
+```{r kefirPlotBar}
+
+
+plot_bar(subset_samples(kefir, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
+  ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + facet_grid(Genus~., scale="free_y", drop=TRUE) + theme(legend.position = "none")
+
+ # annotate("pointrange",x = sample_data(kefir.genus)$Date, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1)
+
+```
+
+This is especially interesting because the only previous date when my gut saw any of this taxa was in December -- on another occasion when I drank some kefir. In fact, _Fusicatenibacter_ is such a strong predictor of kefir drinking that I can use it as a way to look back in time to see the samples when I drank some.
+
+How common is _Fusicatenibacter_ in gut microbiomes? Here's a density plot look at a few hundred samples collected from other people.
+```{r}
+mhg_density_for_taxa(people.norm,"Fusicatenibacter")
+
+
+```
+
+Although most people have none, it's quite common for people to have a few percentage points of _Fusicatenibacter_ regardless of whether they regularly drink kefir.
+
+```{r}
+# this will display the Username of every sample that contains some of F.
+#sample_data(subset_samples(people.norm,SSR %in% sample_names(otu_table(people.norm))[otu_table(people.norm)["Fusicatenibacter",]==0]) )[,c("Username","Date")]
+```
+
+
+But other than this clear change in my gut microbiome, did I notice any differences in health?
+
+Here the answer is more ambiguous. As a healthy adult, I don't have any particular "problems" I'm trying to solve. I remained healthy during the period of the experiment, so the kefir certainly doesn't appear to have made anything worse. My sleep hasn't substantially changed either, and although I'm generally pretty even-tempered, I didn't notice any particular changes positive or negative in my mood either.
+
+The one area where, subjectively, where I feel different is in my overall sense of energy. Although I can't put my finger on anything quantitative, I _do_ notice that I seem to be a little more energetic on days when I drink kefir. Measuring that more precisely may be a good test for follow up.

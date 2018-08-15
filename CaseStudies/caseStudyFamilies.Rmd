@@ -1,0 +1,184 @@
+## Families
+
+## Mother and Daughter
+
+Here's another example, this one from a friend who tested both herself and her mother.
+
+Here's what's in the daughter, but not the mother:
+
+```{r}
+ub16 <- subset_samples(people.norm, Username == "ub16" & Reads > 10000 )
+sample_data(ub16)$Label = "Daughter"
+ub16.mom <- subset_samples(people.norm, Username == "ub16m")
+sample_data(ub16.mom)$Label = "Mom"
+
+ub16.species <- subset_samples(people.species, Username == "ub16" & Reads > 10000 )
+sample_data(ub16.species)$Label = "Daughter"
+
+ub16.mom.species <- subset_samples(people.species, Username == "ub16m")
+sample_data(ub16.mom.species)$Label = "Mom"
+
+mhg_plot_top_heat(merge_phyloseq(ub16, ub16.mom))
+```
+
+
+
+```{r}
+mhg_unique(ub16,ub16.mom)[1]/10000
+```
+
+and the genus found in the mother but not the daughter
+
+```{r}
+mhg_unique(ub16.mom,ub16)[1]/10000
+```
+
+Here are species in the daughter but not the mom:
+
+```{r}
+mhg_unique(ub16.species,ub16.mom.species)[1]/10000
+```
+
+and vice versa:
+
+```{r}
+mhg_unique(ub16.mom.species,ub16.species)[1]/10000
+```
+
+As a bonus, we also have data from the brother, who has been living in Eastern Europe for several years. Here are the samples compared:
+
+
+```{r casestudyFamilyRareif}
+
+bird <- subset_samples(people.norm, grepl("ub1(6)+",sample_data(people.norm)$Username))
+bird.phylum <- subset_samples(people.phylum, grepl("ub1(6)+",sample_data(people.phylum)$Username))
+bird.species <- subset_samples(people.species, grepl("ub1(6)+",sample_data(people.species)$Username))
+
+set.seed(100)
+bird.rare <- rarefy_even_depth(bird)
+bird.phylum.rare <- rarefy_even_depth(bird.phylum)
+mhg_abundance(bird.rare)/10000
+kable(mhg_abundance(bird.phylum.rare)/10000, col.names = c("sister-jun13","sister-may9","brother","mother"))
+
+```
+
+Because the sister's sample was of low quality (under 5000 reads), I rareifed all of these samples to the same depth before creating these tables. 
+
+
+```{r }
+# kable(mhg_abundance(bird)/10000, col.names = c("sister-jun13","sister-may9","brother","mother"))
+# 
+ub3 <- subset_samples(people.norm,Username == "ub3" & Site == "gut")
+meg <- merge_phyloseq(ub3,subset_samples(bird,Username == "ub16b"))
+# 
+# kable(mhg_abundance(meg)/10000, col.names = c("ub3-May16","ub3-Jun16","Brother"))
+# 
+# ub3.species <- subset_samples(people.species,Username == "ub3" & Site == "gut")
+# meg.species <- merge_phyloseq(ub3.species,subset_samples(bird.species,Username == "ub16b"))
+# 
+ kable(mhg_abundance(meg,top=10)/10000, col.names = c("ub3-May16","ub3-Jun16","Brother"))
+
+```
+
+The brother has much higher _Megamonas_ than I've seen in other samples. Is that significant?
+
+```{r}
+#mhg_unique(subset_samples(ub3.species, Date > "2016-06-01"),subset_samples(bird.species,Username == "ub16b"))[-2]/10000
+```
+
+### Husband and wife
+
+Now let's look at a husband and wife:
+
+```{r}
+kt.family <- subset_samples(people.family, Username %in% c("ktp","kp"))
+
+people.tmp <- people.family
+sample_data(people.tmp)$Username <-ifelse(sample_data(people.tmp)$Username %in% c("ktp","kp"),"KP","People")
+make_ord_for(subset_samples(people.tmp, Site == "gut"))
+
+```
+
+As expected of people who live together, both are quite similar relative to other people I've studied.
+
+What can we see at the overall phylum level? (Table \@ref(tab:caseStudyFamilesHWTable))
+
+```{r caseStudyFamilesHWTable}
+kt.phylum <- subset_samples(people.phylum, Username %in% c("ktp","kp"))
+
+kable(mhg_abundance(kt.phylum, top = 5)/10000, col.name = c("wife","husband"), digits = 2,
+      caption = "Phylum differences between a husband and wife.")
+
+```
+
+and let's look at the differences between them on the genus level:
+
+```{r}
+
+people.tmp <- subset_samples(people.norm, Site == "gut")
+kt.genus <- subset_samples(people.tmp, Username %in% c("ktp","kp"))
+ktp <- subset_samples(people.tmp, Username == "ktp") #wife
+kp <- subset_samples(people.tmp, Username == "kp") #husband
+
+mhg_plot_top_heat(kt.genus)
+```
+
+Darker colors mean *lower* abundance of the microbes on this heat map. Let's look at which ones are unique to the couple:
+
+```{r caseStudyFamilyWifeHusbandUnique}
+kable(mhg_unique(ktp,kp)[1]/10000, col.names = c( "Wife (not husband)%"))
+kable(mhg_unique(kp,ktp)[1]/10000, col.names = c( "Husband (not wife)%"))
+```
+
+That's just a start. Please let me know if you find anything else that's interesting.
+
+```{r}
+# We can compare the two for a particular genus like this (husband = red)
+# mhg_density_for_taxa(people.tmp, "Clostridium") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "ktp")
+#   )["Clostridium"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "ktp")
+#   )["Clostridium"]) / 10000,
+#   y = 0,
+#   yend = 0.5
+#   ) +
+#   annotate(
+#   geom = "segment",
+#   color = "red",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "kp")
+#   )["Clostridium"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "kp")
+#   )["Clostridium"]) / 10000,
+#   y = 0,
+#   yend = 0.5
+#   )
+
+
+
+
+```
+
+
+```{r}
+# mhg_density_for_taxa(people.tmp, "Subdoligranulum") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "kp")
+#   )["Subdoligranulum"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.tmp, Username == "kp")
+#   )["Subdoligranulum"]) / 10000,
+#   y = 0,
+#   yend = 5
+#   )
+```
+

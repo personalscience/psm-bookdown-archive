@@ -1,0 +1,47 @@
+## Exercise and the microbiome** {#experimentActivity}
+
+Many people claim there is a link between the microbiome and exercise. 
+
+From a new study at the University of Illinois - Champagne-Urbana^[as reported in http://www.gutmicrobiotaforhealth.com/en/new-research-adds-evidence-exercise-can-change-gut-microbial-composition-independent-diet/]
+
+>Exercise training increased faecal concentrations of the three most abundant short-chain fatty acids (SCFAs), acetate, propionate and butyrate in lean participants -the effect was dependent on body mass index as the change in both acetate and butyrate was observed primarily in the lean participants. Interestingly, exercise-related changes in microbial metabolites correlated with changes in the proportion of SCFA-producing taxa (_Faecalibacterium spp_. and _Lachnospira spp_.) and levels of acetate Coenzyme A (CoA) transferase gene (BcoAT) -a gene involved in regulating butyrate production- that were more substantial in lean versus obese participants. Indeed, exercise-induced increases in faecal BcoAT and SCFA levels also strongly paralleled increases in lean mass. However, their levels decreased again once exercise training finished.
+
+
+Is that true for me?
+
+To find out, I'll load all my iPhone data and compare my activity levels against my overall microbiome changes.
+
+Here's how my activity changes day-to-day:
+
+```{r experimentExerciseOverallPlot}
+
+activity <- with(rikActivity,data.frame(Date=Start,Steps=`Steps (count)`))
+
+
+ggplot(data = activity %>% filter(Date>"2016-07-01"),aes(x=Date,y=Steps)) + geom_line() + ggtitle("Overall Activity (Steps)")
+
+
+```
+
+How about my Activity versus the number of calories I consume?
+
+```{r experimentExerciseCalories}
+
+rik.calories <- rikfood %>% select(Date,Calories) %>% group_by(Date) %>% summarize(Calories = sum(Calories))
+
+df <- na.omit(rik.calories[rik.calories$Date %in% as.Date(activity$Date),])
+df$Steps <- na.omit(activity[as.Date(activity$Date) %in% rik.calories$Date ,])[["Steps"]]
+rik.motion <- data.frame(Date = df$Date, Calories = df$Calories, Steps = df$Steps)
+
+ggplot(data=rik.motion %>% gather(Measure,Value,-Date), aes(x=Date,y=Value,color=Measure)) + geom_point() + geom_smooth() +
+  theme(legend.position = "right") + scale_color_hue(l = 40) + scale_y_log10() +
+  annotate("pointrange",x = kefir.day, y = 100, ymin = 100, ymax = 110, color = "blue", size = 0.1) + 
+  annotate("text",y = 150, x =as.Date("2017-04-10"),  label = "Dates I drank kefir", color = "blue") +
+  ggtitle("One Year of Exercise vs Calories Consumed")
+
+
+```
+
+
+Another study shows a link between a specific SNP and the ability of caffeine to improve athletic performance.^[https://journals.lww.com/acsm-msse/Abstract/publishahead/Caffeine,_CYP1A2_Genotype,_and_Endurance.96963.aspx].  If you are AA or CC at [the SNP rs762551](https://you.23andme.com/tools/data/?snp_name=rs762551), then a few miligrams of coffee might improve your performance by up to 15% if you are like the 100 atheletes who participated in a randomized control trial by some University of Toronto researchers.  Or not. When I look at the data from the study, I see several outliers, people like me who are AC (and therefore "slow metabolizers") but for whom caffeine apparently has little effect. 
+

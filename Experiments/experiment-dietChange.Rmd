@@ -1,0 +1,212 @@
+## Diet Change {#experimentDietChange}
+
+After a lifetime of enjoying a banana or two almost every day, a [microbiome test from DayTwo](https://medium.com/neodotlife/review-of-viome-f024423a3d3a) suggested that I stop eating them. It also said I stop eating most grains, and if I do, to eat them with fat. Generally the recommendations pointed toward me eating a more fat and fewer carbs.  So for three months (Dec - Feb) I switched my diet to more of a low carbohydrate high fat (LCHF), with a goal of getting to under 25% carbs and 50% fat. (Figure \@ref(fig:experimentDietChangeMacroBefore))
+
+```{r experimentDietChangeMacroBefore, fig.show = "hold",  out.width = "40%", fig.cap = "Summary of the macro nutrients I ate the year before switching to my Goal diet."}
+#knitr::include_graphics(c("./Experiments/assets/experimentDietMacroBefore.png","./Experiments/assets/experimentDietMacroAfter.png"))
+
+lchf.dates <- seq(lubridate::ymd("2017-12-01"),lubridate::ymd("2018-02-28"),by=1)
+rikStats$Diet <- "Regular"
+rikStats$Diet[!is.na(match(rikStats$Date,lchf.dates))] <- "LCHF"
+
+
+a <- rikfood %>% select(-Date,-Meal,-Name) %>% summarise_all(funs(sum)) / nrow(rikfood)
+a <- a %>% select(Carbs,Fat,Protein) %>% prop.table() * 100 
+a <- a %>% gather("Macro")
+
+a.new <- data.frame(Macro = a$Macro, value = c(25,50,25))
+
+df <- a %>%
+  arrange(value) %>%
+  mutate(Group = factor(Macro, levels = c("Carbs","Fat", "Protein")),
+          cumulative = cumsum(value),
+          midpoint = cumulative - value / 2,
+          label = paste0(Group, " ", round(value / sum(value) * 100, 1), "%")) 
+
+#pie(as.numeric(prop.table(select(a,Carbs,Fat,Protein))))
+# knitr::kable(prop.table(select(a,Carbs,Fat,Protein))*100,digits=2)
+
+gmacro.old <- ggplot(df, aes(x = 1, weight = value, fill = Group))  + 
+   geom_bar(width = 1, position = "stack") +
+   coord_polar(theta = "y") +
+   geom_text(aes(x = 1.1, y = midpoint, label = label)) +
+  ggtitle( "My Regular Diet") + 
+  theme(legend.position = "none",
+        axis.text  = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank()
+        ) 
+
+gmacro.old
+
+a.new <- data.frame(Macro = a$Macro, value = c(25,50,25))
+df.new <- a.new %>% 
+  arrange(Macro) %>%
+  mutate(Group = factor(Macro, levels = c("Carbs","Fat", "Protein")),
+          cumulative = cumsum(value),
+          midpoint = cumulative - value / 2,
+          label = paste0(Group, " ", round(value / sum(value) * 100, 1), "%")) 
+
+gmacro.new <- ggplot(df.new, aes(x = 1, weight = value, fill = Group))  + 
+   geom_bar(width = 1, position = "stack") +
+   coord_polar(theta = "y") +
+   geom_text(aes(x = 1.1, y = midpoint, label = label)) +
+  ggtitle( "LCHF Diet") + 
+  theme(legend.position = "none",
+        axis.text  = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank()
+        ) 
+
+gmacro.new
+
+# maybe later attempt putting these on a single line:
+# facet_wrap(c(gmacro.old,gmacro.new), nrow = NULL, ncol = NULL, scales = "fixed",
+# shrink = TRUE, labeller = "label_value", as.table = TRUE,
+# switch = NULL, drop = TRUE, dir = "h")
+
+lchf.sleep <- mean(dplyr::filter(rikStats,Diet=="Regular")$Z, na.rm=TRUE) - mean(dplyr::filter(rikStats,Diet=="LCHF")$Z, na.rm=TRUE)
+# lubridate::minute(as.POSIXct('2012-01-23 00:00:00 EST') - (3600*lchf.sleep) )  # tells exact number of minutes
+
+```
+
+This was harder than it might seem. I think of myself as a typical ominivore on a reasonably-healthy American diet: no sugary drinks or fast food, plenty of vegetables, mostly home-cooked with minimal processing. Sure, I make exceptions now and then, but my generally good health and weight level mean I don't worry too much about what I eat. I thought skipping bread and rice would be enough, but I learned that carbs are _everywhere_.  To get under 25%, I'm allowed only 65g/day.  Just my morning latte is 15g. A single banana is 23g, and if you add one more apple (22g), I'm over my daily limit. You can easily add fat: a tablespoon of olive oil (13g) or a tablespoon of butter (11g) won't seem like much food, but it adds up quickly. The problem, I found, is that fatty foods also tend to fill me up, so I eat less. And as a percentage of my calories, that means I'm allowed even fewer carbohydrates.
+
+But I persevered. I'm not going to claim I was perfect -- I'm doing this experiment for fun, not for serious scientific research -- so there were days when I indulged differently. Still, just making a conscious effort was enough to push my eating habits in the general direction of less carbs, more fat. And soon I began to notice some effects.
+
+Three months into the new diet, I noticed my sleep had changed slightly: I seemed to be sleeping longer and feeling better, from an average of 25 minutes extra per night -- a 5% improvement.  (see Figure \@ref(fig:experimentDietSleepSummary)) Could this have a microbiome explanation?
+
+```{r experimentDietSleepSummary, fig.cap = "My sleep duration apparently increased by about 5% after switching to the new diet."}
+#knitr::include_graphics("./Experiments/assets/experimentDietSleepSummary.png")
+
+
+# get rid of that first day in January, which is an outlier
+df <- rikStats[-1,] %>% dplyr::filter(Date < "2018-03-01" &  Z>5) %>% 
+  group_by(Week = cut(Date, "1 week")) %>% 
+  mutate(MeanZ = mean(Z)) %>% select(Week, Date,MeanZ)
+
+
+ggplot(df,aes(x=Date,y=MeanZ)) + geom_line(stat="identity") + 
+  ggtitle("Sleep Times (Weekly Average)") + 
+  geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin=lchf.dates[1], xmax=tail(lchf.dates,1), ymin=-Inf, ymax=Inf),
+            fill="red",
+            alpha=0.2,
+            inherit.aes = FALSE) +
+  geom_smooth(method = "loess") + 
+  annotate("text",x=lchf.dates[1]+length(lchf.dates)/2,y=7.5,label = "LCHF Diet") +
+  theme(axis.text.x = element_text(angle=90))
+
+```
+
+To find out, I compared four gut microbiome samples taken _after_ starting the new diet with four taken before. (Table \@ref(tab:experimentDietChangeFTable))
+
+```{r experimentDietChangeSetup, fig.cap = "Genus level differences before and after a change of diet."}
+
+lowcarb.ssr <- c(426265, 445237, 463678, 459907, 459904, 463681, 463684)
+lowcarbcontrol.ssr <- c(353903, 372807, 372921, 372987, 354959, 354977, 378011, 377310, 377238, 377996, 378005)
+
+# genus level analysis here, on just the samples from the above SSRs
+lowcarb <- subset_samples(sprague.genus.norm, SSR %in% lowcarb.ssr )
+lowcarbcontrol <- subset_samples(sprague.genus.norm, SSR %in% lowcarbcontrol.ssr )
+sample_data(lowcarbcontrol)$Label <- "Regular"
+
+# The control group is about 5 months worth of "regular" samples, in this case a total of 72 gut samples
+# taken (mostly) daily
+lowcarbcontrol.phylum.gut <- subset_samples(sprague.phylum.norm, (Site == "gut" | Site == "smartgut") & ((SSR %in% lowcarbcontrol.ssr) |
+                                              (Date >"2017-06-01" & Date < "2017-11-01")))
+
+
+
+mhg_plot_top_heat(subset_samples(merge_phyloseq(lowcarb,lowcarbcontrol),Site=="gut" | Site =="smartgut")) + ggtitle("Regular vs. Low Carb (Gut/Genus)")
+```
+
+```{r experimentDietChangeFTable}
+
+lowcarb.phylum.gut <- subset_samples(sprague.phylum.norm, SSR %in% lowcarb.ssr & (Date > "2017-11-07" &
+                  (Site=="gut" | Site =="smartgut")))
+
+# Change the label names to anonymize the samples
+sample_data(lowcarb.phylum.gut )$Label <- "LCHF"
+sample_data(lowcarbcontrol.phylum.gut)$Label <- "Regular"
+  
+
+#mhg_plot_top_heat(subset_samples(merge_phyloseq(lowcarb.phylum.gut,subset_samples(lowcarbcontrol.phylum.gut, SSR %in% lowcarbcontrol.ssr)),Site=="gut" | Site =="smartgut")) + ggtitle("Regular vs. Low Carb (Gut/Genus)")
+
+knitr::kable(lowcarbcontrol.phylum.gut %>% subset_samples(SSR %in% lowcarbcontrol.ssr) %>%
+  merge_phyloseq(lowcarb.phylum.gut) %>% 
+  mhg_abundance(colnames="Label",top=5)/10000,
+  digits = 2, caption = "Phylum level abundances before and after a change to a low carb, high fat diet.")
+
+
+#sample_data(lowcarbcontrol.phylum.gut %>% subset_samples(SSR %in% lowcarbcontrol.ssr) %>%
+# merge_phyloseq(lowcarb.phylum.gut))[,c("Date","Site","Label","Notes")]
+
+
+# I generated a phylum-level heatmap, didn't find anything, so then I perused this list
+# list of 4 samples taken after the diet change.  Odd that all Firmicutes seem lower than my previous ones
+#knitr::kable(mhg_abundance(lowcarb.phylum.gut,colnames="Label",top=10)/10000,digits=2)
+
+
+
+
+
+```
+
+Note the  substantial difference in the level of _Firmicutes _(Table \@ref(tab:experimentDietChangeFTable)). All of the LCHF samples seem to have _Firmicutes_ just slightly over 50%, whereas three of the four "Regular" samples are much higher.  Is that a coincidence? Is it statistically significant? 
+
+To find out, I looked at all my gut samples from the previous six months, when I was on my "regular" diet, a total of 72 samples. The average (mean) abundance of _Firmicutes_ in those samples is shown in Table \@ref(tab:experimentDietChangeTableMean), plus the output of a simple T-Test that shows the likelihood that the difference could be due to chance alone.
+
+```{r experimentDietChangeTableMean, fig.show = "hold"}
+f <- mhg_taxa(lowcarbcontrol.phylum.gut,"Firmicutes") %>% select(abundance)
+#mean(as.numeric(f$abundance)/10000)
+
+ft<-otu_table(lowcarbcontrol.phylum.gut)["Firmicutes",]
+f.ssr<-colnames(otu_table(lowcarbcontrol.phylum.gut)["Firmicutes",])
+
+# create a new column for the labcarbcontrol samples: Firmicutes abundance
+sample_data(lowcarbcontrol.phylum.gut)$Firmicutes <- as.numeric(otu_table(lowcarbcontrol.phylum.gut)["Firmicutes",])
+#sample_data(lowcarbcontrol.phylum.gut)[,c("Date","SSR","Firmicutes")]
+
+#sample_data(subset_samples(lowcarbcontrol.phylum.gut, SSR %in% colnames(ft[,as.numeric(ft)<500000])))[,c("Date","Label")]
+
+# How to identify only those samples with under 50% Firmicutes
+#otu_table(lowcarbcontrol.phylum.gut)[,otu_table(lowcarbcontrol.phylum.gut)["Firmicutes",]<500000]
+
+ff <- mhg_taxa(subset_samples(lowcarb.phylum.gut, SSR %in% lowcarb.ssr),"Firmicutes") %>% select(abundance)
+#mean(as.numeric(ff$abundance)/10000)
+
+knitr::kable(data.frame(Regular = mean(as.numeric(f$abundance)/10000), LCHF = mean(as.numeric(ff$abundance)/10000)),
+             col.names = c("Regular (Ave)","LCHS"),
+             caption = "Mean Abundance of Regular Samples Compared to Low Carb/High Fat", digits = 2)
+
+t.test(f$abundance,ff$abundance)
+
+```
+
+The extremely low p-value (`r t.test(f$abundance,ff$abundance)$p.value`) implies that the difference in sleep is unlikely to be due to chance. P-values have [serious problems](https://www.vox.com/science-and-health/2017/7/31/16021654/p-values-statistical-significance-redefine-0005) as a way to measure whether something is statistically significant, but as a sniff-test, in this case the value is so low that it's worth investigating further.
+
+
+```{r experimentDietChangeT, fig.cap = "T-Test summary of the statistical significances of differing Firmicutes abundance before and after a diet change (control n = 72, control = 4)"}
+#t.test(f$abundance,ff$abundance)
+
+
+```
+
+Incidentally, among those Regular samples there were a few with under 50% _Firmicutes_ abundance, but were easily explained: for example, three of them happened after my [Soylent experiment](#experimentSoylent).
+
+Conclusion: A low-carb high fat diet can affect _Firmicutes_ abundance.
+
+---
+
+What about _after_ my diet. Did things bounce back to normal? Although I'm more conscious of what I eat, and _do_ generally try to eat fewer carbs (e.g. I've stopped all banana eating), I wouldn't say I keep to the diet as rigorously as I did. 
+
+```{r}
+feb.gut.phylum <- subset_samples(gut.phylum.norm, Date > "2018-02-01") #SSR %in% c(476724,476703))
+mf <- mhg_abundance(feb.gut.phylum, top = 10)/10000
+
+knitr::kable(mf[order(colnames(mf))], digits=2)
+```
+

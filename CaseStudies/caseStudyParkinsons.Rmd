@@ -1,0 +1,135 @@
+## Parkinson's Disease and the Microbiome {#caseStudyParkinsons}
+
+There is evidence that 
+
+From [](http://dx.doi.org/10.1016/j.chom.2017.12.008):
+
+>Since 2015, six studies examining the gut microbiome in Parkinson’s disease (PD) have reported an increase in Akker- mansia abundance in PD patients (e.g., Heintz-Buschart et al., 2017; Hill-Burns et al., 2017); indeed, elevated Akkerman- sia abundance appears to be the most consistently defining feature of the PD mi- crobiome. Likewise, a 2017 study found elevated Akkermansia in individuals with rapid eye movement sleep behavior disor- der, which is considered a pre-motor symptom of PD (Heintz-Buschart et al., 2017). 
+
+First we look at the Genus overall picture:
+
+```{r caseStudyParkinsonsLoad}
+park.genus <- subset_samples(people.norm,Username=="Parkinsons1")
+park.genus <- prune_taxa(taxa_sums(park.genus)>0,park.genus)
+kable(mhg_abundance(park.genus, top=10)/10000,digits=2, col.names = c("%"))
+```
+
+
+How different is this patient's Akkermansia compared to everyone else?
+
+```{r}
+
+# attempt to sort all samples from highest to lowest Akkermansia.
+# ggplot(data=mhg_all_who_have(people.norm,"Akkermansia") %>% arrange(desc(Abundance)) , aes(x=reorder(Label,-Abundance),y=Abundance)) + geom_bar(stat="identity") + 
+#   theme(axis.text.x = element_text(angle=90)) +
+#   labs(title="Abundance of Akkermansia in hundreds of samples")
+
+```
+
+
+```{r}
+
+healthy.gut.genus <- subset_samples(people.gut.norm, Condition = "Healthy")
+
+mhg_density_for_taxa(merge_phyloseq(park.genus,subset_samples(people.norm, Site == "gut" & Condition == "Healthy")),"Akkermansia") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  park.genus #subset_samples(people.order,SSR==36161)
+  )["Akkermansia"]) / 10000,
+  xend = as.numeric(otu_table(
+  park.genus
+  )["Akkermansia"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  ) + ggtitle("Parkinson's patient compared to 160 healthy samples")+ xlab("Akkermansia abundance (%)")
+
+
+# mhg_density_for_taxa(merge_phyloseq(gut.norm,subset_samples(people.norm, Site == "gut")),"Akkermansia") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   park.genus #subset_samples(people.order,SSR==36161)
+#   )["Akkermansia"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   park.genus
+#   )["Akkermansia"]) / 10000 ,
+#   y = -Inf,
+#   yend = Inf
+#   ) + ggtitle("Parkinson's patient compared to 700+ people (including me")+ xlab("Akkermansia abundance (%)")
+
+mhg_density_for_taxa(merge_phyloseq(gut.norm,park.genus),"Akkermansia") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  park.genus #subset_samples(people.order,SSR==36161)
+  )["Akkermansia"]) / 10000,
+  xend = as.numeric(otu_table(
+  park.genus
+  )["Akkermansia"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  ) + ggtitle("Parkinson's patient compared to my 500+ gut samples") + xlab("Akkermansia abundance (%)")
+
+# mhg_density_for_taxa(subset_samples(people.norm,Site=="gut"),"Akkermansia") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   park.genus #subset_samples(people.order,SSR==36161)
+#   )["Akkermansia"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   park.genus
+#   )["Akkermansia"]) / 10000 ,
+#   y = -Inf,
+#   yend = Inf
+#   )+ ggtitle("Parkinson's patient compared to hundreds of gut samples") + xlab("Akkermansia abundance (%)")
+
+
+```
+
+
+How about me compared to my father and sister? (My brother, who I also tested, shows abundance of zero)
+
+```{r}
+dad.genus.norm <- subset_samples(people.norm, Site == "gut" & Username == "RSpragueFather")
+sister <- subset_samples(people.norm, Username == "cjt")
+sample_data(sister)$Username <- "Sister"
+sister.gut <- subset_samples(sister,Site == "gut")
+
+brother.gut <- subset_samples(people.gut.norm,SSR==36161)
+
+mhg_density_for_taxa(merge_phyloseq(sister.gut,dad.genus.norm),"Akkermansia") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  park.genus #subset_samples(people.order,SSR==36161)
+  )["Akkermansia"]) / 10000,
+  xend = as.numeric(otu_table(
+  park.genus
+  )["Akkermansia"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  )+ ggtitle("Parkinson's patient compared to my family") + xlab("Akkermansia abundance (%)")
+
+# Discovered my sister has one sample (out of two) with 10% Akk, like me.
+# mhg_abundance(merge_phyloseq(sister.gut,dad.genus.norm),"Akkermansia")
+```
+There are only 8 few samples involved here, and that one on the far right is just one of two from my sister and is therefore likely an anomolie. Still, if there were a big family component to this microbe, it certainly isn't showing in this test.  F
+
+Let's check the variability of my _Akkermansia_:
+```{r}
+
+plot_bar(subset_taxa(subset_samples(gut.norm.nodupes,Date > "2017-05-01" & Date < "2017-07-15"),Genus == "Akkermansia"), x = "Date") + 
+ # scale_x_date(date_labels = "%M-%Y", date_breaks = "1 months", date_minor_breaks = "1 month") +
+  geom_smooth(method = "loess") +  ggtitle("Akkermansia")  +
+  scale_y_continuous(labels=function(x)x/10000)
+
+quantile(as.numeric(mhg_abundance(subset_taxa(subset_samples(gut.norm.nodupes,Date > "2017-05-01" & Date < "2017-07-15"),Genus == "Akkermansia")))/10000)
+```
+
+

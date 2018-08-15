@@ -1,0 +1,178 @@
+## Traveling to China {#chinaTravel}
+
+During my other international travel experiments, I tested only twice: before and after. Did I miss anything by not testing daily?
+
+On a recent trip to Beijing, China, I took enough kits to test myself every day: gut, skin, nose, and mouth.
+
+Any travel presents major challenges to the microbiome. Besides the significant differences in food, you are surrounded by different people (and germs) and weather. A trip to China involves a 12 hour plane flight too, exposing the body to a long period of lowered air pressure, tight quarters with people and recycled air, and of course the jet lag that accompanies a fifteen hour time shift. With all of that, it would not be surprising to see a significant shift in my microbiome.
+
+Here's an overall heat plot of my gut, day-to-day before and after the trip \@ref(fig:experimentChinaHeatGut)
+
+```{r experimentChinaHeatGut, fig.cap =  "Gut samples before/during/after a trip to Beijing from the US. Dark is 0, lighter colors are higher abundance"}
+
+chinaDates <- rikStats %>% dplyr::filter(Geo=="Beijing") #%>% select(Date) %>% as.vector()  #%in% sample_data(gut.norm)$Date # == as.Date(sample_data(gut.norm)$Date)
+
+chinaPeriod <- seq(from=range(as.Date(chinaDates$Date))[1]-3,to = tail(as.Date(chinaDates$Date),1)+3,by=1)
+
+china.norm <- subset_samples(gut.norm, Site == "gut" & Date %in% chinaPeriod & SSR != 174522)
+china.norm <- prune_taxa(taxa_sums(china.norm)>100,china.norm)
+
+sample_data(china.norm)$Label <- c("Before China-2","Before China-1", "China day 1", "China day 2", "China day 3", "China day 4", "China day 4", "After China", "Return US + 24", "Return + 48")
+mhg_plot_top_heat(china.norm, label = "Date", n = 25)  + ggthemes::theme_fivethirtyeight(base_size = 8) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position="none")
+```
+
+I wasn't surprised to see the rise in _Kluyvera_, a genus that on the 16S test can include sometimes-pathogenic species like _E. coli_ or _Shigella_. These microbes can go up and down regularly, sometimes for no apparent reason at all, but often due to a significant change in environment, like on a trip where you're exposed to many new microbes.
+
+But the obvious standout is the genus _Coprobacter_, which soared beginning a few days after arrival and settled back after my return. I looked in my other samples over the long term and find that it is strongly associated with my China trip. \@ref(fig:travelChinaPlotCopro)
+
+
+```{r travelChinaPlotCopro, fig.cap="Changes in gut microbiome abundance of _Coprobacter_ over time. Area shaded in red is the period while traveling from the U.S. to China."}
+mhg_taxa_plot(subset_samples(sprague.species.norm, Date > "2017-06-01" & Date < "2017-9-01"), "Coprobacter fastidiosus") + ggtitle("Coprobacter") + 
+    geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin= as.Date("2017-07-08"), xmax = as.Date("2017-07-14"), ymin=-Inf, ymax=Inf),
+            fill="red",
+            alpha=0.2,
+            inherit.aes = FALSE) 
+#    annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-14"), y = -0.5, yend = -0.51, color = "red", size = 2) 
+```
+
+Among my years of daily sampling it appears to have bloomed only once --  this trip -- after which it settled back to its quiet little self.  The very first time I noticed any at all was early in the year, coincidentally (?) after I began drinking kefir. But even then, the amounts were tiny (under 0.01%) and often zero -- until this trip.
+
+When I looked at the hundreds of other samples people have sent me, I could find _Coprobacter_ in just a few, and then only at relatively small levels (under 0.4%), less than a tenth of what I found on my biggest day (4.9%). The big 4000+ person Zhernakova study^[ @zhernakova_population-based_2016] found it in small amounts in many people, but again, not very much. I couldn't see any obvious patterns in any of the samples: some were from heavy travelers including some who had been to China, some not; some were from healthy people, some not. I found small amounts in a few skin samples (including my son, in a sample taken shortly after my return), but always in small amounts and with no clear patterns.
+
+The natural question to ask about this microbe is _what does it do?_ Unfortunately, as in so many of these cases, even Dr. Google can't tell me much besides a few passing references in hundreds of top academic papers. It  doesn't seem to be a well-studied microbe.  I know that it's a member of the _Bacteroidetes_ phylum, a "rod-shaped, gram-positive, obligate anaerobe", and my particular species appears to be _Coprobacter fastidiosus_.
+
+The Russian scientists who first isolated it (in 2013^[@shkoporov_coprobacter_2013]) found that, when cultured on glucose, it generates propionic, acetic, and succinic acids. If you look up what those acids do, you can invent lots of stories that might explain why it might appear on a trip to China (smelly? maybe the food! retinal modulation? maybe from the smog!). But I've been around the microbiome block enough times to know that you can explain just about anything if you try hard enough and you don't care about proving it scientifically.
+
+Travel is often good for _Proteobacteria_, another large family of microbes that changed on this trip. Whenever I see high levels, in myself or others, I usually find that the body is undergoing some kind of challenge -- often as a result of exposure to something unhealthy, like a sick person or bad food, and sometimes accompanied by symptoms like an upset stomach or fever. Are the symptoms a _result_ of the higher levels of _Proteobacteria_ or a _cause_? Maybe this phylum contains plain old pathogens, which would explain the rise in abundance, or maybe -- and I'm speculating -- it rises as a natural defense to _protect_ us against? 
+
+Look how my levels rose \@ref(fig:travelChinaProteo). Shortly after returning home, I was on another plane, for a week in the Midwest. All that travel appears to have kept my _Proteobacteria_ levels high. (Unfortunately I'm missing a few samples during that period, but I think you can see the trends). I was never ill during my trip -- at least not with symptoms I could feel -- but my previous bouts of illness almost always coincide with a bump in _Proteobacteria_, so who knows.
+
+```{r travelChinaProteo, fig.cap ="Gut Proteobacteria abundances rose during a period of heavy travel. Note: zero abundances are days with no samples available."}
+
+# high_proteo_ssrs <- colnames(otu_table(gut.phylum.norm)["Proteobacteria",])[otu_table(gut.phylum.norm)["Proteobacteria",]>100000]
+#   
+# sample_data(subset_samples(gut.phylum.norm, SSR %in% high_proteo_ssrs))[,c("Date","Label","Reads")]
+# 
+# proteo_window <- subset_samples(gut.phylum.norm, Date > "2017-07-10" & Date < "2017-08-05")
+# cbind(sample_data(proteo_window)[,c("Date","Label","Reads")],mhg_taxa(proteo_window,"Proteobacteria")[2]/10000)
+
+plot_bar(subset_taxa(subset_samples(gut.phylum.norm, Date > "2017-06-25" & Date < "2017-07-25"),Phylum == "Proteobacteria"), x="Date") + geom_smooth(method="loess", se=FALSE) +
+#  annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-13"), y = 4, yend = 4, color = "red", size = 2) + 
+ # annotate("text",y = 4.2, x =as.Date("2017-07-10"),  label = "Dates I was in China", color = "red") +
+   geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin= as.Date("2017-07-08"), xmax = as.Date("2017-07-14"), ymin=-Inf, ymax=Inf),
+            fill="red",
+            alpha=0.2,
+            inherit.aes = FALSE) +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +  ggtitle("Proteobacteria (gut)")
+
+```
+
+
+
+How about diversity? Did that change? (Figure \@ref(fig:travelChinaPlotDiversityGut))
+
+```{r travelChinaPlotDiversityGut, fig.cap = "Shannon diversity of gut samples during a week-long trip to Beijing."}
+plot_richness(subset_samples(sprague.family.norm, Site == "gut" &  Date %in% #chinaPeriod 
+                               seq(as.Date("2017-07-01"),to=as.Date("2017-08-01"), by=1)
+                             ),
+              x = "Date", measure = c("Shannon")) + geom_smooth(method="loess", se=FALSE) +
+  # annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-13"), y = -Inf, yend = -Inf, color = "red", size = 2) + 
+  # annotate("text",y = 1.65, x =as.Date("2017-07-10"),  label = "Dates I was in China", color = "red") +
+  # + 
+  geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin= as.Date("2017-07-08"), xmax = as.Date("2017-07-14"), ymin=-Inf, ymax=Inf),
+            fill="red",
+            alpha=0.2,
+            inherit.aes = FALSE) +
+  annotate("text",y = 1.65, x =as.Date("2017-07-11"),  label = "Dates I was in China", color = "red") +
+  # + 
+  facet_grid(Site~., scale="free_y", drop=TRUE) 
+
+
+```
+
+
+You can see that some sites may have changed more than others. (Figure \@ref(fig:travelChinaPlotDiversitySites))
+```{r travelChinaPlotDiversitySites, fig.cap = "Shannon diversity of all samples during a week-long trip to Beijing."}
+
+p <- plot_richness(subset_samples(sprague.family.norm,  Site %in% c("skin","mouth","nose","gut") & Date %in% #chinaPeriod
+                               seq(as.Date("2017-07-01"),to=as.Date("2017-08-01"), by=1)
+                             ),
+              x = "Date", measure = c("Shannon")) + geom_smooth(method="loess", se=FALSE) +
+    facet_grid(Site~., scale="free_y", drop=TRUE) 
+
+p + annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-13"), y = +Inf, yend = +Inf, color = "red", size = 2) 
+
+#p
+
+# dat_text <- data.frame(
+#   #label = c("","","","Dates I was in China"),
+#   Site = c("skin","mouth","nose","gut"),
+#   Date = seq(as.Date("2017-07-01"),to=as.Date("2017-08-01"), by=1),
+#   txt = "Dates I was in China"
+#   
+#   
+# )
+# 
+# 
+# p + geom_line(data=dat_text, mapping = aes(x = Date, y = -Inf, label = txt), color = "red") 
+#   
+#   
+#   annotate("text",y = +Inf, x =as.Date("2017-07-10"),  label = "Dates I was in China", color = "red") 
+
+
+
+```
+
+
+```{r travelChinaPlotDiversityskin}
+# plot_richness(subset_samples(sprague.family.norm, Site == "nose"# &  Date %in% #chinaPeriod 
+#                               # seq(as.Date("2017-07-01"),to=as.Date("2017-08-01"), by=1)
+#                              ),
+#               x = "Date", measure = c("InvSimpson")) + geom_smooth(method="loess", se=FALSE) +
+#   annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-13"), y = 4, yend = 4, color = "red", size = 2) + 
+#   annotate("text",y = 4.2, x =as.Date("2017-07-10"),  label = "Dates I was in China", color = "red") 
+# #  facet_grid(Site~., scale="free_y", drop=TRUE) 
+
+```
+
+
+Answer: maybe. As always, my diversity seems to bounce up and down for no apparent reason. It's not surprising that exposure to an all-new environment might tend to bring out new microbes too, as in the case of _Coprobacter_. In this case, at least as measured at the family taxonomic rank, there *was* a slight shift upward in diversity. Incidentally, on the dates after the red line, I stopped at home for a day or two and then continued on to another part of the United States. That's a lot of travel, so it wouldn't be surprising for it to have an effect on my microbial diversity.
+
+It was a similar story with the diversity of my mouth, nose, and skin: if I _really_ wanted to imagine that a visit to China caused a change in diversity, I could point to a few samples that seem to make the case, but inevitably diversity shifted again soon afterwards with no apparent cause.
+
+I could find no other clear pattern of change in any of the other sites. When I looked through each of the individual taxa, none of them 
+
+
+Let's look at the other sites I tested.  Did anything unusual happen in my skin microbiome? As usual, I look first at the overall heatmap to spot any obvious changes.
+
+```{r travelChinaSkin, fig.cap = "Heat map of my skin microbiome before and after a trip to China."}
+china.skin <- subset_samples(sprague.genus.norm, Site == "skin" & Date %in% chinaPeriod & SSR != 161444 ) #& Reads > 20000)
+# sample_data(china.skin)[,c("Date","SSR","Label","Reads")]
+mhg_plot_top_heat(china.skin, label = "SSR", n = 25)  + ggthemes::theme_fivethirtyeight(base_size = 8) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position="none")
+
+```
+
+One of these, _Rhizobium_ is fairly abundant during the week or two before my trip, but then seems to disappear a few days after my arrival, only to bloom again right afterwards. Interestingly, _Rhizobium_ is a important nitrogen-fixing microbe found in soil, always near a plant host. What might that have to do with China, or with international plane travel?  I looked more closely at the abundance of this microbe over time and found that it appeared in my skin only once before, during an extended visit to the northeastern U.S. Like the China trip, it happened over the summer when I typically spend more time outdoors and have greater contact with the soil. Another spike happened right after a camping trip, which makes sense.
+
+The change in _Rhizobium_ abundance this time was indeed unusual, because it seems to not have been related to anything unusual on my part. It was nice weather and I went hiking a few times during that period, but there were many other times I went hiking that didn't see a bloom in this microbe.
+
+```{r travelChinaRhizo, fig.cap = "Long-term abundance of Rhizobium in my skin microbiome. Red line indicates the period of traveling to China."}
+skin.genus.all <- subset_samples(sprague.genus.norm,Site=="skin" & Date > "2017-05-01") # & Reads > 20000)
+
+#View(mhg_df_just_taxa(skin.genus.all,"Rhizobium"))
+
+plot_bar(subset_taxa(skin.genus.all, Genus=="Rhizobium"), x="Date") + 
+    annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-14"), y = -0.5, yend = -0.51, color = "red", size = 2)  +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +  ggtitle("Rhizobium (skin)") 
+
+# mhg_taxa_plot(subset_samples(skin.genus.all, Date > "2017-05-01"),"Rhizobium") + ggtitle("Rhizobium (skin)") + 
+#     annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-14"), y = -0.5, yend = -0.51, color = "red", size = 2) 
+
+```
+
+My conclusion: international travel to a very different place, like China, causes _some_ changes to the microbiome, as you would expect. There is at least one gut microbe, _Coprobacter_, whose bloom seems highly correlated to this particular trip. I could find no other major changes that could be pin-pointed to travel this way, although the extensive testing I did for this experiment let me notice another microbe, _Rhizobium_ whose unexpected rise seems to have occured just before the trip and continued to show up now and then afterwards.
+
+

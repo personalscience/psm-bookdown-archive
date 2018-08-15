@@ -1,0 +1,227 @@
+## Other People {#CaseStudyOther}
+
+
+
+
+
+```{r caseStudySB}
+
+sb.phylum <- subset_samples(people.gut.phylum.norm, Username == "sb")
+sb.norm <- subset_samples(people.gut.norm, Username == "sb")
+
+tam.phylum <- subset_samples(people.gut.phylum.norm, Username == "tm")
+tam.norm <- subset_samples(people.gut.norm, Username == "tm")
+
+# mhg_abundance(tam.norm)/10000
+# mhg_abundance(tam.phylum)/10000
+
+#cb.json <- jsonlite::read_json(file.path(path_to_user("Charles_Bergmeier"),"Charles_Bergmeier-gut-2016-04-06.json"))
+
+dr.phylum <- subset_samples(people.gut.phylum.norm, Username == "dr2")
+dr.norm <- subset_samples(people.gut.norm, Username == "dr2")
+
+# mhg_abundance(dr.phylum)/10000
+# 
+# mhg_unique(tam.norm, dr.norm)
+# 
+# mhg_taxa(tam.norm, "Bifidobacterium")
+# mhg_taxa(tam.norm, "Lactobacillus")
+
+# df <-   # mhg_all_who_have(people.norm,"Bifidobacterium") %>% filter(Condition=="Healthy" & Username!="tt") %>% arrange(desc(Abundance))
+# 
+# 
+# 
+# ggplot(data=df , aes(x=reorder(Username,-Abundance),y=Abundance)) + geom_bar(stat="identity") +
+#   theme(axis.text.x = element_text(angle=90)) +
+#   labs(title="Abundance of Bifidobacteria in hundreds of healthy samples")
+
+
+
+# mhg_abundance(sb.phylum)/10000
+# mhg_abundance(sb.norm)/10000
+
+make_ord_for(subset_samples(people.gut.norm,Age<30 & Age>18))
+
+```
+
+ub7 complains of dysbiosis. ub16 is a very healthy, active female.  bp1 began a ketogenic diet.
+
+```{r caseStudySB2}
+# 
+# comparables <- subset_samples(people.gut.norm,Age<30 & Age>18 & !Username=="bp1" | (Username == "bp1" & Label == "Before Diet"))
+# 
+# mhg_plot_top_heat(comparables, n = 10)
+# mhg_abundance(comparables)/10000
+# 
+mhg_density_for_taxa(merge_phyloseq(gut.norm,people.norm), "Blautia") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "tm")
+  )["Blautia"]) / 10000,
+  xend = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "tm")
+  )["Blautia"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  )
+
+# otu_table(gut.norm)[,otu_table(gut.norm)["Alistipes"]>40000]
+# 
+# otu_table(gut.norm)["Alistipes"]>40000
+# 
+# mhg_density_for_taxa(gut.norm,"Blautia")
+
+```
+
+How about another kefir drinker?
+
+
+```{r caseStudyOtherKefirDri}
+lm.norm <- subset_samples(people.norm, Username == "lm")
+lm.phylum <- subset_samples(people.phylum, Username == "lm")
+mhg_abundance(lm.phylum)/10000
+mhg_abundance(lm.norm, colnames="Date")/10000
+mhg_density_for_taxa(merge_phyloseq(people.norm,gut.norm), "Anaeroplasma") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "lm")
+  )["Anaeroplasma"]) / 10000,
+  xend = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "lm")
+  )["Anaeroplasma"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  )
+
+#mhg_taxa(subset_samples(people.norm, Site == "gut"),"Anaeroplasma")
+
+#sample_data(subset_samples(people.norm, SSR %in% colnames(otu_table(people.norm)["Anaeroplasma",otu_table(people.norm)["Anaeroplasma"]>0])))[,c("Username","Date")]
+
+df <- mhg_all_who_have(people.norm,"Fusicatenibacter") %>% arrange(desc(Abundance))
+
+
+
+ggplot(data=df , aes(x=reorder(Label,-Abundance),y=Abundance)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title="Abundance of Fusicatenibacter in hundreds of samples") 
+#  annotate(geom = "point", x = df %>% filter(Username=="pra") %>% select(Label), y = -Inf)
+
+
+```
+
+And a family of Australians
+
+```{r caseStudyOtherAussie1}
+aus.phylum <- subset_samples(people.phylum, grepl("lm[a-z]*",Username))
+aus.norm <- subset_samples(people.norm, grepl("lm[a-z]*",Username))
+aus.wife <- subset_samples(aus.norm, SSR == 445566)
+
+# people.tmp <- subset_samples(people.norm, Site=="gut" & Condition %in% c("Healthy"))
+# sample_data(people.tmp)$Username <- "Other"
+# sample_data(people.tmp)$Username[sample_data(people.tmp)$SSR %in% sample_data(aus.norm)$SSR] <- "AUS"
+# make_ord_for(people.tmp)
+
+# husband 445587
+# son 447247
+sample_data(aus.norm)$Label <- c("son","father","mother")
+#mhg_abundance(aus.phylum, colnames="Label")/10000
+mhg_plot_top_heat(aus.norm)
+```
+
+
+Here are the taxa that are found in unusual high abundances compared to healthy people
+```{r caseStudyOtherAussieHealthyRanges}
+
+# all taxa where aus.norm is greater than healthy people's max
+mhg_outlier(mhg_range_for(aus.norm),mhg_range_for(subset_samples(people.norm, Site=="gut" & Condition=="Healthy"))) %>% filter(original>max) %>% select(taxa,mean,sd,original) %>% knitr::kable(digits=2, caption = "This sample is out of healthy range for these taxa.")
+
+
+
+```
+
+Let's look for _Anaeroplasma_
+
+```{r caseStudyOtherAussie}
+
+ps <- people.norm
+# sample_data(ps)$Username <- "P"
+#grepl("lm[a-z]*",
+      
+
+#sample_data(ps)[,"Username"] == "lm"
+ggplot(data= mhg_all_who_have(ps,"Anaeroplasma") %>% arrange(desc(Abundance)) , aes(x=reorder(Label,-Abundance),y=Abundance)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title="Abundance of Anaeroplasma in hundreds of samples",
+       y = "Abundance (%)",
+       x = "Person")
+
+#sample_data(people.norm)[,c("Username","Date","Label")] %>% arrange(Label)
+```
+
+
+
+Another user, ```sj```, here showing all the taxa that are out of range of healthy people (Figure: \@ref(tab:caseStudyOtherSJRange))
+
+```{r caseStudyOtherSJRange}
+
+sj <- subset_samples(people.norm,Username == "sj" & Site == "gut")
+sj.phylum <- subset_samples(people.phylum, Username == "sj" & Site == "gut" )
+sj.family <- subset_samples(people.family, Username == "sj" & Site == "gut")
+ps <- subset_samples(people.gut.norm, Site == "gut" )
+users <- sample_data(ps)$Username
+users[-which(users=="sj")] <- "Person"
+sample_data(ps)$Username <- users
+
+#make_ord_for(merge_phyloseq(subset_samples(ps,Condition=="Healthy"),sj)) + labs(title="Compared to Healthy Users")
+#mhg_abundance(sj,top = 50)/10000
+
+# all taxa where sj is greater than healthy people's max
+mhg_outlier(mhg_range_for(sj),mhg_range_for(subset_samples(people.norm, Site=="gut" & Condition=="Healthy"))) %>% filter(original>max) %>% select(taxa,mean,sd,original) %>% knitr::kable(digits=2, caption = "This sample is out of healthy range for these taxa.")
+
+
+
+# mhg_outlier(mhg_range_for(tam.norm),mhg_range_for(subset_samples(people.norm, Site=="gut" & Condition == "Healthy"))) %>% filter(original>=max*0.8) %>% filter(original != 0)
+
+# mhg_density_for_taxa(merge_phyloseq(gut.norm,people.norm), "Hespellia") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "tm")
+#   )["Hespellia"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "tm")
+#   )["Hespellia"]) / 10000 ,
+#   y = -Inf,
+#   yend = Inf
+#   )
+# 
+# mhg_density_for_taxa(merge_phyloseq(gut.norm,people.norm), "Parasporobacterium") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "sj")
+#   )["Parasporobacterium"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "sj")
+#   )["Parasporobacterium"]) / 10000 ,
+#   y = -Inf,
+#   yend = Inf
+#   )
+
+# mhg_all_who_have(merge_phyloseq(gut.norm,people.norm), "Adlercreutzia") %>% arrange(desc(Abundance))
+```
+
+Then I computed which of my own taxa are out of range of the healthy people (Table \@ref(tab:caseStudyMeOutOfRange))
+
+```{r caseStudyMeOutOfRange}
+
+mhg_outlier(mhg_range_for(gut.norm),mhg_range_for(subset_samples(people.norm, Site=="gut" & Condition=="Healthy"))) %>% filter(original>max) %>% arrange(desc(original)) %>% knitr::kable(digits=2, caption = "Out of healthy range")
+
+```
+

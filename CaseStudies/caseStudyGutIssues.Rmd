@@ -1,0 +1,307 @@
+## Gut Issues
+
+Probably the most common reason people are motivated to study their microbiome is due to their discomfort with their gut.
+
+CB is a health-conscious woman who has long suffered from gut issues.
+
+Let's start with a heatmap of all her gut samples to see if we can spot any patterns
+
+```{r caseStudyCBExplore}
+
+cb.gut.genus <- subset_samples(people.gut.norm, Username == "cb")
+cb.gut.genus <- prune_taxa(taxa_sums(cb.gut.genus)>42, cb.gut.genus)
+plot_heatmap(cb.gut.genus, sample.order = "Date", sample.label = "Date")
+# ggplot(data = sample_data(cb.gut.genus)[,c("Date","Reads")], aes(x=Date,y=Reads)) + geom_bar(stat="identity") 
+
+
+```
+
+Hard to tell from this single case. How about if we look at another person ("NJ1")
+
+
+First let's make a similarity plot it to see if we can spot something unusual:
+
+```{r}
+#plot_top_heat(nj1)
+people.tmp <- people.family
+sample_data(people.tmp)$Username <-ifelse(sample_data(people.tmp)$Username=="NJ1","NJ1","People")
+make_ord_for(subset_samples(people.tmp, Site == "gut"))
+```
+
+Nothing special there. She seems firmly in the middle of most of the rest of the people.
+
+Now let's look for specific microbes at the phylum level:
+
+```{r}
+
+nj1 <- subset_samples(people.norm, Username == "NJ1")
+nj1 <- prune_taxa(taxa_sums(nj1)>42, nj1)
+nj1.phylum <- subset_samples(people.phylum, Username == "NJ1")
+nj1.phylum <- prune_taxa(taxa_sums(nj1.phylum)>42, nj1.phylum)
+
+knitr::kable(mhg_abundance(nj1.phylum)/10000, digits = 2)
+
+```
+
+Nothing obviously different there than with others I've seen. Might be nice to see more Verrucomicrobia in the second (7-25) sample, but nothing pops as particularly special. How about the genus level:
+
+```{r, results = "asis"}
+knitr::kable(mhg_abundance(nj1)/10000, digits = 2)
+
+```
+
+The most striking finding is how different the second sample is from the first. Why?
+
+When I look closer, it appears that much of the difference is driven by one genus, _Colinsella_, of which she has among the highest abundances I've seen. In my own gut samples, I've never had more than 5% of that genus, but she has more than 8%. Is that good or bad? Who knows? But it's something I would spend more time studying.
+
+
+```{r}
+
+mhg_density_for_taxa(people.norm, "Collinsella") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "NJ1")
+  )["Collinsella"]) / 10000,
+  xend = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "NJ1")
+  )["Collinsella"]) / 10000 ,
+  y = -Inf,
+  yend = Inf
+  )
+
+           
+```
+
+
+
+
+Clearly different at nearly all taxa.  Which microbe disappeared in the second sample?
+
+```{r}
+
+mhg_unique(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01"))
+```
+
+and vice versa:
+
+```{r}
+kable(mhg_unique(subset_samples(nj1, Date < "2017-07-01"),subset_samples(nj1, Date > "2017-07-01"))[1]/10000, digits = 2, col.names = c("% Unique to first sample"))
+```
+
+
+Let's look at another case:  "Ed" is a German man on a mostly vegetarian diet.
+
+```{r}
+
+ed <- subset_samples(people.norm, Username == "AD" & Site == "gut")
+ed.norm <- prune_taxa(taxa_sums(ed)>42, ed)
+
+#plot_top_heat(ed.norm)
+
+c.people <- people.norm # compare set
+sample_data(c.people)$Username <- "Other"
+
+
+ed.all <- subset_samples(people.phylum, Username == "AD")
+ed.ssr <- sample_data(ed.all)$SSR
+sample_data(c.people)$Username[sample_data(c.people)$SSR %in% ed.ssr] <- "You"
+
+
+  
+  
+ed.phylum <- subset_samples(people.phylum, Username == "AD" & Site == "gut")
+ed.phylum.norm <- prune_taxa(taxa_sums(ed.phylum)>42, ed.phylum)
+mhg_abundance(ed.phylum.norm)/10000
+
+mhg_abundance(ed.norm)/10000
+
+# using another database: not for public
+# load(paste0(DATA_DIR,"/ubiome corp/healthy/healthy897Genus.RData"))
+# sample_data(healthy.ps)$Site <- "gut"
+# healthyPlusEd <- merge_phyloseq(healthy.ps,ed.norm)
+# ord <- ordinate(healthyPlusEd, method = "NMDS", distance = "bray" )
+# plot_ordination(healthyPlusEd, ord,  color = "Username", shape = "Site")# label = "Label")
+
+
+#ord <- ordinate(subset_samples(c.people, Site == "gut"), method = "DCA", distance = "bray" )
+
+make_ord_for(subset_samples(c.people, Site == "gut"), color = "Username")
+
+```
+
+### Celiac Patients
+
+
+L and her friend S suffer from the gluten disorder called Celiac disease.
+
+```{r}
+lori.phylum <- subset_samples(people.phylum,  Username == c("em1"))
+lori  <- subset_samples(people.norm,  Username == c("em1"))
+sandy.phylum <- subset_samples(people.phylum,  Username == c("em2"))
+sandy <-subset_samples(people.norm,  Username == c("em2"))
+mhg_abundance(merge_phyloseq(lori.phylum,sandy.phylum),top=6)/10000
+
+mhg_abundance(merge_phyloseq(lori,sandy),top=10)/10000
+
+#mhg_plot_top_heat(merge_phyloseq(lori,sandy))
+
+```
+
+
+I don't often see L's level of Fusobacterium. A quick check, though, shows that she's not the highest.
+
+```{r}
+mhg_density_for_taxa(people.norm,"Fusobacterium") + 
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "em1"))["Fusobacterium"] / 10000),
+  xend = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "em1"))["Fusobacterium"] / 10000),
+  y = -Inf,
+  yend = Inf
+  )
+
+plot_richness(merge_phyloseq(subset_samples(people.family,Username=="em1"),subset_samples(people.family,Username=="em2")), measures=c("InvSimpson"))
+
+ls.ssr <- c(sample_data(lori)$SSR,sample_data(sandy)$SSR)
+  
+  
+c.people <- subset_samples(people.family, Site == "gut") # compare set
+sample_data(c.people)$Username <- "Other"
+
+#sample_data(c.people)$Username[sample_data(c.people)$SSR %in% ls.ssr] <- subset_samples(c.people)
+
+sample_data(c.people)$Username[sample_data(c.people)$SSR %in% ls.ssr] <- sample_data(people.norm)$Username[sample_data(people.norm)$SSR %in% ls.ssr]
+
+# loriSandyHealthy <- merge_phyloseq(lori,sandy,healthy.ps)
+# ord <- ordinate(loriSandyHealthy, method = "NMDS", distance = "bray" )
+# plot_ordination(loriSandyHealthy, ord,  color = "Username", shape = "Site")# label = "Label")
+
+#ord <- ordinate(subset_samples(c.people, Site == "gut"), method = "DCA", distance = "bray" )
+make_ord_for(c.people, color = "Username")
+
+
+```
+
+### SJ
+
+His doctor says he has high _Klebsiella_, but how high is high? Klebsiella pneumoniae
+
+```{r checkKelbsiella}
+# 
+# mhg_density_for_taxa(people.species,"Klebsiella pneumoniae") + 
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(sprague.species.norm, Site=="gut"))["Klebsiella pneumoniae"] / 10000),
+#   xend = as.numeric(otu_table(
+#   subset_samples(sprague.species.norm,Site == "gut"))["Klebsiella pneumoniae"] / 10000),
+#   y = 0,
+#   yend = 0.5
+#   )
+# 
+
+```
+
+
+
+### Mr. C
+
+```{r}
+
+conor.phylum <- subset_samples(people.phylum,  Username == c("em3"))
+conor  <- subset_samples(people.norm,  Username == c("em3"))
+
+c.people <- subset_samples(people.family, Site == "gut") # compare set
+sample_data(c.people)$Username <- "Other"
+
+sample_data(c.people)$Username[sample_data(c.people)$SSR == 12356] <- "Conor"
+
+
+make_ord_for(c.people)
+
+```
+
+### FF
+
+Here's a person from Norway who has long suffered from IBS.
+
+```{r}
+
+ff.phylum <- subset_samples(people.phylum,  Username == c("ff"))
+ff  <- subset_samples(people.norm,  Username == c("ff"))
+
+ff.people <- subset_samples(people.family, Site == "gut" & Condition == "Healthy") # compare set
+ff.people <- merge_phyloseq(subset_samples(people.family,Username=="ff"),ff.people)
+sample_data(ff.people)$Username <- "Other"
+
+sample_data(ff.people)$Username[sample_data(ff.people)$SSR == 379847] <- "FF"
+
+
+make_ord_for(ff.people)
+
+ff.people.genus <- subset_samples(people.norm, Site == "gut" & Condition == "Healthy") # compare set
+ff.people.genus <- merge_phyloseq(subset_samples(people.norm,Username=="ff"),ff.people.genus)
+
+mhg_density_for_taxa(ff.people.genus,"Sutterella") + 
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(ff.people.genus, Username == "ff"))["Sutterella"] / 10000),
+  xend = as.numeric(otu_table(
+  subset_samples(ff.people.genus, Username == "ff"))["Sutterella"] / 10000),
+  y = -Inf,
+  yend = Inf
+  )
+
+
+```
+
+
+```{r}
+mhg_density_for_taxa(people.norm,"Fusicatenibacter") + 
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "em3"))["Fusicatenibacter"] / 10000),
+  xend = as.numeric(otu_table(
+  subset_samples(people.norm, Username == "em3"))["Fusicatenibacter"] / 10000),
+  y = -Inf,
+  yend = Inf
+  )
+```
+
+## High Proteobacteria
+
+Usually I associate the phylum _Proteobacteria_ with trouble. So when recently somebody showed me results with nearly 10%, I immediately wanted to know more.
+
+```{r}
+db1.phylum <- prune_taxa(taxa_sums(subset_samples(people.phylum, Username == "db1")) > 50, (subset_samples(people.phylum, Username == "db1")))
+db1.genus <- prune_taxa(taxa_sums(subset_samples(people.norm, Username == "db1")) > 50, (subset_samples(people.norm, Username == "db1")))
+db1.family <- prune_taxa(taxa_sums(subset_samples(people.family, Username == "db1")) > 50, (subset_samples(people.family, Username == "db1")))
+# mhg_taxa(db1.genus,"Akkermansia")
+
+kable(mhg_abundance(db1.genus)/10000,col.names = c("db1 %"))
+```
+
+Most of the _Proteobacteria_ is from the genus _Parasutterella_.  I'm not sure what this one does, but the levels in this sample are much higher than anything I've seen before.
+
+```{r caseStudyGutIssuesPeopleOrdLiza}
+people.tmp <- subset_samples(people.family, Site=="gut")
+ssr.tmp <- sample_data(subset_samples(people.tmp, Username == "db1"))$SSR
+
+sample_data(people.tmp)$Username <- "People"
+
+sample_data(people.tmp)$Username[sample_data(people.tmp)$SSR == ssr.tmp] <- "Liza"
+make_ord_for(people.tmp)
+
+```
+
+

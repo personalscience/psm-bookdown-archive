@@ -1,0 +1,184 @@
+## Do Probiotics Work? {#experimentProbiotics}
+
+Probiotic supplements are a \$34 billion business, of which at least \$6 billion is supplements, according to a May 2016 report by [BCC Research](http://www.bccresearch.com/market-research/food-and-beverage/probiotics-market-ingredients-supplements-foods-report-fod035e.html). With unregulated health claims that range from the benign ("helps digestion") to the fantastic ("A miracle cure!"), do they make a significant difference in my own gut microbiome?  I tested myself to find out.
+
+Among unhealthy people, there is evidence that, under a doctor's care, [probiotics can help](http://www.cochrane.org/CD004827/IBD_probiotics-prevention-antibiotic-associated-diarrhea-children) with antibiotic-associated diarrhea and similar conditions in children or among people [recovering from *C.* difficile](http://www.cochrane.org/CD006095/IBD_the-use-of-probiotics-to-prevent-c.-difficile-diarrhea-associated-with-antibiotic-use) infections. 
+
+On the other hand, a [recent scientific review](http://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0300-5) of all well-done studies of probiotics among healthy people couldn't find evidence that probiotics made much difference compared to a placebo in randomized controlled trials.  When the data-heavy web site FiveThirtyEight did a [week-long series](http://fivethirtyeight.com/features/gut-week-introduction/) on Gut Science, including a detailed survey of [what's known about probiotics](http://fivethirtyeight.com/features/gut-week-do-probiotics-work-are-they-good-for-me/), they concluded: “There's no evidence in humans, however, to support taking probiotics just to generally improve your gut health.”
+
+A literature review by the US Agency for Healthcare Research and Quality found [no safety issues in healthy adults](http://www.ahrq.gov/research/findings/evidence-based-reports/probiotsum.html), but there is suprisingly little research to show that the pills actually do anything. The independent lab [Labdoor](https://labdoor.com/rankings/probiotics) tests most common brands to see which actually contain the organisms claimed on the label, but I couldn't find anyone who tests whether the body can absorb them or not. There have been a few peer-reviewed studies showing that _some_ microbes in supplements can make it to the gut^[_L. reuteri DSM 17938_ and _L. rhamnosus GG_ in @dommels_survival_2009], but these studies almost feel like special cases, where they try lots of microbes and only a few make it. It's not clear that organisms in a typical off-the-shelf bottle of probiotics have ever been tested that way.
+
+
+I'm especially interested in learning whether the probiotics in the supplements actually “stick” in my gut. Taking so many billion organisms in pill form all at once may very well show up in a single gut test result, but how do I know they're not simply being flushed out of my system? Or worse, how do I know I'm not just crowding out something more important?
+
+
+To find out, I tracked my microbiome daily while taking a high quality probiotic supplement, one that I received directly from the manufacturer. To be a fair test, one worth publicizing the brand name for better or worse, I'd want to try it out on multiple people, at multiple times. Because I didn't do that this time, I won't name the product other than to say that it's from a "good" brand and well-recommended. 
+
+I took the supplement once per day for nine days. I would have continued for an even ten, but I was starting to feel uncomfortably bloated those last few days. While that's an encouraging sign that the pill is working, I didn't want to do anything to seriously mess up my gut. I'm doing this experiment for fun, and it won't be fun if I get sick as a result.
+
+
+```{r echo=FALSE}
+# knitr::include_graphics("./experiments/assets/soundProbioticsLabel.jpg")
+```
+
+Let's look for at the overall abundances for the two genera that were in the supplements: _Bifidobacterium_ and _Lactobacillus_. (Figure \@ref(fig:probioticPlotAmounts))
+
+```{r probioticOverallAbundances, echo = FALSE, message=FALSE}
+
+probiotic.day <- seq(as.Date("2016-10-23"),length=9, by=1)  # also declared in experiment-summary
+probiotic.genus <- subset_samples(gut.norm, Site == "gut" & Date %in% seq(as.Date("2016-10-23"),length=25, by=1)) # Site == "gut" & Date > "2016-06-01" & grepl("[P|p]robiotic",Label))
+
+targetGenus <- c("Bifidobacterium","Lactobacillus")
+#targetGenus <- c("Bifidobacteriaceae","Lactobacillaceae")
+
+```
+
+
+
+```{r probioticPlotAmounts, fig.cap = "Percent abundance of key microbes (genus-level) found in the gut while taking a probiotic supplement.", echo = FALSE, message=FALSE}
+
+ps.short <- subset_samples(prune_taxa(taxa_sums(probiotic.genus)>0,probiotic.genus))
+
+p <- which(sample_data(gut.norm)$SSR %in% sample_data(probiotic.genus)$SSR)
+                                    
+
+plot_bar(subset_taxa(ps.short, Genus %in% targetGenus),
+         fill="Genus",
+         x="Date") +  
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  facet_grid(Genus~., scale="free_y", drop=TRUE) + 
+    annotate("point",x=probiotic.day, y = -0.03, color = "red") + theme(legend.position = "none")
+
+
+```
+
+The red dots represents days when I took a gut sample after consuming the probiotic. Unfortunately, despite taking and submitting samples daily, several of my results just didn't have enough reads to be useful. This chart shows only the days when I have a sample of at least 10,000 reads.
+
+Even with that caveat, it's hard to see clear-cut evidence that the pill had a significant effect. Yes, I have slightly more of those two taxa by the end of the experiment, but seriously, not *that* much more.
+
+Let's look at a longer time horizon (Figure \@ref(fig:probioticPlotFacets)).
+
+```{r probioticPlotFacets, fig.cap = "Percent abundance of key gut microbes over a three month period after taking a probiotic supplement." }
+targetGenus <- c("Bifidobacterium","Lactobacillus")#,"Akkermansia","Roseburia")
+
+ps.long <- subset_samples(prune_taxa(taxa_sums(gut.norm)>0,gut.norm),
+                                    Date >= "2016-08-15" &  Date < "2016-11-15")
+# plot_bar(subset_taxa(ps.long,
+#                      Genus %in% targetGenus),
+#          fill="Genus",
+#          x="Date") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")
+
+plot_bar(subset_taxa(ps.long, Genus %in% targetGenus), 
+         #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
+         x = "Date", fill = "Genus")  +
+  scale_x_date(date_labels = "%b", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  facet_grid(Genus~., scale="free_y", drop=TRUE) + 
+  annotate("point",x=probiotic.day, y = -0.03, color = "red")
+```
+
+
+```{r plotAmountsLong, echo = FALSE, message=FALSE}
+
+# ps.long <- subset_samples(prune_taxa(taxa_sums(gut.norm)>0,gut.norm),
+#                                     Date >= "2016-08-15" &  Date < "2016-11-15")
+# 
+# x = which(sample_data(ps.long)$Date == "2016-10-24")
+# xend = which(sample_data(ps.long)$Date == "2016-11-02")
+# plot_bar(subset_taxa(ps.long,
+#                      Genus %in% targetGenus),
+#          fill="Genus",
+#          x="Date") +
+#    scale_y_continuous(labels=function(x)x/10000) +
+#   annotate("segment",x = as.Date("2016-10-24"), xend = as.Date("2016-11-02"), y = -0.003, yend = -0.003, color = "blue", size = 2)
+
+```
+
+Hmmmm, it seems the levels of those particular genera *did* increase a tiny bit at the end of the experiment, but there are plenty of other times on the chart where I see spikes too. In fact, the biggest increase happened in September when I was living it up in New Orleans, eating red beans and rice -- and no probiotic pills.
+
+Maybe my view of the microbe ecology, hoping to see results in only one or two genera, is too simplistic. We know that the gut is an ecosystem. If you add lots of one type of organism, maybe that affects the abundances and ratios of other microbes, all of whom are in constant competition with one another. Is there a way to tell *overall* how the microbes are changing?
+
+Let's apply an _ordination_ analysis. Essentially this means we look at all the samples together and work out how different the samples are from one another, based on some "distance metric" that compares the abundances of specific microbes. If the abundances of two samples are roughly the same, or if they tend to rise and fall together, then we plot them next to each other, and vice versa if they are not well-correlated. There is a mathematical way to do this where we combine all these different correlations over and over and pick just the two that seem to matter the absolute most, which we'll plot on a two-dimensional graph (Figure \@ref(fig:probioticPlot))
+
+
+```{r probioticPlot, fig.cap = "NMDS ordination (Bray-Curtis) of gut samples for ten months before and after taking probiotic supplements. ", results = 'hide'}
+p.norm <- gut.norm
+
+sample_data(p.norm)$Experiment <- FALSE
+d <- as.character(sample_data(p.norm)$Date)
+e <- as.character(sample_data(subset_samples(p.norm,
+                                             Date >= "2016-10-24" & Date < "2016-11-02"
+                                             & !is.na(Date)
+                                             )
+                              )$Date
+                  )
+sample_data(p.norm)$Experiment <- d %in% e
+sink("junk.txt")
+sprague.norm.gut.ord <- ordinate(subset_samples(p.norm,
+                                                Site=="gut" &
+                                                Date > "2016-01-01"), 
+                                 method = "NMDS", 
+                                 distance = "bray")
+sink()
+plot_ordination(p.norm,
+                sprague.norm.gut.ord, 
+                color = "Experiment")
+
+```
+
+Hmm... that looks pretty random to me.
+
+#### Other people
+Since doing this experiment on myself, I've spoken with numerous others who've tried something similar: take a gut test, then start some type of probiotic supplement, and finally take another followup test a few days or weeks later.
+
+Here's an example, "Jeremy", a healthy man in his 50s took [this probiotic supplement](https://www.florahealth.com/us/products/super-bifido-plus-probiotic/): $42 for one month of pills:
+
+```{r probioticsSuperBifidoLabel, fig.cap = "Super Bifido Plus Probiotics contains high amounts of live Bifidobacteria and Lactobacillus."}
+knitr::include_graphics("./experiments/assets/labelSuper-Bifido-Plus-Probiotic-30cap.jpg")
+```
+
+and here's the high level result:
+
+```{r}
+
+jc <- subset_samples(people.norm,Username == "jc")
+jc.short <- prune_taxa(taxa_sums(jc)>42,jc)
+mhg_plot_top_heat(jc.short)
+```
+
+Next let's look just at the microbes reported to be in the probiotic pills. Jeremy has three samples of interest: (1) taken in mid-summer, a month before starting the probiotics, (2) right before the month of pills, and (3) after completing 30 days of faithful pill taking.
+
+```{r}
+
+targetGenus <- c("Bifidobacterium","Lactobacillus")#,"Akkermansia","Roseburia")
+plot_bar(subset_taxa(jc.short,
+                     Genus %in% targetGenus),
+         fill="Genus",
+         x="Date") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")
+
+plot_bar(subset_taxa(subset_samples(jc.short, Date > "2017-01-01"), Genus %in% targetGenus), 
+         #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
+         x = "Date", fill = "Genus")  +
+  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  facet_grid(Genus~., scale="free_y", drop=TRUE)
+
+
+```
+So although we *do* see a slight increase in both taxa, it's hard to pin it solely on the probiotics. After all, he was at even higher levels a month *before* starting the pills. 
+
+Also, looking more closely at the read counts, I see that the final sample had the lowest, about 36,000 reads versus the 80,000+ reads of the other samples. When dealing with low-abundance bacteria, this can matter, but it's impossible to tell precisely how much. The bottom line is that it's possible that the probiotics had no effect whatsoever, and even if there was an effect, it was probably quite slight.
+
+
+
+#### (Tentative) Conclusions and next steps
+
+It is very difficult to say with this analysis that the probiotics had any effect that is detectable by the uBiome Explorer test. 
+
+Further analysis required:
+
+* *Consider other statistical analysis*. Although the two strains contained in the probiotic pill don't appear to cause a change in the gut microbiome results, are there other changes that can be detected statistically. Perhaps there are other taxa that show a significant change.
+
+* *Other time horizons*. Maybe the changes don't happen immediately.  Although at a high level, there doesn't appear to a noticable lag in the levels of the probiotic strains, perhaps a more sophisticated data transformation would uncover something.

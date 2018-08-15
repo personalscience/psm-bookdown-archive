@@ -1,0 +1,114 @@
+
+## Omega-3 and the microbiome**
+
+[This paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5593975/) suggests a relationship between _Lachnospiraceae_ family and Omega-3. I tried taking high-omega 3 fish oil pills for a week. (Figure \@ref(fig:experimentOmega3))
+
+```{r experimentOmega3, fig.cap="Days marked in red are days I took two fishoil capsules."}
+fishoil.day <- as.Date(na.omit(rikStats[rikStats$`Fish Oil`>0,]$Date))
+keytaxa.top <- subset_taxa(gut.family.norm, Family %in% c("Lachnospiraceae") )
+
+plot_bar(subset_taxa(subset_samples(gut.family.norm, Date>"2017-01-01" ),   #, Date %in% seq(as.Date("2016-12-01"), length = 60, by = 1)),
+                     Family == "Lachnospiraceae"), x = "Date") + 
+  geom_smooth(method = "loess", se = FALSE) +
+  annotate("point",x=fishoil.day, y = -0.03, color = "red")+
+  scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("Lachnospiraceae") + labs(color="Days I took Omega-3 pill")
+
+```
+
+Another study from the University of Nottingham found that [omega-3 correlates with the microbiome in women](http://www.gutmicrobiotaforhealth.com/en/observational-study-shows-omega-3-fatty-acids-correlate-gut-microbiota-composition-women/).
+
+## Soylent** {#experimentSoylent}
+
+A team of undergraduates at the University of California Berkeley conducted an experiment with 14 people to see if the nutrition drink [Soylent](https://soylent.com) would change the microbiome^[@hsu_interventional_2017 and see the [\$6,405 crowd-sourced campaign](https://experiment.com/projects/impact-of-soylent-consumption-on-human-microbiome-composition) that funded it]. They found that it increased the ratio of Bacteroidetes to Firmicutes by a significant amount. How about me?
+
+Interestingly, looking back through my daily microbiome samples to see which dates I tried Soylent, I got this: (Figure \@ref(fig:experimentSoylentFBRatio))
+
+```{r experimentSoylentFBRatio, fig.cap = "Red dots mark days when I drank Soylent."}
+
+soylent.day <- mhg_food_days(rikfood,"soylent")
+keytaxa.top <- subset_taxa(gut.phylum.norm, Phylum %in% c("Bacteroidetes","Firmicutes") )
+
+plot_bar(subset_taxa(subset_samples(gut.phylum.norm, Date %in% seq(soylent.day[1]-3, length = 10, by = 1)),
+                     Phylum %in% c("Bacteroidetes","Firmicutes")), x = "Date", fill = "Phylum") + 
+  #geom_smooth(method = "loess", se = FALSE) +
+  annotate("point",x=soylent.day, y = -0.03, color = "red")+
+  scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("Drinking Soylent Changes My Phyla")  
+  #annotate("text", x = soylent.day, y = 100000, label = "Days I drank Soylent")
+
+```
+
+
+The red dots are dates when I drank Soylent.^[More precisely, the sample taken that day represents the food I ate the day _before_. In other words, the red dots are the *day after* I drank Soylent.] Unfortunately, the samples failed on two of the dates in this chart, so I'm unable to see how my gut microbiome looked immediately before taking the Soylent, but still, isn't it strange that my F/B ratio was reasonably stable until then?
+
+The shift is more dramatic if we look at a longer time frame, the weeks before and after the Soylent drinking (Figure \@ref(fig:soylentFBratio))
+
+```{r soylentFBratio, fig.cap="Soylent-drinking days are highlighted in red."}
+dates <- (seq(soylent.day[1]-30, length = 50, by =1))
+
+gut.phylum.range <- subset_samples(gut.phylum.norm, Date %in% dates )
+Firmicutes <- as.vector(otu_table(gut.phylum.range)["Firmicutes",])
+Bacteroidetes <- as.vector(otu_table(gut.phylum.range)["Bacteroidetes",])
+dates <- sample_data(gut.phylum.range)$Date
+
+fb <- data.frame(fb=Bacteroidetes/Firmicutes, date=dates)
+
+ggplot(data=fb, aes(x=date,y=fb)) + geom_line() +
+  scale_x_date(date_labels = "%b-%d", date_breaks = "1 week", date_minor_breaks = "1 day") +
+  geom_smooth(method = "loess") + 
+  ggtitle(paste("Bacteroidetes/Firmicutes ratio")) + 
+  geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin=soylent.day[1], xmax=soylent.day[2], ymin=0, ymax=1.5),
+              fill="red",
+              alpha=0.2,
+              inherit.aes = FALSE) +
+  # annotate(geom="segment", color = "red",
+  #          x = soylent.day,
+  #          xend = soylent.day ,
+  #          y = 0, yend = 1.5) + 
+  theme(axis.text.x = element_text(angle = -90, hjust = 1))
+```
+
+This is by no means a confirmation of the results of their experiment, since mine was just an _ad hoc_ test for two days among many other types of food-eating and tests that I regularly conduct on myself. That said, it is odd that I find a significant shift in that ratio, in the same direction as in their published trial.^[Important technical note: the study authors didn't use the standard uBiome bioinformatics pipeline (like I did), choosing instead to build their data from the raw FASTQ files returned from the uBiome 16S sequencing lab. That would normally make a significant difference in the results, so compare my data points with caution. Still...]
+
+Why would this be?
+
+The nutritional label gives some possible clues. (Figure \@ref(fig:experimentSoylentLabel))
+
+```{r experimentSoylentLabel, fig.cap = "Nutritional label and ingredients list from a bottle of Soylent."}
+knitr::include_graphics("Experiments/assets/MHG-experimentSoylentLabel.jpg")
+```
+
+One of the main ingredients, maltodextrin, is a man-made polysaccharide popular as a food additive for its usefulness as a thickener and texturizer. Usually synthesized from corn or wheat, it has been added to food products since the 1950s and is now in something like 60% of all packaged foods. It also has some well-known effects on the microbiome^[See @nickerson_deregulation_2015], at least in mice, and on the ability of some bacteria to form biofilms. I couldn't find any studies in humans that specifically look at the affect on the microbiome, except now this Berkeley study.
+
+The Soylent web site [explains that the maltodextrin](http://blog.soylent.com/post/68180382810/soylent-10-macronutrient-overview) is there to provide carbohydrates. Mixed with oat flour and other fibers to give it an overall lower glycemic index, it's naturally easy to digest and a quick source of energy. That sounds like a recipe that should significantly affect the microbiome, especially if you use it, as intended, as your main source of food. 
+
+
+Interestingly, my gut diversity seems to have increased sharply right after drinking the Soylent, followed by a crash a few days later.
+
+```{r experimentSoylentDiversity, fig.cap = "Family-level diversity. The period highlighted in red is days I drank Soylent."}
+
+plot_richness(subset_samples(gut.phylum.norm, Date %in% dates ), x="Date", measures = "Simpson")+
+  scale_x_date(date_labels = "%b-%d", date_breaks = "1 week", date_minor_breaks = "1 day") +
+  geom_rect(data=data.frame(xmin=5000, xmax=10000, ymin=-Inf, ymax=Inf),
+            aes(xmin=soylent.day[1], xmax=soylent.day[2], ymin=0.3, ymax=0.7),
+              fill="red",
+              alpha=0.2,
+              inherit.aes = FALSE) +
+  geom_line(stat="identity") +
+  ggtitle("Gut Diversity ")
+```
+
+The diversity calculated in this chart is a very crude measurement that tries to summarize a complex ecology into a single number, and as you can see it tends to vary sharply from day-to-day anyway. That said, it's not _that_ variable over time, and the few days after Soylent seem notably higher than the rest of the period measured. I'm betting this is really caused by the fact that I was visiting another city at the time, so the increase is likely related to travel more than the food itself. Still, something for future research to consider.
+
+Finally, let's look at the overall phyla-level breakdown. (Figure \@ref(fig:experimentSoylentPhylaOverall))
+```{r experimentSoylentPhylaOverall, fig.cap = "Phyla breakdown shows high Verrucomicrobia after Soylent drinking. Genus is Akkermansia."}
+plot_bar(prune_taxa(taxa_sums(gut.phylum.range)>200000, gut.phylum.range), x = "Date", fill = "Phylum") +
+  scale_x_date(date_labels = "%b-%d", date_breaks = "1 week", date_minor_breaks = "1 day") +
+  annotate("point",x=soylent.day, y = -3, color = "red") +
+  scale_y_continuous(labels = function(x) x / 10000) + ggtitle("My Gut on Soylent")
+```
+
+Interestingly, the days after Soylent drinking show that the Firmicutes has been replaced by _Verrucomicrobia_, the phylum that contains _Akkermansia_. The affect lasts a few days, and it's unusual compared to the rest of the sampling period, so I doubt it's a coincidence. Still, it's very hard to tell the cause.
+
+More details are available on the [Mycrobes site](https://mycrobes.berkeley.edu/the-study/) of the student group that did the experiment. There is also a lively [Reddit discussion](https://www.reddit.com/r/soylent/comments/76911u/an_interventional_soylent_diet_increases_the/).
+

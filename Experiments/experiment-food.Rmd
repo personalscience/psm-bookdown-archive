@@ -1,0 +1,124 @@
+
+## Other foods and my microbiome ** {#experimentFood}
+
+Flax is often described as a powerful food source for gut bacteria. Can we tell which microbes are most affected, and by how much?
+
+By tracking daily, I'm able to see trends and relationships that wouldn't show up in a normal large trial.
+
+
+
+I occasionally eat ground flax seed, a few tablespoons mixed into other foods. How does it affect my microbiome compared to the days when I _don't_ eat it?
+
+
+```{r experimentFlaxSetup, fig.cap = "Red dots mark days when I add flax."}
+
+flax_day <- mhg_food_days(rikfood,"flax")
+#flax_day <- mhg_food_days(rikfood,"beer|wine|ale|whiskey|pinot|chardonnay|cabernet|merlot|leinenkugels|pilsner|ipa")
+flax_nextday <-flax_day+1
+
+flax_df <- data.frame(flax = factor("no flax"),
+                      date = as.Date(seq.Date(range(rikfood$Date)[1],range(rikfood$Date)[2],by=1)) )
+
+levels(flax_df$flax) <- factor(c("no flax","flax","flax day two"))
+
+flax_df[!is.na(match(flax_df$date,flax_day)),]$flax <- "flax" # days where I ate flax
+flax_df[!is.na(match(flax_df$date,flax_nextday)),]$flax <- "flax day two"
+
+#flax_df holds the dates on which I either ate "no flax", "flax", or it was the day after "flax day two"
+
+
+```
+
+
+
+```{r experimentFlaxDaysChart, fig.cap = "Red dots mark days when I ate flax."}
+# flax days are spread throughout the period, not clustered over a single sub-period
+#ggplot(data = flax_df, aes(x=date,y=flax, fill=flax)) + geom_bar(stat="identity")
+  
+
+```
+
+
+
+```{r experimentFlax, fig.cap = "Red dots mark days when I add flax."}
+
+ps.flax <- subset_samples(gut.norm.nodupes,Date %in% (flax_df %>% filter(flax=="flax"))$date)
+ps.flax <- prune_taxa(taxa_sums(ps.flax)>500,ps.flax)
+ps.flax_nextday <- subset_samples(gut.norm.nodupes,Date %in% (flax_df %>% filter(flax=="flax day two"))$date)
+ps.flax_nextday <- prune_taxa(taxa_sums(ps.flax_nextday)>500,ps.flax_nextday)
+
+ps.noflax <- subset_samples(gut.norm.nodupes, Date %in% (flax_df %>% filter(flax=="no flax"))$date)
+ps.noflax <- prune_taxa(taxa_sums(ps.noflax)>500,ps.noflax)
+flax.df <- mhg_range_for(ps.flax)
+noflax.df <- mhg_range_for(ps.noflax)
+flaxNext.df <- mhg_range_for(ps.flax_nextday)
+
+flaxDiff <- full_join(flax.df,noflax.df, by = "taxa") %>% select(taxa,flax = mean.x,noflax = mean.y) %>%
+  transmute(taxa,flax=flax/10000,noflax=noflax/10000) %>% transmute(taxa,noflax, flaxAdvantage=flax-noflax) %>%
+  arrange(desc(flaxAdvantage)) %>% na.omit()
+
+flaxDiff1 <- full_join(flaxDiff,flaxNext.df, by = "taxa") %>%
+  select(taxa,flaxAdvantage, noflax, flax1_mean = mean) %>%
+  transmute(taxa,flaxAdvantage,flax1_mean = flax1_mean/10000 - noflax, sum = flaxAdvantage+flax1_mean)
+
+
+
+flaxDiff2 <- flaxDiff1 %>% gather(day,diff_means,flax1_mean,flaxAdvantage) %>% na.omit() %>% arrange(taxa) 
+flaxDiff2$taxa <- factor(flaxDiff2$taxa)
+flaxDiff2$day[flaxDiff2$day=="flax1_mean"]<-"day of"
+flaxDiff2$day[flaxDiff2$day=="flaxAdvantage"]<-"day after"
+flaxDiff2$day <- factor(flaxDiff2$day)
+
+
+ggplot(data=flaxDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = paste0("Genus microbes associated with eating flax"," (n=",
+                      length((flax_df %>% filter(flax=="flax"))$flax), ")"),
+       x = "Taxa (genus)",
+       y = "Difference in mean abundance (%)")
+
+
+```
+
+
+```{r experimentFoodCorrelations }
+
+# flax.df %>% head()
+#  # %>% select(abundance)
+# cor(mhg_taxa(ps.noflax, "Akkermansia")$abundance/10000,mhg_taxa(ps.flax, "Akkermansia")$abundance/10000)
+# cat(mhg_taxa(ps.flax_nextday, "Akkermansia")$abundance/10000)
+```
+
+Notice how in nearly every case, flax-eating appears to affect microbiome abundances on both the day of the sample _as well as_ the day following. This makes intuitive sense: if flax has an effect, you'd expect it to linger for a day or two. If there were no effect, you might expect the levels to come and go randomly. 
+
+```{r}
+# 
+# 
+# ggplot(data=flaxDiff1 %>% filter(abs(flaxAdvantage)>0.05), aes(x=reorder(taxa,-flaxAdvantage), y = flaxAdvantage)) + geom_bar(stat="identity") +
+#   theme(axis.text.x = element_text(angle=90)) +
+#   labs(title = "Genus microbes associated with eating flax",
+#        x = "Taxa (genus)",
+#        y = "Difference in mean abundance (%)")
+
+#%>% arrange(flax - noflax) %>% gather(control,value,flax, noflax) 
+# 
+# ggplot(data=flaxDiff %>% filter(control=="noflax"),
+#        aes(x=reorder(taxa,-value), y=value, fill=control)) +
+#   geom_bar(stat="identity") +
+#   coord_cartesian(xlim=c(0, 25)) + 
+#   scale_y_continuous(labels = function(x)x/10000) + 
+#   theme(axis.text.x = element_text(angle=90)) +
+#   labs(title = "Genus microbes associated with eating flax",
+#        x = "Taxa (genus)",
+#        y = "Difference in mean abundance (%)")
+
+#flaxDiff %>% filter(control=="noflax") %>% transmute(pct=value/10000) %>% arrange(desc(value)) %>% head(10)
+
+# plot_bar(subset_taxa(subset_samples(gut.phylum.norm),
+#                      Phylum %in% c("Bacteroidetes","Firmicutes")), x = "Date", fill = "Phylum") + 
+#   #geom_smooth(method = "loess", se = FALSE) +
+#   annotate("point",x=flax.day, y = -0.03, color = "red")+
+#   scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("How Eating Flax Changes My Phyla")  
+#   #annotate("text", x = soylent.day, y = 100000, label = "Days I ate Flax")
+
+```

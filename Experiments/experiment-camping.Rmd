@@ -1,0 +1,50 @@
+## Camping {#experimentCamping}
+
+
+How does my microbiome change after camping?
+
+
+```{r campingSetup}
+camping.ssr <- c(269410,115631,345531,269501) # gut and skin from May 2017 trip to Cascades
+
+camping.genus <- subset_samples(sprague.genus.norm, SSR %in% camping.ssr)
+camping.genus <- prune_taxa(taxa_sums(camping.genus)>4000,camping.genus)
+camping.before <- subset_samples(sprague.genus.norm, SSR == 113416)  # Wed, May 24 
+camping.after <-subset_samples(sprague.genus.norm, SSR == 115631)  # Mon May 29
+
+camping <- subset_samples(sprague.phylum.norm,  Date >= "2016-08-24" & Date <= "2016-08-27")
+camping <- prune_taxa(taxa_sums(camping)>40000,camping)
+camping.gut <- subset_samples(camping,Site=="gut")
+mhg_plot_top_heat(camping.gut)
+```
+
+Here are the genus-level organisms in my gut after camping that weren't there before:
+
+```{r}
+kable(mhg_unique(camping.after,camping.before)[1:10,][1]/10000, digits = 2, col.names = c("New after camping (%)"))
+```
+
+
+Interesting to note the very large increase in the formerly-non-existent _Kluyvera_. This is a branch of microbes that includes _E. Coli_ and the pathogen _Shigella_. Unfortunately, 16S doesn't have enough resolution to distinguish between harmless and pathogenic versions of these taxa, but it is intriguing that they would show up.
+
+Here are the ones I lost on the trip:
+
+
+```{r}
+kable(mhg_unique(camping.before,camping.after)[1]/10000, digits = 2, col.names = c("Before Camping (%)"))
+```
+
+
+Odd that I lost all my remaining _Bifidobacterium_, though it's important to note that the Before sample has a low read count (`r sample_data(camping.before)$Reads`) compared to the "After" one (`r sample_data(camping.after)$Reads`).
+
+
+Let's look at a different camping trip, one in which I sampled daily _including on the trail_.
+
+In this case, I left on a Wednesday, staying overnight on the trail on Wednesday night ("Before"), then Thursday night.  I took a sample on Friday morning ("Day 1") and another one after I arrived home ("After")
+
+```{r}
+kable(mhg_abundance(camping.gut)/10000,digits = 2, col.names = c("Before","Trail","Home","After"))
+```
+
+
+

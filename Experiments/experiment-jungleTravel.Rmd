@@ -1,0 +1,78 @@
+## Traveling through the jungle {#experimentJungleTravel}
+
+**This section is marked for deletion**
+
+Upon further inspection, I'm unable to identify a valid sample for before/after comparison. It's unclear where the data came from for the original version of this document.
+
+We previously discussed the Lawrence David study that measured an individual microbiome daily for a year and found a dramatic change when one of the subjects moved temporarily to Thailand. I recently did something similar for a family vacation in Central America. Would the same changes happen to me?
+
+We spent most of our time in a rural, jungle part of Belize, about a half hour’s drive from Benque, near the border with Guatemala. Besides viewing the fantastic, well-preserved Mayan ruins, we also did horseback riding, cave exploration, and of course plenty of eating.
+
+Here's a selfie I took in front of the incredibly well-preserved thousand-year-old pyramid at [Tikal](http://www.smithsonianmag.com/history/secrets-of-the-maya-deciphering-tikal-2289808/):
+
+
+
+```{r}
+#![me at Tikal](https://farm9.staticflickr.com/8594/16063989023_353f14a4dd.jpg)
+knitr::include_graphics("./Experiments/assets/experimentsJungleTikal.jpg")
+```
+
+
+I did one other thing: before leaving on the trip, and immediately afterwards, I took some gut microbiome samples. Here’s what my gut microbiome (phylum level) looked like before and after the trip:
+
+```{r}
+jungle.ssr <- c(8445,13603)
+jungle.phylum <- subset_samples(sprague.phylum.norm, SSR %in% jungle.ssr)
+jungle <- prune_taxa(taxa_sums(jungle.phylum)>100, jungle.phylum)
+
+kable(mhg_abundance(jungle)[1:7,]/10000
+, col.names = c("Before (%)","After (%)"), digits=1)
+
+```
+
+As we discussed in previous chapters, the phylum level is the "big picture"", and the first place to look at a new sample. At this level we see a big shift between _Actinobacteria_ and _Proteobacteria_, from less than 1% to to well over 7%.  Interestingly the Lawrence David study found the same thing: a westerner traveling to a developing country sees a sharp rise in _Proteobacteria_!
+
+To see how or why this happened, I’ll review my samples at a lower taxonomic level. Here are the organisms found at the genus level:
+
+```{r}
+# kable(mhg_abundance(subset_samples(sprague.genus.norm,SSR==13603)),col.names = "After (%)", digits =1)
+# mhg_abundance(subset_samples(sprague.genus.norm,SSR==13603 | SSR == 8445))[1:5,]
+
+
+jungle.genus<- subset_samples(sprague.genus.norm, SSR %in% jungle.ssr)
+jungle <- prune_taxa(taxa_sums(jungle.genus)>100, jungle.genus)
+
+kable(mhg_abundance(jungle)[1:7,]/10000
+, col.names = c("Before (%)","After (%)"), digits=1)
+
+```
+
+  Genus               | **Before** |  **After**|
+  --------------------| ------------| -----------
+  Faecalibacterium	|   14.198%|      20.374%|
+  Bacteroides|          12.717%|      10.396%|
+  Blautia |             4.469% |      8.585%|
+  Ruminococcus  |       8.383% |      7.906%|
+  Pseudobutyrivibrio |  1.804% |      4.134%|
+  Cronobacter        |  0.002% |      3.592%|
+  Coprococcus          |5.411% |      2.574%|
+  Clostridium          |6.611% |      1.763%|
+  Parabacteroides      |0.507% |      1.393%|
+  
+  
+  
+Most of the new organisms I picked up come from the family _Enterobacteriales_, of which the majority – about 3.5% of my entire sample – is _Cronobacter_, a nasty pathogen named after the Greek mythological titan who swallowed his children!
+
+Ouch! Fortunately I never got sick. Why not? The science is just too new to say for sure, but here’s my theory: there is *no such thing as “good” or “bad” bacteria*. Everything depends on the *ratios*, on *balance* among lots of competing germs. In my case – and this is my pure, amateur, unscientific speculation – the *Cronobacteria* increase might actually have *helped* my health, by out-eating something else that may have been even worse.
+
+Here are some reasons I suspect this is true:
+
+-   **Diversity**: Oddly, my gut biome diversity went *down* slightly. Before the trip, uBiome found 19 unique phyla. Afterwards, there were only 15. You wouldn’t normally expect diversity to *drop* after exposure to novel microbes from the jungle. But I think there’s an easy explanation:
+
+-   **Increase in unidentified organisms**: uBiome was able to identify only about 91% of what it found at the phyla level. In my previous tests, they found closer to 95+%. Maybe my apparent drop in diversity was simply a drop in *identifiable* bacteria. Maybe some of those unknown organisms stimulated the bloom in *Cronobacter*.
+
+-   **Clostridium plunge**: I saw huge drops, from 0.66% to 0.18%, in the notorius *Clostridum*genus, which includes many nasty species (e.g. the infamous antibiotic-resistant *C. Difficile*). Other pathogens dropped too. Did the change in location precipitate a fight between competing bacterial armies?
+
+-   **Parasites**: the uBiome test only measures bacteria, so I don’t know the status of other microbes I encountered. If *Cronobacteria* are normally pathogenic, is it possible that all their toxicity was aimed at a takeover by some other organism?
+
+The Lawrence David study also showed that the microbiome bounced back to normal again pretty quickly after the person returned back home. Is the same true for me? That’s something to watch for in my next samples.

@@ -1,0 +1,205 @@
+## The Skin Microbiome* {#experimentSkin}
+
+
+Microbes of the gut are important, but many other organisms are crawling all over you too.  What can we learn from studying my skin samples?
+
+
+```{r loadskin}
+# all of this is read in loadMGHData.r
+# skin.genus <- subset_samples(sprague.genus.norm, Site == "skin")
+# skin.species <- subset_samples(sprague.species.norm, Site == "skin")
+# skin.phylum <- subset_samples(sprague.phylum.norm, Site == "skin")
+# skin.family <- subset_samples(sprague.family.norm, Site == "skin")
+
+```
+
+
+
+Like the gut, the vast majority come from only two genera.
+
+
+
+```{r}
+
+#skin.all <- subset_samples(skin.genus, Date == "2016-11-06")
+skin.pruned <- prune_taxa(taxa_sums(skin.genus)>42,skin.genus)
+skin.pruned <- prune_taxa(taxa_sums(skin.phylum) >4000 ,skin.phylum)
+# match everything but Actinobacteria
+# skin.pruned <- prune_taxa(taxa_names(skin.phylum)[is.na(match(taxa_names(skin.phylum),"Actinobacteria"))],skin.pruned)
+
+mhg_plot_top_heat(skin.pruned,n=10,label="Date") + theme(legend.position = "off")
+#sample_data(mouth.Nov6)$Label <- c("Lips","Tongue","Cheek (Right)", "Cheek (Left)")
+
+plot_bar(subset_samples(skin.pruned, Date > "2017-07-01"),x = "Label", fill = "Phylum")
+```
+
+
+
+```{r}
+#kable(mhg_abundance(skin.genus, colnames = "Label", top = 5)/10000, digits=2)
+```
+
+And here's the diversity:
+
+```{r}
+plot_richness(skin.genus, measure = "InvSimpson", x = "Label")
+```
+
+Is it just me? I also looked at the many other samples people have sent. Like me, most of them are dominated by _Actinobacteria_ and _Firmicutes_, with a tiny bit of _Proteobacteria_ and even smaller amounts of others.  At the genus level, the vast majority are _Propionibacterium_ and _Staphylococcus_, with an occasional spike of that smelly _Corynebacterium_.
+
+```{r experimentSitesSkinOthers}
+
+people.skin <- subset_samples(people.norm, Site == "skin")
+people.skin <- prune_taxa(taxa_sums(people.skin)>100, people.skin)
+# mhg_plot_top_heat(people.skin, n = 5)
+# #sample_data(people.skin)[,c("Username","Site", "Label")]
+# mhg_plot_top(people.skin)
+# 
+# 
+# 
+# mhg_density_for_taxa(people.skin,"Staphylococcus", username = "cb")
+# #Propionibacterium
+# #Staphylococcus
+# mhg_density_for_taxa(skin.genus,"Propionibacterium",username = "cb") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.skin, Username == "cb")
+#   )["Propionibacterium"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.skin, Username == "cb")
+#   )["Propionibacterium"]) / 10000 ,
+#   y = -Inf,
+#   yend = Inf
+#   )
+# 
+# make_ord_for(people.skin)
+# 
+# mhg_abundance(subset_samples(people.skin, Username %in% c("cb","RspragueSon")))
+
+```
+
+
+
+A recent [paper published in Nature](https://www.nature.com/articles/s41598-017-06055-9) warned that several pathogens are lurking in common kitchen sponges. In particular, it noted the abundance of _Moraxellaceae_, a common skin bacterium. How much do I have?
+
+```{r}
+#kable(mhg_taxa(subset_samples(sprague.family.norm, Site == "skin"),"Moraxellaceae"))
+#mhg_taxa_plot(subset_samples(sprague.family.norm, Site == "skin"),"Moraxellaceae")
+
+
+
+plot_bar(subset_taxa(subset_samples(sprague.all_ranks.norm,
+                                    Site == "skin" & Date > "2015-01-01"),
+                     grepl("Morax*",Species) ),
+         x = "Date", fill = "Genus") + 
+  ggtitle("Sprague Skin Microbes Under Moraxellaceae") + 
+  scale_x_date(date_labels = "%B ", date_breaks = "1 months", date_minor_breaks = "2 weeks") +
+  ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + theme(legend.position = "right") 
+  
+
+```
+
+Apparently I have a small amount, depending on when I sample.
+
+
+Now look at an odd new bacteria that showed up in some of my samples from Spring 2017 (Figure \@ref(fig:experimentsSitesSkinXan))
+
+```{r experimentsSitesSkinXan, fig.cap = "Levels of Xanthomonodales spiked for some unknown reason."}
+# mhg_taxa_plot(subset_samples(sprague.order.norm,Site=="skin" & Date>"2017-01-01"),"Xanthomonadales")
+
+sprague.skin.order <- subset_samples(sprague.order.norm,Site=="skin" & Date>"2017-04-01")
+sprague.skin.order <- prune_taxa(taxa_sums(sprague.skin.order)>3000,sprague.skin.order)
+
+# plot_bar(sprague.skin.order, fill = "Order", x = "Date")
+
+Xanthomonadales <- subset_taxa(subset_samples(sprague.order.norm, Site == "skin"), Order %in% c("Xanthomonadales"))
+
+x <- mhg_abundance(subset_samples(Xanthomonadales, Date > "2016-01-15" & Date < "2018-03-27"))/10000 
+#fb <- fb["Firmicutes",]/fb["Bacteroidetes",] # 
+x <- x %>% gather(Date,Percentage)
+x$Date <- as.Date(x$Date)
+# fb$taxa <- rownames(fb)
+# fb <- fb %>% gather(Date,Abundance,-taxa)
+
+ggplot(data=x %>% gather(Date,Percentage),aes(x=Date,y=Percentage, group=1)) + geom_point() + geom_line() +
+  #scale_x_date(date_labels = "%B ", date_breaks = "1 months", date_minor_breaks = "2 weeks") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ggtitle("Abundance of Xanthomonadales In My Skin Over Time")
+
+# ord <- ordinate(subset_samples(sprague.order.norm, Site=="skin"), "NMDS")
+# plot_ordination(Xanthomonadales,ord,color = "Geo", label = "Label")
+```
+
+Not sure what this could be doing.
+
+### Body odor
+
+That unpleasant smell from you underarms is caused by _Corynebacteria_^[See more at [Rob Dunn Lab](http://robdunnlab.com/projects/invisible-life/corynebacterium/) or the original academic paper here: @natsch_specific_2003]. Perhaps there is a relationship between what I find behind my ear and other parts of the body. Let's check (Figure \@ref(fig:experimentsSitesSkinPlotAllRanks))
+
+```{r experimentsSitesSkinPlotAllRanks, fig.cap="Skin microbes, phylum level, over time."}
+#mhg_taxa_plot(skin.pruned,"Corynebacterium")
+
+#mhg_abundance(skin.pruned)
+
+skin.all_ranks <- subset_samples(sprague.all_ranks.norm,
+                                    Site == "skin" & Date > "2015-01-01")
+
+
+skin.all_ranks.pruned <- prune_taxa(taxa_sums(skin.all_ranks)>50000, skin.all_ranks)
+
+skin.all_ranks.genus <- subset_taxa(skin.all_ranks.pruned,Phylum == "Actinobacteria")
+
+# mhg_abundance(skin.genus)
+# plot_bar(subset_samples(skin.all_ranks.genus, Date >"2017-07-01"), x = "Date", fill="Genus")
+# 
+#   
+# plot_bar(subset_taxa(skin.all_ranks.pruned,
+#                      grepl("Actino*",Phylum) ),
+#          x = "Date", fill = "Genus") + 
+#   ggtitle("Sprague Skin Microbes Under Corynebacterium") + 
+#   scale_x_date(date_labels = "%B ", date_breaks = "1 months", date_minor_breaks = "2 weeks") +
+#   ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + theme(legend.position = "right") 
+
+
+# Make the X-axis ordered by date, but not as a date axis. 
+sample_data(skin.all_ranks.pruned)$Dateorder <- as.character(sample_data(skin.all_ranks.pruned)$Date) 
+plot_bar(subset_taxa(skin.all_ranks.pruned,TRUE
+                     # grepl("Coryne*",Species) 
+                     ),
+         x = "Dateorder", fill = "Phylum") + 
+  ggtitle("Sprague Skin Microbes") + 
+#  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "1 week") +
+  ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  theme(legend.position = "right" ) #, axis.title.x = element_blank(),axis.text.x=element_blank())
+```
+
+I also tested the difference between behind-the-ear (the normal way) and on the forehead (Figure \@ref(fig:skinComparePlotEarForehead))
+
+```{r skinComparePlotEarForehead, fig.cap = "Forehead and ear nave compared. (Lighter shades are more abundant)"}
+forehead.ssr <-391882
+behindEar.ssr <- 391954
+
+skinCompare.norm <- subset_samples(skin.genus, SSR %in% c(forehead.ssr,behindEar.ssr))
+sample_data(skinCompare.norm)$Label <- c("Forehead","Ear")
+skinCompare.genus <- prune_taxa(taxa_sums(skinCompare.norm)>42,skinCompare.norm)
+
+mhg_plot_top_heat(skinCompare.genus)
+kable(mhg_abundance(subset_samples(skin.phylum, SSR %in% c(forehead.ssr,behindEar.ssr)),colnames = "Label", top = 6)/10000,col.names = c("Forehead","Ear"))
+```
+
+And the underarm versus behind the ear (Figure: \@ref(fig:experimentSiteSkinUnderarm))
+
+```{r experimentSiteSkinUnderarm, fig.cap = "Skin samples from two sites: the normal behind-the-ear and from the underarm. Lighter colors are _higher_ abundance"}
+skin.underarm <- subset_samples(sprague.genus.norm, Site == "skin" & SSR %in% c(372807, 475322 ))
+sample_data(skin.underarm)$Label = c("Ear","Underarm")
+mhg_plot_top_heat(skin.underarm, n = 5)
+
+```
+
+
+Once again, sampling site matters: there is a significant difference in the type of microbe behind the ear compared to the forehead. Incidentally, notice in the underarm the much higher abundance of _Corynebacterium_, which produces that distinctive smell of body odor.
+
+
+See the Appendix for an [overall summary of my skin experiments](#appendixMySkin)

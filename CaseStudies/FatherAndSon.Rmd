@@ -1,0 +1,178 @@
+## Family members
+
+My father and I live in different parts of the country: he's in the Midwest (where I grew up) and I'm on the West Coast. We're both healthy omnivores and, other than a couple-decade age difference we both eat roughly similar foods and have similar medical histories.
+
+That said, I was surprised to see our gut biomes were so similar. Here's how I did the comparison.
+
+Remember that a gut microbiome varies *a lot* day-to-day, depending on whatever food we happened to eat, exposure to illness, geographic location, even time of year. To keep the variables as constant as possible, I'll compare two samples taken on the same day:
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+
+#load(paste0(Sys.getenv("UBIOME_DATADIR"),"/ubiome_people/ub_data-Richard_Sprague/derived/spragueAllRanks.RData"))
+# source("../dataReadFunctions.R") # convenience functions
+dad.phylum.norm <- subset_samples(people.phylum,Username == "RSpragueFather")
+dad.genus.norm <- subset_samples(people.norm, Username == "RSpragueFather")
+dad.genus.norm <- prune_taxa(taxa_sums(dad.genus.norm)>24,dad.genus.norm)
+dad.species.norm <- subset_samples(people.species, Username == "RSpragueFather")
+#dad.phylum.norm <- phyloseq_for_user("Donald_Sprague",rank = "phylum", count.normalized = TRUE)
+sample_data(dad.phylum.norm)$Username <- "Dad"
+sample_data(dad.genus.norm)$Username <- "Dad"
+sample_data(dad.species.norm)$Username <- "Dad"
+#sample_data(dad.phylum.norm)$Date <- as.Date(sample_data(dad.phylum.norm)$Date, origin = "1899-12-30")
+# sprague.phylum.norm <- phyloseq_for_user("Richard_Sprague",rank="phylum",count.normalized = TRUE)
+# sample_data(sprague.phylum.norm)$Date <- as.Date(sample_data(sprague.phylum.norm)$Date, origin = "1899-12-30")
+sample_data(sprague.phylum.norm)$Username <- "Me"
+sample_data(sprague.genus.norm)$Username <- "Me"
+sample_data(sprague.species.norm)$Username <- "Me"
+
+me.and.dad <- merge_phyloseq(subset_samples(sprague.phylum.norm,Site == "gut" & Date=="2016-08-08"),
+                            subset_samples(dad.phylum.norm, Site =="gut" & Date == "2016-08-08"))
+me.and.dad <- prune_taxa(taxa_sums(me.and.dad)>20000,me.and.dad)
+
+me.and.dad.genus <- merge_phyloseq(subset_samples(sprague.genus.norm,Site == "gut" & Date=="2016-08-08"),
+                            subset_samples(dad.genus.norm, Site =="gut" & Date == "2016-08-08"))
+
+me.and.dad.species <- merge_phyloseq(subset_samples(sprague.species.norm,Site == "gut" & Date=="2016-08-08"),
+                            subset_samples(dad.species.norm, Site =="gut" & Date == "2016-08-08"))
+
+# kable(otu_table(me.and.dad)[order(taxa_sums(me.and.dad),decreasing=TRUE)]/10000, digits = 2,col.names = c("Dad %", "Me %"))
+
+kable(mhg_abundance(me.and.dad)/10000, digits = 2, col.names = c("Me %", "Dad %"))
+
+```
+
+At the highest, phylum, level, we can see the percentage abundances look different. One easy way to spot specific patterns is through a heatmap, like this one:
+
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+plot_heatmap(me.and.dad,
+             method="CCA",
+             sample.label = "Username",
+             taxa.order = taxa_names(me.and.dad)[order(taxa_sums(me.and.dad),decreasing=FALSE)]) + theme(legend.position = "right")
+
+
+```
+
+Here are some of the taxa that are unique to me:
+
+```{r fatherSonUnique}
+
+me.only <- mhg_unique(subset_samples(me.and.dad.genus,Username=="Me"),
+          subset_samples(me.and.dad.genus,Username=="Dad")
+          )
+
+me.only.species <- mhg_unique(subset_samples(me.and.dad.species,Username=="Me"),
+          subset_samples(me.and.dad.species,Username=="Dad")
+          )
+
+dad.only <- mhg_unique(subset_samples(me.and.dad.genus,Username=="Dad"),
+          subset_samples(me.and.dad.genus,Username=="Me")
+          )
+
+dad.only.species <- mhg_unique(subset_samples(me.and.dad.species,Username=="Dad"),
+          subset_samples(me.and.dad.species,Username=="Me")
+          )
+
+kable(me.only[1:10,] %>% select(1) / 10000, col.names = c("Me (%)"), digits = 2)
+
+kable(me.only.species[1:10,] %>% select(1) / 10000, col.names = c("Me Species(%)"), digits = 2)
+```
+
+The list includes the familiar _Bacteroides plebeius_, the "seaweed-digesting" microbe which we've discussed previous. Dad never lived in Asia, so this is not a surprise.
+
+and some that Dad has that I don't:
+```{r}
+
+kable(dad.only[1:10,] %>% select(1) / 10000, col.names = c("Dad (%)"), digits = 2)
+
+kable(dad.only.species[1:10,] %>% select(1) / 10000, col.names = c("Dad Species (%)"), digits = 2)
+```
+
+That _Thalassospira_ is a mystery. A quick literature search reveals nothing, but it's abundant enough to make me wonder if there's something special about Dad's lifestyle that would harbor it. Note that it's not visible on the species level, an indicator that nothing is known below the genus.
+
+I tried to esimate, roughly, how common it is among the other samples I've seen: It ranges between zero and ```r range(otu_table(people.norm)["Thalassospira"])[2]/10000```
+
+The vast majority of samples have none, but it's not unknown either:
+
+```{r}
+qplot(as.vector(otu_table(people.norm)["Thalassospira"])/10000, ylab = "Number of Samples", xlab = "% Abundance", main = "Frequency of Thalassospira")
+```
+
+Since Dad has already submitted several samples, I can also check whether and how much he has in his other samples:
+
+```{r}
+#mhg_taxa_plot(dad.genus.norm, "Thalassospira") + ggtitle("Dad's Thalassospira")
+#plot_bar(subset_samples(dad.genus.norm, Site=="gut"), fill = "Genus")
+            
+plot_bar(prune_taxa("Thalassospira",subset_samples(dad.genus.norm, Site =="gut")), x = "Label") + scale_y_continuous(labels=function(x)x/10000) +    ggtitle("Dad's Thalassospira") + ylab("Abundance (%)")
+
+# 
+# plot_bar(prune_taxa("Bifidobacterium",subset_samples(dad.genus.norm, Site =="gut")), x = "Label") + scale_y_continuous(labels=function(x)x/10000) +    ggtitle("Dad's Bifidobacterium") + ylab("Abundance (%)")
+
+```
+The answer is that he has _some_ in all of his gut samples. This particular one was unusually high, but without more data it's hard to tell if that's significant.
+
+### My sister
+
+Now let's compare myself with my sister. She made two samples (A and B), but the first thing we note is how different they are from each other. Despite being taken a month apart, they look significantly different.
+
+```{r}
+sister <- subset_samples(people.norm, Username == "cjt")
+sample_data(sister)$Username <- "Sister"
+sister.gut <- subset_samples(sister,Site == "gut")
+sister.phylum <- subset_samples(people.phylum, Username == "cjt")
+sister.gut.phylum <- subset_samples(sister.phylum,Site == "gut")
+
+kable(mhg_abundance(sister.gut.phylum, top = 6)/10000, digits = 2, col.names = c("A","B"))
+```
+
+Sample A is the oddball, with unusually low Firmicutes than Sample B, and different from both me and our father, despite eating roughly the same diet. Can we try to undersand what's driving the difference? Let's look at the genus level:
+
+
+```{r}
+kable(mhg_abundance(merge_phyloseq(subset_samples(sister.gut, Date < "2016-11-01"),
+                            subset_samples(sister.gut, Date > "2016-11-01")),
+                   top = 10)/10000, 
+      digits = 2, col.names = c("A","B"))
+```
+
+Aha! the _Porphyromonas_ is the giveaway. That taxa almost never appears in a gut sample. In fact, of the hundreds of samples I've studied, it was nearly zero in all but the gut samples. I think we can safely assume that my sister's sample A was contaminated somehow.
+
+```{r}
+#qplot(mhg_taxa(subset_samples(people.norm, Site == "mouth"),"Porphyromonas")$abundance, bins=50) + 
+ # xlab("Abundance (%)") + scale_x_continuous(label = function(x) x/10000)
+```
+
+Finally, let's make one big comparison among all my family members
+
+```{r}
+
+
+daughter <- subset_samples(people.norm, Username == "RSpragueDaughter" & Site=="gut")
+daughter <- prune_taxa(taxa_sums(daughter)>42,daughter)
+sample_data(daughter)$Username <- "Daughter"
+
+spragues <- merge_phyloseq(me.and.dad.genus,
+                           subset_samples(sister.gut, Date > "2016-11-01"),
+                           daughter)
+sample_data(spragues)$Label <- sample_data(spragues)$Username
+
+kable(mhg_abundance(spragues,top=10)/10000,
+      digits=2, col.names = sample_data(spragues)$Username)
+
+mhg_plot_top_heat(spragues) + theme(legend.position = "off")
+
+```
+
+Presented this way, a few items stand out:
+
+My daughter is very different from the rest of us, missing whole classes of microbes. Like me, she is missing _Paraprevotella_.
+
+Dad's low _Bifidobacterium_, probably a function of age, may explain some of his sleep troubles. Fortunately he has _some_ Bifido, so I'm optimistic that with the right diet he may be able to increase his levels.  My sister, who complains of poor sleep too, has low Bifido as well, but again the good news is that it's not zero: she has something to work with.
+
+
+```{r caseFatherSonDiversity}
+
+plot_richness(spragues, measures = "Shannon", x = "Username")
+```
+

@@ -1,0 +1,99 @@
+## The Oral Microbiome* {#startMouth}
+
+```{r}
+# This is now read in loadMHGData.r
+# mouth.genus <- subset_samples(sprague.genus.norm, Site == "mouth")
+# mouth.species <- subset_samples(sprague.species.norm, Site == "mouth")
+```
+
+
+The first place that microbes enter is also one of the richest and most variable environments in the body.
+
+
+Scientists added an odorless compound from wine to a culture of known oral bacteria, and sure enough: the bacteria generated compounds that we can smell: terpenes, benzenic compounds and lipid derivatives. Each of us has a unique oral microbiome, and scientists were able to that that this inter-person variability is large enough to explain at least some of the differences in how each of us perceive a glass of wine.^[@munoz-gonzalez_ability_2015]
+
+
+What are the most important species in my mouth?
+
+See the Appendix for an [overall summary of my mouth experiments](#appendixMyMouth)
+
+
+
+
+How much variability is there within the mouth? To find out, I took four samples immediately after waking up one morning. I was careful to swab only in a specific part of the mouth.
+
+```{r mouthsetup1}
+
+mouth.Nov6 <- subset_samples(mouth.genus, Date == "2016-11-06")
+mouth.Nov6 <- prune_taxa(taxa_sums(mouth.Nov6)>42,mouth.Nov6)
+sample_data(mouth.Nov6)$Label <- c("Lips","Tongue","Cheek (Right)", "Cheek (Left)")
+
+```
+
+
+
+```{r mouthshow}
+kable(mhg_abundance(mouth.Nov6, colnames = "Label", top = 20)/10000, digits=2)
+```
+
+While there is some variation in the cheeks, there is a dramatic difference between them and the lips or tongue. Also interesting is the way the lips are dominated by just three taxa that make up more than 85% of the total abundance. In Inverse Simpson terms, the lips are the least diverse, whereas the tongue is the most diverse.
+
+
+```{r}
+plot_richness(mouth.Nov6, measure = "Shannon", x = "Label") + ggtitle("Mouth Microbiome Diversity")
+```
+
+Let's start with the genus level. How much *Streptococcus* has been in my mouth, and to the degree that we know at the species level, which types of species are there?
+
+Here I find something alarming: a new type of _Streptococcus_ appears to have colonized my mouth, somewhat suddenly, around April of this year. _Streptococcus sp. BS35a_ seems to have been unknown to my mouth until then. Why? And is it really alarming?
+
+I've noticed no change in my health, dental or otherwise, and although I'm doing experiments all the time I can't point to anything in particular that might have caused such a shift in that particular microbe.
+
+
+
+```{r mouthStrep}
+mouth.species <- subset_samples(sprague.species.norm, Site == "mouth" & Reads >10000 ) #& Date > "2016-07-01")
+#as.character(tax_table(mouth.species)[grep("Strep*",tax_table(mouth.species))])
+
+sample_data(sprague.all_ranks.norm)$Date <- as.Date(sample_data(sprague.all_ranks.norm)$Date, origin = "1899-12-30")
+# plot_bar(subset_taxa(subset_samples(sprague.all_ranks.norm,
+#                                     Site == "mouth" & Date > "2016-10-01"),
+#                      grepl("Strep*",Species) ),
+#          x = "Date", fill = "Species") + 
+#   ggtitle("Sprague Mouth Microbes") + 
+#   scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "1 week") +
+#   ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+#   theme(legend.position = "bottom")
+```
+
+At the species level, I eliminated all samples with under 10,000 reads.  We see something interesting: for no apparent reason, the species of _Streptococcus_ detected in my mouth has changed. Suddenly, in December 2016 my mouth was colonized by a particular species that had not been there before. Why? I hadn't done anything special; I'm not aware of any major lifestyle or other changes to cause this.
+
+
+```{r}
+# Make the X-axis ordered by date, but not as a date axis. 
+# sample_data(mouth.species)$Dateorder <- as.character(sample_data(mouth.species)$Date) 
+# plot_bar(subset_taxa(prune_taxa(taxa_sums(mouth.species)>50000, mouth.species),
+#                      grepl("Strep*",Species) ),
+#          x = "Dateorder", fill = "Species") + 
+#   ggtitle("Sprague Mouth Microbes") + 
+# #  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "1 week") +
+#   ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+#   theme(legend.position = "right" ) #, axis.title.x = element_blank(),axis.text.x=element_blank())
+
+sample_data(mouth.species)$Dateorder <- as.character(sample_data(mouth.species)$Date) 
+plot_bar(subset_taxa(prune_taxa(taxa_sums(mouth.species)>50000, mouth.species),
+                     grepl("Strep*",Species) ),
+         x = "Dateorder", fill = "Species") + 
+  ggtitle(paste("Sprague Mouth Microbes","through",tail(sample_data(mouth.species)$Date,1))) + theme(axis.text.x=element_blank()) + xlab("Dates (ordered)") + 
+#  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "1 week") +
+  ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  theme(legend.position = "right" ) #, axis.title.x = element_blank(),axis.text.x=element_blank())
+
+
+```
+
+I confirmed with the lab that it's not contamination. 
+
+What's _especially_ odd is that I experienced a shift like this *twice* now in one year. After comfortably floating along with Species _Streptococcus sp. BS35a_ for more than six months, suddenly in August the balance shifted again, this time to _Streptococcus sp. 11aTha1_. Will it shift again? Who knows?
+
+

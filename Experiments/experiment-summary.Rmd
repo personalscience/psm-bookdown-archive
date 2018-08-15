@@ -1,0 +1,232 @@
+## Overall Summary of My Experiments {#experimentSummary}
+
+During the period from 2014 until late 2017, I sequenced over 500 samples of my microbiome. Inspired by the experiment in a 2014 paper by David Lawrence^[@david_host_2014], during most of that time I also carefully tracked the food I ate, my sleep, and other variables like activity or location. Most of my near-daily samples were of my gut, but I also regularly tested my skin, nose, and mouth. Since I'm generally healthy, I didn't have a specific goal in mind other than to try to understand better what these microbes are doing, so many of my tests were taken while undergoing simple experiments, like eating a specific type of food or visiting a new location. While not necessarily up to the rigorous standards of a formal scientific trial, these "n of 1" studies on myself helped me discover several new interesting facts about my own microbiome, many of which appear to contradict other published studies. In addition, hundreds of people sent me their own test results, letting me compare many different microbiomes. And of course, I also followed the latest developments in scientific publications and the general press as I eagerly tried to learn more.
+
+What follows is a brief overview of some of the key things I learned. 
+
+* The microbiome is highly variable from day to day, often moving in ways that appear indistinguishable from random.
+* Broad trends _are_ there if you look closely. I found many intriguing new results.
+* It _is_ possible to change your microbiome in specific circumstances.
+* People's microbiomes are frustratingly different from one another. A feature that seems to be true about one person may not apply to another.
+
+### Diversity
+
+The general consensus is that diversity is good: a greater variety of microbes ensures more resillience against the daily threat of invaders. Many people, after taking just one test, often feel either reassured that their diversity is "good" or disappointed that it's "bad". But I find that day-to-day variability is high enough that it's almost never useful to use a single result. For example, here's my diversity during a typical week: (Figure \@ref(fig:plotOneWeekDiversity))
+
+```{r, plotOneWeekDiversity, fig.cap = "Diversity changes significantly day-to-day.", echo= FALSE, warning = FALSE}
+# plot_richness(subset_samples(sprague.family.norm, Date > "2017-03-15" & Date < "2017-03-27" & Site == "gut"), measures=c("Shannon"),x = "Date") +
+#   scale_x_date(date_labels = "%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
+#   geom_smooth(method = "loess") + 
+#   ggtitle("Gut diversity changes day-to-day")
+
+diversityWeek.gut.family <- subset_samples(sprague.family.norm, Date > "2017-03-15" & Date < "2017-03-27" & Site == "gut")
+data = data.frame(Diversity = estimate_richness(diversityWeek.gut.family, measures=c("Shannon")),
+                  Date = sample_data(diversityWeek.gut.family)$Date)
+ggplot(data,aes(x=Date,y=Shannon)) + geom_point() +
+  geom_smooth(method = "loess") + 
+  scale_x_date(date_labels = "%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
+  theme(axis.text.x = element_text(angle=90)) + 
+  labs(y = "Shannon Alpha Diversity Index", title = "Gut Diversity Changes Day-To-Day")
+```
+
+If Monday were my only test, I may have been disappointed with my 1.83 score. Wait another day or two and, with no significant changes in diet, I was up to 2.29 -- before plunging to 1.78 by the weekend. Moral: don't take a single result too seriously.
+
+To get a sense of how much diversity can vary over a year (Figure \@ref(fig:plotOneYearDiversity))
+
+```{r, plotOneYearDiversity, echo= FALSE, warning = FALSE, fig.cap = "Gut diversity varies day-to-day but holds to a recognizable range within a single individual"}
+
+diversityYear.gut.family <- subset_samples(gut.family.norm, Date > "2016-06-01" & Date < "2017-06-01")
+data = data.frame(Diversity = estimate_richness(diversityYear.gut.family, measures=c("Shannon")),
+                  Date = sample_data(diversityYear.gut.family)$Date)
+ggplot(data,aes(x=Date,y=Shannon)) + geom_point() +
+  geom_smooth(method = "loess") + 
+  scale_x_date(date_labels = "%B", date_breaks = "1 months", date_minor_breaks = "1 month")  +
+  theme(axis.text.x = element_text(angle=90)) + 
+  labs(y = "Shannon Alpha Diversity Index", title = "Gut Diversity Across One Year")
+
+
+# plot_richness(subset_samples(gut.family.norm, Date > "2016-06-01" & Date < "2017-06-01"), measures=c("Shannon"), x = "Date" )+
+#   scale_x_date(date_labels = "%m-%Y", date_breaks = "3 months", date_minor_breaks = "1 month") +
+#   geom_smooth(method = "loess") + 
+#   ggtitle("Gut Diversity Across One Year")
+  
+```
+
+Although the blue moving-average line shows apparent stability, there are many days that are far above and below the average. Yes, at various times during this period I was eating different types of food, often in a deliberate attempt to influence my microbiome, but believe me: that is not the reason for the wild changes up and down. I also studied the mathematics behind how diversity is measured, hoping to find something more "accurate", but ultimately I concluded that, like many attempts to summarize the microbiome in a single number, the whole concept of diversity is a mirage. Everything depends.
+
+Another way to measure diversity is to simply look at the number of unique microbes. Since I began testing, I've found a grand total of ```r ntaxa(sprague.genus.norm)``` genera and ```r ntaxa(sprague.species.norm)``` species. About ```r ntaxa( prune_taxa(taxa_sums(gut.norm)>0, gut.norm))``` unique genera are found just in my gut, and ```r length(setdiff(taxa_names(mouth.genus), taxa_names(gut.norm))) ``` unique ones were only in my mouth.
+
+```{r experimentSummaryDiversityDiff}
+
+# setdiff(taxa_names(gut.norm),taxa_names(skin.genus))  # taxa in gut but not skin
+# 
+# setdiff(taxa_names(skin.genus),taxa_names(gut.norm))  # taxa in skin but not gut
+# length(setdiff(taxa_names(mouth.genus), taxa_names(gut.norm))) # mouth but not gut
+
+```
+
+
+Another example of an idea that gets too much credit is the concept of a simple overall ratio as a way to explain or predict some aspect of health. The relationship between the two most common bacterial categories, the phyla _Firmicutes_ and _Bacteroidetes_, is still often proposed as a key to understanding obesity despite its being resoundingly disproven in many studies.^[The most recent, well-respected review [(Walters, Xu, Knight 2014)](http://onlinelibrary.wiley.com/doi/10.1016/j.febslet.2014.09.039/full) says flat-out: "the ratio changes between normal and obese individuals are not statistically significant overall and therefore should not be considered a general feature distinguishing normal and obese human gut microbiota across populations."]
+
+ I confirmed this unreliability for myself, again obvious if you see how much variation there is day-to-day on a typical week (Figure \@ref(fig:plotFirmicutes))
+
+```{r, plotFirmicutes, echo = FALSE, fig.cap="The FB ratio changes significantly day-to-day, making it unclear which point should be relied upon over a ten day period."}
+
+Firmicutes <- subset_taxa(subset_samples(sprague.phylum.norm, Site == "gut"), Phylum %in% c("Firmicutes","Bacteroidetes"))
+
+fb <- mhg_abundance(subset_samples(Firmicutes, Date > "2017-03-15" & Date < "2017-03-27"))/10000 
+fb <- fb["Firmicutes",]/fb["Bacteroidetes",] # 
+fb <- fb %>% gather(Date,Ratio)
+fb$Date <- as.Date(fb$Date)
+# fb$taxa <- rownames(fb)
+# fb <- fb %>% gather(Date,Abundance,-taxa)
+
+ggplot(data=fb %>% gather(Date,Ratio),aes(x=Date,y=Ratio, group=1)) + geom_point() + geom_line() +
+  scale_x_date(date_labels = "%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ggtitle("Ten Consecutive Days of Firmicutes/Bacteroidetes")
+
+# plot_bar(subset_samples(Firmicutes, Date > "2017-03-15" & Date < "2017-03-27"), fill = "Phylum", x = "Date") +
+#   ggtitle("Firmicutes Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")
+```
+
+I found high daily variability to be the case for just about every microbe that you'll find mentioned in popular books or articles. Here are two more examples:
+
+_Akkermansia_ is a well-studied microbe due to its important role in degrading the mucin that lines the colon. There is only one known species of _Akkermansia_ that inhabits human guts, _Akkermansia muciniphila_, so this is one of those cases when knowing the genus level is a pretty good approximation of what's happening. Here are my levels over a typical month, with the blue line indicating the moving average.
+
+```{r}
+#mhg_taxa_plot(subset_samples(gut.norm, Date > "2017-06-01"),"Akkermansia")
+
+
+plot_bar(subset_taxa(subset_samples(gut.norm, Date %in% seq(as.Date("2017-02-01"),length=30,by=1)), Genus == "Akkermansia"), x = "Date") + geom_smooth(method="loess", se=FALSE) + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + ggtitle("Akkermansia")
+
+```
+
+I tend to have a much higher average abundance than most people. [Later](#caseStudyParkinsons) I'll explain why I think that's true, but first let's look at another important microbe.
+
+```{r}
+#mhg_density_for_taxa(people.norm, "Akkermansia") 
+  # annotate(
+  # geom = "segment",
+  # color = "blue",
+  # x = as.numeric(otu_table(gut.norm)["Akkermansia"]) / 10000,
+  # xend = as.numeric(otu_table( gut.norm )["Akkermansia"]) / 10000 ,
+  # y = 0,
+  # yend = 1
+  # )
+
+```
+
+
+_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.
+].
+
+```{r summarPlotBifido}
+#mhg_taxa_plot(subset_samples(gut.norm, Date > "2016-06-01"),"Akkermansia")
+
+probiotic.day <- seq(as.Date("2016-10-23"),length=9, by=1)
+plot_bar(subset_taxa(subset_samples(gut.norm, Date %in% seq(as.Date("2016-07-01"), length = 180, by = 1)),
+                     Genus == "Bifidobacterium"), x = "Date") + 
+  geom_smooth(method = "loess", se = FALSE) +
+  annotate("point",x=probiotic.day, y = -0.03, color = "red")+
+  scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("Bifidobacterium")
+  
+```
+
+Incidentally, the red dots indicate days when I was taking a powerful probiotic supplement that contained _Bifidobacterium_. And that big spike in September? That was during a trip to New Orleans, when I ate a lot of red beans and rice.  At least for me, food seems to work better than taking supplements.
+
+What else did I discover? Here I get to the fun and rewarding parts of these experiments, because I _did_ find several interesting microbes that are apparently unknown to science but that had a clear relationship to my activities.
+
+The first is the yogurt drink kefir. Google the phrase "one of the most potent probiotic foods available" and you’ll find kefir in all the top results. A [recent BBC documentary](http://www.bbc.com/news/health-38800977)  that tested people after consuming different types of "gut-friendly" foods found that kefir had by far the biggest effect.  My interest piqued when, after my disappointment with kombucha, I spoke with a man who happened to mention his good luck with kefir as a solution to his many gut issues. On a doctor’s recommendation, he tried kefir for a number of years with limited success, until — frustrated with the \$3/day expense of buying it at Trader Joe’s — he began making it himself at home. "What a difference!" he claimed.
+
+Did it work for me? Yes! I found a very noticeable change in my gut microbiome — the most significant I’ve seen among my many experiments. Here's what I found when I had the kefir drink sequenced:
+
+```{r}
+kefirSample.genus <- subset_samples(sprague.genus.norm,  SSR == 134894) # Site == "custom") #
+kefirSample.genus <- prune_taxa(taxa_sums(kefirSample.genus)>0,kefirSample.genus)
+kable(head(mhg_abundance(kefirSample.genus)/10000,5), digits= 2, col.names = c("Kefir (%)"))#,"Kefir2","Kefir2"))#sample_data(kefirSample.genus)$Label)#, col.names = "Kefir Abundance (%)")
+```
+
+Look at my levels of _Lactococcus_, the main genus of microbe known to be found in kefir, and compare to what I saw in my gut biome:
+
+```{r plotAmountsKefir1, echo=FALSE ,cache = TRUE}
+
+food <- rikfood
+kefir <- "kefir"
+fromDate <- as.Date("2016-11-15")
+toDate <- as.Date("2017-07-01")
+kefir.day <- c(as.Date("2016-12-02"),unique(food[str_detect(food$Name, kefir),"Date"]))
+kefir.day <- kefir.day[kefir.day<toDate]
+
+# 
+# lactococcus <- subset_taxa(subset_taxa(subset_samples(gut.norm,Site=="gut"),
+#                            Genus == "Lactococcus"))
+
+
+kefir.top <- subset_taxa(gut.norm, Genus %in% c("Lactococcus") ) #,"Fusicatenibacter"))
+
+plot_bar(subset_samples(kefir.top, Date > fromDate & Date < toDate), fill = "Genus", x = "Date") +
+  ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + 
+  scale_x_date(date_labels = "%b20%y",
+                date_breaks = "1 month", date_minor_breaks = "2 weeks")
+
+# 
+# plot_bar(subset_taxa(subset_samples(transform_sample_counts(lactococcus,
+#                                                             function(x) x/1000000),
+#                                     Date >= "2016-12-01"),
+#             Genus == "Lactococcus"),
+#          x = "Date",
+#          fill="Genus") +
+#   scale_x_date(date_labels = "%b20%y",
+#                date_breaks = "1 month", date_minor_breaks = "2 weeks")
+#   
+```
+
+The blue dots in the chart are days when I drank kefir. Since I sample near-daily over the entire chart, we can see that _Lactococcus_ suddenly appeared shortly after I began to consume kefir. I had almost none beforehand. Also note that the levels seem to dip when I go for a few days without drinking any, such as during my business trips out of town in mid-March and another in early-April.
+
+I was even able to find a new microbe, _Fusicatenibactor_ that appears to exactly trace my kefir consumption. 
+
+```{r}
+mhg_taxa_plot(gut.norm, "Fusicatenibacter") +  
+  annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1)  
+
+#mhg_taxa(gut.norm,"Fusicatenibacter")
+```
+
+I could find nothing in the literature that associates this microbe with kefir drinking. Though it appeared in me only _after_ I started kefir, I found this microbe to be reasonably common among the hundreds of other samples people have sent, healthy and not, young and old. Why do _I_ suddenly have it when I start drinking kefir, and why do others -- even non-kefir drinkers -- seem to have it? A mystery! Definitely something of scientific interest, though, and worthy of further investigation.
+
+Here's another odd microbe I found, this time during a trip to Beijing China (the red line):
+
+```{r}
+mhg_taxa_plot(subset_samples(gut.norm, Date > "2017-05-01"), "Coprobacter") + ggtitle("Coprobacter") + 
+    annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-14"), y = -0.5, yend = -0.51, color = "red", size = 2) 
+```
+
+I had none of this during my years of testing, but it suddenly appeared during the trip -- and disappeared promptly afterward. Interestingly, although this microbe appears occasionally in the hundreds of other samples I've seen, there is no clear pattern, and never in the levels that appeared in mine. I couldn't find any at all in the guts of two individuals I know who had been traveling in Asia.
+
+```{r}
+# 
+# mhg_density_for_taxa(people.norm, "Coprobacter") #+
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(sprague.genus, Date == "2017-07-08" )
+#   )["Coprobacter"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(sprague.genus,  Date == "2017-07-10")
+#   )["Coprobacter"]) / 10000 ,
+#   y = 0,
+#   yend = 0.5
+#   )
+
+           
+```
+
+### Variability through time
+
+
+Like most westerners, the vast majority of my gut is composed of *Firmicutes* and *Bacteroidetes*, with an occasional spike of *Actinobacteria* or *Proteobacteria* or *Verrucomicrobia*. You can see a detailed summary in the [Appendix](#appendixGut)
+
+

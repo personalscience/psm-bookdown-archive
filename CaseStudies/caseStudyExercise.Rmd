@@ -1,0 +1,25 @@
+## Exercise {#caseStudyExercise}
+
+I wanted to see if [this paper](http://www.mdpi.com/2072-6643/9/8/792) is right in concluding that physically-fit women have lower _Eubacterium_. Here's one physically-fit woman I know and sure enough, she has none of this microbe.
+
+Other people I've seen who _do_ have this seem to be either (1) older, or (2) on an unusual diet.
+```{r}
+
+summary(as.numeric(otu_table(people.norm)["Eubacterium"]/10000))
+#kable(mhg_abundance(subset_samples(people.norm, Username == "dr2"), "Eubacterium"))
+
+# mhg_density_for_taxa(people.norm, "Eubacterium") +
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "dr2")
+#   )["Eubacterium"]) / 10000,
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "dr2")
+#   )["Eubacterium"]) / 10000 ,
+#   y = 0,
+#   yend = 1
+#   )
+
+```

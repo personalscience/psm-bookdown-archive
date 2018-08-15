@@ -1,0 +1,145 @@
+## Traveling in Mexico {#experimentMexico}
+
+People are not the only foreigners you meet when you visit another country. Trillions of new microbes, mostly bacteria, will meet you as soon as you cross the border, and many of them won't get along with the trillions that already inhabit your body. Fortunately, as I discovered on a recent trip,  Mexican microbes are pretty friendly, and with all the tasty food available in the country, they're lucky too.
+
+"Montezuma's revenge" is the popular name given to Traveler's diarrhea, apparently because somebody got sick in Mexico long ago and decided to pin the blame on the Aztec emperor who was killed by the Conquistador Hernán Cortés in 1520. Whatever you call it, studies show up to 50% of international travelers suffer some trouble, and about 80% of the time the culprit is a bacterium.^[See a thorough, easy-to-read introduction to the issues here: https://www.travmed.com/pages/health-guide-chapter-6-travelers-diarrhea]
+
+Mexico City has become a serious foodie capital. If you haven't been there recently, many seasoned travelers suggest you check it again because there has been quite a boom in fine restaurants with tasty dishes from around the world. We ate everything, from *queso oaxaca* at Mercado de San Juan, to the grasshopper-like insect delicacy ( 60 pesos/100g) *chapulines*, to the wonderful buttery-tasting fruit called *cherimoya*.
+
+My favorite drink was *pulque*, a fermented concoction made from the sap of the maguey (agave) plant. Unlike other fermented beverages like kombucha or beer, the fermentation takes place *inside* the plant, before harvesting. The plants take more than a decade to mature, and when they start to produce, you have to suck out the pulque quickly or it goes bad. Nobody's figured out how to preserve it without losing flavor and potency, so unfortunately I'm not able to get any in the U.S.
+
+
+```{r echo=FALSE}
+knitr::include_graphics("./Experiments/assets/experimentTravelMexicoPulque.jpg")
+
+mexico.ssr <- c(31328,55019,55026) # "2015-12-02" "2016-01-05" "2016-03-29"
+  
+mexico.phylum <- subset_samples(sprague.phylum.norm, SSR %in% mexico.ssr)
+mexico <- prune_taxa(taxa_sums(mexico.phylum)>100,mexico.phylum)
+sample_data(mexico)$Label <- c("Before","During","After")
+```
+
+
+
+
+I loved the food, but what about my microbes? To find out, I tested myself before leaving, immediately at the end of the trip ('during'), and then a few weeks after returning ('after'). Here's the highest level (phylum) summary of the most common bacteria I found:
+
+```{r mexicoTable, echo=FALSE}
+
+kable(mhg_abundance(mexico)/10000, digits = 2, col.names = c("Before %", "During %", "After %"))
+
+```
+
+
+
+The first thing to notice is the contrast between my microbiome during the trip versus otherwise. Before and after, my gut is normally dominated by the top two phyla, with nothing else breaking higher than 2%, but during the trip the abundances are more evenly spread. In other words, the diversity increased, as you can see in this picture of the changes in my "Shannon" diversity metric:
+
+
+```{r echo=FALSE, warning = FALSE, message = FALSE}
+#knitr::include_graphics("./assets/experimentTravelMexicoDiversity.png")
+mexico.family <- subset_samples(sprague.family.norm, SSR %in% mexico.ssr)
+sample_data(mexico.family)$Label <- c("1 Before","2 During","3 After")
+# plot_richness(mexico.family,  x = "Label", measure = "Shannon", sortby = "Date") #+ aes(ymin = 1.0) +geom_bar(stat = "identity")
+
+ggplot(data = data.frame( diversity = estimate_richness(mexico.family)$Shannon, label =  sample_data(mexico.family)$Label), aes(x=label,y=diversity)) + geom_bar(stat="identity") + coord_cartesian(ylim = c(1.5,2)) +
+  ylab("Diversity (Shannon)") + xlab("") +
+  ggtitle("Gut Diversity Before/During/After Mexico")
+
+```
+
+
+
+It makes sense that diversity would increase on a trip, but what can I learn about the bacteria that changed?
+
+Notice how a key one, _Proteobacteria_, spiked during my trip and then returned to normal after I returned home. I saw the same spike after [*my jungle trip*](http://www.ubiomeblog.com/my-microbiome-in-the-jungle/), during my [*gut cleanse experiment*](http://www.ubiomeblog.com/experimenting-with-a-gut-cleanse-by-richard-sprague/), and once before when I had been fighting an upset stomach. My experience is consistent with a similar observation by Duke University's Lawrence David ^[@david_host_2014 http://genomebiology.com/2014/15/7/R89] and collaborators, who found that this phylum seems to increase during episodes when the gut is under attack, like it is in foreign travel.
+
+Whenever I see elevated _Proteobacteria_ in somebody's results, I always ask them if they've noticed anything unusual tummy-wise.  This phylum contains most of the well-known pathogens, including _Salmonella_, _E. Coli_, as well as those responsible for Black Plague and ulcers. Unfortunately the standard (i.e. cheap) 16S rRNA test can't identify any of these pathogens with suitable accuracy, like the infamous _E. Coli_ or other nasty ones like _Shigella._  By their nature, pathogens are often very similar to benign or even beneficial bacteria, sometimes differing by only a single base pair. If they were too different, evolution would quickly stamp them out.
+
+That said, at the bacterial DNA level, the *Kluyvera* genus is quite similar to interesting bacteria like _E. Coli_ or _Shigella_, and sure enough, I see that it spiked during my trip. *Kluyvera* ferments sugars and goes up in people on a ketogenic diet, but in this case I bet I'm seeing evidence of a perhaps some kind of an unwanted invader. (Figure \@ref(fig:travelMexicoPlotHeatBeforeAfter))
+
+```{r travelMexicoPlotHeatBeforeAfter, fig.cap = "Variability of key genus abundance before/during/after a trip to Mexico."}
+#knitr::include_graphics("./assets/experimentTravelMexicoKluyvera.png")
+mexico.genus <- subset_samples(sprague.genus.norm, SSR %in% mexico.ssr)
+sample_data(mexico.genus)$Label <- c("1 Before","2 During","3 After")
+mhg_plot_top(mexico.genus, top=10) + ggtitle("Before/During/After Mexico Travel")
+```
+
+
+```{r travelMexicoPlotTop, fig.cap =  "Changes in key genus abundance when traveling to Mexico. (Lighter shades are more abundant)"}
+
+#mhg_abundance(mexico.genus, top = 10)/10000
+mhg_plot_top_heat(mexico.genus, n=15)+ ggtitle("Before/During/After Mexico Travel")
+# names(mhg_abundance(mexico.genus,top=10))
+# plot_bar(prune_taxa(taxa_sums(mexico.genus)>50000,mexico.genus), x = "Label", fill = "Genus") +
+#   scale_y_continuous(labels=function(x)x/100000) + ylab("Abundance (%)")
+               
+
+```
+
+
+Next, what might I learn if I study just the bacteria that changed the most ? To do that, I made a list of just those at the genus level that existed *before* my trip and *after*, but not *during*.
+
+```{r}
+mexico.before <- subset_samples(mexico.genus, SSR == mexico.ssr[1])
+mexico.during <- subset_samples(mexico.genus, SSR == mexico.ssr[2])
+mexico.after <- subset_samples(mexico.genus, SSR == mexico.ssr[3])
+
+
+
+m.db <- mhg_unique(mexico.during,mexico.before)
+m.da <- mhg_unique(mexico.during,mexico.after)
+
+kable(m.db$tax_name[m.db$tax_name %in% m.da$tax_name], col.names = c("Unique in Mexico"))
+
+```
+
+
+I then compared this to uBiome's big database, based on tens of thousands of samples. You can find a chart like this on your Insights tab:
+
+
+
+```{r echo=FALSE}
+knitr::include_graphics("./Experiments/assets/experimentTravelMexicoElusive.jpg")
+```
+
+Two of these stand out for me: _Methanomassiliicoccus_ and _Citrobacter_, both of which are rare among uBiome samples and yet they appeared for me just once on a trip to Mexico. Interesting…
+
+I didn't bother showing the whole uBiome chart, but a little further up the list of uBiome database frequency is *Fastidiosipila*, which again appeared just this once for me.
+
+Next, let's look at the organisms that disappeared while I was in Mexico:
+
+```{r}
+# m.bd <- mhg_unique(mexico.before,mexico.during)
+# m.ad <- mhg_unique(mexico.after,mexico.during)
+# m.ba <- mhg_unique(mexico.before,mexico.after)
+# 
+# mhg_unique(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name %in% rownames(mhg_abundance(mexico.during))
+# 
+# rownames(mhg_abundance(mexico.before)) %in% rownames(mhg_abundance(mexico.after))
+kable(mhg_unique(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name,col.names = c("Disappeared"))
+
+```
+
+Comparing these to the uBiome database, I see that all of them are pretty common, seen in at least a quarter of all other uBiome users. Again, it's odd that they disappeared from my uBiome results during the trip.
+
+One of them, *Pseudoflavonifractor* is [*associated*](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0149564) with successful weight loss. I *did* gain a few pounds during the trip, but lost it all within a few weeks, maybe because this guy resurrected when I got home?  Or not. If I've learned anything from my tons of near-daily samples, it's that the microbiome is highly variable and you shouldn't make big conclusions based on just a single result.
+
+As for the rest, the obvious question-- both for the bacteria that I gained and those I lost: is that good or bad?
+
+The answer, frustratingly, is that we don't really know, but here are some obvious questions for follow-up:
+
+-   Are these bacteria somehow associated with Mexico? Like other organisms, some bacteria seem to be native to some geographies and some aren't. Maybe I've stumbled upon a few that happen to enjoy the climate there.
+
+-   I never became sick during my trip. Did some of these new bacteria protect me somehow? If so, what specifically might I do next time to ensure that I can get them again?
+
+-   Few of the bacteria I gained seem to stick around, but I know from past experience living in another country that it *does* seem possible to make permanent changes. Many people who live for extended periods in Japan, for example, seem to carry a bacterium that's good at digesting sushi. Maybe there's a similar one for Mexican food?
+
+-   What about the fermented pulque? Is there some specific health benefit I enjoyed by drinking something that thousands of years of tradition says is good for me? Perhaps with more data we can identify exactly which microbes thrive on this stuff.
+
+As a personal scientist, my purpose isn't to solve these problems right away, but rather to raise new and hopefully interesting questions that others can follow up together. Studying the differences between my own samples is my biggest advantage over "real" scientists, who generally look at anonymous data and rarely have the context to go deep into interesting questions that might not have been apparent at the start of the experiment.
+
+
+* My microbiome changed noticeably during my trip, but it bounced back in a few weeks.
+* My diversity went up, as you'd expect, as did levels of one particular phylum, _Proteobacteria_ that seems in me to indicate that my body is fighting invaders.
+* Science still knows precious little about the microbiome, though we continue to learn.
+

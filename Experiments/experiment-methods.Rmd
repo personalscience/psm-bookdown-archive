@@ -1,0 +1,297 @@
+## Collection methods {#experimentCollection}
+
+To understand a result, we need to know more about the overall variability of the microbiome. As we showed previously, the day-to-day changes can be substantial, but what about variability in the sample itself? To find out, I tried sampling the same, uh, evacuation in several different ways. (Warning: some of the discussion here may get a little precise).
+
+I submitted two swabs to the lab. One of them I simply poked somewhere in the middle of the sample. In the other, I placed the entire sample into a plastic bag and gently "blended" it as best I could, rolling and kneading it back and forth until it was as mixed as I had patience to try. Here are the results at the genus level:
+
+```{r evacuationDifferences}
+
+
+
+evac1.middle <- subset_samples(sprague.genus.norm, SSR == 21189)
+evac1.blend <- subset_samples(sprague.genus.norm, SSR == 22430)
+evac1 <- prune_taxa(taxa_sums(merge_phyloseq(evac1.middle,evac1.blend))>42,
+                     merge_phyloseq(evac1.middle,evac1.blend))
+
+
+kable(mhg_abundance(evac1, top = 10)/10000, digits=2,col.names=c("Middle", "Blended"))
+```
+
+As we can see, there is a significant difference. If you are merely swabbing from a single wipe, it'll clearly matter a great deal that you wipe consistently from sample to sample.
+
+Sometimes I'll have more than one chunk in the same "session".  Here's what happens when I wipe from the first chunk and then the second:
+
+
+```{r}
+evac2.first <- subset_samples(sprague.genus.norm, SSR == 74573)
+evac2.second <- subset_samples(sprague.genus.norm, SSR == 74582)
+
+
+evac2 <- prune_taxa(taxa_sums(merge_phyloseq(evac2.first,evac2.second))>42,
+                     merge_phyloseq(evac2.first,evac2.second))
+kable(mhg_abundance(evac2, top = 10)/10000, digits=2,col.names=c("First", "Second"))
+```
+
+But what if I sample twice on the same day? Although I tend to be a once-a-day guy, there are occasions when I'll need to go more than once and I have a few examples with data from the same day.   
+
+```{r evac3}
+
+evac3.first <- subset_samples(sprague.genus.norm, SSR == 110782)  # 2017-05-04 morning
+evac3.second <- subset_samples(sprague.genus.norm, SSR == 266613) # 2017-05-04 afternoon
+evac3 <- prune_taxa(taxa_sums(merge_phyloseq(evac3.first,evac3.second))>42,
+                     merge_phyloseq(evac3.first,evac3.second))
+
+evac4.first <- subset_samples(sprague.genus.norm, SSR == 86141)  # 2017-10-27 morning
+evac4.second <- subset_samples(sprague.genus.norm, SSR == 86170)  # 2017-10-27 afternoon
+evac4 <- prune_taxa(taxa_sums(merge_phyloseq(evac4.first,evac4.second))>42,
+                     merge_phyloseq(evac4.first,evac4.second))
+
+
+evac5.ssr<- c(155588,155543) # July 5: kefir greens; cheeseburger + peanut butter; orca beans, beef shortrib, corn on the cob; beer
+evac6.ssr <- c(155519,155639) # July 6: (p1) visible corn kernels ; yesterday = kefir, beans, korean beef, blueberry smoothie
+evac5.first <- subset_samples(sprague.genus.norm, SSR==evac5.ssr[1])
+evac5.second <- subset_samples(sprague.genus.norm, SSR==evac5.ssr[2])
+evac5 <- prune_taxa(taxa_sums(merge_phyloseq(evac5.first,evac5.second))>42,
+                     merge_phyloseq(evac5.first,evac5.second))
+
+kable(mhg_abundance(evac3, top = 10)/10000, digits=2,col.names=c("Day 1 Morning", "Day 1 Afternoon"))
+kable(mhg_abundance(evac4, top = 10)/10000, digits=2,col.names=c("Day 2 Morning", "Day 2 Afternoon"))
+kable(mhg_abundance(evac5, top = 10)/10000, digits=2,col.names=c("Day 3 Morning", "Day 3 Afternoon"))
+
+
+```
+
+Or maybe it's just me. Something odd about my own microbiome, perhaps, or just something related to how I sample?
+
+Here's another sample somebody sent me, two swabs from the wipe:
+
+```{r person2evac, fig.cap="Person 2: separate swabs from the same sample"}
+person2.evac1 <- subset_samples(people.norm, SSR == 23771)  # RSpragueFather 2015-09-15 gut
+person2.evac2 <- subset_samples(people.norm, SSR == 23790)  # 2015-09-15 gut 2
+person2 <- prune_taxa(taxa_sums(merge_phyloseq(person2.evac1,person2.evac2))>42,
+                     merge_phyloseq(person2.evac1,person2.evac2))
+kable(mhg_abundance(person2, top = 10)/10000, digits=2,col.names=c("Sameday1", "Sameday 2"))
+
+```
+
+
+
+Same day, very different results. My conclusion is that to ensure results are comparable, you must be extra careful to adopt similar methods across samples. My advice is to never rely on a single test; always get more than one sample, and don't make conclusions unless you've seen multiple results, often over several days. And when you *do* take a sample, try to move the swab through as much of the DNA as possible. It's not as convenient, but unfortunately this means taking a chunk (not a wipe) and swabbing throughout. Generally, the more DNA you can collect, the better.
+
+Ultimately the real lesson is to be humble about what we can learn from a single sample while simultaneously noting that there *is* a signal in the noise. After hundreds of samples, I see variance, but not *too* much variance. There really is a distinct signal in my microbiome, one unique to me, and worth uncovering.
+
+```{r evacDiversity, fig.cap="Diversity differences between two swabs taken from the same sample."}
+#plot_richness(evac1,measure=c("Shannon"), x = "Label") #c("Blended","Middle"))
+
+#ggplot(data = data.frame(estimate_richness(evac1, measures = "Shannon"), location= c("Blended","Middle")), aes(x=location,y = Shannon)) + geom_bar(stat="identity")
+
+kable(data.frame(estimate_richness(evac1, measures = "Shannon"), location= c("Blended","Middle")), col.names = c("Diversity","Location"), row.names = FALSE)
+```
+
+---
+
+Scientists at uBiome [recently released](https://www.biorxiv.org/content/early/2018/05/15/322677) results from experiments testing the variability of gut samples.  My own experiments show considerable day-to-day variability, so I was interested to see their conclusions, which are based on much more rigorous testing.
+
+The preprint, titled _Measures of reproducibility in sampling and laboratory processing methods in high-throughput microbiome analysis_ finds these high-level results:
+
+1. **Sampling method isn't that important**. Gut stool is not homogeneous, so you'd expect some variation in abundances depending on where and how you wipe, but when they systematically tested one person 11 times, they found the differences from the same day were small. Samples taken the same day were 0.95+ correlated; those taken from the same individual on different days were 0.60+ correlated -- much higher than the correlation between different people.
+
+2. **Storage conditions don't matter (much) either** Whether you store the samples frozen, at room temperature, or in hot weather, your results won't be different enough to make them invalid. 
+
+3. **Sequencing results are pretty consistent**. Turning a microbiome gut sample into usable data requires dozens of precise steps, any of which can potentially skew the results, but at least in uBiome's lab pipeline, the final results are highly reproducible. 
+
+All of this is good news to people hoping for important insights from their microbiome testing, but it still left me with some questions.
+
+The paper doesn't describe exactly _how_ they tested the person ("Subject A") who they found had consistent results over time. This is an experiment I've tried too -- over 25 samples worth -- and meanwhile several people have sent me the results where they happened to test twice. Can I replicate the uBiome results?
+
+Let's start by looking at a single Phylum, _Firmicutes_, which is usually the most common in western guts. This is the highest-level taxanomical ranking as well, so the 16S method used in the uBiome pipeline should be pretty accurate. Using the 25 samples of which I have duplicates taken the same day, I'll compare the first sampling ("Sample1") with the second "(Sample2)".
+
+When we eyeball it, the _Firmicutes_ doesn't appear to vary a whole lot between the same-day samples. The black lines in each of the bars is the level of _Firmicutes_ found in the _second_ sample. Although there are a few significant exceptions (10-27, 04-15, 6-10), most of the time the levels for this microbe seem pretty close no matter where you sample.
+
+```{r, echo = FALSE}
+
+me.gut <- subset_samples(sprague.genus.norm,Site=="gut")
+me.gut.df <- sample_data(me.gut)[,c("Date","SSR","Label")] %>% as.data.frame()
+
+#(me.gut.df %>% subset(Date>"2018-01-10"))$Date
+
+me.gut.dupes.dates <- sample_data(me.gut)$Date[duplicated(sample_data(me.gut)$Date)] 
+me.gut.dupes <- subset_samples(me.gut,Date %in% me.gut.dupes.dates)
+
+p0.ssr <- as.character(data.frame(sample_data(me.gut.dupes)[,"SSR"])[,1])
+p1.ssr <- c("23771", "23790") # rspraguefather 2015-09-15
+p2.ssr <- c("54976", "54936") # lyme1 2016-04-16
+
+p0.phylum <- subset_taxa(subset_samples(sprague.phylum.norm, SSR %in% p0.ssr), Phylum %in% c("Firmicutes","Bacteroidetes"))
+
+# data frame in tidy format with all duplicate dates and abundances for F and B phylum
+p0.top.df <- data.frame(Date = sample_data(me.gut.dupes)$Date %>% strftime(format = "%m-%d"),
+                        Firmicutes = t(otu_table(p0.phylum)[2,])/10000, 
+                        Bacteroidetes = t(otu_table(p0.phylum)[1,])/10000) %>%
+  mutate(Ratio = Firmicutes/Bacteroidetes) %>%
+  gather(Phylum, Abundance, -Date,Firmicutes,Bacteroidetes, -Ratio)
+
+# ggplot(data=p0.top.df %>% arrange(Date) %>% mutate(x = as.character(Date)),
+#        aes(x=x,y=Abundance,fill=factor(Phylum))) +
+#   geom_bar(stat="identity", position = position_dodge(width = 0.8)) +
+#   scale_y_continuous(labels = function(x)x*1) + 
+#   theme(axis.text.x = element_text(angle=90)) +
+#   #facet_wrap(~Date) + 
+#   labs(title = "Same Samples", y = "Abundance (%)", x = "Sample")
+  
+
+ggplot(data=p0.top.df[,] %>% dplyr::filter(Phylum == "Firmicutes") %>%
+         arrange(Date) %>% mutate(x=as.character(Date)),
+       aes(x=x,y=Abundance, fill = Phylum)) +
+  geom_bar(stat = "identity",position=position_dodge(width=0.8), color="black") + 
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = "Firmicutes level in samples taken the same day",x = "Sample")
+
+# ggplot(p0.top.df %>% dplyr::filter(Phylum == "Firmicutes") %>% mutate(x=as.character(Date)),
+#        aes(x=x,y=Ratio)) +
+#   geom_bar(stat = "identity", position = "dodge", color = "black") + 
+#     theme(axis.text.x = element_text(angle=90))
+
+```
+
+
+
+One limitation of the uBiome paper is that they only looked at a tiny subset of all the genus-level taxa found in the sample. Presumably they did this because [they've previously shown](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0176555) that those particular genera are accurately represented in the sample, but if you want to know if something is evenly distributed, you can't rely on a subset. For example, even though a subset of my gut phylum, _Firmicutes_, is reasonably stable all on its own, the _ratio_ of Firmicutes to other important taxa is all over the place.
+
+```{r, echo = FALSE}
+
+p0.ratios <- data_frame( Sample =  p0.top.df[seq(2,nrow(p0.top.df),2),"Date"], # seq(1,nrow(p0.top.df)/2),#
+           Sample1 = p0.top.df[seq(1,nrow(p0.top.df),2),"Ratio"],
+           Sample2 = p0.top.df[seq(2,nrow(p0.top.df),2),"Ratio"])[1:25,]
+
+
+  
+p0.fb.all <- p0.top.df %>% tidyr::spread(Phylum,Abundance)
+
+p0.fb <- data_frame( Sample =  p0.fb.all[seq(2,nrow(p0.fb.all),2),"Date"],
+                     Ratio1 = p0.fb.all[seq(1,nrow(p0.fb.all),2),"Ratio"],
+                     Ratio2 = p0.fb.all[seq(2,nrow(p0.fb.all),2),"Ratio"],
+                     Firmicutes1 = p0.fb.all[seq(1,nrow(p0.fb.all),2),"Firmicutes"],
+                     Firmicutes2 = p0.fb.all[seq(2,nrow(p0.fb.all),2),"Firmicutes"],
+                     Bacteroidetes1 = p0.fb.all[seq(1,nrow(p0.fb.all),2),"Bacteroidetes"],
+                     Bacteroidetes2 = p0.fb.all[seq(2,nrow(p0.fb.all),2),"Bacteroidetes"])
+  
+  
+
+
+#knitr::kable(p0.ratios, digits= 2)
+
+ggplot(data=p0.ratios %>% gather(Part,Value,-Sample) %>% arrange(Value), aes(x=reorder(Sample, Value), y = Value, fill = Part)) + 
+  geom_bar(stat= "identity", position = position_dodge(width = 0.8)) + 
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = "FB Ratio in different parts of same sample", x = "Sample", y = "Ratio of Firmicutes/Bacteroides in same sample") 
+
+
+```
+
+Let's run the same correlation calculation that uBiome used:
+
+```{r measureSampleLin, echo = FALSE}
+library(DescTools)
+#DescTools::CCC(p0.ratios$Part1,p0.ratios$Part2)[["rho.c"]][,"est"]
+
+knitr::kable(data_frame(DescTools::CCC(p0.fb$Ratio1,p0.fb$Ratio2)[["rho.c"]][,"est"],
+             DescTools::CCC(p0.fb$Firmicutes1,p0.fb$Firmicutes2)[["rho.c"]][,"est"],
+             DescTools::CCC(p0.fb$Bacteroidetes1,p0.fb$Bacteroidetes2)[["rho.c"]][,"est"]),
+            col.names = c("FB Ratio", "Firmicutes", "Bacteroidetes"),
+            digits = 2,
+            caption = "Lin's Concordance Correlation Coefficience for 25 samples")
+
+
+
+```
+
+At the phylum level, I find much less correlation (at best 0.50) than uBiome did (0.95).  What are some possible reasons?
+
+First, as noted they are looking at a subset of 28 taxa that they've decided can be most accurately detected using their pipeline. I'm looking only at one phylum. But _Firmicutes_ is the most important, most broadly watched phylum in the gut. If this is measured inaccurately, what does that say about the rest of the experiments?
+
+Second, although I'm studying only a single taxa, they're using a summary metric of _all_ 28 taxa they measure. The paper doesn't explain how they summarize 28 microbial abundances into a single number, but I assume they are doing some common similarity metric, like Bray-Curtis.  This is a simple and often-used way to tell how similar or different two vectors are from one another. I didn't do that because I'm comparing a single number, not a vector.
+
+Let's see if I can make a rough estimate that would be similar to their list of taxa.  uBiome's clinical test tracks 28 microbes at the genus and species level, not all of which can be seen in Explorer.  
+
+
+```{r measureSampleClinical, echo = FALSE, message = FALSE}
+
+clinical <- readr::read_csv("../assets/clinicalTaxa2016.csv")
+clinical_genus <- (clinical %>% dplyr::filter(tax_rank=="genus"))$tax_name
+
+dupes_dates <- sample_data(me.gut.dupes)$Date %>% strftime(format = "%m-%d")
+
+dupes_dates[seq(1,length(dupes_dates),2)] <- paste0(dupes_dates[seq(1,length(dupes_dates),2)],"A")
+dupes_dates[seq(2,length(dupes_dates),2)] <- paste0(dupes_dates[seq(2,length(dupes_dates),2)],"B")
+
+dupes_dates <- sort(c(paste0("sample",stringr::str_pad(seq(1,25,1),width=2, pad = "0"),"A"),
+                      paste0("sample",stringr::str_pad(seq(1,25,1),width=2, pad = "0"),"B")))
+
+
+# here are the taxa that are found both in uBiome's clinical list and in the Explorer list
+
+
+clinical.ps <- subset_taxa(me.gut.dupes,Genus %in% str_subset(taxa_names(me.gut.dupes),str_c(clinical_genus, collapse = "|")))
+
+# here's a 12 x 50 matrix, the rows of which are the percentage abundances of each uBiome clinical genus
+clinical_table <- as.matrix(otu_table(clinical.ps)/10000)
+
+colnames(clinical_table) <- dupes_dates
+```
+
+There are 12 genus-level taxa on both lists (`r str_subset(taxa_names(me.gut.dupes),str_c(clinical_genus, collapse = "|"))`)
+
+Here are the correlations _between_ the clinical taxa
+
+```{r measureSampleClinicalShow, echo = FALSE, warning= FALSE, message = FALSE}
+
+# now construct another matrix, each cell of which is the vegdist of each column multiplied by every other column
+
+clinical_cors <- cor(t(clinical_table))
+
+mc <-clinical_cors[upper.tri(clinical_cors)] # just the upper triangle
+
+ind <- which( upper.tri(clinical_cors,diag=F) , arr.ind = TRUE )
+
+mCorr<-data.frame( col = dimnames(clinical_cors)[[2]][ind[,2]] ,
+                   row = dimnames(clinical_cors)[[1]][ind[,1]] ,
+                   val = clinical_cors[ ind ] )
+
+mCorr %>% arrange(desc(val)) %>% head(10) %>% knitr::kable( digits = 2, col.names = c("Taxa1","Taxa2","Correlation"))
+
+
+```
+
+
+Here are the correlations among the Bray-Curtis distances:
+
+```{r measureSampleClinicalShowMatrix, echo = FALSE, message = FALSE}
+
+vegan_table_df <- vegan::vegdist(t(clinical_table)) %>% as.matrix() %>% as.data.frame()
+
+vegan_table_dist <- vegan_table_df[upper.tri(vegan_table_df)] # head() #gather()
+
+
+v_ind <- which( upper.tri(vegan_table_df,diag=F) , arr.ind = TRUE )
+
+v_dist <-data.frame( col = dimnames(vegan_table_df)[[2]][v_ind[,2]] ,
+                   row = dimnames(vegan_table_df)[[1]][v_ind[,1]] ,
+                   Distance = vegan_table_df[ v_ind ] )
+
+# ggplot(data=v_dist, aes(x=col,y=row)) + geom_tile(aes(fill=Distance)) + 
+#   theme(axis.text.x = element_text(angle=90)) +
+#   #scale_fill_gradientn(colours=c("#0000FFFF","#FFFFFFFF","#FF0000FF"))
+#   scale_fill_gradientn(colours=c("#ff6600","#ff9933")) +
+#   labs(title = "Bray-Curtis Distance Between Samples", x = "Sample", y = "Sample")
+
+ggcorrplot::ggcorrplot(as.matrix(vegan_table_df)[seq(1,20,2),seq(2,20,2)])
+
+```
+
+(which, upon reflection, means absolutely nothing)
+
+Finally, I think the real difference has to do with sampling technique. I poke the swab all over the place into my samples. My guess is that their experimental subject probably swabbed the outside of the sample at two spots. That may or may not be more realistic than my method -- it depends on whether you think toilet paper grabs only the outside or not -- but it _does_ highlight the importance of consistency in how you take a sample. If, as the uBiome experiments appear to show, you sample only on the outside, then there is probably a lot of similarity in the same sample. If normal people are more like me, sampling all over the place, then my results show the variability may be much higher than uBiome thinks.
+
+
+

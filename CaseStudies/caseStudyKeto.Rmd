@@ -1,0 +1,49 @@
+## Ketogenic Diet {#caseStudyKeto}
+
+What happens if you eat a very low-carb, high fat diet ?
+
+This is a person who tried Keto for several weeks.
+
+```{r plotKeto, echo = FALSE, warning = FALSE, message = FALSE}
+
+bp1.norm <- subset_samples(people.norm, Username = "bp1") #phyloseq_for_user("Orli_Kadoch",count.normalized = TRUE)
+
+# mhg_plot_top_heat <- function(ps){
+#   ps.top <- prune_taxa(names(sort(taxa_sums(ps),TRUE)[1:25]), ps)
+#   plot_heatmap(ps.top,sample.order = "Date", sample.label = "Label")
+# }
+
+mhg_plot_top_heat(subset_samples(bp1.norm, SSR %in% c("17701","17944","39365"))) + ggtitle("Keto Diet Before/After") + theme(legend.position = "off")
+
+```
+
+Now let's compare two people. The red line is the person above, who tracked their microbiome while beginning the diet; the blue line is a person who has been on a ketogenic diet for six months or so. Interestingly, the genus _Parasutterella_ seems in unusually high abundance in both cases. Does it somehow relate to a low carb diet?
+
+
+
+```{r keto2}
+people.tmp <- subset_samples(people.norm, Site == "gut")
+db1 <- subset_samples(people.tmp, Username == "db1")
+
+# We can compare the two for a particular genus like this (husband = red)
+mhg_density_for_taxa(merge_phyloseq(people.tmp,gut.norm), "Parasutterella") +
+  annotate(
+  geom = "segment",
+  color = "blue",
+  x = as.numeric(otu_table(db1)["Parasutterella"]) / 10000,
+  xend = as.numeric(otu_table(db1)["Parasutterella"]) / 10000,
+  y = 0,
+  yend = 1.5
+  ) +
+  annotate(
+  geom = "segment",
+  color = "Red",
+  x = as.numeric(otu_table(subset_samples(people.tmp, Username == "bp1"))["Parasutterella"]) / 10000,
+  xend = as.numeric(otu_table(subset_samples(people.tmp, Username == "bp1"))["Parasutterella"]) / 10000,
+  y = 0,
+  yend = 1.5
+  )
+
+
+```
+

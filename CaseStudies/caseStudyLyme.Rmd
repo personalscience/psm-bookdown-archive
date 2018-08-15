@@ -1,0 +1,74 @@
+## Lyme Disease {#CaseStudyLyme}
+
+What can we learn about Lyme disease?
+
+We know that Lyme disease has been linked to the pathogen _Borrelia_. The uBiome 16S pipeline doesn’t appear able to distinguish among the different species of that taxa, so let's look at a higher level, the family _Spirochaetaceae_, which includes _Borrelia._  Several people with confirmed lyme disease sent me their samples, and indeed I _do_ find some _Spirochaetaceae_ in these samples, albeit at very low abundance.
+
+I was unable to find any _Spirochaetaceae_ in any of the other hundreds of samples I examined, including from a few people with confirmed lyme.
+
+
+
+```{r}
+spiro <- subset_taxa(people.family, Family == "Spirochaetaceae")
+spiro.ssr <- colnames(otu_table(spiro)[,otu_table(spiro) > 0]) # ssrs with > 0 Spirochaetaceae
+# 
+#sample_data(subset_samples(people.norm, SSR %in% spiro.ssr)) #[,c("Date","Username","Site")]
+
+plot_bar(subset_samples(spiro, SSR %in% spiro.ssr), x = "Date") + ggtitle("Samples with Spirochaetaceae")
+# mhg_taxa_plot(spiro,"Spirochaetaceae")
+# plot_bar(subset_taxa(gut.family.norm, Family == "Spirochaetaceae" ), x = "Date")
+
+```
+
+Let's do an ordination. How do lyme patients resemble one another? \@ref(fig:caseStudyLymeOrdination1)
+
+```{r caseStudyLymeOrdination1, fig.cap = "Clusters of lyme patients"}
+lyme.ps <- subset_samples(people.family, Condition == "Lyme" & Site == "gut")
+lyme.ssr <- c(15811,16464,17664,20272,35818,36017,54976,84870,11028,11330)
+
+#spiro.ssr #  "15811" "17664" "20272"
+lyme.ps <- subset_samples(people.family, SSR %in% lyme.ssr)
+sample_data(lyme.ps)$Username <- c(rep("Person1",6),rep("Person2",2),rep("Person3",2))
+
+newLabel <- c("lyme","Treatment1","lyme","lyme","keto1","keto2","lyme","Treatment2","Oct","Dec")
+
+# oldLabel <- sample_data(lyme.ps)$Label
+# oldLabel <- sub("db(3|1|4)","lyme",oldLabel)
+sample_data(lyme.ps)$Label <- newLabel
+#sample_data(lyme.ps)$Label <- sub("spare","lyme",oldLabel)
+
+
+sink("junk.txt")
+lyme.ord <- ordinate(lyme.ps, method = "NMDS", distance = "bray")
+lyme.df <- plot_ordination(lyme.ps,lyme.ord,justDF = TRUE)
+sink()
+
+
+ggplot(data=lyme.df,aes(x=NMDS1,y=NMDS2, color = Username)) + geom_point() +
+theme(text=element_text(size=15), axis.text = element_text(size=4),
+      legend.position = "right") + geom_point(size=3) +
+    geom_text(aes(label=Label),size = 4, hjust = "center", vjust = "top" ) +
+  geom_text(aes(label=strftime(Date,format="%Y-%b")),nudge_y=0.02,size = 2, hjust = "middle", vjust = "bottom" ) +
+  labs(title="Clusters of Lyme Patients", y= "Correlation #1", x = "Correlation # 2")
+
+
+```
+
+This person tried Kefir to see if they could increase Fusicatenibacter:
+
+```{r}
+db.gut.norm <- subset_samples(people.gut.norm,Username == "db" & Site == "gut")
+db.gut.family <- subset_samples(people.family,Username == "db" & Site == "gut")
+#sample_data(db.gut.family)
+mhg_taxa_plot(db.gut.norm,"Fusicatenibacter") +
+  scale_x_date(date_labels = "%B-%y", date_breaks = "1 month", date_minor_breaks = "1 month") +
+  annotate("point",x=sample_data(db.gut.family)$Date, y = 0, color = "red")
+
+mhg_taxa_plot(db.gut.family,"Spirochaetaceae") +
+  scale_x_date(date_labels = "%B", date_breaks = "1 month", date_minor_breaks = "1 month") +
+  annotate("point",x=sample_data(db.gut.family)$Date, y = 0, color = "red")
+
+#plot_bar(prune_taxa("Spirochaetaceae",db.gut.family),fill="Family", x= "Date") +  annotate("point",x=sample_data(db.gut.family)$Date, y = 0, color = "red")
+
+
+```

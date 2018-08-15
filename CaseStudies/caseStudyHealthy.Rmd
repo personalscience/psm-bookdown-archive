@@ -1,0 +1,78 @@
+## Healthy People {#CaseStudyHealthy}
+
+>>Healthy people are all alike; every unhealthy person is unhealthy in their own way. 
+>> - Leo Tolstoy _Anna Karenina_.
+
+A statistically-generated NMDS diagram is an easy way to show hundreds of samples at one time. Samples that are more similar to one another are shown closer together, forming "clusters" that can give us an idea of which people are most similar.  (Figure \@ref(fig:plotCaseStudyAll))
+
+```{r plotCaseStudyAll, results = "hide", fig.cap = "Overall clustering of hundreds of unique samples in my database." }
+
+# healthy.ssrs <- sample_data(subset_samples(people.all, Condition == "Healthy"))$SSR
+# healthy.phylum <- subset_samples(people.phylum,SSR %in% healthy.ssrs)
+# healthy.family <- subset_samples(people.family,SSR %in% healthy.ssrs)
+
+sink("junk.txt")
+ord <- ordinate(subset_samples(people.family, Site=="gut"),method = "NMDS", distance = "bray")
+plot_ordination(subset_samples(people.family, Site=="gut"),ord, color = "Condition", label = "Username")
+sink()
+file.remove("junk.txt")
+
+```
+
+The differences here are not strikingly obvious, but you can see a cluster among the baby samples. There is overlap, but it appears that the healthy people are generally in a separate space from the people who self-report some type of dysbiosis.
+
+What if we look just at the "healthy" people? In Figure \@ref(fig:plotCaseStudyHealthy) I unfortunately don't see any special clusters.
+
+```{r plotCaseStudyHealthy, results = "hide", fig.cap="An overall look at clustering among just healthy people." }
+sink("junk2.txt")
+people.family.healthy.gut <- subset_samples(people.family, Condition == "Healthy" & Site=="gut")
+#sample_data(people.family.healthy.gut)$Username <- "m"
+ord <- ordinate(people.family.healthy.gut,method = "NMDS", distance = "bray")
+df <- plot_ordination(people.family.healthy.gut,ord, color = "Condition", label = NULL, justDF = TRUE) 
+
+#df[25,"Condition"] <- 
+  
+levels(df$Condition) <- c(levels(df$Condition),"Me")
+
+
+ggplot(data = df %>% mutate(Condition=replace(Condition,Username=="jk","Me")) , aes(x=NMDS1,y=NMDS2, color = Condition, size = as.numeric(Condition))) + geom_point() +
+  guides(size = FALSE)
+
+
+file.remove("junk2.txt")
+
+```
+
+
+
+
+
+
+```{r}
+# RC are two typical healthy people. Both are vegetarians and both sampled themselves recently on the same date.
+# rc <- subset_samples(people.gut.norm, Username == "rc" )
+# mh <- subset_samples(people.gut.norm, Username == "mh" )
+# mh.phylum <- subset_samples(people.gut.phylum.norm, Username == "mh")
+# 
+# mhg_unique(rc,mh)[1]/10000 # taxa in rc but not mh
+# mhg_unique(mh,rc)[1]/10000  # taxa in mh but not in rc
+#mhg_abundance(rc)/10000
+#mhg_abundance(subset_samples(people.phylum, Username == "rc" ))/10000
+```
+
+
+```{r}
+# mhg_density_for_taxa(subset_samples(people.gut.norm, Condition == "Healthy"),"Fusobacterium") + 
+#   annotate(
+#   geom = "segment",
+#   color = "blue",
+#   x = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "mh"))["Fusobacterium"] / 10000),
+#   xend = as.numeric(otu_table(
+#   subset_samples(people.norm, Username == "mh"))["Fusobacterium"] / 10000),
+#   y = 0,
+#   yend = 0.5
+#   )
+
+```
+

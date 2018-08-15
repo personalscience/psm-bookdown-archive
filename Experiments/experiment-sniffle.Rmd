@@ -1,0 +1,82 @@
+## Sniffles {#experimentSniffle}
+
+I don't often get colds, at least not _serious_ ones that keep me in bed. But this past Spring, there had been something going around. Most of my family was spared, but then my teenager had to stay home from school. A few days later I felt a prickly sensation in the back of my throat. Nothing serious, but just enough to make me wonder if I might be catching one too. I started to drink more liquids, tried to slow down at work, took extra care to get to bed on time, and did whatever else I could to stave it off.
+
+To no avail. Here's how my nose microbiome faired a week before, the week of, and the week after a nasty rhinovirus hit me with the sniffles and a cough (Figure \@ref(fig:setupSniffle)).
+
+```{r setupSniffle, fig.cap="My genus level nose microbiome as tested the week before, during, and after a case of the sniffles. Lighter colors mean higher abundances."}
+
+sniffle.ssr <- c(111009, 111164, 111165, 112641, 269242)
+sniffle.nose.genus <- subset_samples(sprague.genus.norm, Site=="nose" & SSR %in% sniffle.ssr)
+sniffle.nose.genus <- prune_taxa(taxa_sums(sniffle.nose.genus)>42, sniffle.nose.genus)
+
+sniffle.nose.species.long <- subset_samples(sprague.species.norm, Site=="nose")
+sniffle.nose.species.long <- prune_taxa(taxa_sums(sniffle.nose.species.long)>42, sniffle.nose.species.long)
+
+sample_data(sniffle.nose.genus)$Label <- c("Before","During","After")
+
+#sample_data(sniffle.nose.genus)
+mhg_plot_top_heat(sniffle.nose.genus) + ggtitle("My Nose Microbiome Before and After a Cold") + xlab("Sniffle")
+```
+
+When I want to study an unfamiliar microbiome, generating a heat map like this is often the first step toward finding something unusual. In this case we see a notable increase in levels of _Ochrobactrum_. Is that a coincidence?
+
+To find out, I first generated a few more heatmaps, covering a longer period of time. Although I think of myself as relatively immune from colds -- at least bad ones -- when I looked at my notes I remembered that there had been a similar, mild bout of the sniffles back in December. I looked more broadly at each of the taxa that seemed to rise and fall throughout that period and one by one I eliminated various culprits that might be associated with my colds. Except this one.
+
+```{r experimentSniffleLongview, fig.cap = "Red line are dates when I had the sniffles."}
+sniffle.nose.genus.long <- subset_samples(sprague.genus.norm, Site=="nose" & Date > "2016-09-01" & Date < "2017-07-15" & SSR!=111037 & Reads>10000)
+sniffle.nose.genus.long <- prune_taxa(taxa_sums(sniffle.nose.genus.long)>42, sniffle.nose.genus.long)
+
+# sample_data(sniffle.nose.genus.long)[,c("Date","Label","SSR","Reads")]
+
+df <- tibble(Ochrobactrum=as.vector(otu_table(sniffle.nose.genus.long)["Ochrobactrum",]),
+             #Delftia=as.vector(otu_table(sniffle.nose.genus.long)["Delftia",]),
+             date=sample_data(sniffle.nose.genus.long)$Date)  %>% 
+  gather(taxa,abundance, -date)
+
+# ggplot(data=df[order(df$date),], aes(x=date,y=abundance,color=taxa)) + geom_line()  + 
+#     annotate("segment",x = as.Date("2017-05-12"), xend = as.Date("2017-05-15"), y = -0.5, yend = -0.51, color = "red", size = 2) +
+#   annotate("segment",x = as.Date("2016-12-10"), xend = as.Date("2016-12-12"), y = -0.5, yend = -0.51, color = "red", size = 2) 
+
+plot_bar(subset_taxa(subset_samples(sniffle.nose.species.long, Date > "2016-12-01" & Date < "2017-06-01"),
+                     grepl("Ochrobactrum",Species) ), x="Date", fill = "Species") +
+    scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  ggtitle("Incidence of Ochrobactrum In My Nose") + 
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")+ 
+    annotate("segment",x = as.Date("2017-05-12"), xend = as.Date("2017-05-15"), y = -0.5, yend = -0.51, color = "red", size = 2) +
+  annotate("segment",x = as.Date("2016-12-10"), xend = as.Date("2016-12-12"), y = -0.5, yend = -0.51, color = "red", size = 2) +
+  theme(legend.position = "right")
+
+# mhg_taxa_plot(sniffle.nose.genus.long,"Ochrobactrum") + 
+#     annotate("segment",x = as.Date("2017-05-12"), xend = as.Date("2017-05-15"), y = -0.5, yend = -0.51, color = "red", size = 2) +
+#   annotate("segment",x = as.Date("2016-12-10"), xend = as.Date("2016-12-12"), y = -0.5, yend = -0.51, color = "red", size = 2) + 
+#   theme(legend.position = "right")
+```
+
+The red dots are days when I had a noticable bout of sniffles. It is highly intriguing that, after years of nose microbiome testing, the only flareups of _Ochrobactrum_ happen in the week or two after catching a cold. I've looked at my other samples, going back to 2014 and these are the only peaks of this taxa.
+
+What about the other rise that happened during April? It wasn't associated with a full-blown cold, at least not one that I noticed, but I _was_ traveling that week, with several hours spent on airplanes and in unfamiliar hotels. Oddly I didn't see a similar increase during other trips. Is it possible that I actually _did_ catch a cold of some kind, but I just didn't notice it?
+
+Now, I'm just a single data point, so data of this kind hardly proves anything. But like all personal science, it gives us some new, possible questions to ask, some lines of inquiry that might be useful for professional scientists to consider. 
+
+But before getting too excited, what do we know about this bacterium? It's more commonly found in plants than in people, especially the area around plant roots called the rhizosphere.^[http://onlinelibrary.wiley.com/doi/10.1111/j.1462-2920.2005.00891.x/full] It's not unknown in humans, though. A few Google searches reveal that this genus includes a rare pathogen, _O. anthropi_, that is sometimes seen in immunocompromised people.^[ http://jcm.asm.org/content/51/4/1330.full ] In my nose, uBiome's bioinfomatics pipeline labeled most of my new species as _O. tritici_, which was identified last year as a pathogen ^[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4773274/] infecting a 70-year-old man infected with jaundice. 
+
+I think a better question is what a bacterium would have to do with the common cold, which as we know is caused by a virus -- a completely different kind of microbe and one that is not detectable by the 16S rRNA technology used in my microbiome testing. I can only speculate, but I wonder if maybe the cold was actually caused by a _phage_, a virus that infects not human cells but bacteria. Is it possible that a phage, by killing off or otherwise modifying some of the "normal" bacteria in my nose, might allow a different bacterial species to have a brief runup in abundance?
+
+Finally, the really cool discoveries relate to treatment. What if we could find a microbe,  a 16S-recognizable one that appears _before_ coming down with the sniffles? Just predicting when I'll get a cold is useful, even if I can't stop it. Of course, even better would be a discovery of some microbe that could out-compete or otherwise destroy the one associated with the cold virus. So far I haven't found a candidate bacterium that is clearly associated with the _onset_ of a cold, but from now on I'll be much more careful when I see _Ochrobactrum_.
+
+
+```{r}
+# Here's how I wrote the data to disk
+# d <- as.data.frame(otu_table(sniffle.nose.genus.long),col.names=as.character(sample_data(sniffle.nose.genus.long)$Date ))
+# 
+# names(d) <- as.character(sample_data(sniffle.nose.genus.long)$Date )
+# 
+# write.csv(d,"spragueNose.csv")
+
+```
+
+
+
+
+

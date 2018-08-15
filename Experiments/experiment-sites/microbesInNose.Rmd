@@ -1,0 +1,155 @@
+## The Nose Microbiome* {#startNose}
+
+Springtime for many people brings hay fever, an allergic reaction [known to be associated with the microbiome](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5378446/). I fortunately don't suffer from the condition, but I wondered if maybe I could find something in my nose microbiome that would show a seasonal shift, perhaps something aligned with allergy season. Even if I don't have symptoms, maybe by finding some of the key microbes involved my data might be useful to others who would like to explore more of the link between their allergies and microbes.
+
+Like every place on the body, your nose has its own unique microbial ecology, as different from other sites as a tropical rainforest is from the artic tundra. Unlike the gut or the mouth, your nose is in constant contact with the external environment, exposed to new microbes that float in day and night with every breath you take. 
+
+`r if (knitr:::is_html_output()) '<a data-flickr-embed="true"  href="https://www.flickr.com/photos/zinpics/3541116911/in/photolist-6oV9FR-jLZoh-dxz6pL-581qyJ-7QNKfd-6CrFeA-SLcUma-y7FCv-22pPuex-ewkrqH-o2VGFS-aJG1He-mNfLh-5NNKGG-8JJBpf-E1JDC-JcVK-ATyGV-cRSh9-e3KruP-eoAEx-6CLsEi-9yUEsK-e3R6x5-whSt3-9iRE5J-3no8M-quGq69-kBsBc4-xmXwB-9bVExw-7oU9Y4-dXqN6r-67GNL5-2VaTFg-5uknPj-9cw8mi-6eE5-9AJV1M-22LpB-539k91-ccvhUj-ecPZo7-8tLBXG-83ddWH-3S2aW-k9sUu-Vu6rt7-98DGs9-4omUUp" title="noses"><img src="https://farm3.staticflickr.com/2228/3541116911_076ea7653a.jpg" width="500" height="324" alt="noses"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>'`
+
+It seems reasonable to expect that we'd see different microbes floating in our environment as the seasons shift. After all, changes in temperature, humidity, and daylight affect the abundance and variety of plants, so of course these shifts will affect microbes.  But is there a pattern to the changes?
+
+To find out, I sampled my nose microbiome more than 50 times over a period of three years, carefully tracking the date and microbial species in each sample. In all, I found more than 200 different (genus-level) bacteria from about 350 unique species.
+
+```{r noseFunctions}
+
+# https://stackoverflow.com/questions/28030936/r-need-to-extract-month-and-assign-season
+new_season_label <- function(ps) {
+  
+  dates <- sample_data(ps)$Date
+# months <- as.numeric(format(as.Date(dates, '%m/%d/%Y'), '%m'))
+ months <- strptime(sample_data(sprague.ps)$Date,format='%Y-%m-%d')$mon +1
+ indx <- setNames( rep(c('Winter', 'Spring', 'Summer',
+                   'Fall'),each=3), c(12,1:11))
+
+ return(unname(indx[as.character(months)]))
+}
+
+nose.out <- c(92758,161393,111021,111037,301642)  # eliminate some obvious outliers
+
+
+sprague.ps <- sprague.family.norm
+
+sample_data(sprague.ps)$Season <- factor(new_season_label(sprague.ps), levels = c("Winter","Spring","Summer","Fall"))
+sample_data(sprague.ps)[sample_data(sprague.ps)$Geo == "Mercer Island",]$Geo <- "Seattle"
+sprague.nose = subset_samples(sprague.ps,Site=="nose" & !(SSR %in% nose.out)) # & SSR != 52075)# & Season != "Spring")
+sprague.skin = subset_samples(sprague.ps,Site=="skin")
+sprague.ext = sprague.nose # merge_phyloseq(sprague.nose,sprague.skin)
+
+
+```
+
+
+
+```{r studyNose}
+# 
+# mhg_plot_top_heat(sprague.nose)
+# data.frame(date=sample_data(sprague.nose)$Date,label=sample_data(sprague.nose)$Label)
+# 
+# mhg_abundance(subset_samples(sprague.nose, Date<"2016-03-26"))
+
+```
+
+
+
+
+```{r plotSeasonality, fig.cap = "Nose microbiome across seasons. (NMDS ordination, Bray-Curtis similarity at Family rank"}
+# sink("junk.txt") # to suppress output because ordinate function uses cat
+# sprague.ord.ext = ordinate(sprague.ext, "NMDS", "bray")
+# 
+# pBC.ext <- plot_ordination(sprague.ext, sprague.ord.ext, color="Season",title="Nose Microbiome Across Seasons")
+# sink()
+# 
+# 
+# pBC.ext + geom_point(size = 5, alpha = 0.7) + geom_text(aes(label= paste0(Geo,"\n",substr(Date,3,7))),
+ #                                                       size=4,check_overlap = TRUE)
+
+
+```
+
+Using a versatile clustering algorithm called [non-metric multidimension scaling (NMDS)](https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/), I calculated the statistical correlations among the hundreds of microbes in a way that let me build a two-dimension chart where similar samples are clustered together, and less-similar samples are further apart. Where there are significant differences among samples, an NMDS chart will show obvious clustering, with similar samples bunched together and separate from other clusters. 
+
+I couldn't see any patterns when I generated an NMDS clustering diagram on the whole data set, which includes samples taken in multiple geographies.  When I looked only at those samples taken in a single geography, my home , the results were a little more, well, consistent with a theory that seasons matter. (Figure \@ref(fig:nosePlotSeasonalityGeo))
+
+```{r nosePlotSeasonalityGeo, fig.cap = "Nose microbiome across seasons in a single geography."}
+
+nose.out <- c(92758,161393,213979,111021,111037,301642, 372987)  # eliminate some obvious outliers
+
+nose.family.seattle <- subset_samples(sprague.nose, !(SSR %in% nose.out) & Geo == "Seattle")
+nose.family <-  subset_samples(sprague.nose, !(SSR %in% nose.out))
+  #subset_samples(sprague.family.norm, Site == "nose" & Geo == "Mercer Island")
+sink("junk.txt") # to suppress output because ordinate function uses cat
+sprague.ord.nose.seattle = ordinate(nose.family.seattle, method= "RDA")#, distance = "bray")
+sink()
+
+
+#mhg_plot_top_heat(nose.family.seattle)
+#sample_data(nose.family.seattle)[,c("Date","SSR","Label")]
+pBC.ext <- plot_ordination(sprague.ext, sprague.ord.nose.seattle, color="Season",title="Nose Microbiome Across Seasons")
+
+pBC.ext + geom_point(size = 5, alpha = 0.7) # + geom_text(aes(label= paste0(substr(Date,3,7))),size=4,check_overlap = TRUE)
+
+```
+
+```{r nosePlotSeasonalityDiversityGeo, fig.cap = "Nose microbiome diversity in a single geography by season."}
+
+data = data.frame(Diversity = estimate_richness( nose.family, measures=c("Shannon")),
+                  Season = sample_data( nose.family)$Season,
+                  Geo = sample_data(nose.family)$Geo) 
+ggplot(data,aes(x=Season,y=Shannon)) + geom_boxplot() +
+  theme(text = element_text(size = 15), axis.text = element_text(size = 10)) + 
+  labs(x="Season",y="Alpha Diversity (Shannon Metric)", title = "My Nose Microbiome Diversity by Season")
+  
+  
+#mhg_plot_top_heat(nose.family)
+#plot_richness(subset_samples(nose.family.seattle, Date>"2017-01-01"), measures = "InvSimpson", x = "Season") + geom_boxplot() + ggtitle("My Nose Microbiome Diversity Varies By Season")
+
+
+
+#mhg_plot_top(nose.family.seattle, top = 8)
+```
+
+
+Okay, this chart is kind of a mess.  If there were major shifts, we'd see clear clusters.  Although we don't quite see that, it _is_ interesting that the seasons _do_ kinda-sorta hang together with much overlap. For example, the (red) winter dots are all on the right side of the chart, with the (blue) summer dots mostly on the left. The (purple) fall dots are, if anything, closer to the winter samples, and (green) spring is closer to summer. Both spring and fall were more in the middle, which you might kinda-sorta expect given that they are generally less extreme than the other two seasons.
+
+Importantly, each of the samples was taken under the same conditions: I swabbed the nostrils for about 30 seconds right after waking up each morning. Since my bedroom is kept at a climate-controlled temperature year-round, these samples wouldn't show direct results of major seasonal changes, though microbes in my bedroom are presumably affected somewhat by what's happening outdoors. I also have a number of samples taken in different geographies while traveling, but I removed them before making this chart.
+
+What about the richness and diversity of microbes throughout the year?  The box plot in (Figure \@ref(fig:nosePlotSeasonalityDiversityGeo)) shows that summer has the widest diversity _range_ (those dots outside the main box are outliers).  In this plot, the area in the box represents 50% of the samples, and the line through the middle is the median diversity.
+
+
+I spend more time indoors in the winter, so perhaps that explains why median diversity is lowest then. Again, it's interesting that both spring and fall have similar diversities to each other, perhaps because both seasons have similar amounts of indoor-outdoor time and maybe the variety of microbes reflect that.
+
+```{r}
+
+#kable(data.frame(Date=sample_data(sprague.ext)$Date, Geo=sample_data(sprague.ext)$Geo, Notes = sample_data(sprague.ext)$Notes))
+```
+
+Is it just me?  Can I learn anything by comparing my nose microbes to other people?  I ran several analyses against other people but so far haven't found much.
+
+```{r experimentSitesNoseOtherPeople}
+
+# people.nose <- subset_samples(people.family, Site == "nose")
+# 
+# mhg_abundance(people.nose, top = 5)
+# sample_data(people.nose)[,c("Username","Date","Reads")]
+# make_ord_for(merge_phyloseq(subset_samples(people.nose,Username %in% c("cb","RSpragueFather","RspragueSon")),
+#                             subset_samples(sprague.nose, Site == "nose")))
+# 
+# rscb <- merge_phyloseq(subset_samples(people.nose, Username == "cb"),
+#                        sprague.ext)
+# 
+# 
+# sample_data(rscb)[,"Geo"] <- "-"
+# sample_data(rscb)[1,"Geo"] <- "SF"
+# sample_data(rscb)[1,"Season"] <- "Winter"
+# sample_data(rscb)[8,"Geo"] <- "RS"
+# 
+# sink("junk.txt") # to suppress output because ordinate function uses cat
+# rscb.ord.nose = ordinate(rscb, "MDS", "bray")
+# sink()
+# pBC.ext <- plot_ordination(rscb, rscb.ord.nose, color="Season",title="Nose Microbiome Across Seasons")
+# 
+# pBC.ext + geom_point(size = 5, alpha = 0.7) + geom_text(aes(label= paste0(Geo,"\n",substr(Date,3,7))),
+#                                                         size=4,check_overlap = TRUE)
+
+```
+

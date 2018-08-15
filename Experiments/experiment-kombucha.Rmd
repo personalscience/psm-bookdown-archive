@@ -1,0 +1,184 @@
+## Kombucha {#experimentKombucha}
+
+```{r kombuchaSetup}
+
+food <- rikfood
+
+kombucha.day <- # seq(as.Date("2016-07-27"),to=as.Date("2016-08-02"), by=1)
+  unique(food[str_detect(food$Name, "kombucha"),"Date"])
+
+kombucha.day <- kombucha.day[kombucha.day<"2016-09-01"]
+
+kombucha.genus <- subset_samples(gut.norm.nodupes, Site == "gut"  & Date >"2016-07-26"  & Date < "2016-08-04")
+kombucha.family <- subset_samples(family.gut.nodupes, Site == "gut"  & Date %in% seq(from=range(kombucha.day)[1]-2, to=range(kombucha.day)[2]+3, by=1))
+
+```
+
+For healthy bacteria-rich drinks that affect the microbiome, many people immediately think of kombucha. Served chilled during the summer, it has a well-deserved reputation as a natural refreshing alternative to soft drinks. Despite its tangy, mildly sweet taste, it has a surprisingly low amount of sugar: less than two grams in a serving^[Though [one large test](https://www.bevnet.com/news/2016/kombucha-study-raises-sugar-content-questions) by the BevNet industry trade site says the labels may under-report the real amount], compared to more than 20 grams in the same amount of orange juice or 39 grams in a can of Coke.
+
+
+
+The sugar is missing because it's been eaten by microbes, a complex blend of bacteria and yeast that convert regular tea (usually black, but also oolong or green tea) into a complex, flavorful beverage. The fermentation process is ideal for adding other ingredients for taste, so there is no end to the interesting flavors possible, giving rise to a highly competitive commercial market:  U.S. supermarkets sold \$180 Million of the drinks in 2015.
+
+Kombucha fermentation begins with a SCOBY, a "Symbiotic Colony of Bacteria and Yeast", a pancake-sized disk-shaped gelitintous object also known as a "mother" or "mushroom", which it sort of resembles.  Despite the nickname, the only funji in the SCOBY are yeasts, combined with a complex blend of bacteria and other single-celled microbes from many parts of the tree of life.  The different microbes need one another to produce the distinctive sweet and fizzy taste. Yeast cells convert sucrose into fructose and glucose and produce ethanol; the bacteria convert glucose into gluconic acid and fructose into acetic acid; caffeine from the tea stimulates the entire reaction, especially the production of cellulose by special strains of bacteria.^[The best scientific review I know is in @dufresne_tea_2000]
+
+There have been [many anecdotal claims of the effect of kombucha on health](http://www.kombu.de/benefits.htm), purporting benefits ranging from better eyesight and thicker hair to cures for various diseases, though not everyone thinks it's healthy. Even some alternative health experts, like Dr. Andrew Weil, [recommend against it](http://www.nytimes.com/2010/03/25/fashion/25Tea.html). Many of the claims for and against kombucha have been studied experimentally, in mice as well as humans, often with compelling results, but I'm unable to find any good data showing how it affects the microbiome. 
+
+So I tested it myself.
+
+
+For seven days, from July 27 to August 2, I drank 48 ounces per day of commercially-purchased [GT's Gingerade Kombucha](http://gtslivingfoods.com/). That's three full bottles, or six servings a day for a week. 
+
+The key bacteria in the SCOBY are from phylum _Proteobacteria_ and order _Rhodospirillales_ of acetic- and gluconic-acid producting microbes that include genus _Gluconacetobacter_, closely related to _Acetobacter_, the key to the fermentation of vinegar. Thanks to the action of these microbes, kombucha is quite acidic, between 2.5 and 3.5 pH, almost as acidic as the 1.5 or 2.5 of a healthy stomach. These bacteria apparently don’t survive ingestion. They are rarely, if ever, found in human guts^[For a list of microbes that _are_ found in the gut, see: http://www.raeslab.org/companion/vlaams-darmflora-project.html], so whatever effect, if any, they have on the microbiome is indirect.
+
+The label claims each bottle contains one billion organisms of two microbial species. The first, _Saccharomyces boulardii_, is a popular "healthy" microbe, well-studied and proven as a safe digestion aid. A close cousin of brewer's yeast, its cell wall tends to stick to pathogens, which may account for its proven ability to prevent and fight diarrhea.^[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4542552/]. Unfortunately, it is not a bacterium, and so won't be detectable in my 16S-based microbiome tests. 
+
+The other added species _Bacillus coagulans_ is often found in human guts, and should be easy to find. The specific one used in GT's drinks is the patented [Bacillus coagulans GBI-30, 6086](http://www.ganedenbc30.com/ganedenbc30), a particularly hardy spore-forming microbe that can survive boiling and baking. Because it's well-studied and safe, it's a popular "probiotic" food additive and appears to have some beneficial effects on digestion.^[https://www.asm.org/index.php/general-science-blog/item/6761-bottoms-up-discover-the-microbes-in-probiotic-drinks ]
+
+I tested my gut microbiome each day, as well as my mouth and skin microbiome at intervals during the experiment and sure enough, the _Bacillus_ shows up loud and clear. (Figure \@ref(fig:experimentKombuchaPlotBacillus) )
+
+```{r experimentKombuchaPlotBacillus, fig.cap = "The blue line represents days I drank 6 servings of kombucha."}
+
+kombucha.top <- subset_taxa(gut.norm.nodupes, Genus == "Bacillus")
+
+plot_bar(subset_samples(kombucha.top, Date > "2016-07-01" & Date < "2016-09-01" ), fill = "Genus", x = "Date") +
+  ggtitle("Kombucha Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")  +
+  annotate("segment",x = kombucha.day,
+           #xmin = kombucha.day, xmax = kombucha.day + 1,
+           xend = kombucha.day+1, 
+           y = 0, yend = 0.1, size = 3,
+          # ymin = 5.01, ymax = 5.0, 
+           color = "blue", size = 0.1) +
+  scale_x_date(date_labels = "%b-%d",
+                date_breaks = "1 week", date_minor_breaks = "1 weeks")
+
+
+# raw abundances
+
+#mhg_taxa(subset_samples(sprague.genus, Date %in% kombucha.day & Site == "gut" ),"Bacillus")
+
+```
+
+It took a few days of heavy kombucha drinking, but eventually those microbes became detectable. Given the known hardiness of _Bacillus_, this isn't necessarily all that surprising. Still, it's a nice confirmation that the test works; after all, in my hundreds of daily tests, I see this microbe only in the few days after drinking this brand of kombucha. But maybe the _Bacillus_ just comes in and out, safely protected as a spore, without really influencing my microbiome. Can we see evidence the kombucha affected something else about my microbiome?
+
+**Diversity doesn't seem to change** (Figure \@ref(fig:experimentKombuchaDiversity)). I looked at the overall mixture of microbes and abundances using the Shannon diversity metric, commonly used by ecologists to tell measure the richness and variety in an environment. Don't let the scale of this graph fool you:  I set it narrowly to see precisely how diversity changes each day. A Shannon diversity change of a tenth of a point or so, as in this graph, is pretty trivial. 
+
+```{r experimentKombuchaDiversity, fig.cap="How my overall family-level diversity changes while drinking kombucha. I drank 6 full servings on each of the days marked with the blue line."}
+
+plot_richness(kombucha.family, x= "Date", measures = c("Shannon")) + ggtitle("Gut Diversity While Drinking Kombucha") + geom_line() + 
+  scale_x_date(date_labels = "%b-%d", date_breaks = "1 day", date_minor_breaks = "1 day") +
+  annotate("segment",x = kombucha.day,
+           #xmin = kombucha.day, xmax = kombucha.day + 1,
+           xend = kombucha.day+1, 
+           y = 2.0, yend = 2.0, size = 3,
+          # ymin = 5.01, ymax = 5.0, 
+           color = "blue", size = 0.1)
+
+# a precomputed diagram from a Python version of diversity testing:
+# ![Diversity through time](https://github.com/richardsprague/kombucha/blob/master/kombuchaDiversity.png?raw=true)
+```
+
+Diversity had been climbing before the experiment began, so I don't think we can lay that initial increase on kombucha. Incidentally, had I not been testing daily, I might be tempted to say diversity _decreased_. This is something that makes me skeptical of the results of many scientific studies: the microbiome flucutates so much day-to-day that what you see is very dependent on _when_ you test.  (By the way, note that the July 30 sample is missing, due to a failure in the lab processing.)
+ 
+Let's look at that order _Rhodospirillales_ that contains the genus _Acetobacter_ found in the SCOBY. (Figure \@ref(fig:experimentKombuchaRhodo))
+
+```{r experimentKombuchaRhodo, fig.cap="Abundance of microbes that include the genus Acetobacter found in the SCOBY"}
+
+kombucha.top <- subset_taxa(order.gut.nodupes, Order == "Rhodospirillales")
+
+plot_bar(subset_samples(kombucha.top, Date > "2016-07-01" & Date < "2016-09-01" ), fill = "Order", x = "Date") +
+  ggtitle("Kombucha Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)")  +
+  annotate("segment",x = kombucha.day,
+           #xmin = kombucha.day, xmax = kombucha.day + 1,
+           xend = kombucha.day+1, 
+           y = 0, yend = 0.1, size = 3,
+          # ymin = 5.01, ymax = 5.0, 
+           color = "blue", size = 0.1) +
+  scale_x_date(date_labels = "%b-%d",
+                date_breaks = "1 week", date_minor_breaks = "1 weeks")
+```
+
+If we squint enough, we might credit that large spike with kombucha drinking. It's possible, but then how would you explain the crash the following day, or the other apparent spikes in other parts of the chart? I conclude it's probably a coincidence. More than likely, microbes like this from the SCOBY itself are not in the beverage anyway.
+
+
+What about other microbes? Here is a heatmap showing the changes of the top 20 genus during my experiment:
+
+```{r kombuchaExperimentPlots, echo = FALSE, message = FALSE, warning = FALSE}
+
+
+kombucha.species <- subset_samples(sprague.species.norm, Site == "gut"  & Date > "2016-07-26"  & Date < "2016-08-04")
+# 
+# 
+# sample_data(kombucha)$Experiment <- 
+#   ifelse(grepl("Kombucha",sample_data(kombucha)$Label),"Kombucha","None")
+# sample_data(kombucha.species)$Experiment <- sample_data(kombucha)$Experiment
+# sample_data(kombucha.species)$Experiment
+
+plot_heatmap(prune_taxa(names(sort(taxa_sums(kombucha.genus),TRUE)[1:20]),kombucha.genus), sample.label = "Label", sample.order = "Date") + theme(legend.position  = "none") + ggtitle("Top microbes (genus) while drinking kombucha")
+```
+
+I don't see any patterns. Usually, if the experiment causes a change, I'll see an obvious streak from left to right somewhere in the heatmap, but I don't see that.
+
+Finally, let's look at the levels of a few "probiotic" microbes, including the one listed on the label (Figure \@ref(fig:kombuchaAllProbiotics))
+
+```{r kombuchaAllProbiotics, fig.cap = "Abundance of key 'probiotic' microbes while consuming kombucha."}
+targetGenus <- c("Lactobacillus","Akkermansia", "Bifidobacterium" )
+plot_bar(subset_taxa(kombucha.genus, Genus %in% targetGenus), 
+         #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
+         x = "Date", fill = "Genus")  +
+  scale_x_date(date_labels = "%b-%d", date_breaks = "1 day", date_minor_breaks = "1 day") +
+  ggtitle("Abundance while drinking kombucha") + theme(legend.position = "none") +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  facet_grid(Genus~., scale="free_y", drop=TRUE)
+
+# ![Bifidobacterium Levels](https://github.com/richardsprague/kombucha/blob/master/kombuchaBarChart.jpg?raw=true)
+```
+
+While _Akkermansia_ seems to rise near the end of the sequence, it's hard to see any real patterns here. 
+
+For comparison, let's look at a longer time horizon (Figure \@ref(fig:kombuchaPlotLong))
+
+```{r kombuchaPlotLong, fig.cap = "Daily abundance of key microbes while drinking kombucha (blue lines). Blank regions are days when I have no data."}
+targetGenus <- c("Lactobacillus","Akkermansia", "Bifidobacterium", "Bacillus" )
+ps.tmp <- subset_samples(gut.norm.nodupes, Date > "2016-07-01" & Date < "2016-09-01" )
+kombucha.top <- subset_taxa(ps.tmp, Genus %in% targetGenus)
+
+plot_bar(kombucha.top, fill = "Genus", x = "Date") +
+  ggtitle("Abundance while drinking kombucha (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  #annotate("pointrange",x = kombucha.day, y = 0, ymin = -0.003, ymax = 0, color = "red", size = 0.1) + 
+  scale_x_date(date_labels = "%d-%b",
+                date_breaks = "1 week", date_minor_breaks = "1 day")  +
+  facet_grid(Genus~., scale="free_y", drop=TRUE)+
+  annotate("segment",x = kombucha.day,
+           #xmin = kombucha.day, xmax = kombucha.day + 1,
+           xend = kombucha.day+1, 
+           y = 0, yend = 0.1, size = 1,
+          # ymin = 5.01, ymax = 5.0, 
+           color = "blue", size = 0.1) +
+  theme(legend.position = "none")
+  
+```
+
+Although we can't positively credit kombucha for that spike in _Bacillus_ during my experiment, it's interesting that I had none of it in the weeks beforehand, and that it disappeared again in the weeks afterwards. I drink this brand of kombucha occasionally, and yes the same microbe shows up occasionally too, sometimes a few days afterwards. 
+
+In my years of testing, I rarely see _Bacillus_ in my gut microbiome, but the few times when it _does_ appear, there seems to be a relationship to drinking the same brand of kombucha a few days beforehand. There are also times when I drink kombucha and _don't_ detect this microbe, so the association isn't perfect, but then again this was the only time I had so much of this brand all at once.
+
+```{r}
+
+# plot_bar(subset_taxa(subset_samples(gut.all_ranks.nodupes, Date > "2017-03-05" & Date < "2017-03-15"),  Genus == "Bacillus"), fill = "Species", x = "Date")
+```
+
+My conclusion: when consumed in large amounts, GT's Gingerade Kombucha leaves new _Bacillus_ microbes in my gut.  Although they don't appear to stick around permanently, the association is strong enough that I bet it works in you too. Other microbes, including so-called "probiotic" ones, don't change much at all.
+
+But don't take my word for it. The full dataset and analysis tools are on Github: <https://github.com/richardsprague/kombucha>
+
+There is much more analysis that can be done with this data. Some of the ideas you might try are:
+
+* Study correlations among the taxa. Which ones are correlated, and which are not?
+* Which taxa appeared and/or disappeared during the experiment?
+* Is there a relationship between the microbes known to be present in kombucha and those in any of the gut results?
+* How do these results compare to *you* when you drink kombucha?
+
+Please study as much as you like, and let me know what you find!
+
+

@@ -1,0 +1,112 @@
+
+# My Experiments {#experiments}
+
+Microbe numbers shift daily in response to your environment, so a single sample won't give much more than a brief snapshot at a single point in time. Here are some of the experiments I've tried on myself, in over 600 tests since 2014. What happens in your case?
+
+
+[Experiment: Probiotic supplements](#experimentProbiotics) Do probiotic pills affect my microbiome?
+
+[Experiment: Drinking Homemade Kefir](#experimentKefir) Does kefir make a difference?
+
+[Experiment: Drinking kombucha](#experimentKombucha) How about kombucha?
+
+[Experiment: Collection methods](#experimentCollection) Does it matter how, exactly, you collect the sample?
+
+
+[Experiment: The Dentist](#experimentDentist) What changes before and after my dental checkup?
+
+[Experiment: Sleep](#experimentSleep) Can I sleep better by manipulating the microbiome?
+
+
+[Experiment: Gut Cleanse](#experimentCleanse) Let's go all the way: clear out all the microbes and watch how they grow back.
+
+
+<!-- ```{r child="Experiments/experiment-summary.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-kefir.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-travelMexico.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-travelChina.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-camping.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-activity.Rmd"} -->
+<!-- # Does my microbiome change depending on how much exercise I get? -->
+<!-- ``` -->
+
+
+
+```{r child="Experiments/experiment-probiotics.Rmd"}
+```
+
+
+<!-- ```{r child="Experiments/experiment-dentist.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-colon.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-kombucha.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-sleep.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-food.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-dietChange.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-methods.Rmd"} -->
+<!-- # How does collection method influence the result? -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-sites/microbesInSkin.Rmd"} -->
+<!-- # Microbes in the skin -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-sites/microbesInMouth.Rmd"} -->
+<!-- # Microbes in the mouth -->
+<!-- ``` -->
+
+
+<!-- ```{r child="Experiments/experiment-sites/microbesInNose.Rmd"} -->
+<!-- # Microbes in the nose -->
+<!-- ``` -->
+
+
+
+<!-- ```{r child="Experiments/experiment-other.Rmd"} -->
+<!-- ``` -->
+
+
+## Conclusions
+
+Are these results are meaningful enough to be worthy of further analysis? How representative were these samples of my microbiome at the time? I submit only a tiny swab to uBiome’s lab; are the bacteria distributed evenly enough that the size or location of the sample doesn’t matter? Would I get similar results if I submitted two tests from slightly different sites on the same sample?
+
+The answers to all these questions are unclear, but while we need to take these concerns seriously, my experience over many samples is that the uBiome results are consistent enough that, yes, the conclusions are actionable as long as we keep the limitations in mind. Here’s why I think so:
+
+First, my results are consistent with other “healthy omnivore” submissions that uBiome has received from others with diets and health histories similar to mine. I would be concerned if, for example, my firmicutes/bacteroidetes ratio were reversed.
+
+Second, 16S technology has proven accuracy when identifying unique organisms, so I can generally trust information about the overall level of diversity regardless of specific proportions. Since diversity tends to correlate with health – and is manipulable based on what I eat – my own experience shows that the changes I see in these results go up and down consistently in the expected way. Even if specific points on my microbiome map are fuzzy, the overall landmarks appear to be solid.
+
