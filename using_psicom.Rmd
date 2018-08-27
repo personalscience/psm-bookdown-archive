@@ -55,26 +55,31 @@ Some bad examples of tags:
 
 These tags aren't very useful because people aren't likely to search for them.
 
-## Community
-
-Next, search through the data uploaded by others in the Personal Science community. Let's say we want to find all the other users who have tagged their data `lyme`. Type that in the search field and see there are a total of (in this case) 18 samples with that tag. Give this search a name so you can use it later on the next screen.
-
-```{r using_psicom_community_lyme, echo = FALSE, warning = FALSE, message = FALSE}
-knitr::include_graphics("using_psicom/img/using_psicom_community_lyme1.png")
-
-```
-
 
 ## Compare
 
 Switch to the Compare tab for the heart of the Personal Science app. Once you've uploaded some data and created a few queries, this is where you'll spend most of your time.
 
-Your first view shows your sample. Click on some of the checkboxes here to see a graph of the levels of the various microbes found in the sample(s) you've uploaded.
 
-To compare your sample with others, click on one of the checkboxes for the query you saved on the previous tab. For example, this is what we see when we click the `lymesamples` query (Figure \@ref(fig:usingPsicomCompareLyme1)):
+Your first view shows your sample. The left panel shows which microbes are found in your sample versus other samples in the database. Click on some of the checkboxes here to see a graph of the levels of the various microbes found in the sample(s) you've uploaded.
 
 
-```{r usingPsicomCompareLyme1, fig.cap = "Select the 'lymesamples' query to see how your sample(s) marked with '*' compare with others", echo = FALSE, warning = FALSE, message = FALSE}
+
+
+### Create a query
+
+Next, search through the data uploaded by others in the Personal Science community. Let's say we want to find all the other users who have tagged their data `lyme`. Type that in the search field and hit `+Save Query` and see there are a total of (in this case) 18 samples with that tag. Give this search a name so you can use it later when you compare to other users.
+
+```{r using_psicom_community_lyme, echo = FALSE, warning = FALSE, message = FALSE}
+knitr::include_graphics("using_psicom/img/using_psicom_compare_query_lyme1.png")
+
+```
+
+
+To compare your sample with others, click on one of the checkboxes for the query you saved on the previous tab. For example, this is what we see when we click the `lyme2` query (Figure \@ref(fig:usingPsicomCompareLyme1)):
+
+
+```{r usingPsicomCompareLyme1, fig.cap = "Select the 'lyme2' query to see how your sample(s) marked with '*' compare with others", echo = FALSE, warning = FALSE, message = FALSE}
 knitr::include_graphics("using_psicom/img/using_psicom_compare_lyme1.png")
 
 ```

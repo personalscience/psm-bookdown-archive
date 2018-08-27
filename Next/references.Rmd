@@ -1,0 +1,64 @@
+## Annotated References
+
+This is a new field, so much of the written literature remains in academia, but hopefully the following summary of items to read will be helpful.
+
+Here are my suggestions for additional reading.
+
+####Twitter
+
+The best overall account to follow is [\@MicrobiomDigest](https://twitter.com/microbiomdigest). Elizabeth Bik knows everybody and regularly tweets and retweets about most things you need to know to stay up-to-date.
+
+My list of people who regularly write interesting comments about the microbiome is here: 
+
+https://twitter.com/sprague/lists/personal-biology
+
+
+####Authors
+
+These popular science writers often write on microbiome-related topics, and you'll find just about anything valuable if their name is attached:
+
+* [Ed Yong](http://edyong.flavors.me/): subscribe to his weekly newsletter ("The Ed's Up") for regular updates on science, especially the microbial world.
+
+* [Carl Zimmer](http://carlzimmer.com/): long-time science writer who writes carefully-researched books and articles about biology.
+
+* [Moises Velasquez-Manoff](http://www.moisesvm.com/): Regular New York Times journalist and author of *An Epidemic of Absence*.
+
+#### Best Overview Articles
+
+There are too many good introductory articles to mention, but here are a few that I especially like:
+
+GERMS ARE US  BY MICHAEL SPECTER
+
+[Germs Are Us: Bacteria make us sick. Do they also keep us alive?](http://www.newyorker.com/reporting/2012/10/22/121022fa_fact_specter?currentPage=all): New Yorker article (2012) by Michael Specter
+
+
+
+####Web Sites
+
+[*http://www.microbiomedigest.com/*](http://www.microbiomedigest.com/) A daily digest of scientific microbiome papers, by Elisabeth Bik  Twitter: \@microbiomdigest
+
+[Gut Microbiota Research and Practice](http://www.gutmicrobiotaforhealth.com/en/observational-study-shows-omega-3-fatty-acids-correlate-gut-microbiota-composition-women/)
+
+[Microbiology of the Built Environment Network](https://www.microbe.net/): Although the site is funded by a grant to study "microbes present in buildings", much of the content is relevant to the human microbiome, and the scientists who regularly post there are top notch.
+
+[The Gut Institute](http://thegutinstitute.com/) The main site for Grace Liu, a PharmD and microbiome nerd. Especially worth listening to her [podcasts from 2015-16](https://thegutinstitute.com/gut-guardians-podcast).
+
+####Podcasts
+
+
+[Gut Guardians](http://thegutinstitute.com/gut-guardians-podcast) by Grace Liu and Matt Peppin had some good episodes but hasn't been updated since September 2016.
+
+####Courseware
+
+
+[Gut Check: Exploring Your Microbiome](https://www.coursera.org/learn/microbiome) from Coursera
+
+####Software
+
+
+[*https://github.com/biocore*](https://github.com/biocore)
+
+#### Books I Like
+
+[My Favorite Books About the Microbiome](https://medium.com/microbiome/my-favorite-books-about-the-microbiome-9e47d23a1947): Medium post (updated Jan 2018)
+

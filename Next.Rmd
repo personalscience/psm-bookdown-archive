@@ -1,0 +1,41 @@
+# Go Further* {#next}
+
+Once you've appreciated the importance of the microbiome and its affect on health and more, you may want to expand your knowledge beyond the scope of this book.
+
+Here are a few interesting other microbiome-related ideas to explore
+
+Ötzi’s microbiome has been sequenced! Yes, scientists have studied the Tyrolean Iceman, who died in an Italian alpine glacier 5300 years ago. Antibiotic-resistance and early pathogenic strains were apparently common way before the dawn of civilization.^[@lugli_ancient_2017]
+
+
+---
+
+```{r child="Next/microbesAndGenes.Rmd"}
+```
+
+---
+
+```{r child="Next/beyondBacteria.Rmd"}
+```
+
+---
+
+```{r child="Next/exploreFermentedFood.Rmd"}
+```
+---
+
+
+```{r child="Next/references.Rmd"}
+```
+
+
+```{}
+#{r child="Next/references-books.Rmd"}
+```
+
+
+```{r child="Next/references-academic.Rmd"}
+```
+
+
+
+

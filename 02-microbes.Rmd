@@ -1,27 +1,27 @@
 # Microbes to Watch {#Microbes}
 
 
-Your gut as seen by consumer-priced sequencing technology contains many more unique microbial species than you can possibly track, at least hundreds in most people and potentially over 1000. I've seen 1083 different ones in my own results. And that's just using the comparatively crude 16S technology: more comprehensive estimates based on other technology find as many as 36,000 different species^[See @frank_molecular-phylogenetic_2007 [Open access download](http://www.pnas.org/content/104/34/13780.full)]!  With that much variety, how do we find the ones that matter?
+Your gut as seen by consumer-priced sequencing technology contains many more unique microbial species than you can possibly track, at least hundreds in most people and potentially over 1000. I've seen 1083 different ones in my own results. And that's just using the comparatively crude 16S technology: more comprehensive estimates based on other technology find as many as 36,000 different species^[See @frank_molecular-phylogenetic_2007 or click for the [open access download](http://www.pnas.org/content/104/34/13780.full)]!  With that much variety, how do we find the ones that matter?
 
 Fortunately, only about 14 strains of 10 species account for 80% of a typical gut microbiome^[See the detailed estimates here: @kraal_prevalence_2014]
 
 In this chapter, we'll just consider the most common microbes and the overall consensus on what they do.  Later, in the chapter on [experiments](#experiments), we'll show more about how you can _manipulate_ them.
 
-What you're really wondering is how does your sample compare to others? Do you have an unusual abundance (or lack) of a particular taxa? Is there something that might indicate a greater or lesser similarity between your sample and certain other types of people? That is a very difficult question which we'll address over and over in this book, but for now let's just look at overall abundances of the highest taxonomical level, the phylum.
-
-The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroidetes_, which generally make up 80% or more of the total sample.  Most people also have smaller amounts of _Actinobacteria_,  _Proteobacteria_ and _Verrucomicrobia_. This overall composition is so common in healthy people that it's tempting to assume their dominance is "natural" or "normal", but like much else with the microbiome, the situation is different outside the western world, a clue that it's difficult to summarize a single individual's microbiome as "good" or "bad." It all depends.
-
-Let's start with what we know based on the results from real people.
+What you're really wondering is how does your sample compare to others? Do you have an unusual abundance (or lack) of a particular taxa? Is there something that might indicate a greater or lesser similarity between your sample and certain other types of people? That is a very difficult question which we'll address over and over in this book, but for now let's just look at overall abundances of some key microbes. 
 
 ## Phylum {#microbesPhylum}
 
-[In this section: 
+This section is under construction
 
-* Debunking the Firmicutes/Bacteroides ratio
+The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroidetes_, which generally make up 80% or more of the total sample.  Most people also have smaller amounts of _Actinobacteria_,  _Proteobacteria_ and _Verrucomicrobia_. This overall composition is so common in healthy people that it's tempting to assume their dominance is "natural" or "normal", but like much else with the microbiome, the situation is different outside the western world, a clue that it's difficult to summarize a single individual's microbiome as "good" or "bad." It all depends.
 
-]
+
 
 ## Genus {#microbesGenus}
+
+This section is under construction
+
+You're likely to hear most about the genus level because it's the most detail that cheap sequencing technologies can get right -- most of the time. 
 
 
 _Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.
@@ -43,6 +43,13 @@ Incidentally, the red dots indicate days when I was taking a powerful probiotic 
 
 ## Species
 
+This section is under construction
+
+When you hear the term "species", you probably think of a specific kind of creature, like a dog or a cat. More generally, among the kinds of plants and animals we encounter in the visible world, the term "species" refers broadly to organisms that can mate with one another to produce offspring of the same kind. Cats and dogs are different species because they can't mate with each other.
+
+But bacteria don't mate: they reproduce by dividing themselves in half. So how do we define a species? In fact, even terms like "parent" or "child" aren't quite appropriate if each new cell is an identical copy of the old one. For very broad categories, like phylum or even genus, the similarities among like cells is high enough that we feel comfortable grouping them together with a common name, but at what point do we reach the lowest, most _specific_ level. 
+
+The answer is tricky for another reason, called _horizontal gene transfer_, a process by which sometimes (in fact, quite often), a microbe will absorb genes from nearby microbes, altering its genome and its corresponding functions, sometimes significantly. Once that happens, the resulting new microbe can itself divide indefinitely, producing more and more copies of itself with the new gene. Although the new microbes still mostly resemble their original 
 
 ## Diversity
 

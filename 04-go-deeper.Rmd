@@ -1,8 +1,8 @@
-# Go Deeper {#GoDeeper}
+# Using uBiome {#GoDeeper}
 
-This chapter tells how to get more out of your uBiome results.
+Tips and tricks for getting as much as possible out of your uBiome results.
 
-## Using the uBiome web interface
+## Find more details in your uBiome results
 
 Once you've received your uBiome results, the first page to visit is the [uBiome Explorer](https://explorer.ubiome.com/my-microbiome/). Here you'll see the "My microbiome" tab ( Figure \@ref(fig:explorerMainPage)) which provides a very high-level summary of your microbiome. If this is your first time here, go ahead and breeze through this page, but just ignore most of the conclusions. As we'll learn, scientists have barely scratched the surface of what we will eventually understand about the microbiome, so think of this page as a teaser -- a hint of the potential. If your results show something you didn't expect, say on diversity or body weight, don't worry: it almost certainly just means that the Insights pane is wrong about you. Later we'll see how to pull out far more interesting and useful results.
 

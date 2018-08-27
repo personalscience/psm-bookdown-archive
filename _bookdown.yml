@@ -18,6 +18,8 @@ rmd_files: ["index.Rmd",
 "Experiments.Rmd",
 "CaseStudies.Rmd",
 "04-go-deeper.Rmd",
+"Next.Rmd",
+"ComingSoon.Rmd",
 "Appendix.Rmd",
 "06-references.Rmd"
 ]
