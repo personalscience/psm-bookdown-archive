@@ -75,7 +75,7 @@ If the results of a treatment are not recorded, we still have reference values. 
 
 What if there were a common way for everyone who tries X to record their results quantitatively?
 
-That’s the idea behind symptom tracking, and it’s a nice start. Some companies try to add fancy additional features on top, like using machine learning to try to guess better than you can alone about the various correlations found within your data. Getwell.ai or Doc.Ai go this direction — gather enough data, either from yourself or from others, so that we can predict the causes for various states. Again, that’s interesting and it’s a nice start, but it’s limited.
+That’s the idea behind symptom tracking, and it’s a nice start. Some companies try to add fancy additional features on top, like using machine learning to try to guess better than you can alone about the various correlations found within your data. Many companies go this direction — gather enough data, either from yourself or from others, so that we can predict the causes for various states. Again, that’s interesting and it’s a nice start, but it’s limited.
 
 What you really want — and the key, original idea behind Personal Science — is to let you take that quantitative data and *compare* it to others: others like you, people who you consider to be just like you except for such-and-such symptom.
 
