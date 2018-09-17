@@ -21,8 +21,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 [Experiment: Gut Cleanse](#experimentCleanse) Let's go all the way: clear out all the microbes and watch how they grow back.
 
 
-<!-- ```{r child="Experiments/experiment-summary.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-summary.Rmd"}
+```
 
 
 <!-- ```{r child="Experiments/experiment-kefir.Rmd"} -->

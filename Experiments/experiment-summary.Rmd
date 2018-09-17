@@ -92,7 +92,8 @@ ggplot(data=fb %>% gather(Date,Ratio),aes(x=Date,y=Ratio, group=1)) + geom_point
 
 I found high daily variability to be the case for just about every microbe that you'll find mentioned in popular books or articles. Here are two more examples:
 
-_Akkermansia_ is a well-studied microbe due to its important role in degrading the mucin that lines the colon. There is only one known species of _Akkermansia_ that inhabits human guts, _Akkermansia muciniphila_, so this is one of those cases when knowing the genus level is a pretty good approximation of what's happening. Here are my levels over a typical month, with the blue line indicating the moving average.
+_Akkermansia_ is a well-studied microbe due to its important role in degrading the mucin that lines the colon. There is only one known species of _Akkermansia_ that inhabits human guts, _Akkermansia muciniphila_, so this is one of those cases when knowing the genus level is a pretty good approximation of what's happening. Here are my levels over a typical month, with the blue line indicating the moving average.^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.
+].
 
 ```{r}
 #mhg_taxa_plot(subset_samples(gut.norm, Date > "2017-06-01"),"Akkermansia")
@@ -118,8 +119,7 @@ I tend to have a much higher average abundance than most people. [Later](#caseSt
 ```
 
 
-_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs^[Important note: in all of these charts, I don't distinguish between a day when the tested abundance was zero, and a day when I have no reliable test results. Besides the daily variability in the microbiome, the test results themselves often come with wild differences in quality. This is nothing to complain about: the ability to see these microbes in the first place is a true miracle of technology, and even the most careful lab can't get around the myriad of technical issues that come with such a complex process.
-].
+_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs.
 
 ```{r summarPlotBifido}
 #mhg_taxa_plot(subset_samples(gut.norm, Date > "2016-06-01"),"Akkermansia")
@@ -199,8 +199,22 @@ I could find nothing in the literature that associates this microbe with kefir d
 Here's another odd microbe I found, this time during a trip to Beijing China (the red line):
 
 ```{r}
-mhg_taxa_plot(subset_samples(gut.norm, Date > "2017-05-01"), "Coprobacter") + ggtitle("Coprobacter") + 
-    annotate("segment",x = as.Date("2017-07-08"), xend = as.Date("2017-07-14"), y = -0.5, yend = -0.51, color = "red", size = 2) 
+mhg_taxa_plot(subset_samples(gut.norm, Date > "2017-05-01" & Date < "2017-09-01"), "Coprobacter") + ggtitle("Coprobacter") +
+  annotate(
+    "segment",
+    x = as.Date("2017-07-08"),
+    xend = as.Date("2017-07-14"),
+    y = -0.5,
+    yend = -0.51,
+    color = "red",
+    size = 2
+  ) +
+  scale_x_date(
+    date_labels = "%b",
+    date_breaks = "1 month",
+    date_minor_breaks = "2 weeks"
+  )
+
 ```
 
 I had none of this during my years of testing, but it suddenly appeared during the trip -- and disappeared promptly afterward. Interestingly, although this microbe appears occasionally in the hundreds of other samples I've seen, there is no clear pattern, and never in the levels that appeared in mine. I couldn't find any at all in the guts of two individuals I know who had been traveling in Asia.
