@@ -6,7 +6,7 @@ Subglacial Lake Whillans is a lake buried under more than 800 meters of ice in t
 
 
 ```{r echo=FALSE, fig.cap = "Go 2,600 feet further to find microbes. Photo: [NASA/JPL-Caltech](https://www.jpl.nasa.gov/news/news.php?release=2013-077)"}
-knitr::include_graphics("https://www.jpl.nasa.gov/images/earth/antarctica/20130228/wissard20130228-full.jpg")
+knitr::include_graphics("Science/assets/sciencewissard20130228-full.jpg")
 ```
 
 
@@ -35,7 +35,7 @@ Although new and bizarre extremophiles are discovered regularly, so far it appea
 Several lichen species, including rock colonizing *Rhizocarpon geographicum* and *Xanthoria elegans*,  and the vagrant *Aspicilia fruticulosa*, remained alive after ten days of direct UV exposure on board a European Space Agency spacecraft. ^[@de_la_torre_survival_2010] Some especially hardy cyanobacteria that came with the lichens didn't survive, so perhaps  space offers a better chance for multicellular life, which has the luxury of outer protective pigmented layers.
 
 ```{r echo=FALSE, fig.cap = "Could be lichen outer space. Photo: [J Brew](https://www.flickr.com/photos/brewbooks/4784053254)"}
-knitr::include_graphics("https://farm5.staticflickr.com/4100/4784053254_4d715e632b_z.jpg")
+knitr::include_graphics("Science/assets/scienceFlickrLichen.jpg")
 ```
 
 

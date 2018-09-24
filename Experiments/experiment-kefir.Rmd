@@ -1,8 +1,9 @@
 ## Kefir and the Microbiome {#experimentKefir}
 
-If you follow the microbiome at all, you’ll eventually discover the benefits of kefir. Google the phrase "one of the most potent probiotic foods available" and you’ll find kefir in all the top results. A [recent BBC documentary](http://www.bbc.com/news/health-38800977)  that tested people after consuming different types of "gut-friendly" foods found that kefir had by far the biggest effect.  My interest piqued when, after my [disappointment with kombucha](#experimentKombucha), I spoke with a man who happened to mention his good luck with kefir as a solution to his many gut issues. On a doctor’s recommendation, he tried kefir for a number of years with limited success, until — frustrated with the \$3/day expense of buying it at Trader Joe’s — he began making it himself at home. "What a difference!" he claimed.
+Everyone interested in the microbiome eventually has to check out kefir. Google the phrase "one of the most potent probiotic foods available" and you’ll find kefir in all the top results. A [recent BBC documentary](http://www.bbc.com/news/health-38800977)  that tested people after consuming different types of "gut-friendly" foods found it had by far the biggest effect.  My interest piqued when, after my [disappointment with kombucha](#experimentKombucha), I spoke with a man who happened to mention his good luck with kefir as a solution to his many gut issues. On a doctor’s recommendation, he tried kefir for a number of years with limited success, until — frustrated with the \$3/day expense of buying it at Trader Joe’s — he began making it himself at home. "What a difference!" he claimed.
 
-Did it work for me? Yes! I found a very noticeable change in my gut microbiome — the most significant I’ve seen among my many experiments. Look at my levels of _Leuconostoc_, one genus known to be found in kefir:
+Did it work for me? Yes! I found a very noticeable change in my gut microbiome — the most significant I’ve seen among my many experiments. Look at my daily levels of _Leuconostoc_, a prodigious synthesizer of Vitamin K known to be found in kefir. (Figure \@ref(fig:plotAmountsKefir) )
+
 
 ```{r plotAmountsKefir, echo=FALSE ,cache = TRUE}
 
@@ -11,7 +12,7 @@ food <- rikfood
 kefir <- "kefir"
 #kefir.day <- unique(food[str_detect(food$Name, kefir),"Date"])
 
-fromDate <- as.Date("2016-11-15")
+fromDate <- as.Date("2016-11-01")
 toDate <- as.Date("2017-07-01")
 kefir.day <- c(as.Date("2016-12-02"),unique(food[str_detect(food$Name, kefir),"Date"]))
 kefir.day <- kefir.day[kefir.day<toDate]
@@ -27,7 +28,7 @@ kefir.top <- subset_taxa(gut.norm, Genus %in% c("Leuconostoc") ) #,"Fusicateniba
 plot_bar(subset_samples(kefir.top, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
   ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
   annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + 
-  scale_x_date(date_labels = "%b20%y",
+  scale_x_date(date_labels = "%b",
                 date_breaks = "1 month", date_minor_breaks = "2 weeks")
 
 
@@ -43,13 +44,13 @@ plot_bar(subset_samples(kefir.top, Date %in% seq(from=fromDate,to=toDate, by=1) 
 #   
 ```
 
-The blue dots in the chart are days when I drank kefir. Since I sample near-daily over the entire chart, we can see that both of these taxa suddenly appeared shortly after I began to consume kefir. I had almost none beforehand. Also note that the levels seem to dip when I go for a few days without drinking any, such as during my business trips out of town in mid-March and another in early-April.
+The blue dots in the chart are days when I drank kefir. Since I sample near-daily over the entire chart, we can see that both of these taxa suddenly appeared shortly after I began to consume kefir. I had almost none beforehand. Also note that the levels seem to dip when I skip drinking for a few days, such as during my business trips out of town in mid-March and another in early-April.
 
-So it apparently has a big effect on the microbiome. What is this stuff anyway?
+So apparently it has a big effect on the microbiome. What is this stuff anyway?
 
 The first thing to know about kefir is the pronunciation. Say “Keh-FEAR”, with the accent on the second syllable, not “KEE-fur” or “kEH-fir”. The Russian origin of the term is a reminder of a time in the distant past when — it’s unclear exactly where or how — the first batch was prepared and then passed along, its microbial components shared from person to person until it reached today’s status as a popular drink you can buy in most grocery stores.
 
-Making it at home brings more benefits than just saving money. Commercially-purchased drinks are subject to unavoidable regulatory, shelf-life, and consistency contraints that are important for business. But more than that, if you believe like I do that microbes are highly-customized to our environments, making at home will ensure that the kefir is well-adapted to your own personal microbial environment. The batch that survives and thrives in your kitchen will, by definition, have proven its ability to withstand whatever whatever conditions you face there.
+Making it at home brings more than just financial benefits. Commercially-purchased drinks are subject to unavoidable regulatory, shelf-life, and consistency contraints that are important for successful business, but not necessarily for nutrition. More importantly, if you believe like I do that microbes are highly-customized to our environments, making at home will ensure that the kefir is well-adapted to your own personal microbial environment. The batch that survives and thrives in your kitchen will, by definition, have proven its ability to withstand whatever conditions you face there.
 
 Making it yourself is surprisingly easy. It begins with a bundle of the component microbes, a cauliflower-shaped substance usually called the "grain" or "seed" that looks like this:
 
@@ -59,18 +60,18 @@ knitr::include_graphics("Experiments/assets/kefir_grain.jpg")
 ```
 
 
-Instruction books often tell you to be careful how you handle the grains, but I find them robust enough that I pick them up with my bare fingers. I drop them into a glass of milk left sitting on the counter overnight and — voila! — twenty four hours later, the liquid has turned into kefir. Pull out the kefir grains from that glass, plop it into another, and you’re all set for tomorrow’s batch. Unlike yogurt, which requires heating and a stable temperature, kefir doesn’t appear to care about how it's handled, so long as you keep it at room temperature and can wait for twenty four hours. The reaction might vary by a few hours if the room is a bit colder or warmer, but otherwise I find it surprisingly consistent. Just set and forget.
+Instruction books often tell you to be careful how you handle the grains, but I find them robust enough that I pick them up with my bare fingers. I drop them into a glass of milk left sitting on the counter overnight and — voila! — twenty four hours later, the liquid has turned into kefir. Pull out the kefir grains from that glass, plop it into another, and you’re all set for tomorrow’s batch. Unlike yogurt, which requires heating and a stable temperature, kefir doesn’t appear to care how it's handled, so long as you keep it at room temperature and can wait for twenty four hours. The reaction might vary by a few hours if the room is a bit colder or warmer, but otherwise I find it surprisingly consistent. Just set and forget.
 
-Once you have the grains, making more kefir is easy, but where do you get the grains in the first place?  It's supposedly possible to make them from scratch using a goat-hide bag filled with pasteurized milk and the intestinal flora of a sheep, but I haven't tried that myself.  I'm told it works so long as you shake every hour and maintain a constant temperature. 
+I found that the only hard part is getting started.  Once you have the grains, making more kefir is easy, but where do you get the grains in the first place?  It's supposedly possible to make them from scratch using a goat-hide bag filled with pasteurized milk and the intestinal flora of a sheep, but I haven't tried that myself.  I'm told it works so long as you shake every hour and maintain a constant temperature. 
 
-Even without going the goat-hide route, I found that getting started was the only hard part of the process. You can order some starter grains online for under $25, but for shipping purposes the manufacturers generally give them to you in a freeze-dried form that requires a week or so of preparation before the microbes are fully alive and kicking out drinkable quantities of kefir.
+You can order some starter grains online for under $25, but for shipping purposes the manufacturers generally give them to you in a freeze-dried form that requires a week or so of preparation before the microbes are fully alive and kicking out drinkable quantities of kefir.
 
 I got mine by asking around until I found a neighbor who had been brewing his own. Anyone who makes homemade kefir will be happy to give you some extra grains. The fermentation process causes the grains to multiply, and you will find yourself throwing them out regularly.
 
-The grains themselves contain a combination of lactic acid bacteria (_Lactobacillus_, _Lactococcus_, _Leuconostoc_), acetic acid bacteria (_Acetobacter_), and yeast,  clumped together with casein (milk proteins) and complex sugars in a matrix of a unique polysaccharide called Kefiran. The nutritional content apparently varies depending on fermentation time and other factors, but there’s a lot of good stuff in there^[@otles2003 and http://files.cienciapatodos.webnode.pt/200000022-79ffe7af9e/Kefir.pdf] (Figure \@ref(fig:kefirOltesNutrition)).
+The grains themselves contain a combination of lactic acid bacteria (_Lactobacillus_, _Lactococcus_, _Leuconostoc_), acetic acid bacteria (_Acetobacter_), and yeast,  clumped together with casein (milk proteins) and complex sugars in a type of carbohydrate molecule called Kefiran. The nutritional content apparently varies depending on fermentation time and other factors, but there’s a lot of good stuff in there^[@otles_kefir_2003 http://files.cienciapatodos.webnode.pt/200000022-79ffe7af9e/Kefir.pdf] (Figure \@ref(fig:kefirOltesNutrition)).
 
-```{r kefirOltesNutrition, fig.cap = "Nutrional content of kefir."}
-knitr::include_graphics("./assets/kefir-oltes-nutrition.jpg")
+```{r kefirOltesNutrition, fig.cap = "Nutritional content of kefir. [Source: @otles_kefir_2003]"}
+knitr::include_graphics("Experiments/assets/kefir-oltes-nutrition.jpg")
 ```
 
 
@@ -79,20 +80,18 @@ A rigorous microbial analysis by an Irish lab ^[@walsh_microbial_2016. Also [a 2
 
 
 ```{r echo=FALSE}
-knitr::include_graphics(rep("./assets/kefir-microbial-makeup.jpg"))
+knitr::include_graphics(rep("Experiments/assets/kefir-microbial-makeup.jpg"))
 ```
 
-
-The uBiome test looks only at the 16S ribosomal gene, which unfortunately can’t detect yeasts, so I don’t have an easy way to track the yeasts in the kefir. 
-
-But I *can* run the kefir mixture through the same 16S pipeline that I use for my other samples. I put a swab into some kefir that I had left on the counter for a "second ferment", an additional 24-hour period after the grains from the first ferment. This is what I found:
+The uBiome test I used unfortunately can’t detect yeasts, so I don’t have an easy way to track the non-bacterial microbes in my kefir. But I *can* run the mixture through the same gene sequencing that I use for my other samples. I put a swab into some kefir that I had left on the counter for a "second ferment", an additional 24-hour period after the grains from the first ferment. This is what I found:
 
 ```{r kefirTable, echo = FALSE}
 
 kefirSample.genus <- subset_samples(sprague.genus.norm, Site == "custom") # SSR == 134894)
 kefirSample.genus <- prune_taxa(taxa_sums(kefirSample.genus)>0,kefirSample.genus)
 
-kable(head(mhg_abundance(kefirSample.genus)/10000,5), digits= 2, col.names = sample_data(kefirSample.genus)$Label)#, col.names = "Kefir Abundance (%)")
+kable(head(mhg_abundance(kefirSample.genus)/10000,5), digits= 2, col.names = c("Kefir1","Kefir2","Kefir3") )
+#sample_data(kefirSample.genus)$Label)#, col.names = "Kefir Abundance (%)")
 ```
 
 These are the only taxa that met the 0.07% abundance criteria discussed previously. But even without that cutoff, the uBiome pipeline shows no _Acetobacter_, despite its prominence in the study shown above.
@@ -164,4 +163,4 @@ But other than this clear change in my gut microbiome, did I notice any differen
 
 Here the answer is more ambiguous. As a healthy adult, I don't have any particular "problems" I'm trying to solve. I remained healthy during the period of the experiment, so the kefir certainly doesn't appear to have made anything worse. My sleep hasn't substantially changed either, and although I'm generally pretty even-tempered, I didn't notice any particular changes positive or negative in my mood either.
 
-The one area where, subjectively, where I feel different is in my overall sense of energy. Although I can't put my finger on anything quantitative, I _do_ notice that I seem to be a little more energetic on days when I drink kefir. Measuring that more precisely may be a good test for follow up.
+The one area where, subjectively, where I feel different is in my overall sense of energy. Although I can't put my finger on anything quantitative, I _do_ notice that I seem to be a little more energetic on days when I drink kefir. Measuring that more precisely may be a good followup test.

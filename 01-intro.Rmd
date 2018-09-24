@@ -9,7 +9,7 @@ The Personal Science app supports raw data from several microbiome companies.
 ### uBiome
 The most popular laboratory is the San Francisco startup uBiome ^[from September 2012], 
 that originally began as crowdfunded campaign on
-Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. Order a kit online at the [uBiome web site](https://shop.ubiome.com/pages/buynow).  We recommend the standard "Gut Kit" ($89). Be sure to use the offer code `PERSONAL SCIENCE` to get 15% off your order.
+Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. Order a kit online at the [uBiome web site](https://shop.ubiome.com/pages/buynow).  We recommend the standard "Gut Kit" ($89). Be sure to use the offer code `PERSONALSCIENCE` to get 15% off your order.
 
 Just send them a sample and a few weeks later they give you access to a private web page that will show you a breakdown of the types of bacteria they found.  Read [Go Deeper](#GoDeeper) for an in-depth guide for how to get the most of the uBiome web page.
 

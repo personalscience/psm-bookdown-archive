@@ -6,7 +6,7 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 
 [Experiment: Probiotic supplements](#experimentProbiotics) Do probiotic pills affect my microbiome?
 
-[Experiment: Drinking Homemade Kefir](#comingSoon) Does kefir make a difference?
+[Experiment: Drinking Homemade Kefir](#experimentKefir) Does kefir make a difference?
 
 [Experiment: Drinking kombucha](#experimentKombucha) How about kombucha?
 
@@ -25,8 +25,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 ```
 
 
-<!-- ```{r child="Experiments/experiment-kefir.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-kefir.Rmd"}
+```
 
 
 <!-- ```{r child="Experiments/experiment-travelMexico.Rmd"} -->

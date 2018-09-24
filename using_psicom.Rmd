@@ -11,9 +11,11 @@ output:
 
 The Personal Science app will let you compare your health data to other people who have agreed, like you, to share their raw data.
 
+To get started, create your account at [https://app.personalscience.com/register](https://app.personalscience.com/register).
+
 Sharing and analyzing your data is a three part process:
 
-1. Upload your own raw data and tag it with descriptive attributes. (Figure \@ref(fig:usingPsicomMainScreen1))
+1. Upload your own raw data (see [our instructions](#downloaduBiome)) and tag it with descriptive attributes. (Figure \@ref(fig:usingPsicomMainScreen1))
 2. Search the community for specific tags and save the results as a query
 3. View and analyze your results, either by themselves or in combination with a query you created.
 
@@ -40,7 +42,7 @@ Remember that your uploaded data is intended to be shared with every other Perso
 
 ### JSON
 
-Follow the instructions [here](https://github.com/personalscience/public/blob/master/docs/how-to-download-ubiome-json.md) if you're not sure how to get the raw JSON data from uBiome.
+Follow the(see [our instructions](#downloaduBiome)) if you're not sure how to get the raw JSON data from uBiome.
 
 
 ### Tags

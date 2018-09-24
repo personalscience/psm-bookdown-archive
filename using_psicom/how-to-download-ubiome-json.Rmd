@@ -5,7 +5,7 @@ To use your uBiome data, you'll need to download it from the uBiome web site.  (
 Go to the [uBiome Explorer page](http://explorer.ubiome.com)  and click on the section labeled "Advanced" and then "Downloads" (Figure \@ref(fig:downloaduBiomeDataExplorerDownloads)) :
 
 ```{r downloaduBiomeDataExplorerDownloads, fig.cap = "Select the Downloads feature in the uBiome web app."}
-knitr::include_graphics(file.path(getwd(),"img/ubiomeExplorerDownloads.jpg"))
+knitr::include_graphics(file.path(getwd(),"img/uBiomeExplorerDownloads.jpg"))
 ```
 
 ---

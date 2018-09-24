@@ -18,15 +18,15 @@ Hundreds of people have sent me their microbiome results. Here are some examples
 <!-- ``` -->
 
 
-<!-- ```{r child = "CaseStudies/alzheimers-disease.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/alzheimers-disease.Rmd"}
+```
 
-<!-- ```{r child = "CaseStudies/colorectalCancer.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/colorectalCancer.Rmd"}
+```
 
 
-<!-- ```{r child = "CaseStudies/caseStudyKeto.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/caseStudyKeto.Rmd"}
+```
 
 
 <!-- ```{r child = "CaseStudies/caseStudyExercise.Rmd"} -->
