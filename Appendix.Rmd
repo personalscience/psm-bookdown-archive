@@ -68,7 +68,7 @@ ggplot(data = h.sprague %>% arrange(desc(mean)) %>% top_n(20), aes(x=reorder(tax
   geom_point(aes(y=mean), color = "blue") + 
     theme(axis.text.x = element_text(size = 15, angle=90))  + 
     scale_y_log10(labels=function(x)x/10000) +
-  labs(title="Richard Sprague", x="Top 20 Taxa", y = "Abundance (log10 %)")
+  labs(title="Healthy Ranges",subtitle = "Red = median, Blue = mean", x="Top 20 Taxa", y = "Abundance (log10 %)")
 
 ```
 

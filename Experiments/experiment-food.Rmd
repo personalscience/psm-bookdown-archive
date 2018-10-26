@@ -122,3 +122,12 @@ Notice how in nearly every case, flax-eating appears to affect microbiome abunda
 #   #annotate("text", x = soylent.day, y = 100000, label = "Days I ate Flax")
 
 ```
+
+
+what about other foods, like cupcakes?
+
+```{r}
+cupcake_days <- mhg_food_days(rikfood,"cupcake")
+cupcake_days
+```
+

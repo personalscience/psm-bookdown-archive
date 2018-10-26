@@ -67,12 +67,12 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 <!-- ``` -->
 
 
-<!-- ```{r child="Experiments/experiment-food.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-food.Rmd"}
+```
 
 
-<!-- ```{r child="Experiments/experiment-dietChange.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-dietChange.Rmd"}
+```
 
 
 <!-- ```{r child="Experiments/experiment-methods.Rmd"} -->

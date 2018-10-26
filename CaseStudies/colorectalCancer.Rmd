@@ -1,90 +1,145 @@
 ## Colorectal Cancer {#caseStudyCancer}
 
-Paul was a pretty normal 50-something year old father of two teenagers when he noticed some odd things in the bathroom. At first he thought it was something he'd been eating; despite a lifetime of Southern living, he didn't have as much tolerance for deep-fried cooking as some of his neighbors and the past few weeks had been unusually heavy on the grease. So, he laid off the french fries for a few weeks and it seemed to get better. He had enjoyed a lifetime of perfect health: he was rarely sick, had never been inside a hospital except to visit others, and fully expected to live well into his 80s or 90s like his grandparents. 
+```{r}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+source("../R/loadMHGData.R")
+```
 
-He wasn't worried, but a few months later his wife reminded him that his company insurance plan includes a free annual physical, and he thought why not. The doctor didn't seem worried either, but suggested a few more tests “just in case”, and unfortunately that's when he got the diagnosis that has been on his mind every day since: Stage IV colorectal cancer that has spread to his liver.
 
-Many cancers seem to have a relationship with the microbiome, and there are at least ten viruses which are known to be carcinogenic, including Human papillomavirus (HPV), that causes cervical cancer, and for which there is a vaccine. Some scientists guess that most cancers will eventually be shown to have their origins in a microbe, and although that's mostly speculation at this point, the idea of using microbes to treat or prevent cancer has attracted interest for more than 100 years. 
-
-*Fusobacterium nucleatum*, *Bacteroides fragilis*, and many members of the large class of Enterobaceriaceae have well-studied characteristics that make them liable to cause the types of genetic damage that can give rise to cancer.
-
-A friend suggested that Paul test his gut microbiome, and then asked me to take a look. Here are some of the interesting things I found. 
-
-First we look at the Phylum overall picture:
-
-```{r caseStudyccr2}
+```{r caseStudyccr2setup}
 ccr.phylum <- subset_samples(people.phylum,SSR==36161)
 
 ccr.phylum <- prune_taxa(taxa_sums(ccr.phylum)>12,ccr.phylum)
+
+ccr.genus <- subset_samples(people.norm, SSR == 36161)
+ccr.genus <- prune_taxa(taxa_sums(ccr.genus)>12, ccr.genus)
+
 ccr.species <- subset_samples(people.species,SSR==36161)
 ccr.species <- prune_taxa(taxa_sums(ccr.species)>12, ccr.species)
 
-kable(mhg_abundance(ccr.phylum, top=5)/10000,digits=2, col.names = c("%"))
+#kable(mhg_abundance(ccr.phylum, top=5)/10000,digits=2, col.names = c("%"))
 ```
 
-The standard ratios (Firmicutes/Bacteroidetes) that I follow while watching other samples, are all well within the "normal" range. In other words, I don't see anything offhand that looks odd.
 
-His overall diversity, using uBiome's calculations of the Shannon diversity index, is a healthy 89%.
+Paul was a pretty normal 50-something year old father of two teenagers when he noticed something odd in the bathroom. At first he thought it was something he'd been eating; despite a lifetime of Southern living, he didn't have as much tolerance for deep-fried cooking as some of his neighbors and the past few weeks had been unusually heavy on the grease. So, he laid off the french fries for a few weeks and it seemed to get better. He had enjoyed a lifetime of perfect health: he was rarely sick, had never been inside a hospital except to visit others, and fully expected to live well into his 80s or 90s like his grandparents. 
+
+He wasn't worried, but a few months later his wife reminded him that his company insurance plan includes a free annual physical, and he thought why not. The doctor didn't seem worried either, but suggested a few more tests “just in case”, and unfortunately that's when he got the diagnosis that has been on his mind every day since: Stage IV colorectal cancer that has spread to his liver.
+
+If you or a loved one find yourself in tragic situation like this, your first stop should always be with a medical professional. Paul's oncologist studied this full-time for years of medical school, has treated tens of thousands of cancer patients for 30 years, and gets paid to stay up-to-date on the latest science while interacting with other professionals like him. So it's beyond silly and arrogant -- not to mention dangerous -- to ask the opinion of an untrained amateur like me.
+
+But still. Nobody, not even the most caring and selfless doctor, feels the urgency of the situation more than Paul and his family. They'll try anything -- and who can blame them?  The same careful, methodical and well-informed approach that makes the mainstream medical profession more effective over the long term, well, maybe it also makes this doctor just slightly more risk averse. There are treatments that no responsible doctor would consider, what exactly is a "responsible" treatment when you know that your odds are tragically small?  Seriously, what's there to lose?
+
+---
+
+Intriguing new discoveries have been made in the past few years about the relationship between cancer and the microbiome, and Paul asked if I know anything based on my years of near-daily sampling and amateur study. Might we find something in his microbiome, something that perhaps his doctor hasn't thought to consider? Given all that's known about microbiome-healthy diets, maybe if we found something unusual, some out-of-place microbe, is there a chance we might uncover a new, more effective treatment? 
+
+Many cancers seem to have a relationship with the microbiome. There are at least ten viruses which are known to be carcinogenic, including Human papillomavirus (HPV) that causes cervical cancer, and for which there is a vaccine. Some scientists guess that most cancers will eventually be shown to have their origins in a microbe, and although that's mostly speculation at this point, the idea of using microbes to treat or prevent cancer has attracted interest for more than 100 years.
+
+_Fusobacterium nucleatum_, _Bacteroides fragilis_, and many members of the large class of Enterobacteriaceae have well-studied characteristics that make them liable to cause the types of genetic damage that can give rise to cancer.
+
+I repeat: I'm not an expert -- I have no training or credentials in this at all -- so please don't take any of the following analysis as a substitute for the advice of a trained professional. Over the years, I've seen thousands of results from microbiome tests, including hundreds from people who claim to be healthy. The obvious place to start is to look at how Paul's sample may or may not differ from those healthy users.
+
+---
+
+Overall, I found his gut diversity is a little on the low side -- a Shannon value of 1.2. I'm usually somewhere between 2.0 and 2.5, though it's not uncommon to see lower, and [there's so much day-to-day variability](https://medium.com/microbiome/how-to-think-about-microbiome-diversity-9a39869137c1) in gut diversity that I wouldn't take a single result very seriously. 
+
+Next I looked at the broadest, Phylum level, where I ranked all the microbes in comparison to the healthy samples, picking out the top ones that seem to be outliers. The following charts show the percentage abundance of Paul's top microbes (yellow dots), compared to the average (blue dot) and median (red) for my database of healthy people. The vertical lines show the range of abundances I've seen in healthy people, so a yellow dot above or below that line is an outlier that's worth considering further.
+
+```{r experimentCCRCompareHealthyPhylum, fig.cap = "Healthy ranges compared (Phylum)."}
+#kable(mhg_abundance(ccr.phylum, top=25)/10000,digits=2, col.names = c("%"))
+
+h <- mhg_range_for(subset_samples(people.phylum,Site=="gut" & Condition == "Healthy"))
+ccr.range <- mhg_range_for(ccr.phylum)
 
 
-That high level of _Proteobacteria_ is a clue that something's not right. This is only one test, so it's not unknown even in healthy people for the levels to show up high now and then.  (I've had several samples show up that high, including one at 25% for no apparent reason). Still, it's worth digging deeper.
+g = ggplot(data = ccr.range %>% select(taxa,ccr = max) %>% dplyr::full_join(h) %>% arrange(desc(mean)) %>% top_n(5,wt=ccr), aes(x=reorder(taxa,-ccr),y=mean)) + 
+  #geom_boxplot() +
+  geom_linerange( aes(ymin = min, ymax = max)) + 
+  geom_point(aes(y=median), color = "red") + 
+  geom_point(aes(y=mean), color = "blue") + 
+  geom_point(aes(y=ccr), color = "yellow") + 
+    theme(axis.text.x = element_text(size = 15, angle=90))  + 
+    scale_y_log10(labels=function(x)x/10000) +
+  labs(title="Top 5 Microbes Compared to Healthy Phylum", x="Top 5 Taxa", y = "Abundance (log10 %)")
+
+g + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")) 
+
+```
+
+That high level of _Proteobacteria_ is a clue that something's not right. I've noticed that this microbe tends to be high in people with gut issues; _Kluyvera_, _E. Coli_, _Shigella_ and most common pathogens are in this group. Now, it's only one test, and it's not unknown even in healthy people for the levels to show up high now and then.  In my daily sampling, I've often had several samples show up that high, including one or two at 25% for no apparent reason. Still, maybe it's worth looking more closely, at the Order level:
 
 ```{r}
-kable(mhg_abundance(subset_samples(people.order,SSR==36161),top=5)/10000, digits=2, col.names = c("Order %"))
-```
-
-But then I saw way, way off-the-charts high levels of the order _Xanthomonadales_, which makes up something like 16% of his entire gut bacteria. Of the hundreds of biomes I've studied, I see this one from time to time, but never in such a high quantity. Other than Paul, the highest I've ever seen in the gut was in me, after returning from my 2-week camping trip in New Mexico, where my total was 0.0056^[I _did_ see a level of more than 30% in one of my _skin_ samples, again for no apparent reason (See [more analysis](#experimentSkin)).]. Paul's is 2800x that amount. 
-
-Not sure what this means, but one version of that bacterium is a pathogen that lives in things like catheters; it's usually harmless and goes away when you take out the catheter. 
-
-```{r}
-#chart showing how rare it is across every sample I know. Note that it shows up in one of my skin samples (4/17/2017)
-# people.gut.order <- subset_samples(people.order, Site == "gut")
-# mhg_density_for_taxa(merge_phyloseq(sprague.order.norm,people.gut.order),"Xanthomonadales") +
-#   annotate(
-#   geom = "segment",
-#   color = "blue",
-#   x = as.numeric(otu_table(
-#   subset_samples(people.gut.order, Username == "ccr") #subset_samples(people.order,SSR==36161)
-#   )["Xanthomonadales"]) / 10000,
-#   xend = as.numeric(otu_table(
-#   subset_samples(people.gut.order, Username == "ccr")
-#   )["Xanthomonadales"]) / 10000 ,
-#   y = 0,
-#   yend = 0.5
-#   )
+#kable(mhg_abundance(subset_samples(people.order,SSR==36161),top=5)/10000, digits=2, col.names = c("Order %"))
 ```
 
 
-He does not show any measured amounts of the bacteria _Fusobacterium_ that have been discussed in scientific journals as associated with colon cancer. In fact, that microbe is so clearly associated that [destroying it with the antibiotic metronidazole](http://science.sciencemag.org/content/early/2017/11/20/science.aal5240) slows tumors in mice.
+```{r experimentCCRCompareHealthyOrder, fig.cap = "Healthy ranges compared (Order)."}
+# kable(mhg_abundance(ccr.genus, top=25)/10000,digits=2, col.names = c("%"))
 
-New research shows that, at least in people with an inherited  gene known to pre-dispose the likelihood of colorectal cancer, the gut microbiome can form a biofilm composed of slightly-mutated versions of two microbes: _Baceteroides fragilis_ and _Escherichia coli_.^[As reported in the [Feb 1 2018 edition of the New York Times](https://www.nytimes.com/2018/02/01/health/colon-cancer-bacteria.html) based on research published in Science:  @dejea_patients_2018]  Since the 16S test can't quite see _E. Coli_ I can't look for that in Paul's sample, and it turns out he has no _B. Fragilis_ either. But among the hundreds of other samples, I find many who have high abundances of this microbe. Does that make them at risk? Absolutely not, but is it premature to add the presence of this microbe to one of many possible risk factors? I don't know. 
+h <- mhg_range_for(subset_samples(people.order,Site=="gut" & Condition == "Healthy"))
+ccr.range <- mhg_range_for(subset_samples(people.order,SSR==36161))
+
+
+g = ggplot(data = ccr.range %>% dplyr::select(taxa,ccr = max) %>% dplyr::full_join(h) %>% arrange(desc(ccr)) %>% top_n(10,wt=ccr), aes(x=reorder(taxa,-ccr),y=mean)) + 
+  #geom_boxplot() +
+  geom_linerange( aes(ymin = min, ymax = max)) + 
+  geom_point(aes(y=median), color = "red") + 
+  geom_point(aes(y=mean), color = "blue") + 
+  geom_point(aes(y=ccr), color = "yellow") + 
+    theme(axis.text.x = element_text(size = 15, angle=90))  + 
+    scale_y_log10(labels=function(x)x/10000) +
+  labs(title="Top Microbes Compared to Healthy (Order Level)", x="Top 10 Taxa", y = "Abundance (log10 %)")
+
+g + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")) 
+
+```
+
+Here we see way, way off-the-charts high levels of the order _Xanthomonadales_. These microbes take up 16% of his entire gut bacteria! Of the thousands of microbiome results I've studied, I see this one from time to time, but never at such high abundances. Other than Paul, the most I've ever seen in my own gut came after returning from my 2-week camping trip in New Mexico, where my total was 0.0056^[I _did_ see a level of more than 30% in one of my _skin_ samples, again for no apparent reason (See [more analysis](#experimentSkin)).]. Paul's is 2800x that amount. 
+
+Not sure what this means, but one version of that bacterium is a pathogen that lives in things like catheters; it's usually harmless and goes away when you take out the catheter. Is Paul's chemotherapy "port" involved? 
+
+Let's look deeper, at the Genus level:
+
+
+```{r experimentCCRCompareHealthyGenus, fig.cap = "Healthy ranges compared (Genus)."}
+# kable(mhg_abundance(ccr.genus, top=25)/10000,digits=2, col.names = c("%"))
+
+h <- mhg_range_for(subset_samples(people.norm,Site=="gut" & Condition == "Healthy"))
+ccr.range <- mhg_range_for(ccr.genus)
+
+
+g = ggplot(data = ccr.range %>% select(taxa,ccr = max) %>% dplyr::full_join(h) %>% arrange(desc(mean)) %>% top_n(15, wt=ccr), aes(x=reorder(taxa,-ccr),y=mean)) + 
+  #geom_boxplot() +
+  geom_linerange( aes(ymin = min, ymax = max)) + 
+  geom_point(aes(y=median), color = "red") + 
+  geom_point(aes(y=mean), color = "blue") + 
+  geom_point(aes(y=ccr), color = "yellow") + 
+    theme(axis.text.x = element_text(size = 15, angle=90))  + 
+    scale_y_log10(labels=function(x)x/10000) +
+  labs(title="Top Microbes Compared to Healthy (Genus Level)", x="Top 15 Taxa", y = "Abundance (log10 %)")
+
+g + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")) 
+
+```
+
+Here the one notable outlier is _Catenibacterium_. Intriguingly, the other people I've seen with such high levels are all unhealthy. One of them, like Paul, is undergoing chemotherapy. Is this a microbe that associates somehow with disease? And if so, is there anything he can (or should) do about it?
+
+Ken Lassessen at https://cfsremission.com has compiled an extensive list of actions that can increase or reduce common microbes and [he finds evidence](https://cfsremission.com/2017/11/18/reducing-catenibacterium-genus/) that flaxseed oil is associated with reduced _Catenibacterium_. Is it worth trying? Ask your doctor.
+
+Peer reviewed studies of colorectal cancer and the microbiome have singled out _Fusobacterium_. In fact, that microbe is so clearly associated that [destroying it with the antibiotic metronidazole](http://science.sciencemag.org/content/early/2017/11/20/science.aal5240) slows tumors in mice. There is none in Paul's sample, either because his current cancer treatments have eliminated it, or because it just wasn't detected in this sample. 
+
+New research shows that, at least in people with an inherited gene known to pre-dispose the likelihood of colorectal cancer, the gut microbiome can form a biofilm composed of slightly-mutated versions of two microbes: _Bacteroides fragilis_ and _Escherichia coli_.^[As reported in the [Feb 1 2018 edition of the New York Times](https://www.nytimes.com/2018/02/01/health/colon-cancer-bacteria.html) based on research published in Science:  @dejea_patients_2018], neither of which is identifiable in Paul's sample.
+
+If you found some in your microbiome sample results, would that that mean you are at risk? Absolutely not, but is it premature to add the presence of this microbe to one of many possible risk factors? I don't know. 
 
 ```{r caseStudyCCRBFraglis}
 # Uncomment this section to generate a dataframe showing an ordered list of the abundance of B fragilis in these people
-ccr.otuTable <- otu_table(subset_taxa(subset_samples(people.species, Site == "gut"), Species == "Bacteroides fragilis"))
-ccr.ssrs <- colnames(ccr.otuTable[,ccr.otuTable>0])
-ccr.people <- subset_samples(people.species, SSR %in% ccr.ssrs & Site == "gut")
-ccr.df <- data.frame(sample_data(ccr.people)[,c("Username","SSR")],BFragilis=as.numeric(ccr.otuTable[,ccr.ssrs])) %>% arrange(desc(BFragilis))
-#ccr.df
-#mhg_density_for_taxa(subset_samples(sprague.species.norm, Site=="gut"),"Bacteroides fragilis")
-#mhg_density_for_taxa(subset_samples(people.species, Condition = "Healthy" & Site=="gut"),"Bacteroides fragilis")
 
-
+#mhg_all_who_have(subset_samples(people.species, Site == "gut" & Condition == "Healthy"), "Bacteroides fragilis" ) %>% arrange(desc(Abundance))
 ```
 
-Of the people in my database, I find that _B. fragilis_ ranges between 0 and ```r range(ccr.otuTable)[2]/10000```%, with the vast majority fo samples hovering at 0%.
-```{r caseStudyCCRBFragilisDensity}
-#mhg_density_for_taxa(subset_samples(people.species, Condition = "Healthy" & Site=="gut"),"Bacteroides fragilis")
+Among the hundreds of sample results I've seen, _B. fragilis_ ranges between zero and 4% in healthy people, and zero to 7% in unhealthy people.
 
-
-```
-
-
-
-Like all concerned patients, Paul's first stop is with his oncologist, a doctor with almost thirty years experience fighting cancer and who is very familiar with.
-
-Unfortunately, the doctor sticks to the tried and true, not because he doesn't understand the urgency of Paul's situation, but because he knows that over time the only way to beat cancer is through the methodical, step-by-step approach of one trial after another. 
 
 Another thing to check out is new research showing a link between the oral microbiome and colorectal cancer.
 "Low colonic abundance of _Lachnospiraceae_ favours colonisation of gut mucosa by oral pathogens linked to CRC"^[ @flemer_oral_2017 ]
