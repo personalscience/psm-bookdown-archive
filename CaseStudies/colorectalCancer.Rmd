@@ -21,13 +21,13 @@ ccr.species <- prune_taxa(taxa_sums(ccr.species)>12, ccr.species)
 ```
 
 
-Paul was a pretty normal 50-something year old father of two teenagers when he noticed something odd in the bathroom. At first he thought it was something he'd been eating; despite a lifetime of Southern living, he didn't have as much tolerance for deep-fried cooking as some of his neighbors and the past few weeks had been unusually heavy on the grease. So, he laid off the french fries for a few weeks and it seemed to get better. He had enjoyed a lifetime of perfect health: he was rarely sick, had never been inside a hospital except to visit others, and fully expected to live well into his 80s or 90s like his grandparents. 
+Paul was a pretty normal father of two teenagers when he noticed something odd in the bathroom. At first he thought it was something he'd been eating; despite a lifetime of Southern living, he didn't have as much tolerance for deep-fried cooking as some of his neighbors and the past few weeks had been unusually heavy on the grease. So, he laid off the french fries for a few weeks and it seemed to get better. He had enjoyed a lifetime of perfect health: he was rarely sick, had never been inside a hospital except to visit others, and fully expected to live well into his 80s or 90s like his grandparents. 
 
 He wasn't worried, but a few months later his wife reminded him that his company insurance plan includes a free annual physical, and he thought why not. The doctor didn't seem worried either, but suggested a few more tests “just in case”, and unfortunately that's when he got the diagnosis that has been on his mind every day since: Stage IV colorectal cancer that has spread to his liver.
 
 If you or a loved one find yourself in tragic situation like this, your first stop should always be with a medical professional. Paul's oncologist studied this full-time for years of medical school, has treated tens of thousands of cancer patients for 30 years, and gets paid to stay up-to-date on the latest science while interacting with other professionals like him. So it's beyond silly and arrogant -- not to mention dangerous -- to ask the opinion of an untrained amateur like me.
 
-But still. Nobody, not even the most caring and selfless doctor, feels the urgency of the situation more than Paul and his family. They'll try anything -- and who can blame them?  The same careful, methodical and well-informed approach that makes the mainstream medical profession more effective over the long term, well, maybe it also makes this doctor just slightly more risk averse. There are treatments that no responsible doctor would consider, what exactly is a "responsible" treatment when you know that your odds are tragically small?  Seriously, what's there to lose?
+But still. Nobody, not even the most caring and selfless doctor, feels the urgency of the situation more than Paul and his family. They'll try anything; and who can blame them?  The same careful, methodical and well-informed approach that makes the mainstream medical profession more effective over the long term, well, maybe it also makes this doctor just slightly more risk averse. There are treatments that no responsible doctor would consider, but what exactly is a "responsible" treatment when you know that your odds are tragically small?  Seriously, what's there to lose?
 
 ---
 
@@ -37,7 +37,7 @@ Many cancers seem to have a relationship with the microbiome. There are at least
 
 _Fusobacterium nucleatum_, _Bacteroides fragilis_, and many members of the large class of Enterobacteriaceae have well-studied characteristics that make them liable to cause the types of genetic damage that can give rise to cancer.
 
-I repeat: I'm not an expert -- I have no training or credentials in this at all -- so please don't take any of the following analysis as a substitute for the advice of a trained professional. Over the years, I've seen thousands of results from microbiome tests, including hundreds from people who claim to be healthy. The obvious place to start is to look at how Paul's sample may or may not differ from those healthy users.
+I repeat: I'm not an expert -- I have no training or credentials in this at all -- so please don't take any of the following analysis as a substitute for the advice of a trained professional. Over the years, I've seen thousands of results from microbiome tests, including hundreds from people who claim to be healthy. We know for certain that Paul's chances are uncertain -- even with the best medical help in the world. Who can blame him for reaching out to anyone else who might have some insights?  The obvious place to start is to look at how Paul's microbiome sample may or may not differ from those healthy users.
 
 ---
 
@@ -66,7 +66,7 @@ g + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dot
 
 ```
 
-That high level of _Proteobacteria_ is a clue that something's not right. I've noticed that this microbe tends to be high in people with gut issues; _Kluyvera_, _E. Coli_, _Shigella_ and most common pathogens are in this group. Now, it's only one test, and it's not unknown even in healthy people for the levels to show up high now and then.  In my daily sampling, I've often had several samples show up that high, including one or two at 25% for no apparent reason. Still, maybe it's worth looking more closely, at the Order level:
+That high level of _Proteobacteria_ is a clue that something's not right. I've noticed that this microbe tends to be high in people with gut issues; _Kluyvera_, _E. Coli_, _Shigella_ and most common pathogens are in this group. Now, this is only one test, and it's not uncommon even in healthy people for the levels to show up high now and then.  In my daily sampling, I've often had several results that high, including one or two at 25% for no apparent reason. Still, maybe it's worth looking more closely, at the Order level:
 
 ```{r}
 #kable(mhg_abundance(subset_samples(people.order,SSR==36161),top=5)/10000, digits=2, col.names = c("Order %"))
@@ -94,7 +94,7 @@ g + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dot
 
 ```
 
-Here we see way, way off-the-charts high levels of the order _Xanthomonadales_. These microbes take up 16% of his entire gut bacteria! Of the thousands of microbiome results I've studied, I see this one from time to time, but never at such high abundances. Other than Paul, the most I've ever seen in my own gut came after returning from my 2-week camping trip in New Mexico, where my total was 0.0056^[I _did_ see a level of more than 30% in one of my _skin_ samples, again for no apparent reason (See [more analysis](#experimentSkin)).]. Paul's is 2800x that amount. 
+Here we see way, way off-the-charts high levels of the order _Xanthomonadales_. These microbes take up 16% of his entire gut microbiome! Of the thousands of microbiome results I've studied, I see this bacterium from time to time, but never at such high abundances. Other than Paul, the most I've ever seen in my own gut came after returning from my 2-week camping trip in New Mexico, where my total was 0.0056^[I _did_ see a level of more than 30% in one of my _skin_ samples, again for no apparent reason (See [more analysis](#experimentSkin)).]. Paul's is 2800x that amount. 
 
 Not sure what this means, but one version of that bacterium is a pathogen that lives in things like catheters; it's usually harmless and goes away when you take out the catheter. Is Paul's chemotherapy "port" involved? 
 
@@ -130,7 +130,17 @@ Peer reviewed studies of colorectal cancer and the microbiome have singled out _
 
 New research shows that, at least in people with an inherited gene known to pre-dispose the likelihood of colorectal cancer, the gut microbiome can form a biofilm composed of slightly-mutated versions of two microbes: _Bacteroides fragilis_ and _Escherichia coli_.^[As reported in the [Feb 1 2018 edition of the New York Times](https://www.nytimes.com/2018/02/01/health/colon-cancer-bacteria.html) based on research published in Science:  @dejea_patients_2018], neither of which is identifiable in Paul's sample.
 
-If you found some in your microbiome sample results, would that that mean you are at risk? Absolutely not, but is it premature to add the presence of this microbe to one of many possible risk factors? I don't know. 
+If you found some in your microbiome sample results, would that that mean you are at risk? The short answer is no. For what it's worth, among the hundreds of samples people have sent me, _B. fragilis_ ranges between zero and 4% in healthy people, and zero to 7% in unhealthy people. Pretty inconclusive at best; misleading and counter-productive at worst.
+
+Researchers have found many other intriguing links between specific microbes and colorectal cancer, including a recent study hinting at an association with the *oral* microbiome: low abundance of _Lachnospiraceae_ in the gut apparently allows some oral pathogens to get a foothold in the gut mucosa.^[see "Low colonic abundance of _Lachnospiraceae_ favours colonisation of gut mucosa by oral pathogens linked to CRC" @flemer_oral_2017 ]
+
+Are any of these microbial connections worth further investigation? Sadly, the chances are slim, but keep in mind that the best scientists on earth don't know the answers either. It's arrogant and patronizing to suggest that patients and their families should defer only to "real" scientists on these questions.
+
+When fighting any terrible situation, false hope can be a greater danger than the disease itself if you become a victim of disreputable scammers, who are all-too-common in the world of health advice. Paul did the right thing by going first to an experienced oncologist, with whom he consults on everything, including the decision to test and study his microbiome.
+
+If -- and I believe, when -- a microbiome-informed cure for cancers becomes available, it will be thanks to the tireless effort of doctors, as well as people like Paul who are willing to ask questions.
+
+
 
 ```{r caseStudyCCRBFraglis}
 # Uncomment this section to generate a dataframe showing an ordered list of the abundance of B fragilis in these people
@@ -138,12 +148,6 @@ If you found some in your microbiome sample results, would that that mean you ar
 #mhg_all_who_have(subset_samples(people.species, Site == "gut" & Condition == "Healthy"), "Bacteroides fragilis" ) %>% arrange(desc(Abundance))
 ```
 
-Among the hundreds of sample results I've seen, _B. fragilis_ ranges between zero and 4% in healthy people, and zero to 7% in unhealthy people.
-
-
-Another thing to check out is new research showing a link between the oral microbiome and colorectal cancer.
-"Low colonic abundance of _Lachnospiraceae_ favours colonisation of gut mucosa by oral pathogens linked to CRC"^[ @flemer_oral_2017 ]
-
-New discoveries are made all the time.  See more references about the links between the microbiome and cancer in  [suggested reading](#bestAcademicPapers) section.^[Start with @garrett_cancer_2015 and @fulbright_microbiome_2017]
+See more references about the links between the microbiome and cancer, two good places to start are:  @garrett_cancer_2015 and @fulbright_microbiome_2017]
 
 

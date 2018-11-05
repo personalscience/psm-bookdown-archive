@@ -171,6 +171,18 @@ So although we *do* see a slight increase in both taxa, it's hard to pin it sole
 
 Also, looking more closely at the read counts, I see that the final sample had the lowest, about 36,000 reads versus the 80,000+ reads of the other samples. When dealing with low-abundance bacteria, this can matter, but it's impossible to tell precisely how much. The bottom line is that it's possible that the probiotics had no effect whatsoever, and even if there was an effect, it was probably quite slight.
 
+In fact, probiotics appear to have less of an effect even than travel. Here's "Kevin", a European man who moved to the United States. 
+
+```{r}
+library(ggthemes)
+library(ggplot2)
+kh <- subset_samples(people.norm,Username == "kh")
+kh.short <- prune_taxa(taxa_sums(kh)>100,kh)
+sample_data(kh.short)[,c("Label")] <- c("Europe t=0","USA t+1 mo","USA t+2 mo")
+mhg_plot_top_heat(kh.short)
+```
+
+Notice how Kevin's microbiome shifted dramatically a month after arriving in the US.  Soon after that, he began taking a probiotic supplement, but his gut -- while different -- hasn't shifted as much as it did from the international move.
 
 
 #### (Tentative) Conclusions and next steps

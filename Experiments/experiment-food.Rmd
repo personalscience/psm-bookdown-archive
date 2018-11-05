@@ -124,10 +124,168 @@ Notice how in nearly every case, flax-eating appears to affect microbiome abunda
 ```
 
 
-what about other foods, like cupcakes?
+what about other foods?  How about yogurt?
 
-```{r}
+```{r experimentFoodGeneric}
+yogurt_days <- mhg_food_days(rikfood,"yogurt")
+food_day <- yogurt_days
+food_nextday <- yogurt_days + 1
+
+food_df <- data.frame(food = factor("no item"),
+                      date = as.Date(seq.Date(range(rikfood$Date)[1],range(rikfood$Date)[2],by=1)) )
+
+levels(food_df$food) <- factor(c("no item","item","item day two"))
+
+
+food_df[!is.na(match(food_df$date,food_day)),]$food <- "item" # days where I ate flax
+food_df[!is.na(match(food_df$date,food_nextday)),]$food <- "item day two"
+
+
+ps.food <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item"))$date)
+ps.food <- prune_taxa(taxa_sums(ps.food)>500,ps.food)
+ps.food_nextday <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item day two"))$date)
+ps.food_nextday <- prune_taxa(taxa_sums(ps.food_nextday)>500,ps.food_nextday)
+
+ps.nofood <- subset_samples(gut.norm.nodupes, Date %in% (food_df %>% filter(food=="no item"))$date)
+ps.nofood <- prune_taxa(taxa_sums(ps.nofood)>500,ps.nofood)
+food.df <- mhg_range_for(ps.food)
+nofood.df <- mhg_range_for(ps.nofood)
+foodNext.df <- mhg_range_for(ps.food_nextday)
+
+foodDiff <- full_join(food.df,nofood.df, by = "taxa") %>% select(taxa,food = mean.x,nofood = mean.y) %>%
+  transmute(taxa,food=food/10000,nofood=nofood/10000) %>% transmute(taxa,nofood, foodAdvantage=food-nofood) %>%
+  arrange(desc(foodAdvantage)) %>% na.omit()
+
+foodDiff1 <- full_join(foodDiff,foodNext.df, by = "taxa") %>%
+  select(taxa,foodAdvantage, nofood, food1_mean = mean) %>%
+  transmute(taxa,foodAdvantage,food1_mean = food1_mean/10000 - nofood, sum = foodAdvantage+food1_mean)
+
+
+
+foodDiff2 <- foodDiff1 %>% gather(day,diff_means,food1_mean,foodAdvantage) %>% na.omit() %>% arrange(taxa) 
+foodDiff2$taxa <- factor(foodDiff2$taxa)
+foodDiff2$day[foodDiff2$day=="food1_mean"]<-"day of"
+foodDiff2$day[foodDiff2$day=="foodAdvantage"]<-"day after"
+foodDiff2$day <- factor(foodDiff2$day)
+
+
+ggplot(data=foodDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = paste0("Genus microbes associated with eating yogurt"," (n=",
+                      length((food_df %>% filter(food=="item"))$food), ")"),
+       x = "Taxa (genus)",
+       y = "Difference in mean abundance (%)")
+
+
+```
+
+
+```{r experimentFoodAlcohol}
+alcohol_days <- mhg_food_days(rikfood,"beer|wine|ale|whiskey|pinot|chardonnay|cabernet|merlot|leinenkugels|pilsner|ipa")
+food_day <- alcohol_days
+food_nextday <- alcohol_days + 1
+
+food_df <- data.frame(food = factor("no item"),
+                      date = as.Date(seq.Date(range(rikfood$Date)[1],range(rikfood$Date)[2],by=1)) )
+
+levels(food_df$food) <- factor(c("no item","item","item day two"))
+
+
+food_df[!is.na(match(food_df$date,food_day)),]$food <- "item" # days where I ate flax
+food_df[!is.na(match(food_df$date,food_nextday)),]$food <- "item day two"
+
+
+ps.food <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item"))$date)
+ps.food <- prune_taxa(taxa_sums(ps.food)>500,ps.food)
+ps.food_nextday <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item day two"))$date)
+ps.food_nextday <- prune_taxa(taxa_sums(ps.food_nextday)>500,ps.food_nextday)
+
+ps.nofood <- subset_samples(gut.norm.nodupes, Date %in% (food_df %>% filter(food=="no item"))$date)
+ps.nofood <- prune_taxa(taxa_sums(ps.nofood)>500,ps.nofood)
+food.df <- mhg_range_for(ps.food)
+nofood.df <- mhg_range_for(ps.nofood)
+foodNext.df <- mhg_range_for(ps.food_nextday)
+
+foodDiff <- full_join(food.df,nofood.df, by = "taxa") %>% select(taxa,food = mean.x,nofood = mean.y) %>%
+  transmute(taxa,food=food/10000,nofood=nofood/10000) %>% transmute(taxa,nofood, foodAdvantage=food-nofood) %>%
+  arrange(desc(foodAdvantage)) %>% na.omit()
+
+foodDiff1 <- full_join(foodDiff,foodNext.df, by = "taxa") %>%
+  select(taxa,foodAdvantage, nofood, food1_mean = mean) %>%
+  transmute(taxa,foodAdvantage,food1_mean = food1_mean/10000 - nofood, sum = foodAdvantage+food1_mean)
+
+
+
+foodDiff2 <- foodDiff1 %>% gather(day,diff_means,food1_mean,foodAdvantage) %>% na.omit() %>% arrange(taxa) 
+foodDiff2$taxa <- factor(foodDiff2$taxa)
+foodDiff2$day[foodDiff2$day=="food1_mean"]<-"day of"
+foodDiff2$day[foodDiff2$day=="foodAdvantage"]<-"day after"
+foodDiff2$day <- factor(foodDiff2$day)
+
+
+ggplot(data=foodDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = paste0("Genus microbes associated with eating alcohol"," (n=",
+                      length((food_df %>% filter(food=="item"))$food), ")"),
+       x = "Taxa (genus)",
+       y = "Difference in mean abundance (%)")
+
+
+```
+
+
+Or cupcakes:
+
+```{r experimentFoodCupcake}
 cupcake_days <- mhg_food_days(rikfood,"cupcake")
-cupcake_days
+food_day <- cupcake_days
+food_nextday <- cupcake_days + 1
+
+food_df <- data.frame(food = factor("no item"),
+                      date = as.Date(seq.Date(range(rikfood$Date)[1],range(rikfood$Date)[2],by=1)) )
+
+levels(food_df$food) <- factor(c("no item","item","item day two"))
+
+
+food_df[!is.na(match(food_df$date,food_day)),]$food <- "item" # days where I ate flax
+food_df[!is.na(match(food_df$date,food_nextday)),]$food <- "item day two"
+
+
+ps.food <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item"))$date)
+ps.food <- prune_taxa(taxa_sums(ps.food)>500,ps.food)
+ps.food_nextday <- subset_samples(gut.norm.nodupes,Date %in% (food_df %>% filter(food=="item day two"))$date)
+ps.food_nextday <- prune_taxa(taxa_sums(ps.food_nextday)>500,ps.food_nextday)
+
+ps.nofood <- subset_samples(gut.norm.nodupes, Date %in% (food_df %>% filter(food=="no item"))$date)
+ps.nofood <- prune_taxa(taxa_sums(ps.nofood)>500,ps.nofood)
+food.df <- mhg_range_for(ps.food)
+nofood.df <- mhg_range_for(ps.nofood)
+foodNext.df <- mhg_range_for(ps.food_nextday)
+
+foodDiff <- full_join(food.df,nofood.df, by = "taxa") %>% select(taxa,food = mean.x,nofood = mean.y) %>%
+  transmute(taxa,food=food/10000,nofood=nofood/10000) %>% transmute(taxa,nofood, foodAdvantage=food-nofood) %>%
+  arrange(desc(foodAdvantage)) %>% na.omit()
+
+foodDiff1 <- full_join(foodDiff,foodNext.df, by = "taxa") %>%
+  select(taxa,foodAdvantage, nofood, food1_mean = mean) %>%
+  transmute(taxa,foodAdvantage,food1_mean = food1_mean/10000 - nofood, sum = foodAdvantage+food1_mean)
+
+
+
+foodDiff2 <- foodDiff1 %>% gather(day,diff_means,food1_mean,foodAdvantage) %>% na.omit() %>% arrange(taxa) 
+foodDiff2$taxa <- factor(foodDiff2$taxa)
+foodDiff2$day[foodDiff2$day=="food1_mean"]<-"day of"
+foodDiff2$day[foodDiff2$day=="foodAdvantage"]<-"day after"
+foodDiff2$day <- factor(foodDiff2$day)
+
+
+ggplot(data=foodDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(title = paste0("Genus microbes associated with eating cupcakes"," (n=",
+                      length((food_df %>% filter(food=="item"))$food), ")"),
+       x = "Taxa (genus)",
+       y = "Difference in mean abundance (%)")
+
+
 ```
 
