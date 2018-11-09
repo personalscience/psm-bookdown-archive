@@ -25,6 +25,12 @@ Paul was a pretty normal father of two teenagers when he noticed something odd i
 
 He wasn't worried, but a few months later his wife reminded him that his company insurance plan includes a free annual physical, and he thought why not. The doctor didn't seem worried either, but suggested a few more tests “just in case”, and unfortunately that's when he got the diagnosis that has been on his mind every day since: Stage IV colorectal cancer that has spread to his liver.
 
+```{r echo=FALSE, fig.cap = "Caught between Scylia and Carybdis. [Wikipedia Commons](https://commons.wikimedia.org/wiki/File:Johann_Heinrich_F%C3%BCssli_054.jpg)"}
+# knitr::include_graphics("CaseStudies/images/CaseCCR-477px-Johann_Heinrich_Füssli_054.jpg")
+```
+
+
+
 If you or a loved one find yourself in tragic situation like this, your first stop should always be with a medical professional. Paul's oncologist studied this full-time for years of medical school, has treated tens of thousands of cancer patients for 30 years, and gets paid to stay up-to-date on the latest science while interacting with other professionals like him. So it's beyond silly and arrogant -- not to mention dangerous -- to ask the opinion of an untrained amateur like me.
 
 But still. Nobody, not even the most caring and selfless doctor, feels the urgency of the situation more than Paul and his family. They'll try anything; and who can blame them?  The same careful, methodical and well-informed approach that makes the mainstream medical profession more effective over the long term, well, maybe it also makes this doctor just slightly more risk averse. There are treatments that no responsible doctor would consider, but what exactly is a "responsible" treatment when you know that your odds are tragically small?  Seriously, what's there to lose?
@@ -32,6 +38,13 @@ But still. Nobody, not even the most caring and selfless doctor, feels the urgen
 ---
 
 Intriguing new discoveries have been made in the past few years about the relationship between cancer and the microbiome, and Paul asked if I know anything based on my years of near-daily sampling and amateur study. Might we find something in his microbiome, something that perhaps his doctor hasn't thought to consider? Given all that's known about microbiome-healthy diets, maybe if we found something unusual, some out-of-place microbe, is there a chance we might uncover a new, more effective treatment? 
+
+```{r echo=FALSE, fig.cap = "The culprit? [Courtesy of Dr. Allen-Vercoe, University of Guelph Katz Lab](https://www.flickr.com/photos/92803392@N02/9460876768)"}
+knitr::include_graphics("CaseStudies/images/caseColorectalCancerFusobacterium.jpg")
+```
+
+
+
 
 Many cancers seem to have a relationship with the microbiome. There are at least ten viruses which are known to be carcinogenic, including Human papillomavirus (HPV) that causes cervical cancer, and for which there is a vaccine. Some scientists guess that most cancers will eventually be shown to have their origins in a microbe, and although that's mostly speculation at this point, the idea of using microbes to treat or prevent cancer has attracted interest for more than 100 years.
 
@@ -134,13 +147,11 @@ If you found some in your microbiome sample results, would that that mean you ar
 
 Researchers have found many other intriguing links between specific microbes and colorectal cancer, including a recent study hinting at an association with the *oral* microbiome: low abundance of _Lachnospiraceae_ in the gut apparently allows some oral pathogens to get a foothold in the gut mucosa.^[see "Low colonic abundance of _Lachnospiraceae_ favours colonisation of gut mucosa by oral pathogens linked to CRC" @flemer_oral_2017 ]
 
+Another study (@jacouton_probiotic_2017) found that drug-induced colorectal cancer in mice could be prevented by feeding them a probiotic strain of _Lactobacillus casei BL23_. Although the research is unlikely to apply to humans, this particular strain is known to affect the immune system, producing a cascade of molecules that  appear to change a rat's response to cancer cells. For what it's worth, Paul's sample includes a bit of genus _Lactobacillus_ and some _Bifidobacterium_ too, though the test can't tell the particular strain.
+
 Are any of these microbial connections worth further investigation? Sadly, the chances are slim, but keep in mind that the best scientists on earth don't know the answers either. It's arrogant and patronizing to suggest that patients and their families should defer only to "real" scientists on these questions.
 
-When fighting any terrible situation, false hope can be a greater danger than the disease itself if you become a victim of disreputable scammers, who are all-too-common in the world of health advice. Paul did the right thing by going first to an experienced oncologist, with whom he consults on everything, including the decision to test and study his microbiome.
-
-If -- and I believe, when -- a microbiome-informed cure for cancers becomes available, it will be thanks to the tireless effort of doctors, as well as people like Paul who are willing to ask questions.
-
-
+We need all the personal scientists we can get.
 
 ```{r caseStudyCCRBFraglis}
 # Uncomment this section to generate a dataframe showing an ordered list of the abundance of B fragilis in these people
