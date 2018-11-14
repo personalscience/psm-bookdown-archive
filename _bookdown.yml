@@ -3,6 +3,7 @@ author: "Richard Sprague"
 date: "`r Sys.Date()`"
 
 site: bookdown::bookdown_site
+cover-image: /assets/coverPersonalScience.jpg
 book_filename: "psm"
 delete_merged_file: true
 language:

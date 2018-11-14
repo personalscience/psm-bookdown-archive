@@ -48,35 +48,5 @@ When you hear the term "species", you probably think of a specific kind of creat
 
 But bacteria don't mate: they reproduce by dividing themselves in half. So how do we define a species? In fact, even terms like "parent" or "child" aren't quite appropriate if each new cell is an identical copy of the old one. For very broad categories, like phylum or even genus, the similarities among like cells is high enough that we feel comfortable grouping them together with a common name, but at what point do we reach the lowest, most _specific_ level. 
 
-The answer is tricky for another reason, called _horizontal gene transfer_, a process by which sometimes (in fact, quite often), a microbe will absorb genes from nearby microbes, altering its genome and its corresponding functions, sometimes significantly. Once that happens, the resulting new microbe can itself divide indefinitely, producing more and more copies of itself with the new gene. Although the new microbes still mostly resemble their original 
-
-<!-- ## Diversity -->
-
-<!-- The general consensus is that diversity is good: a greater variety of microbes ensures more resillience against the daily threat of invaders. Many people, after taking just one test, often feel either reassured that their diversity is "good" or disappointed that it's "bad". But I find that day-to-day variability is great enough that it's almost never useful to use a single result. For example, here's my diversity during a typical week: -->
-
-
-<!-- ```{r, plotOneWeekDiversity, echo= FALSE, warning = FALSE} -->
-<!-- plot_richness(subset_samples(sprague.family.norm, Date > "2017-03-15" & Date < "2017-03-27" & Site == "gut"), measures=c("InvSimpson"),x = "Date") + -->
-<!--   scale_x_date(date_labels = "%m-%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") + -->
-<!--   geom_smooth(method = "loess") +  -->
-<!--   ggtitle("Gut diversity changes day-to-day") -->
-<!-- ``` -->
-
-<!-- If I had only tested on Monday, I may have been disappointed with my 0.38 score. Wait another day or two and, with no significant changes in diet, I was up to 0.72 -- before plunging to 0.37 by the weekend. Moral: don't take a single result too seriously. -->
-
-<!-- To get a sense of how much diversity can vary over a year: -->
-
-<!-- ```{r, plotOneYearDiversity, echo= FALSE, warning = FALSE} -->
-<!-- plot_richness(subset_samples(sprague.family.norm, Date > "2016-06-01" & Site == "gut" & Reads > 10000), measures=c("InvSimpson"), x = "Date") + -->
-<!--   scale_x_date(date_labels = "%m-%Y", date_breaks = "3 months", date_minor_breaks = "1 month") + -->
-<!--   geom_smooth(method = "loess") +  -->
-<!--   ggtitle(paste("Gut diversity year-to-year through", -->
-<!--                 tail(sample_data(gut.norm)$Date,1))) -->
-
-<!-- ``` -->
-
-<!-- Although the blue moving-average line shows apparent stability, there are many days that are far above and below the average. Yes, at various times during this period I was eating different types of food, often in a deliberate attempt to influence my microbiome, but believe me: that is not the reason for the wild changes up and down. I also studied the mathematics behind how diversity is measured, hoping to find something more "accurate", but ultimately I concluded that, like many attempts to summarize the microbiome in a single number, the whole concept of diversity is a mirage. Everything depends. -->
-
-
-
+The answer is tricky for another reason, called _horizontal gene transfer_, a process by which sometimes (in fact, quite often), a microbe will absorb genes from nearby microbes, altering its genome and its corresponding functions, sometimes significantly. Once that happens, the resulting new microbe can itself divide indefinitely, producing more and more copies of itself with the new gene. Although the new microbes still mostly resemble their original ancestor, if the new gene makes a protein that affects your body somehow, it might as well be an entirely different species.
 
