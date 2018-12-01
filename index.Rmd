@@ -19,13 +19,13 @@ description: "An introduction to Personal Science and uncovering the secrets of 
 
 How healthy are you?
 
-This simple question is surprisingly difficult to answer quantitatively. Maybe you _feel_ healthy, but is that enough? To really understand your health, you'll need some context: How do you feel compared to ... yesterday?  a few years ago? How about compared to your close friends or family, or to an athlete or health expert you admire? The many ways you might add context to the question will greatly impact the answer.
+This simple question is surprisingly difficult to answer quantitatively. Maybe you _feel_ healthy, but is that enough? To really understand your health, you'll need some context: How do you feel compared to ... yesterday?  a few years ago? How about compared to your close friends or family, or to an athlete or health expert you admire? 
 
 A quantitative answer requires a systematic approach that integrates data collection, experiments, hypotheses, and iteration -- tools that are familiar to any scientist. 
 
 ---
 
-Science is curiosity, a passion for truth, and a never-ending process of systematic experimentation in pursuit of an understanding of the world around us.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
+Science is curiosity, a genuine and humble search for truth using a never-ending process of systematic experimentation.  It's open to everyone and can be applied to any situation, including situations that affect you right now.  It's _Personal Science_ when you use the scientific method to discover important insights about the wellness and performance of yourself and those around you. 
 
 This book will introduce you to one exciting area of personal science: understanding your own microbiome. Our [companion web site](https://personalscience.com/) lets you upload your own data and compare it to others to make your own discoveries.
 
@@ -33,25 +33,22 @@ This book will introduce you to one exciting area of personal science: understan
 
 # What is Personal Science? 
 
-If you suffer from a chronic condition, one of your first struggles is simply knowing the level of severity. What is the precise version or name of this disease? What makes you different from a healthy person, or from the healthy person you used to be? Are there other people with the same condition, and if so, how does your situation compare to theirs? Are you getting better or worse?
+If you suffer from a chronic condition, one of your first struggles is simply *how bad is it?*. What is the precise version or name of this disease? What makes you different from a healthy person, or from the healthy person you used to be? Are there other people with the same condition, and if so, how does your situation compare to theirs? Are you getting better or worse?
 
-In other words, you want to know the *context*. A first step in approaching your situation is to simply understand how you compare…to healthy people, to those who have the same condition as you do, to people who have partially or fully recovered. Are you improving or deteriorating? 
+In other words, you want to know the *context*. The first step in any treatment plan requires that you understand how you compare…to healthy people, to those who have the same condition as you do, to people who have partially or fully recovered. Are you improving or deteriorating? 
 
 Even symptom tracking is just one aspect of the question of context. I want to know more precisely the conditions under which my problem gets better or worse. In other words, what is the *context*? (e.g. are my migraines triggered by high altitudes, by caffeine, by stress, by something else? All of these are just other ways of saying “context”).
 
-One simple example: if I wake up in the morning with a headache, or if I feel nauseous, my attitude — my response — will depend on which of the following is true:
+One simple example: what's the best way to treat a headache?  There's no good answer to that question unless you understand something about the context surrounding the person involved. The appropriate response will depend on whether he or she:
 
-1.  I drank lots of alcohol the night before
+* gets headaches all the time.
+* rarely gets headaches.
+* drank heavily the night before.
+* recently ate raw seafood from a street vendor.
+* Underwent a course of antibiotics for a tick bite last summer and seemed to get better until now.
 
-2.  I ate raw seafood from a street vendor.
+We know intuitively that each medical situation depends on the circumstances. Doctors are helpful partly because they've seen so many other cases that they can quickly focus attention on the aspects that are important to a specific individual. In other words, doctors are trained to recognize the full *context*, to see how this situation compares to others.
 
-3.  Someone in my family felt like this a few days ago.
-
-4.  I was bitten by a tick last Summer and underwent a course of antibiotics that supposedly cleared it up — at least that’s what the test said.
-
-5.  I’m a 90-year-old bedridden man on lots of medications.
-
-These examples are of course extreme — we intuitively understand that a diagnosis depends on the cause behind the symptoms — but even when the cause is known, our treatment options will be guided by *context*, by reference values.
 
 ## Reference Values
 
@@ -61,7 +58,7 @@ So the real question in any medical condition is: what is the reference value? W
 
 For many (most) situations, the reference values have been pre-computed based the medical community’s long experience treating patients like you. We know that X% of people with your type of cancer respond well to this drug. We know that Y% of people who smoke develop this disease. And on and on.
 
-But for some situations, there is no reference value. The microbiome, for example. Nobody knows what “healthy” is, in general. We need more data before we can say definitively that such-and-such abundance levels are “healthy” or “unhealthy”.
+But for some situations -- like data from microbiome tests -- there is no reference value. Nobody knows what a "healthy" microbiome looks like. We need more data before we can say definitively that such-and-such abundance levels are “healthy” or “unhealthy”.
 
 In other cases, there are reference values for the general population, but not necessarily for you. The average height of a 3-year-old girl, for example, is based on data from umpteen thousands of 3-year-olds, but what about among 3-year-olds of your ethnic group, or your family, or people of your socio-economic class, or those in your neighborhood? Whether to consider *your* 3-year-old for special treatment depends entirely on which reference group you are using.
 

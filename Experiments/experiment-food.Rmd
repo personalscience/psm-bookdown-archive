@@ -1,9 +1,39 @@
 
 ## Other foods and my microbiome ** {#experimentFood}
 
-Flax is often described as a powerful food source for gut bacteria. Can we tell which microbes are most affected, and by how much?
+Food affects the microbiome, but can we tell more about which types of food and the specific microbes they affect?
+
+I carefully tracked precisely which foods I ate and computed the totals for the main macronutrients. How do the abundance levels of a typical microbe change in response?
+
+```{r experimentfoodComputeNutrient, fig.cap="See the interactive version of this chart: https://personalscience.shinyapps.io/shinyactinodb/"}
+d <- tbl_df(mhg_taxa(gut.norm, "Bifidobacterium") %>% filter(date > "2017-06-01" & date < "2017-06-30"))
+names(d) <- c("Date","Abundance")
+
+f1 <- tbl_df(rikfood %>% filter(Date > "2017-06-01" & Date < "2017-06-30"))
+
+f <- f1 %>% group_by(Date) %>% summarise(Fiber=sum(Fibre),Sugar= sum(Sugars), Carbs = sum(Carbs), Fat = sum(Fat))  %>% left_join(d)
+
+
+ggplot(data = f %>% gather(Food, Value, Fiber, Sugar, Fat, Carbs), aes(x=Date, y = Abundance/40000)) +
+  geom_line(aes(y = Value/40, color = Food)) +
+  geom_bar(stat = "identity") +
+  labs(title="Bifidobacterium", y="%") +  
+  scale_y_continuous(sec.axis = sec_axis(~.*40, name = "Grams"))
+```
+
+
+Hard to see any particular patterns, but keep in mind that some foods take longer to digest than others. The abundance levels might be difficult to spot unless we did a carefully controlled experiment involving only a single type of food.
+
+Instead of the macronutrients, maybe we can learn something by looking at a specific food.  Flax is often described as a powerful food source for gut bacteria. Can we tell which microbes are most affected, and by how much?
 
 By tracking daily, I'm able to see trends and relationships that wouldn't show up in a normal large trial.
+
+
+You can look at all my data here:
+
+<iframe width="450" height="400" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/shinyactinodb/"> </iframe>
+
+---
 
 
 
@@ -70,7 +100,7 @@ flaxDiff2$day[flaxDiff2$day=="flaxAdvantage"]<-"day after"
 flaxDiff2$day <- factor(flaxDiff2$day)
 
 
-ggplot(data=flaxDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity") +
+ggplot(data=flaxDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum), y = diff_means, fill=day)) + geom_bar(stat="identity", position = "identity") +
   theme(axis.text.x = element_text(angle=90)) +
   labs(title = paste0("Genus microbes associated with eating flax"," (n=",
                       length((flax_df %>% filter(flax=="flax"))$flax), ")"),
@@ -288,4 +318,5 @@ ggplot(data=foodDiff2 %>% filter(abs(diff_means)>0.05), aes(x=reorder(taxa,-sum)
 
 
 ```
+
 
