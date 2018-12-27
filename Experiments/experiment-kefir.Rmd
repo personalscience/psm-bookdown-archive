@@ -14,7 +14,7 @@ kefir <- "kefir"
 
 
 fromDate <- as.Date("2016-11-01")
-toDate <- as.Date("2018-10-01")
+toDate <- as.Date("2018-12-31")
 kefir.day <- c(as.Date("2016-12-02"),unique(food[str_detect(food$Name, kefir),"Date"]))
 kefir.day <- kefir.day[kefir.day<toDate]
 
@@ -23,13 +23,13 @@ kefir.day <- c(kefir.day, kefir.moredays$Date)
 
 kefir.top <- subset_taxa(gut.norm, Genus %in% c("Leuconostoc") ) #,"Fusicatenibacter"))
 
-plot_bar(subset_samples(kefir.top, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
+g <- plot_bar(subset_samples(kefir.top, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
   ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
   annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + 
   scale_x_date(date_labels = "%b",
-                date_breaks = "1 month", date_minor_breaks = "2 weeks")
+                date_breaks = "1 month", date_minor_breaks = "2 weeks") 
 
-
+g +geom_point(aes(x=g$data$Date,y=0),color="red",alpha=0.3,size=1)
 ```
 
 The blue dots in the chart are days when I drank kefir. Since I sample near-daily over the entire chart, we can see that both of these taxa suddenly appeared shortly after I began to consume kefir. I had almost none beforehand. Also note that the levels seem to dip when I skip drinking for a few days, such as during my business trips out of town in mid-March and another in early-April.
@@ -126,7 +126,7 @@ In fact, look how the levels appear to coincide precisely with the periods when 
 
 
 plot_bar(subset_samples(kefir, Date %in% seq(from=fromDate,to=toDate, by=1) ), fill = "Genus", x = "Date") +
-  ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
+  ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
   annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + facet_grid(Genus~., scale="free_y", drop=TRUE) + theme(legend.position = "none")
 
  # annotate("pointrange",x = sample_data(kefir.genus)$Date, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1)

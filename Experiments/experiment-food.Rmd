@@ -31,7 +31,7 @@ By tracking daily, I'm able to see trends and relationships that wouldn't show u
 
 You can look at all my data here:
 
-<iframe width="450" height="400" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/shinyactinodb/"> </iframe>
+<iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/shinyactinodb/"> </iframe>
 
 ---
 
