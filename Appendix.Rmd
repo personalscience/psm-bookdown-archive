@@ -8,21 +8,7 @@ Here are summaries of the overall results of my own testing.
 Which are the most common gut taxa?  Let's look first at Phylum level
 
 ```{r, plotOverallPhylumVariability, echo= FALSE, warning = FALSE}
-# 
-# # plot the range of abundances for top taxa in PS
-# plot_top <- function (ps) {
-#   ps.top <- prune_taxa(names(sort(taxa_sums(ps),TRUE)[1:25]), ps)
-#   df <- as.data.frame(otu_table(ps.top))
-#   df$taxa <- factor(row.names(df))
-#   df <- gather(df, ssr, abundance, -taxa)
-#   df$abundance <- df$abundance 
-#   ggplot(data=df, aes(x=taxa,y=abundance)) + geom_boxplot() +
-#     theme(axis.text.x = element_text(angle=90)) + coord_trans(y="identity") + ylab("Abundance (%)")
-#   
-# }
 
-# plot_top(phylum.gut) + ylab("Sprague Log10 Abundance") + scale_y_log10() +
-#   ggtitle("Top 25 Phylum Abundance")
 
 mhg_plot_top(prune_taxa(taxa_sums(gut.phylum.norm)>500,gut.phylum.norm)) + ylab("Sprague Abundance")  +
   ggtitle("Top Phylum")
@@ -34,20 +20,11 @@ In these boxplot charts, the long box in the middle represents a range between 2
 The Genus level reflects this with more detail, and variability:
 
 ```{r, plotOverallGenusVariability, echo=FALSE, warning = FALSE}
-# plot_top(phylum.gut) + ylab("Sprague Abundance")  +
-#   ggtitle("Top 25 Phylum") +
-#   scale_y_continuous(labels=function(x)x/10000) #+
-
 
 mhg_plot_top(gut.norm) + ylab("Sprague Log10 (%) Abundance") + 
   scale_y_continuous(trans="log10",labels=function(x) x/10000) + 
   ggtitle("Top 25 Genus Abundance % (Gut)")
 
-mhg_plot_top(gut.norm) + ylab("Sprague Log10 Abundance") + scale_y_log10() +
-  ggtitle("Top 25 Genus Abundance (Gut)")
-
-# plot_top(gut.norm) + ylab("Sprague Abundance")  +
-#   ggtitle("Top 25 taxa abundance") + scale_y_continuous(labels=function(x)x/10000)
 ```
 
 ## Healthy ranges {#appendixHealthyRanges}
@@ -119,4 +96,233 @@ mhg_plot_top(subset_samples(sprague.genus.norm, Site == "skin"))
 ```{r}
 mhg_plot_top(subset_samples(sprague.genus.norm, Site == "nose"))
 ```
+
+## Lab Tests Compared
+
+ When I tested the same sample from two labs, the similarities and differences are in the tables below.
+ 
+uBiome vs Thryve: Table \@ref(tab:thryvePhylum).
+
+```{r thryvePhylum}
+#thryveResults <- read.csv("../assets/ThryveMicrobes.csv")
+thryveResults <- read.csv("./assets/Thryve-2017-02-08.csv")
+thryve.ub.phylum <- subset_samples(gut.phylum.norm, SSR == 98989)
+tp <- thryveResults %>% filter(rank == "phylum") %>% select(tax_name = name,Percent = count)  # Thryve Phylum (tp)
+tp$lab <- "thryve"
+tp$Percent <- tp$Percent/1000
+up <- as.data.frame(otu_table(thryve.ub.phylum)/10000)
+up$lab <- "ubiome"
+up$tax_name <- factor(rownames(up))
+colnames(up) <- c("Percent","lab","tax_name")
+
+#tu<-full_join(up,tp)
+# with(tu,table(tax_name,lab)) # tells count of which lab has the microbe
+
+tu <- spread(full_join(up,tp), lab, Percent) %>% arrange(desc(thryve))
+knitr::kable(tu[1:10,], digits = 2, col.names = c("Phylum","Thryve (%)","uBiome (%)"),
+      caption = "Phylum-level abundances from the sample sample.")
+
+
+```
+
+
+
+and genus-level comparisons are in Table \@ref(tab:thryveGenus).
+
+```{r thryveGenus}
+
+thryve.ub.genus <- subset_samples(gut.norm, SSR == 98989)
+tg <- thryveResults %>% filter(rank == "genus") %>% select(tax_name = name,Percent = count)  # Thryve Phylum (tp)
+tg$lab <- "thryve"
+tg$Percent <- tg$Percent/1000
+ug <- as.data.frame(otu_table(thryve.ub.genus)/10000)
+ug$lab <- "ubiome"
+ug$tax_name <- factor(rownames(ug))
+colnames(ug) <- c("Percent","lab","tax_name")
+
+#tu<-full_join(up,tp)
+# with(tu,table(tax_name,lab)) # tells count of which lab has the microbe
+
+tu <- spread(full_join(ug,tg), lab, Percent) %>% arrange(desc(thryve))
+knitr::kable(tu[1:15,], digits = 2, col.names = c("Genus","Thryve (%)","uBiome (%)"),
+      caption = "Genus-level abundances from the sample sample.")
+
+```
+
+
+
+At the phylum level, the samples are remarkably similar (Table \@ref(tab:dayTwoBreakdown)), though less so at the genus level  (Table \@ref(tab:dayTwoBreakdownGenus)).
+
+```{r dayTwoBreakdown}
+
+dayTwoResults <- read.csv("./assets/DayTwoMicrobes.csv")
+
+daytwo.ub.phylum <- subset_samples(sprague.phylum.norm, SSR %in% c(174579)) #,174603))  # later change this so we can see both samples
+dp <- dayTwoResults %>% filter(tax_rank == "phylum") %>% select(tax_name,Me.DayTwo)  # Daytwo Phylum dp)
+dp$Percent <- as.numeric(str_replace(dp$Me.DayTwo, pattern="%", "")) *100
+dp$lab <- "daytwo"
+
+up <- as.data.frame(otu_table(daytwo.ub.phylum)/10000)
+up$lab <- "ubiome"
+up$tax_name <- factor(rownames(up))
+colnames(up) <- c("Percent","lab","tax_name")
+
+#tu<-full_join(up,tp)
+# with(tu,table(tax_name,lab)) # tells count of which lab has the microbe
+
+du <- spread(full_join(up,select(dp,-Me.DayTwo)), lab, Percent) %>% arrange(desc(daytwo))
+kable(du[1:10,], digits = 2, col.names = c("Phylum","DayTwo (%)","uBiome (%)"),
+      caption = "Phylum-level abundances from the sample sample.")
+
+```
+
+
+```{r dayTwoBreakdownGenus}
+
+#dayTwoResults <- read.csv("./assets/DayTwoMicrobes.csv")
+
+daytwo.ub.genus <- subset_samples(sprague.genus.norm, SSR %in% c(174579,174603))  # later change this so we can see both samples
+dg <- dayTwoResults %>% filter(tax_rank == "genus") %>% select(tax_name,Me.DayTwo)  # Daytwo Phylum dp)
+dg$Percent <- as.numeric(str_replace(dg$Me.DayTwo, pattern="%", "")) *100
+dg$lab <- "daytwo"
+
+ug <- as.data.frame(otu_table(daytwo.ub.genus)/10000)
+ug$lab <- "ubiome"
+ug$tax_name <- factor(rownames(ug))
+colnames(ug) <- c("Percent", "UB Sample 2","lab","tax_name")
+
+### BEGIN WORKS
+### this section works, but it only looks at one ub sample
+
+ug$`UB Sample 2` <- NULL
+
+
+du <- spread(full_join(ug,select(dg,-Me.DayTwo)), lab,Percent)  %>% arrange(desc(daytwo))
+kable(du[1:15,], digits = 2, col.names = c("Genus","DayTwo (%)","uBiome 2 (%)"),
+      caption = "Phylum-level abundances from the sample sample.")
+
+
+ug <- as.data.frame(otu_table(daytwo.ub.genus)/10000)
+ug$lab <- "ubiome"
+ug$tax_name <- factor(rownames(ug))
+colnames(ug) <- c("UB Sample 1", "Percent","lab","tax_name")
+ug$`UB Sample 1` <- NULL
+du <- spread(full_join(ug,select(dg,-Me.DayTwo)), lab,Percent)  %>% arrange(desc(daytwo))
+kable(du[1:15,], digits = 2, col.names = c("Genus","DayTwo (%)","uBiome 1 (%)"),
+      caption = "Genus-level abundances from the sample sample.")
+
+
+### END WORKS
+
+#tu<-full_join(up,tp)
+# with(tu,table(tax_name,lab)) # tells count of which lab has the microbe
+
+
+#spread(full_join(ug,select(dg,-Me.DayTwo)), lab,Percent)
+# spread(full_join(select(ug,-`UB Sample 2`),select(dg,-Me.DayTwo)), lab,Percent)
+
+# f <- full_join(ug,select(dg,-Me.DayTwo), by = c("lab","tax_name","Percent","UB Sample 2" = "Percent"))
+# f$lab <- factor(f$lab)
+# 
+# du <- spread(full_join(ug,select(dg,-Me.DayTwo), by = c("lab","tax_name","Percent","UB Sample 2" = "Percent")),lab,Percent) %>% arrange(desc(daytwo))
+# kable(du[1:15,], digits = 2, col.names = c("Genus","DayTwo (%)","uBiome (%)"),
+#       caption = "Phylum-level abundances from the sample sample.")
+
+```
+
+### Viome
+Instead of looking at the bacterial DNA, which at best only tells which organisms are present, this company looks at the genes that those microbes are using. Called "metatranscriptomics", the process is much more expensive because it requires looking at the RNA that are used while transcribing genes into proteins, but the result is a better look at what is actually happening.
+
+I submitted the same sample to two labs, one to Viome and the other to the uBiome 16S lab. The results are quite different (see Table \@ref(tab:viomeBreakdownPhylum) and \@ref(tab:viomeBreakdownGenus) Species details in Table \@ref(tab:viomeTaxrank).
+).
+
+```{r viomeBreakdownPhylum}
+
+#viomeResults <- read.csv("../assets/ViomeMicrobes.csv")
+viomeResults <- readxl::read_excel(path = "./assets/ViomeMicrobes.xlsx", sheet = "ViomeMicrobes")
+
+viome.ub.phylum <- subset_samples(sprague.phylum.norm, SSR == 378005) # SSR = 378005
+viome.ub.phylum <- prune_taxa(taxa_sums(viome.ub.phylum)>0,viome.ub.phylum)
+vp <- viomeResults %>% filter(tax_rank == "phylum") %>% select(tax_name,Percent)  # Viome Genus (vg))
+vp$lab <- "viome"
+vp$Percent <- vp$Percent*100
+up <- na.omit(as.data.frame(otu_table(viome.ub.phylum)/10000))
+
+up$lab <- "ubiome"
+up$tax_name <- factor(rownames(up))
+colnames(up) <- c("Percent","lab","tax_name")
+
+vu <- spread(full_join(vp,up), lab, Percent) %>% arrange(desc(viome))
+kable(vu[1:10,c("tax_name","viome","ubiome")], digits = 2, col.names = c("Phylum","Viome (%)","uBiome (%)"),
+      caption = "Phylum-level abundances from the sample sample.")
+```
+
+
+```{r viomeBreakdownGenus}
+
+#viomeResults <- read.csv("../assets/ViomeMicrobes.csv")
+#
+# 
+# kable(select(filter(viomeResults,tax_rank=="phylum"),"tax_name","Viome","X16S"), col.names = c("Phylum","Viome (%)","uBiome (%)"), digits=2,
+#       caption = "Phylum level breakdown as seen by Viome and uBiome in the same sample.")
+
+
+
+viome.ub.genus <- subset_samples(sprague.genus.norm, SSR == 378005) # SSR = 378005
+vg <- viomeResults %>% filter(tax_rank == "genus") %>% select(tax_name,Percent)  # Viome Genus (vg))
+vg$lab <- "viome"
+vg$Percent <- vg$Percent*100
+ug <- as.data.frame(otu_table(viome.ub.genus)/10000)
+
+ug$lab <- "ubiome"
+ug$tax_name <- factor(rownames(ug))
+colnames(ug) <- c("Percent","lab","tax_name")
+
+vu <- spread(full_join(vg,ug), lab, Percent) %>% arrange(desc(viome))
+kable(vu[1:15,c("tax_name","viome","ubiome")], digits = 2, col.names = c("Genus","Viome (%)","uBiome (%)"),
+      caption = "Genus-level abundances from the sample sample.")
+
+```
+
+
+```{r viomeTaxrank, fig.cap = "uBiome results for same sample submitted to Viome."}
+viome.genus <- subset_samples(sprague.genus.norm, SSR == 378005) # SSR = 378005
+viome.family <- subset_samples(sprague.family.norm, SSR == 378005) # SSR = 378005
+viome.phylum <- subset_samples(sprague.phylum.norm, SSR == 378005) # SSR = 378005
+viome.ub.species <- subset_samples(sprague.species.norm, SSR == 378005)
+viome.ub.species <- prune_taxa(taxa_sums(viome.ub.species)>0,viome.ub.species)
+viome <- prune_taxa(taxa_sums(viome.genus)>20,viome.genus)
+kable(mhg_abundance(viome.ub.species, top = 10)/10000, digits = 2, col.names = c("Species % (16s)"))
+estimate_richness(viome.family)
+
+```
+
+
+
+### Gencove
+
+Another company offering microbiome (and other genomic) testing is Gencove.
+
+I tested a Gencove kit on the same cheek sample I used for a uBiome mouth test. Gencove's directions ask me to spit into a vial. I then dipped a uBiome swab into the vial.  Using a *separate* uBiome test kit, I sampled my cheek microbiome in my normal way -- just a swab against the inside of my mouth, on the right and left cheeks, carefully avoiding other parts of the mouth like the tongue or lips.  See Table \@ref(tab:gencovePhylum) for results.
+```{r gencovePhylum}
+
+gencove.phylum.ub <- subset_samples(sprague.phylum.norm, grepl("Gencove",Label))
+
+gencove.ub <- mhg_abundance(gencove.phylum.ub, top=5)/10000
+gencove.ub$taxa <- row.names(gencove.ub)
+names(gencove.ub) <-c("uBiome Vial","uBiome Cheek", "Phylum")
+gencove.raw <- data.frame(c("Firmicutes","Bacteroidetes","Proteobacteria","Actinobacteria","Fusobacteria"),
+                          c(0.37,0.23,0.22,0.16,0.01)*100)
+names(gencove.raw)<-c("Phylum","Gencove")
+
+gencove<-inner_join(gencove.ub,gencove.raw, by="Phylum")
+
+
+kable(gencove %>% select(Phylum,`uBiome Vial`, `uBiome Cheek`,`Gencove`),digits=2,
+      caption = "Phylum-level comparisons of the same sample. Units are percentage abundance.")
+```
+
+It makes sense that the uBiome results would differ from one another: one is a mixed sample taken from a distributed mix of saliva within the mouth and the other is a simple swab along the cheek -- a very different ecosystem from the rest of the mouth. If you squint a little, the Gencove top results look similar to the uBiome cheek sample, with similar abundances across the board -- with one major exception, the phylum _Actinobacteria_. Unfortunately this exception is too big to ignore. Besides, it's not really fair to compare the cheek sample -- you have to compare the vial samples with each other.
+
+The bottom line is that different labs show different results, sometimes with such a major difference that you can't really compare them.
 
