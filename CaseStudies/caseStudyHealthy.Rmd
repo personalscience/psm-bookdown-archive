@@ -11,9 +11,23 @@ A statistically-generated NMDS diagram is an easy way to show hundreds of sample
 # healthy.phylum <- subset_samples(people.phylum,SSR %in% healthy.ssrs)
 # healthy.family <- subset_samples(people.family,SSR %in% healthy.ssrs)
 
+p.family.gut <- subset_samples(people.family, Site=="gut")
+unique_names <- unique(sample_data(p.family.gut)$Username)
+new_names <- paste0("U",seq(1,length(unique_names)))
+u.df <- data_frame(old_name = unique_names,new_name = new_names)
+
+p.names <- sample_data(p.family.gut)$Username
+
+for (name in p.names){
+  n<- dplyr::filter(u.df,old_name==name) %>% pull(new_name)
+  p.names[which(name == p.names)]<-n
+  
+}
+sample_data(p.family.gut)$Username <- p.names
+
 sink("junk.txt")
-ord <- ordinate(subset_samples(people.family, Site=="gut"),method = "NMDS", distance = "bray")
-plot_ordination(subset_samples(people.family, Site=="gut"),ord, color = "Condition", label = "Username")
+ord <- ordinate(p.family.gut,method = "NMDS", distance = "bray")
+plot_ordination(p.family.gut,ord, color = "Condition", label = "Username")
 sink()
 file.remove("junk.txt")
 

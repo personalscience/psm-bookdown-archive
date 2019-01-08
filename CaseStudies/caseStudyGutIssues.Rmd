@@ -1,6 +1,23 @@
 ## Gut Issues
 
-Probably the most common reason people are motivated to study their microbiome is due to their discomfort with their gut.
+Probably the most common reason people are motivated to study their microbiome is gut dysbiosis. The word "dysbiosis" is as good a diagnosis as any for a problem that is often frustratingly difficult to pin down.
+
+Ten years ago, CT was in excellent health, active in sports with a lean, muscular build. But after a trip to China, and a bout of what he thought was food poisoning, he hasn't been the same. Food allergies, sensitivities to chemicals and bright lights, fatigue, and unexplained muscular problems. Doctors were baffled. Nothing seemed to help, and it looked like he might simply have to accept that this was the new way he'd have to live.
+
+The first thing to note is that this sample is pretty similar in overall diversity to the healthy samples in our database. 
+
+```{r CTOverview, fig.cap="The blue line is CT."}
+ct.gut.family <- subset_samples(people.family, Username == "ct")
+
+estimate_richness(ct.gut.family, measures = "Shannon")
+estimate_richness(people.family.healthy.gut, measures = "Shannon") %>% pull(Shannon) %>% median()
+
+estimate_richness(people.family.healthy.gut, measures = "Shannon") %>% arrange(Shannon) %>%   ggplot(aes(Shannon)) + geom_histogram(aes(x=Shannon), bins = 50) + 
+  geom_vline(xintercept=estimate_richness(ct.gut.family, measures = "Shannon") %>% pull(),
+             color = "blue")
+```
+
+
 
 CB is a health-conscious woman who has long suffered from gut issues.
 
