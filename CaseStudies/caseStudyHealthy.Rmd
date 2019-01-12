@@ -11,6 +11,7 @@ A statistically-generated NMDS diagram is an easy way to show hundreds of sample
 # healthy.phylum <- subset_samples(people.phylum,SSR %in% healthy.ssrs)
 # healthy.family <- subset_samples(people.family,SSR %in% healthy.ssrs)
 
+# further anonymize the names in this chart
 p.family.gut <- subset_samples(people.family, Site=="gut")
 unique_names <- unique(sample_data(p.family.gut)$Username)
 new_names <- paste0("U",seq(1,length(unique_names)))
@@ -48,7 +49,7 @@ df <- plot_ordination(people.family.healthy.gut,ord, color = "Condition", label 
   
 levels(df$Condition) <- c(levels(df$Condition),"Me")
 
-
+# julie knowles
 ggplot(data = df %>% mutate(Condition=replace(Condition,Username=="jk","Me")) , aes(x=NMDS1,y=NMDS2, color = Condition, size = as.numeric(Condition))) + geom_point() +
   guides(size = FALSE)
 
