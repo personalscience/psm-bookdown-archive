@@ -1,5 +1,8 @@
 ## Lyme Disease {#CaseStudyLyme}
 
+NOTE: THIS CHAPTER IS AN EARLY DRAFT
+
+
 What can we learn about Lyme disease?
 
 We know that Lyme disease has been linked to the pathogen _Borrelia_. The uBiome 16S pipeline doesn’t appear able to distinguish among the different species of that taxa, so let's look at a higher level, the family _Spirochaetaceae_, which includes _Borrelia._  Several people with confirmed lyme disease sent me their samples, and indeed I _do_ find some _Spirochaetaceae_ in these samples, albeit at very low abundance.

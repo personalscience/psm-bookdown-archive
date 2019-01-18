@@ -35,8 +35,8 @@ Hundreds of people have sent me their microbiome results. Here are some examples
 <!-- ```{r child = "CaseStudies/caseStudyParkinsons.Rmd"} -->
 <!-- ``` -->
 
-<!-- ```{r child = "CaseStudies/caseStudyLyme.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/caseStudyLyme.Rmd"}
+```
 
 
 <!-- ```{r child = "CaseStudies/caseStudyOther.Rmd"} -->
@@ -48,7 +48,7 @@ Hundreds of people have sent me their microbiome results. Here are some examples
 <!-- ``` -->
 
 
-<!-- ```{r child = "CaseStudies/caseStudyGutIssues.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/caseStudyGutIssues.Rmd"}
+```
 
 

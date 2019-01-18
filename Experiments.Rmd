@@ -55,8 +55,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 <!-- ``` -->
 
 
-<!-- ```{r child="Experiments/experiment-colon.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-colon.Rmd"}
+```
 
 
 ```{r child="Experiments/experiment-kombucha.Rmd"}

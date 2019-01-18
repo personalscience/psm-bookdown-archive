@@ -28,7 +28,7 @@ sample_data(cleanse.phylum.norm)$Label <- c("0 Baseline","1 CC-1wk", "2 CC-1 day
 #  # facet_grid(Phylum~., scale="free_y", drop=TRUE)
 
 m<- mhg_abundance(cleanse.phylum.norm)
-m_dates <- colnames(m)
+m_dates <- strftime(colnames(m),format = "%b-%d")
 
 c_df <- data.frame(taxa = rownames(m), m)
 colnames(c_df) <- c("taxa",m_dates)
@@ -50,9 +50,9 @@ ggplot(data = c_df, aes(x=date,y=value, fill = taxa)) +
 
 ```{r cleansePhylumTableBefore}
 
-c_df <- c_df %>% spread(date, -taxa) 
-c_dates <- as.Date(names(c_df)[-1]) %>% strftime(format="%b-%d")
-names(c_df) <- c(names(c_df)[1],c_dates)
+c_df <- c_df %>% tidyr::spread(date, -taxa) 
+# c_dates <- as.Date(names(c_df)[-1]) %>% strftime(format="%b-%d")
+# names(c_df) <- c(names(c_df)[1],c_dates)
 knitr::kable(c_df[,1:5], digits = 2, caption = "Phylum abundances before colon cleanse")
 ```
 
