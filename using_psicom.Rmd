@@ -11,7 +11,7 @@ output:
 
 The Personal Science app will let you compare your health data to other people who have agreed, like you, to share their raw data.
 
-To get started, create your account at [https://app.personalscience.com/register](https://app.personalscience.com/register).
+To get started, create your account at [https://personalscience.com](https://personalscience.com).
 
 Sharing and analyzing your data is a three part process:
 

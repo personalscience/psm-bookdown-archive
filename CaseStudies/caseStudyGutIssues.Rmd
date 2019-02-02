@@ -207,9 +207,29 @@ make_ord_for(c.people, color = "Username")
 
 ### SJ
 
-His doctor says he has high _Klebsiella_, but how high is high? Klebsiella pneumoniae
+His doctor says he has high _Klebsiella_, but how high is high? 
 
-```{r checkKelbsiella}
+Here are the genus-level microbes that are out of range:
+
+
+```{r checkSJgenus}
+
+
+sj.genus <- subset_samples(people.norm,Username == "sj")
+
+
+
+mhg_outlier(mhg_range_for(sj.genus),mhg_range_for(gut.norm)) %>% filter(original>max)
+
+
+```
+
+
+and species:
+
+```{r checkSJSpecies}
+sj.species <- subset_samples(people.species,Username == "sj")
+mhg_outlier(mhg_range_for(sj.species),mhg_range_for(sprague.species)) %>% filter(original>max)
 # 
 # mhg_density_for_taxa(people.species,"Klebsiella pneumoniae") + 
 #   annotate(

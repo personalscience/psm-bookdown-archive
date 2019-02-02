@@ -1,0 +1,56 @@
+---
+title: "Alzheimers and microbes"
+author: "Richard Sprague"
+date: "1/26/2019"
+output: html_document
+---
+
+```{r, echo = FALSE, message = FALSE}
+source(here::here("R","loadMHGData.R"))
+```
+
+# what about me and Alzheimers
+
+Recent [news](https://www.sciencemag.org/news/2019/01/gum-disease-causing-bacteria-could-spur-alzheimer-s?utm_campaign=news_weekly_2019-01-25&et_rid=54872981&et_cid=2620511) 
+suggests that a microbe involved in gum disease, *Porphyromonas gingivalis* may be associated with Alzheimers. 
+
+Do I have any in my mouth?
+
+Answer: of more than 80 mouths samples for which I have results, one of them shows this microbe:
+  
+```{r Alz}
+
+
+mhg_taxa_plot(mouth.species,"Porphyromonas gingivalis")
+mhg_taxa(mouth.species,"Porphyromonas gingivalis") %>% dplyr::filter(abundance > 0)
+
+
+```
+I don't have many mouth sample results from other people (less than 20), but none of them show positive for this microbe.
+
+
+
+```{r}
+ggplot(data = mhg_taxa(mouth.species,"Porphyromonas gingivalis") %>% dplyr::filter(date>as.Date("2016-08-01") &
+                                                                                     date < as.Date("2016-9-01")),
+       aes(x = date, y = abundance / 10000)) + geom_bar(stat = "identity") +
+  geom_point(aes(x=date,y=0),color = "red") +
+  labs(title = "Porphyromonas gingivalis in my mouth", y = "Abundance (%)") + theme(plot.title = element_text(size = rel(2)),
+                                                               axis.title = element_text(size = rel(1)),
+                                                               axis.text = element_text(size = rel(2)))
+```
+
+
+What was different about the day when it spiked?
+
+Before we get too excited, let's look at the total number of actual reads (as opposed to the 'normalized' count expressed above as a percentage abundance):
+
+```{r}
+pg_sample <- subset_samples(mouth.species, Date == as.Date("2016-08-16"))
+sample_data(pg_sample)$Reads  * mhg_taxa(pg_sample,"Porphyromonas gingivalis")$abundance/1000000
+```
+
+Wait a second, only 3 reads!? The sequencer goes back and forth twice on each strand of DNA, so the minimum number of reads is 2. For it to have found just one additional read means that, on its return trip to that strand, it found a positive result once and a negative result once. Given all the other problems that can happen in sequencing, I'd say this counts as a spurious, ignorable error. Not to mention that this was the only sample among dozens where it found anything at all...
+
+
+

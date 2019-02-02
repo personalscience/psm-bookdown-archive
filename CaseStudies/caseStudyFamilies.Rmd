@@ -1,5 +1,10 @@
 ## Families
 
+Recent research published in Nature^[ [https://www.nature.com/articles/s41598-018-37298-9](https://www.nature.com/articles/s41598-018-37298-9) ] seems to show that microbiomes are more similar between people with close social relationships than between people who are genetically similar. Is this true?
+
+I compared the microbiome samples people have sent of themselves with their spouses and siblings.
+
+
 ## Mother and Daughter
 
 Here's another example, this one from a friend who tested both herself and her mother.
