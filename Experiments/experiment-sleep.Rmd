@@ -10,11 +10,14 @@ A quick internet search for "gut microbe serotonin" will lead you to  [B. infan
 
 This seems like a good target to check, so my first step was to look at my gut biome results to see my levels of the *B. infantis* parent genus *bifidobacterium*.
 
-![](./Experiments/assets/excelBifido1.png)
+```{r}
+
+```
+
 
 How do I tell whether 0.85% is a "normal" or not? uBiome offers this view to compare yourself to the others in their database:
 
-![](./Experiments/assets/ubiomeBifidoCompare.png)
+<image to be added later>
 
 Looks like I'm much lower than average. A search through the rest of the sheet shows that I have no measured amount of *B. infantis*. The 16S testing for a specific species can be unreliable, so I won't take that as a definitive no, but it clearly leaves some room for improvement.
 
@@ -32,12 +35,12 @@ For this experiment I started with two tablespoons the first day, and then three
 
 After a few days, the sleep effect started to wear off, though I still felt much-improved. But could I trace the improvement to improved levels of Bifido? To find out, I measured myself again:
 
-![](./Experiments/assets/excelBifido2.png)
+<image to be placed later>
 
 Bifidobacterium is *much* higher! I raised my bifido levels by almost 7 times.
 
 The other genera changed as well, but among the top taxa, the Bifido change was clearly the most significant. For more proof, look at this chart showing all the samples I took before and after my potato starch experiments.
 
-![](./Experiments/assets/excelBifidoBeforeAfter.png)
+<image to be added later>
 
 Clearly, something significant changed when I added potato starch to my diet.

@@ -1,4 +1,26 @@
 
+## Are my Dialister levels normal?
+
+A well-done 2019 study found that people suffering from depression have significantly lower levels of two groups of bacteria, *Dialister* and *Coprococcus*, possibly due to a potential ability of the gut microbiome to synthesize 3,4-dihydroxyphenylacetic acid, a breakdown product of the neurotransmitter dopamine^[https://www.nature.com/articles/d41586-019-00483-5 ]
+
+How are my levels of *Dialister*?
+
+```{r}
+
+df <- mhg_taxa(gut.norm.nodupes,"Dialister") %>% transmute(date, Dialister = abundance/10000)
+df_healthy <- mhg_taxa(subset_samples(people.gut.norm, Condition == "Healthy"),
+                       "Dialister") %>% transmute(date, Dialister = abundance/10000)
+
+m <- df_healthy %>% pull(Dialister) %>% median()
+
+ggplot(data = df %>% dplyr::filter(date > as.Date("2016-08-01") & date < as.Date("2017-03-01")), aes(x=date,y=Dialister)) + geom_bar(stat="identity") +
+  geom_hline(yintercept = df_healthy %>% pull(Dialister) %>% median(),
+             color = "red") + ggtitle("My levels over time", subtitle = "Red line is median for healthy people")
+
+```
+
+
+
 ## Omega-3 and the microbiome**
 
 [This paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5593975/) suggests a relationship between _Lachnospiraceae_ family and Omega-3. I tried taking high-omega 3 fish oil pills for a week. (Figure \@ref(fig:experimentOmega3))

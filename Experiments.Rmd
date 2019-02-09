@@ -63,8 +63,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 ```
 
 
-<!-- ```{r child="Experiments/experiment-sleep.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-sleep.Rmd"}
+```
 
 
 ```{r child="Experiments/experiment-food.Rmd"}
@@ -96,8 +96,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 
 
 
-<!-- ```{r child="Experiments/experiment-other.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-other.Rmd"}
+```
 
 
 ## Conclusions
