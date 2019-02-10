@@ -30,7 +30,7 @@ Or syphilis, the disease spread by _Treponema pallidum_ that causes its host to 
 
 In general, sexually transmitted diseases are especially likely to have behavioral consequences. A sexual disease that produces symptoms is unlikely to spread, yet it still requires contact with a new victim. Perhaps the ideal vector is a behavioral change, making the host more likely to come in contact with a new host.
 
-A well-done 2019 study found that people suffering from depression have significantly lower levels of two groups of bacteria, *Dialister* and *Coprococcus*, possibly due to a potential ability of the gut microbiome to synthesize 3,4-dihydroxyphenylacetic acid, a breakdown product of the neurotransmitter dopamine^[https://www.nature.com/articles/d41586-019-00483-5 ]
+A well-done 2019 study (@valles-colomer_neuroactive_2019) found that people suffering from depression have significantly lower levels of two groups of bacteria, *Dialister* and *Coprococcus*, possibly due to a potential ability of the gut microbiome to synthesize 3,4-dihydroxyphenylacetic acid, a breakdown product of the neurotransmitter dopamine.
 
 
 There are many other examples of microbes that appear to affect the brain.
