@@ -1,4 +1,4 @@
-## Hacking my sleep** {#experimentSleep}
+## Hacking my sleep {#experimentSleep}
 
 Most people know about the hormone melatonin and that it has something to do with sleep. Some international travelers take it to counter the effects of jet lag, and some people take it regularly as a treatment for insomnia.  You might vaguely remember that it has something to do with the pineal gland, a small organ tucked near your brain, but did you know that your gut contains *400 times*^[@chen_distribution_2011 or https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3198018/] more melatonin?  Something like 80% of its precursors, as well as those of the similar mood-regulating neurotransmitter serotonin are made in the gut^[@cryan_mind-altering_2012 and see the excellent @blaser_missing_2015 for more intriguing details.]
 
@@ -15,24 +15,24 @@ One of the best resistant starches is plain old potato starch, made by finely gr
 
 ```{r experimentSleepBobRedMillGraphic, fig.cap="No fiber in here."}
 
-knitr::include_graphics(file.path(here::here(),"Experiments","assets","experimentSleepBobsRedMillNutrition.jpg"))
+knitr::include_graphics(file.path(here::here(),"Experiments","assets","experimentSleepBobsRedMillFront.jpg"))
 ```
 
 
 The nutrition label on potato starch shows that it is essentially inert as a food. No calories, vitamins, or minerals, no fat, and not even any fiber. It's just zero on everything, because it passes right through the stomach. When cooked, it becomes a thick, gooey consistency that quickly is absorbed by powerful stomach acids, but if kept in its raw state, it slides right through into the colon.
 
-Not many other foods make it this far undigested, so a rich unfermented wad of fresh potato starch is a real treat for the Bifido of the colon and they quickly begin to make the most of it, fermenting it into the precursors to tryptophan.
+Not many other foods make it this far undigested, so a rich unfermented wad of fresh potato starch is a real treat for the Bifido of the colon and they quickly begin to make the most of it, fermenting it into the precursors to tryptophan. At least, that's the theory.
 
-Does it work?  To find out, I started with two tablespoons the first day, and then three tablespoons the next. Anything larger might risk unpleasant gas or loose stools until my body adjusts. Within two days, though, it was obvious that something was working. I couldn't believe my excellent sleep that first couple of nights.
+Does it work?  To find out, I started with two tablespoons the first day: just mix it in a glass of water (or other cold liquid^[you might try cocoa, which one study found significantly increases *Bifidobacterium* abundance: @tzounis_prebiotic_2011 ([full text](https://academic.oup.com/ajcn/article/93/1/62/4597700#112962129))] and drink it, preferably in the afternoon to give it plenty of time to make it to the colon and start feeding the microbes. On the second day I raised it to three tablespoons and kept it there for the following days. Anything larger might risk unpleasant gas or loose stools until my body adjusts. Within two nights it was obvious that something was working. I couldn't believe my excellent sleep!
 
-After a few days, the sleep effect started to wear off, though I still felt much-improved. But could I trace the improvement to improved levels of Bifido? Let's look at the data.
+After a few days, the sleep effect started to wear off, though I still felt much-improved. But could I trace the improvement to improved levels of Bifido? I continued to take potato starch randomly off and on for the next several months, measuring my sleep each night. What did the data say?
 
 ```{r sleepExperimentSleepBifidoChart, fig.cap = "Potato Starch, Sleep, and Bifidobacterium levels."}
-track_file_name <- file.path(here::here(),"assets","Rik Self Tracking 2015.xlsx")
+# track_file_name <- file.path(here::here(),"assets","Rik Self Tracking 2015.xlsx")
+# 
+# track_data <- readxl::read_excel(track_file_name)
 
-track_data <- readxl::read_excel(track_file_name)
-
-experiment_days <- track_data %>% dplyr::filter(Date < "2015-04-10") %>%
+experiment_days <- rikStats %>% dplyr::filter(Date < "2015-04-10") %>%
   dplyr::filter(!is.na(`Potato Starch`) & !is.na(Z)) %>%
   select(Date,PS = `Potato Starch`, Z, REM, Alcohol, Deep, `Vitamin D`) %>%
     dplyr::group_by(Week = cut(Date, "1 week")) %>%
@@ -49,10 +49,10 @@ bifido <- mhg_taxa(subset_samples(sprague.genus.norm,Site == "gut" &
   select(Date,bifido)
 
 # insert one new row (not in my current uBiome Explorer results for some reason, but for which I have JSON data)
-bifido <- rbind(bifido,
-  c("2015-01-19",bifido = as.numeric(6.6516)))
+# bifido <- rbind(bifido,
+#   c("2015-01-19",bifido = as.numeric(6.6516)))
 
-bifido$bifido <- as.numeric(bifido$bifido)
+#bifido$bifido <- as.numeric(bifido$bifido)
 j <- dplyr::full_join(bifido, experiment_days) %>% as_tibble()
 j[is.na(j$`Potato Starch`),]$`Potato Starch` <- "None"
 
@@ -70,9 +70,9 @@ ggplot(data = j  ) +
   labs(title = "Total Sleep Per Night", x = "Date")
 ```
 
-As you can see, there is almost no difference in the total sleep I enjoyed on nights following my eating a tablespoon or two of potato starch. I studied the data carefully, looking for possible ways the potato starch may have had an effect, but couldn't find anything.^[You can see the detailed code on [my blog](http://richardsprague.com/post/2019/02/09/reevaluating_sleep_experiments/)] It's worth noting that the sleep times (Z) in my data are calculated with a Zeo sleep tracking device which I wore strapped on my forehead to detect the subtle changes in electrical activity that come with sleep. Zeo let me calculate precise REM and Deep sleep numbers as well, but none of them seemed to be affected by potato starch.^[I tried correlating with other variables too, such as alcohol but found no effect. I *did* find a small effect during the days after taking Vitamin D supplements, but it barely met the bar for statistical significance. If there's an effect, it's not very strong.]
+As you can see, there is almost no difference in the total sleep I enjoyed on nights following my eating a tablespoon or two of potato starch. I studied the data carefully, looking for possible ways the potato starch may have had an effect, but couldn't find proof that it worked^[You can see the detailed code on [my blog](http://richardsprague.com/post/2019/02/09/reevaluating_sleep_experiments/)]. It's worth noting that the sleep times (Z) in my data are calculated with a Zeo sleep tracking device which I wore strapped on my forehead to detect the subtle changes in electrical activity that come with sleep. Zeo let me calculate precise REM and Deep sleep numbers as well, but none of them seemed to be affected by potato starch.^[I tried correlating with other variables too, such as alcohol but found no effect. I *did* find a small effect during the days after taking Vitamin D supplements, but it barely met the bar for statistical significance. If there's an effect, it's not very strong.]
 
-Unfortunately, when I ran this experiment I only received three microbiome results. The first came shortly after beginning to ingest large amounts of potato starch so I don't have a good "before" result. However, I *do* have one result taken after I had stopped the potato starch for several weeks. Both samples taken when consuming potato starch have much higher levels of _Bifidobacterium_ than normal. 
+Unfortunately, when I ran this experiment I only received three microbiome results. The first came shortly after beginning to ingest large amounts of potato starch so I don't have a good "before" test. However, I *do* have one result taken after I had stopped the potato starch for several weeks. Both samples taken when consuming potato starch have much higher levels of _Bifidobacterium_ than normal. 
 
 What _is_ normal for me? Here's how I look during a typical three month period. (Figure \@ref(fig:experimentSleepBifidoLevels))
 
@@ -108,7 +108,30 @@ ggplot(data=df, aes(x = date, y = abundance)) + geom_bar(stat = "identity") +
 
 Note that I have some *Bifidobacterium* in just about every sample (the red dots), but it doesn't look like there's a strong relationship with sleep. My daily average sleep (indicated in orange, averaged across the week) seems pretty constant, though the *Bifidobacterium* levels flucuate wildly.
 
-Conclusion: I think it's likely that potato starch increased my natural _Bifidobacterium_ levels. Whether it increased microbes associated with serotonin production is less clear, but it's hard to show that the potato starch caused a noticable change in my sleep.
+Since describing my experiments, many people have contacted me to say they've tried the potato starch trick too with various levels of success. One person for whom it worked extremely well suggested from his own testing that the *amount* is critical. My 3-4 tablespoons per day was counterproductive, he said. The melatonin producers supposedly get swamped by that much food, so it's better to give them a much tinier amount.
+
+Unless you test daily, it's hard to see subtle patterns in microbiome samples, and my original experiments weren't frequent enough to tell why (or whether) the _Bifidobacterium_ is changing. So, taking my friend's advice, I tried some smaller amounts of potato starch. How do those look?
+
+```{r experimentSleepPS, fig.cap="No apparent relationship between small amounts (1-2 tsp) of raw potato starch and Bifidobacterium abundance"}
+
+#sample_data(gut.norm)$Notes %>% stringr::str_detect("starch")
+
+ps_dates <- rikfood %>% dplyr::filter(stringr::str_detect(Name, "potato starch")) %>% select(Date,Name) %>% pull(Date)
+  
+  #sample_data(subset_samples(gut.norm,  stringr::str_detect(Notes,"starch") ))[,c("Date","SSR","Label")] %>% pull(Date)
+
+mhg_taxa(gut.norm, "Bifidobacterium") %>% dplyr::filter(date > "2017-03-15" & date < "2017-04-15") %>% ggplot(aes(x=date,y=abundance/10000)) +  geom_point(aes(x = date, y = 0), color = "red") + 
+  geom_bar(stat = "identity") + geom_vline(xintercept = ps_dates, color = "blue") +
+  geom_point(data = rikStats %>% dplyr::filter(Date > "2017-03-15" & Date < "2017-04-15") %>% mutate(date = Date),
+             aes(x = date, y = Z-3), color = "brown") +
+  scale_y_continuous(sec.axis = sec_axis(~.+3,name = "Sleep (hrs)")) +
+  labs(title = "Potato Starch and Bifidobacterium", subtitle = "(Blue lines are days I took some potato starch)", y = "Bifidobacterium (%)") + theme(axis.title.y.right = element_text(color = "brown"), axis.text.y.right = element_text(color = "brown"))
+
+```
+
+Here it's more obvious that any potato starch had little to do with the rise and fall of my gut _Bifidobacteria_. So why were the percentages so much smaller in this experiment than in the higher 6+% numbers I found while doing my original, more rigorous sleep measuring test above? Maybe it's the tinier amounts? We'll have to test again to understand for sure.
+
+Conclusion: There's a possibility that, in high enough amounts, potato starch increases my _Bifidobacterium_ levels. Whether it increased microbes associated with melatonin production is less clear, but it's hard to show that the potato starch caused a noticable change in my sleep.
 
 
 
