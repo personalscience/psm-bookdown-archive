@@ -92,18 +92,19 @@ df <- rikStats %>% dplyr::filter(Date > as.Date("2017-4-01") & Date < as.Date("2
     group_by(Week = cut(date, "1 week")) %>% 
   dplyr::mutate(MeanZ = mean(Z)) %>% select(Week, date,Z, MeanZ, Mean, abundance)
 
-
+iro <- c("Weekly Ave Sleep Per Night"="orange","Long-term healthy"="blue","BAR"="#62c76b")
 
 ggplot(data=df, aes(x = date, y = abundance)) + geom_bar(stat = "identity") +
-  geom_line(aes(x = date, y = Mean), color = "green") + 
-  geom_line(aes(x = date, y = MeanZ/3), color = "orange", stat = "identity") + 
+ # geom_line(aes(x = date, y = Mean), color = "green") + 
+  geom_line(aes(x = date, y = MeanZ/3, color = "Weekly Ave Sleep Per Night"),  stat = "identity") + 
                  scale_y_continuous(sec.axis = sec_axis(~.*3,
                                                         name = "Sleep (Weekly Mean)")) +
   geom_point(aes(x = date, y = 0), color = "red") + 
-  geom_hline(yintercept = bifido_healthy_median, color = "blue") +
+  geom_hline(yintercept = bifido_healthy_median, show.legend = TRUE) +
   scale_x_date(date_labels = "%b",
                 date_breaks = "1 month", date_minor_breaks = "2 weeks") +
-  labs(title = "Bifidobacterium", x = "Date", y = "Abundance (%)")
+  labs(title = "Bifidobacterium", x = "Date", y = "Abundance (%)") + theme(axis.title.x = element_blank()) + 
+  theme(legend.title=element_blank(), legend.text=element_text(size=9))
 ```
 
 Note that I have some *Bifidobacterium* in just about every sample (the red dots), but it doesn't look like there's a strong relationship with sleep. My daily average sleep (indicated in orange, averaged across the week) seems pretty constant, though the *Bifidobacterium* levels flucuate wildly.
@@ -116,20 +117,33 @@ Unless you test daily, it's hard to see subtle patterns in microbiome samples, a
 
 #sample_data(gut.norm)$Notes %>% stringr::str_detect("starch")
 
+Firmicutes <- subset_taxa(subset_samples(sprague.phylum.norm, Site == "gut"), Phylum %in% c("Firmicutes","Bacteroidetes"))
+
+fb <- mhg_abundance(subset_samples(Firmicutes, Date > "2017-03-15" & Date < "2017-04-15"))/10000 
+fb <- fb["Firmicutes",]/fb["Bacteroidetes",] # 
+fb <- fb %>% gather(Date,Ratio)
+fb$Date <- as.Date(fb$Date)
+
 ps_dates <- rikfood %>% dplyr::filter(stringr::str_detect(Name, "potato starch")) %>% select(Date,Name) %>% pull(Date)
   
   #sample_data(subset_samples(gut.norm,  stringr::str_detect(Notes,"starch") ))[,c("Date","SSR","Label")] %>% pull(Date)
+iro <- c("Firmicutes/Bacteroidetes Ratio"="orange","LINE2"="#3591d1","BAR"="#62c76b")
 
 mhg_taxa(gut.norm, "Bifidobacterium") %>% dplyr::filter(date > "2017-03-15" & date < "2017-04-15") %>% ggplot(aes(x=date,y=abundance/10000)) +  geom_point(aes(x = date, y = 0), color = "red") + 
   geom_bar(stat = "identity") + geom_vline(xintercept = ps_dates, color = "blue") +
   geom_point(data = rikStats %>% dplyr::filter(Date > "2017-03-15" & Date < "2017-04-15") %>% mutate(date = Date),
              aes(x = date, y = Z-3), color = "brown") +
+ geom_line(data=fb %>% gather(Date,Ratio),aes(x=Date,y=Ratio, color = "Firmicutes/Bacteroidetes Ratio")) +
   scale_y_continuous(sec.axis = sec_axis(~.+3,name = "Sleep (hrs)")) +
-  labs(title = "Potato Starch and Bifidobacterium", subtitle = "(Blue lines are days I took some potato starch)", y = "Bifidobacterium (%)") + theme(axis.title.y.right = element_text(color = "brown"), axis.text.y.right = element_text(color = "brown"))
+  scale_colour_manual(name="Ratios",values=iro) + scale_fill_manual(name="Sleep",values=iro) +
+  labs(title = "Potato Starch and Bifidobacterium", subtitle = "(Blue lines are days I took some potato starch)", y = "Bifidobacterium (%)") +   theme(axis.title.y.right = element_text(color = "brown"), axis.text.y.right = element_text(color = "brown")) + theme(legend.title=element_blank(), legend.text=element_text(size=9))
 
 ```
 
 Here it's more obvious that any potato starch had little to do with the rise and fall of my gut _Bifidobacteria_. So why were the percentages so much smaller in this experiment than in the higher 6+% numbers I found while doing my original, more rigorous sleep measuring test above? Maybe it's the tinier amounts? We'll have to test again to understand for sure.
+
+An interdisciplinary team of scientists says resistant starch can change the ratio of Firmicutes to Bacteroidetes^[see @maier_impact_2017 [full text](https://mbio.asm.org/content/8/5/e01343-17
+)]. I calculated the ratio for my own testing and found some interesting, often dramatic rises a day or two after taking the potato starch. (Figure \@ref(fig:experimentSleepPS)) 
 
 Conclusion: There's a possibility that, in high enough amounts, potato starch increases my _Bifidobacterium_ levels. Whether it increased microbes associated with melatonin production is less clear, but it's hard to show that the potato starch caused a noticable change in my sleep.
 

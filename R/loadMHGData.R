@@ -1,5 +1,5 @@
 # loadMHGData.R: Initialize and load all objects, functions, or variables required for the MHG book
-# 
+#
 
 
 library(actino)
@@ -15,9 +15,10 @@ DATA_DIR <- Sys.getenv("UBIOME_DATADIR")
 USERNAME <- "ub_data-Richard_Sprague"
 DATAPATH <- file.path(DATA_DIR, "ubiome_people", USERNAME)
 # load convenience functions 'path_to_user' and 'phyloseq_for_user'
-source(file.path(DATA_DIR,"dataReadFunctions.R"))
+#source(file.path(DATA_DIR,"dataReadFunctions.R"))
+library(psmr)
 
-# Load prebuilt versions of all objects used in MHG.  
+# Load prebuilt versions of all objects used in MHG.
 load(file.path(DATAPATH,"derived/spragueAllRanks.RData"))
 load(file.path(DATA_DIR,"ubiome_people/peopleAll.RData"))
 
