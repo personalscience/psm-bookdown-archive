@@ -86,8 +86,8 @@ mexico.after <- subset_samples(mexico.genus, SSR == mexico.ssr[3])
 
 
 
-m.db <- mhg_unique(mexico.during,mexico.before)
-m.da <- mhg_unique(mexico.during,mexico.after)
+m.db <- psmr::unique_taxa(mexico.during,mexico.before)
+m.da <- psmr::unique_taxa(mexico.during,mexico.after)
 
 kable(m.db$tax_name[m.db$tax_name %in% m.da$tax_name], col.names = c("Unique in Mexico"))
 
@@ -109,14 +109,14 @@ I didn't bother showing the whole uBiome chart, but a little further up the list
 Next, let's look at the organisms that disappeared while I was in Mexico:
 
 ```{r}
-# m.bd <- mhg_unique(mexico.before,mexico.during)
-# m.ad <- mhg_unique(mexico.after,mexico.during)
-# m.ba <- mhg_unique(mexico.before,mexico.after)
+# m.bd <- psmr::unique_taxa(mexico.before,mexico.during)
+# m.ad <- psmr::unique_taxa(mexico.after,mexico.during)
+# m.ba <- psmr::unique_taxa(mexico.before,mexico.after)
 # 
-# mhg_unique(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name %in% rownames(mhg_abundance(mexico.during))
+# psmr::unique_taxa(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name %in% rownames(mhg_abundance(mexico.during))
 # 
 # rownames(mhg_abundance(mexico.before)) %in% rownames(mhg_abundance(mexico.after))
-kable(mhg_unique(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name,col.names = c("Disappeared"))
+kable(psmr::unique_taxa(merge_phyloseq(mexico.before,mexico.after),mexico.during)$tax_name,col.names = c("Disappeared"))
 
 ```
 

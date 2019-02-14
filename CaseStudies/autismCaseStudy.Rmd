@@ -39,7 +39,7 @@ kable(kids.table[order(kids.table[,2], decreasing = TRUE),], digits = 2, col.nam
 Now, what about the autistic boy is unique?  Let's compare him to a similar-aged, healthy boy and see which microbes are present in the autistic case but _not_ the healthy case:
 
 ```{r}
-kable(mhg_unique(subset_samples(kids.genus, Username == "fbmgb"), subset_samples(kids.genus, Username == "preston"))[1]/10000, digits = 2, col.names = "ASD")
+kable(psmr::unique_taxa(subset_samples(kids.genus, Username == "fbmgb"), subset_samples(kids.genus, Username == "preston"))[1]/10000, digits = 2, col.names = "ASD")
 ```
 
 The autistic boy has _Sutterella_, an organism that is missing in the healthy boy.

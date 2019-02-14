@@ -44,7 +44,7 @@ kable(head(mhg_abundance(d1)/10000,10), col.names = c("% before","% after"))
 #mhg_abundance(prune_taxa(taxa_sums(d.before1)>0,d.before1))
 #mhg_abundance(prune_taxa(taxa_sums(d.after1)>0,d.after1))
 
-#mhg_unique(d.after1,d.before1)[1]  # this is NULL, meaning that I gained nothing new
+#psmr::unique_taxa(d.after1,d.before1)[1]  # this is NULL, meaning that I gained nothing new
 
 ```
 
@@ -56,7 +56,7 @@ Anything in the genus _Capnocytophaga_ is an opportunistic pathogen, so I say go
 To understand more precisely what changed, let's look more closely just at the ones that disappeared:
 
 ```{r mouthUnique}
-kable(mhg_unique(d.before1,d.after1)[1]/10000, , col.names = "% before")
+kable(psmr::unique_taxa(d.before1,d.after1)[1]/10000, , col.names = "% before")
 ```
 
 All of these unique microbes are of such tiny abundances that it's hard to rule out simple contamination or other problems with the sampling.  Still, it is interesting that there was nothing new (at the genus level) in the "after" sample that wasn't in the "before". This is consistent with the expectation that a dental cleaning would, if anything, tend to _remove_ taxa rather than introduce any new ones.
@@ -70,7 +70,7 @@ kable(head(mhg_abundance(d2)/10000,10), col.names = c("% before","% after"))
 #mhg_abundance(prune_taxa(taxa_sums(d.before2)>0,d.before2))
 #mhg_abundance(prune_taxa(taxa_sums(d.after2)>0,d.after2))
 
-# mhg_unique(d.after2,d.before2)[1]  # Yup, null this time too.
+# psmr::unique_taxa(d.after2,d.before2)[1]  # Yup, null this time too.
 ```
 
 Interestingly, this time my most abundant taxa is _Streptococcus_, instead of _Haemophilus_. 
@@ -78,7 +78,7 @@ Interestingly, this time my most abundant taxa is _Streptococcus_, instead of _H
 Like last time and as expected, I found no new taxa _after_ the cleaning, but here are the genus-level items that disappeared, all at such low abundances that we should probably chalk them up to contamination or other errors that creep in unavoidably between the time I take the sample and when they show up in my results.
 
 ```{r beforeAfterDentist2}
-kable(mhg_unique(d.before2,d.after2)[1]/10000, col.names = "% before")
+kable(psmr::unique_taxa(d.before2,d.after2)[1]/10000, col.names = "% before")
 ```
 
 Let's start with the genus level. How much *Streptococcus* has been in my mouth, and to the degree that we know at the species level, which types of species are there?

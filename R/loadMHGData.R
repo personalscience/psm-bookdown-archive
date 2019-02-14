@@ -19,8 +19,8 @@ DATAPATH <- file.path(DATA_DIR, "ubiome_people", USERNAME)
 library(psmr)
 
 # Load prebuilt versions of all objects used in MHG.
-load(file.path(DATAPATH,"derived/spragueAllRanks.RData"))
-load(file.path(DATA_DIR,"ubiome_people/peopleAll.RData"))
+#load(file.path(DATAPATH,"derived/spragueAllRanks.RData"))
+#load(file.path(DATA_DIR,"ubiome_people/peopleAll.RData"))
 
 # Convention: "gut" refers to a gut sample of high quality (over 10K reads)
 # "norm" is a normalized object. If no rank is specified, assume genus.

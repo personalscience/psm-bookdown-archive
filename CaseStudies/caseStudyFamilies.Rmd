@@ -29,25 +29,25 @@ mhg_plot_top_heat(merge_phyloseq(ub16, ub16.mom))
 
 
 ```{r}
-mhg_unique(ub16,ub16.mom)[1]/10000
+psmr::unique_taxa(ub16,ub16.mom)[1]/10000
 ```
 
 and the genus found in the mother but not the daughter
 
 ```{r}
-mhg_unique(ub16.mom,ub16)[1]/10000
+psmr::unique_taxa(ub16.mom,ub16)[1]/10000
 ```
 
 Here are species in the daughter but not the mom:
 
 ```{r}
-mhg_unique(ub16.species,ub16.mom.species)[1]/10000
+psmr::unique_taxa(ub16.species,ub16.mom.species)[1]/10000
 ```
 
 and vice versa:
 
 ```{r}
-mhg_unique(ub16.mom.species,ub16.species)[1]/10000
+psmr::unique_taxa(ub16.mom.species,ub16.species)[1]/10000
 ```
 
 As a bonus, we also have data from the brother, who has been living in Eastern Europe for several years. Here are the samples compared:
@@ -88,7 +88,7 @@ meg <- merge_phyloseq(ub3,subset_samples(bird,Username == "ub16b"))
 The brother has much higher _Megamonas_ than I've seen in other samples. Is that significant?
 
 ```{r}
-#mhg_unique(subset_samples(ub3.species, Date > "2016-06-01"),subset_samples(bird.species,Username == "ub16b"))[-2]/10000
+#psmr::unique_taxa(subset_samples(ub3.species, Date > "2016-06-01"),subset_samples(bird.species,Username == "ub16b"))[-2]/10000
 ```
 
 ### Husband and wife
@@ -131,8 +131,8 @@ mhg_plot_top_heat(kt.genus)
 Darker colors mean *lower* abundance of the microbes on this heat map. Let's look at which ones are unique to the couple:
 
 ```{r caseStudyFamilyWifeHusbandUnique}
-kable(mhg_unique(ktp,kp)[1]/10000, col.names = c( "Wife (not husband)%"))
-kable(mhg_unique(kp,ktp)[1]/10000, col.names = c( "Husband (not wife)%"))
+kable(psmr::unique_taxa(ktp,kp)[1]/10000, col.names = c( "Wife (not husband)%"))
+kable(psmr::unique_taxa(kp,ktp)[1]/10000, col.names = c( "Husband (not wife)%"))
 ```
 
 That's just a start. Please let me know if you find anything else that's interesting.

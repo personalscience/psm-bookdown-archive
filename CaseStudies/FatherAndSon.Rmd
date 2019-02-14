@@ -57,19 +57,19 @@ Here are some of the taxa that are unique to me:
 
 ```{r fatherSonUnique}
 
-me.only <- mhg_unique(subset_samples(me.and.dad.genus,Username=="Me"),
+me.only <- psmr::unique_taxa(subset_samples(me.and.dad.genus,Username=="Me"),
           subset_samples(me.and.dad.genus,Username=="Dad")
           )
 
-me.only.species <- mhg_unique(subset_samples(me.and.dad.species,Username=="Me"),
+me.only.species <- psmr::unique_taxa(subset_samples(me.and.dad.species,Username=="Me"),
           subset_samples(me.and.dad.species,Username=="Dad")
           )
 
-dad.only <- mhg_unique(subset_samples(me.and.dad.genus,Username=="Dad"),
+dad.only <- psmr::unique_taxa(subset_samples(me.and.dad.genus,Username=="Dad"),
           subset_samples(me.and.dad.genus,Username=="Me")
           )
 
-dad.only.species <- mhg_unique(subset_samples(me.and.dad.species,Username=="Dad"),
+dad.only.species <- psmr::unique_taxa(subset_samples(me.and.dad.species,Username=="Dad"),
           subset_samples(me.and.dad.species,Username=="Me")
           )
 

@@ -1,5 +1,9 @@
 
 
+bookdown::tufte_html_book:
+  toc: yes
+  css: toc.css
+
 bookdown::gitbook:
   css: style.css
   cover-image: assets/coverPersonalScience.jpg

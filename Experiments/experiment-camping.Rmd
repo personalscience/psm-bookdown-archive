@@ -21,7 +21,7 @@ mhg_plot_top_heat(camping.gut)
 Here are the genus-level organisms in my gut after camping that weren't there before:
 
 ```{r}
-kable(mhg_unique(camping.after,camping.before)[1:10,][1]/10000, digits = 2, col.names = c("New after camping (%)"))
+kable(psmr::unique_taxa(camping.after,camping.before)[1:10,][1]/10000, digits = 2, col.names = c("New after camping (%)"))
 ```
 
 
@@ -31,7 +31,7 @@ Here are the ones I lost on the trip:
 
 
 ```{r}
-kable(mhg_unique(camping.before,camping.after)[1]/10000, digits = 2, col.names = c("Before Camping (%)"))
+kable(psmr::unique_taxa(camping.before,camping.after)[1]/10000, digits = 2, col.names = c("Before Camping (%)"))
 ```
 
 

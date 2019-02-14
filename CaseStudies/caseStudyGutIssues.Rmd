@@ -101,13 +101,13 @@ Clearly different at nearly all taxa.  Which microbe disappeared in the second s
 
 ```{r}
 
-mhg_unique(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01"))
+psmr::unique_taxa(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01"))
 ```
 
 and vice versa:
 
 ```{r}
-kable(mhg_unique(subset_samples(nj1, Date < "2017-07-01"),subset_samples(nj1, Date > "2017-07-01"))[1]/10000, digits = 2, col.names = c("% Unique to first sample"))
+kable(psmr::unique_taxa(subset_samples(nj1, Date < "2017-07-01"),subset_samples(nj1, Date > "2017-07-01"))[1]/10000, digits = 2, col.names = c("% Unique to first sample"))
 ```
 
 
