@@ -6,6 +6,7 @@ output: html_document
 ---
 ## Microbes and genes
 
+There is growing evidence that your human genes affect which microbes you'll host.^[For example see @lim_effect_2017]
 If you have your 23andme results, click through on the following links to see what your own genes are.
 
 *Secretor FUT2 allele*

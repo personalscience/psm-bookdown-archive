@@ -201,7 +201,7 @@ Conclusion: A low-carb high fat diet can affect _Firmicutes_ abundance.
 
 ---
 
-What about _after_ my diet. Did things bounce back to normal? Although I'm more conscious of what I eat, and _do_ generally try to eat fewer carbs (e.g. I've stopped all banana eating), I wouldn't say I keep to the diet as rigorously as I did. 
+What about _after_ my diet. Did things bounce back to normal? Although I'm more conscious of what I eat, and _do_ generally try to eat fewer carbs (e.g. I've stopped all banana eating), I wouldn't say I keep to the diet as rigorously as I did. But here are the results from the tests I took after finishing the experiment:
 
 ```{r}
 feb.gut.phylum <- subset_samples(gut.phylum.norm, Date > "2018-02-01") #SSR %in% c(476724,476703))

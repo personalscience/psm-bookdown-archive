@@ -64,11 +64,14 @@ A complete list of all species ever found in my gut is in the supplemental mater
 Here are the Phylum level mouth samples:
 
 ```{r}
-mhg_plot_top(subset_samples(sprague.phylum.norm, Site == "mouth"))  # also stored in the variable ```mouth```, created in "microbesInMouth".
+psmr::mhg_plot_top(subset_samples(sprague.phylum.norm, Site == "mouth"))  # also stored in the variable ```mouth```, created in "microbesInMouth".
 
 a <- subset_samples(merge_phyloseq(people.family,sprague.family.norm), Site=="mouth" & Username != "cjt" & Date > "2016-02-01" & Date < "2017-09-01")
 a <- prune_taxa(taxa_sums(a)>10000,a)
-mhg_plot_top(prune_taxa(taxa_sums(a)>10000,a)) + ggtitle("Oral Microbiome Average Across Dozens of Samples (Species)")
+
+psmr::mhg_plot_top(prune_taxa(taxa_sums(a)>10000,a)) + 
+  scale_y_continuous(trans="log10",labels=function(x) x/10000) + 
+  ggtitle("Oral Microbiome Average Across Dozens of Samples (Species)")
 
 #make_ord_for(a) + theme(legend.position = "none")
 
@@ -81,20 +84,23 @@ mhg_plot_top(prune_taxa(taxa_sums(a)>10000,a)) + ggtitle("Oral Microbiome Averag
 First we look at the phylum level:
 
 ```{r}
-mhg_plot_top(subset_samples(sprague.phylum.norm, Site == "skin"))
+psmr::mhg_plot_top(subset_samples(sprague.phylum.norm, Site == "skin")) + ylab("Log 10 Abundance (%)")  +
+  scale_y_continuous(trans="log10",labels=function(x) x/10000)
 ```
 
 then genus:
 
 ```{r}
-mhg_plot_top(subset_samples(sprague.genus.norm, Site == "skin"))
+psmr::mhg_plot_top(subset_samples(sprague.genus.norm, Site == "skin")) + ylab("Log 10 Abundance (%)")  +
+  scale_y_continuous(trans="log10",labels=function(x) x/10000)
 ```
 
 
 ## Nose Microbiome {#appendixMyNose}
 
 ```{r}
-mhg_plot_top(subset_samples(sprague.genus.norm, Site == "nose"))
+psmr::mhg_plot_top(subset_samples(sprague.genus.norm, Site == "nose")) + ylab("Log 10 Abundance (%)")  +
+  scale_y_continuous(trans="log10",labels=function(x) x/10000)
 ```
 
 ## Lab Tests Compared

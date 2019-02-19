@@ -8,7 +8,7 @@ Viruses present several problems for scientists. They’re super-tiny for one: y
 
 ```{r figVirusSize, echo = FALSE, fig.cap = "Viruses are tiny compared to bacteria. Image:[marneechua](https://www.slideshare.net/marneechua/marine-virus-presentation)"}
 
-knitr::include_graphics("./Next/assets/virusSizeAndStructure.jpg")
+knitr::include_graphics(file.path(here::here(),"Next/assets/virusSizeAndStructure.jpg"))
 # https://www.slideshare.net/marneechua/marine-virus-presentation
 # http://image.slidesharecdn.com/marineviruspresentation-090727100709-phpapp02/95/marine-virus-presentation-3-728.jpg?cb=1248689251
 ```
@@ -41,20 +41,23 @@ Much popular microbiome advice suggests that *more* diversity is better, and int
 
 
 ```{r figVirusEnteric, echo=FALSE}
-knitr::include_graphics("./Next/assets/virusEnteric.jpg")
+knitr::include_graphics(file.path(here::here(),"Next/assets/virusEnteric.jpg"))
 ```
 
 IBD and Crohn’s patients who were carefully studied alongside healthy controls appear to have a wider variety of viruses in their systems. It’s too early to say whether this has any implications for treatment, but it does point out that the story is more complicated than we’d hope.
+
+Similarly, the virome of colorectal patients is so different from healthy people that researchers suspect the cascade of events leading to cancer may be triggered by differences in the way phages affect gut bacteria, and not the bacteria themselves. Furthermore, the phages seem to act as a commumity, making it unlikely that a single culprit starts the process. Rather the cancer results in some unknown, impossibly complex disturbance in the community as a whole.^[@hannigan_diagnostic_2018]
 
 In fact, if you’re not super careful to control for the variety and types of viruses present, it could be that taking a probiotic could be harmful. Your body may have a perfectly good reason that a particular, otherwise beneficial microbe is missing or lower in quantity than in comparable healthy people. Introducing a bacterium that reacts with a latent virus could actually cause more harm than good.
 
 There’s no solid evidence for this yet, but if true, it points in the same disturbing direction for treatment that we’ve been afraid to admit all along: the best way to treat any disease is through ordinary food. Don’t go messing with microbes unless you know what you’re doing.
 
-References: Virgin, H.W. (2014). The virome in mammalian physiology and disease. Cell 157, 142–150.
-
 ---
 
 #### The gut phageome
 
-http://www.pnas.org/content/113/37/10400.abstract
+About half of all people appear to share at least some of a core group of phages, leading some scientists to speculate that, beyond the microbiome may lay a "Healthy gut phageome" (HGP). Another group of phages seems to be much rarer, occuring generally in people of various disease states. Could it be that it's the *phages*, not the microbes themselves that drive some types of disease?^[see @manrique_healthy_2016 [full text](http://www.pnas.org/content/113/37/10400.abstract ))]
+
+
+
 
