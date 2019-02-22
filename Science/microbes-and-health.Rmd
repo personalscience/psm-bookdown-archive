@@ -68,9 +68,9 @@ Amish microbes are very diverse google: “Zupancic microbiota Old Order Amish�
 partly because they drink lots of raw milk
 
 
-“We have probably seen the worst of the asthma epidemic which was at its height in the 80s and 90s"
+“We have probably seen the worst of the asthma epidemic which was at its height in the 80s and 90s"^[ @spector_diet_2016]
 
-google: “Song cohabiting family members share microbiota with one another and with their dogs”
+Members of your household will have more similar microbiomes if there's a dog present.^[see @song_cohabiting_2013 or [open text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3628085/)]
 
  
 Humans are able to synthesize just 30 plant-digesting enzymes. Contrast that to the species _Bacteroidetes thetaiotaomicron_ which can break down plant structures using over  260 different enzymes.^[see @spector_diet_2016 p.299]

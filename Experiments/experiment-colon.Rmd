@@ -108,12 +108,22 @@ data.frame(sample_data(cleanse.family.norm)[,c("Date")],
 
 **It’s pretty hard to make a significant change.** These days a little googling will find plenty of web sites, books, diets, and supplements that claim to “fix” or “change” your microbiome. I’m a healthy, reasonably fit adult, so I’m not as motivated as somebody with a specific health problem, but I thought simply popping probiotics and eating a variety of new and fermented foods would have a big effect. Nope. There are exceptions – new microbes will sprout when I drink [homemade Kefir](#experimentKefir), or [travel to China](#chinaTravel) but it's much harder than you'd think.
 
-Of course, I'm not the first to study microbiome changes after a colon cleanse. A 2015 European study found increases in _Dorea_.^[Read a detailed description of what microbes are noted in a bowel cleansing: @jalanka_effects_2015 ]
- I find the same thing:
-```{r}
+Of course, I'm not the first to study microbiome changes after a colon cleanse. A 2015 European study found increases in _Dorea_, which interestingly I found as well (Figure \@ref(fig:coloncleanseDorea)) .^[Read a detailed description of what microbes are noted in a bowel cleansing: @jalanka_effects_2015 ]
+ 
+```{r coloncleanseDorea, fig.cap = "A rise in Dorea after a colon cleanse."}
 
+psmr::as_tidyps_df(cleanse.genus.norm) %>% filter(taxa == "Dorea") %>%
+  ggplot(.,aes(x=date,y=abundance)) +
+  geom_line() + 
+  geom_point() +
+  geom_vline(xintercept = as.Date("2015-10-19"), color = "red", size = 2, alpha = .2) +
+  annotate("text",x=as.Date("2015-10-19"),y=1.6,color = "red", label = "Colon\nCleanse") + 
+  labs(title = "Dorea levels Before/After a Colon Cleanse",
+       subtitle = "Genus level",
+       y = "Dorea abundance (%)") +
+  theme(legend.position = "none", axis.title.x = element_blank()) 
 
-psmr::mhg_taxa_plot(subset_samples(gut.norm,Date %in% cleansePeriod),"Dorea") 
+#psmr::mhg_taxa_plot(subset_samples(gut.norm,Date %in% cleansePeriod),"Dorea") 
 ```
 
 When I began this experiment I thought for sure I'd find something unusual and perhaps uncover a new way to modify the microbiome. Ultimately the main thing I learned is that the microbiome is incredibly robust. Even a complete reset won't change much.
