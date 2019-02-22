@@ -7,20 +7,55 @@ Probably the most common reason people are motivated to study their microbiome i
 
 Ten years ago, CT was in excellent health, active in sports with a lean, muscular build. But after a trip to China, and a bout of what he thought was food poisoning, he hasn't been the same. Food allergies, sensitivities to chemicals and bright lights, fatigue, and unexplained muscular problems. Doctors were baffled. Nothing seemed to help, and it looked like he might simply have to accept that this was the new way he'd have to live.
 
-The first thing to note is that this sample is pretty similar in overall diversity to the healthy samples in our database. 
+The first thing to note is that this sample is pretty similar in overall diversity to the healthy samples in our database. (Figure \@ref(fig:CTOverview))
 
 ```{r CTOverview, fig.cap="The blue line is CT."}
 ct.gut.family <- subset_samples(people.family, Username == "ct")
 
-estimate_richness(ct.gut.family, measures = "Shannon")
-estimate_richness(people.family.healthy.gut, measures = "Shannon") %>% pull(Shannon) %>% median()
 
-estimate_richness(people.family.healthy.gut, measures = "Shannon") %>% arrange(Shannon) %>%   ggplot(aes(Shannon)) + geom_histogram(aes(x=Shannon), bins = 50) + 
+estimate_richness(people.healthy.gut.family, measures = "Shannon") %>% arrange(Shannon) %>%
+  ggplot(aes(Shannon)) + geom_histogram(aes(x=Shannon), bins = 50) + 
   geom_vline(xintercept=estimate_richness(ct.gut.family, measures = "Shannon") %>% pull(),
-             color = "blue")
+             color = "blue") +
+  annotate(geom = "text",y = 0, x = estimate_richness(ct.gut.family, measures = "Shannon") %>% pull(),
+            label = sample_data(ct.gut.family)$Date %>% strftime(format = "%m-%d"),
+           color = "red")+
+  labs(title = "Histogram: Diversity of Healthy People",
+       y = "Number of healthy people",
+       x = "Shannon Diversity Metric")
+```
+
+So what might be driving CT's issues?
+
+Let's look at the microbes that are significantly different in CT than in our database of healthy people. The genus-level microbes listed in Figure \@ref(fig:CTvsHealthy) are outliers. 
+
+```{r CTvsHealthy}
+
+ct.gut.genus <- subset_samples(people.gut.norm, Username == "ct")
+
+
+psmr::mhg_outlier(psmr::mhg_range_for(ct.gut.genus),psmr::mhg_range_for(people.healthy.gut.genus)) %>% filter(original>max) %>% knitr::kable()
+
+
+```
+
+From this it appears CT has far higher _Haemophilus_ than the healthy people. What might that mean?
+
+Can we find other people with similar high levels?  Here's a look at the top 10 most abundant samples in our database. Note that all are unhealthy.
+
+```{r CTComparehaemo}
+
+# psmr::mhg_all_who_have(people.gut.norm, "Haemophilus") %>% arrange(desc(Abundance)) %>% select(Abundance,Username) %>%
+#   ggplot(aes(x=Abundance)) + stat_density() +
+#   geom_vline(xintercept = psmr::mhg_taxa(ct.gut.genus,"Haemophilus") %>% pull(abundance) / 10000,
+#              color = "blue")
+
+psmr::mhg_all_who_have(people.gut.norm, "Haemophilus") %>% arrange(desc(Abundance)) %>% top_n(10)%>%
+  select(Condition,Abundance) %>% knitr::kable()
 ```
 
 
+### CB
 
 CB is a health-conscious woman who has long suffered from gut issues.
 
@@ -28,7 +63,7 @@ Let's start with a heatmap of all her gut samples to see if we can spot any patt
 
 ```{r caseStudyCBExplore}
 
-cb.gut.genus <- subset_samples(people.gut.norm, Username == "cb")
+cb.gut.genus <- subset_samples(people.norm, Username == "cb")
 cb.gut.genus <- prune_taxa(taxa_sums(cb.gut.genus)>42, cb.gut.genus)
 plot_heatmap(cb.gut.genus, sample.order = "Date", sample.label = "Date")
 # ggplot(data = sample_data(cb.gut.genus)[,c("Date","Reads")], aes(x=Date,y=Reads)) + geom_bar(stat="identity") 
@@ -97,19 +132,26 @@ mhg_density_for_taxa(people.norm, "Collinsella") +
 
 
 
-Clearly different at nearly all taxa.  Which microbe disappeared in the second sample?
+Clearly different at nearly all taxa.  Here are the microbes that went extinct in the second sample:
 
 ```{r}
 
-psmr::unique_taxa(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01"))
+psmr::unique_taxa(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01")) %>% arrange(tax_name) %>% pull(tax_name) %>% cat(sep = ", ")
+
+t <- psmr::unique_taxa(subset_samples(nj1, Date > "2017-07-01"), subset_samples(nj1, Date < "2017-07-01")) %>% select(abundance = 1,tax_name)  
+
+data.frame(tax_name = t$tax_name,abundance = t$abundance/10000) %>% knitr::kable(digits = 3)
 ```
 
 and vice versa:
 
 ```{r}
-kable(psmr::unique_taxa(subset_samples(nj1, Date < "2017-07-01"),subset_samples(nj1, Date > "2017-07-01"))[1]/10000, digits = 2, col.names = c("% Unique to first sample"))
+
+psmr::unique_taxa(subset_samples(nj1, Date < "2017-07-01"),subset_samples(nj1, Date > "2017-07-01")) %>% arrange(tax_name) %>% pull(tax_name) %>% cat(sep = ", ")
+
 ```
 
+### Ed
 
 Let's look at another case:  "Ed" is a German man on a mostly vegetarian diet.
 
@@ -118,24 +160,12 @@ Let's look at another case:  "Ed" is a German man on a mostly vegetarian diet.
 ed <- subset_samples(people.norm, Username == "AD" & Site == "gut")
 ed.norm <- prune_taxa(taxa_sums(ed)>42, ed)
 
-#plot_top_heat(ed.norm)
+s_cf <- psmr::mhg_outlier(psmr::mhg_range_for(ed.norm),psmr::mhg_range_for(people.healthy.gut.genus))
 
-c.people <- people.norm # compare set
-sample_data(c.people)$Username <- "Other"
+s_cf2 <- s_cf %>% select(-taxa) /10000
 
+data.frame(taxa = s_cf$taxa, s_cf2) %>% knitr::kable(digits = 3, caption = "Ed outlier abundances (%)")
 
-ed.all <- subset_samples(people.phylum, Username == "AD")
-ed.ssr <- sample_data(ed.all)$SSR
-sample_data(c.people)$Username[sample_data(c.people)$SSR %in% ed.ssr] <- "You"
-
-
-  
-  
-ed.phylum <- subset_samples(people.phylum, Username == "AD" & Site == "gut")
-ed.phylum.norm <- prune_taxa(taxa_sums(ed.phylum)>42, ed.phylum)
-mhg_abundance(ed.phylum.norm)/10000
-
-mhg_abundance(ed.norm)/10000
 
 # using another database: not for public
 # load(paste0(DATA_DIR,"/ubiome corp/healthy/healthy897Genus.RData"))
@@ -147,7 +177,7 @@ mhg_abundance(ed.norm)/10000
 
 #ord <- ordinate(subset_samples(c.people, Site == "gut"), method = "DCA", distance = "bray" )
 
-make_ord_for(subset_samples(c.people, Site == "gut"), color = "Username")
+#make_ord_for(subset_samples(c.people, Site == "gut"), color = "Username")
 
 ```
 
@@ -219,7 +249,11 @@ sj.genus <- subset_samples(people.norm,Username == "sj")
 
 
 
-mhg_outlier(mhg_range_for(sj.genus),mhg_range_for(gut.norm)) %>% filter(original>max)
+s_cf <- mhg_outlier(mhg_range_for(sj.genus),mhg_range_for(people.healthy.gut.genus)) %>% filter(original>max) 
+
+s_cf2 <- s_cf %>% select(-taxa) /10000
+
+data.frame(taxa = s_cf$taxa, s_cf2) %>% knitr::kable(digits = 3, caption = "SJ outlier abundances (%)")
 
 
 ```
@@ -229,20 +263,13 @@ and species:
 
 ```{r checkSJSpecies}
 sj.species <- subset_samples(people.species,Username == "sj")
-mhg_outlier(mhg_range_for(sj.species),mhg_range_for(sprague.species)) %>% filter(original>max)
-# 
-# mhg_density_for_taxa(people.species,"Klebsiella pneumoniae") + 
-#   annotate(
-#   geom = "segment",
-#   color = "blue",
-#   x = as.numeric(otu_table(
-#   subset_samples(sprague.species.norm, Site=="gut"))["Klebsiella pneumoniae"] / 10000),
-#   xend = as.numeric(otu_table(
-#   subset_samples(sprague.species.norm,Site == "gut"))["Klebsiella pneumoniae"] / 10000),
-#   y = 0,
-#   yend = 0.5
-#   )
-# 
+s_cf <- mhg_outlier(mhg_range_for(sj.species),
+                    mhg_range_for(subset_samples(people.species,
+                                                 Condition == "Healthy" & Site == "gut"))) %>% filter(original>max) 
+
+s_cf2 <- s_cf %>% select(-taxa) /10000
+
+data.frame(taxa = s_cf$taxa, s_cf2) %>% knitr::kable(digits = 3, caption = "SJ outlier abundances (%)")
 
 ```
 
@@ -250,18 +277,20 @@ mhg_outlier(mhg_range_for(sj.species),mhg_range_for(sprague.species)) %>% filter
 
 ### Mr. C
 
+Here's another person. Let's see which parts of their sample are outliers compared to healthy people.
+
 ```{r}
 
 c.phylum <- subset_samples(people.phylum,  Username == c("em3"))
 c  <- subset_samples(people.norm,  Username == c("em3"))
 
-c.people <- subset_samples(people.family, Site == "gut") # compare set
-sample_data(c.people)$Username <- "Other"
+s_cf <- mhg_outlier(mhg_range_for(c),
+                    mhg_range_for(people.healthy.gut.genus)) %>% filter(original>max) 
 
-sample_data(c.people)$Username[sample_data(c.people)$SSR == 12356] <- "Conor"
+s_cf2 <- s_cf %>% select(-taxa) /10000
 
+data.frame(taxa = s_cf$taxa, s_cf2) %>% knitr::kable(digits = 3, caption = "SJ outlier abundances (%)")
 
-make_ord_for(c.people)
 
 ```
 
@@ -274,19 +303,19 @@ Here's a person from Norway who has long suffered from IBS.
 ff.phylum <- subset_samples(people.phylum,  Username == c("ff"))
 ff  <- subset_samples(people.norm,  Username == c("ff"))
 
-ff.people <- subset_samples(people.family, Site == "gut" & Condition == "Healthy") # compare set
+ff.people <- people.healthy.gut.family # compare set
 ff.people <- merge_phyloseq(subset_samples(people.family,Username=="ff"),ff.people)
 sample_data(ff.people)$Username <- "Other"
 
 sample_data(ff.people)$Username[sample_data(ff.people)$SSR == 379847] <- "FF"
 
 
-make_ord_for(ff.people)
+#psmr::make_ord_for(ff.people)
 
-ff.people.genus <- subset_samples(people.norm, Site == "gut" & Condition == "Healthy") # compare set
+ff.people.genus <- people.healthy.gut.genus # compare set
 ff.people.genus <- merge_phyloseq(subset_samples(people.norm,Username=="ff"),ff.people.genus)
 
-mhg_density_for_taxa(ff.people.genus,"Sutterella") + 
+psmr::mhg_density_for_taxa(ff.people.genus,"Sutterella") + 
   annotate(
   geom = "segment",
   color = "blue",
@@ -338,7 +367,7 @@ ssr.tmp <- sample_data(subset_samples(people.tmp, Username == "db1"))$SSR
 sample_data(people.tmp)$Username <- "People"
 
 sample_data(people.tmp)$Username[sample_data(people.tmp)$SSR == ssr.tmp] <- "HH"
-make_ord_for(people.tmp)
+#make_ord_for(people.tmp)
 
 ```
 

@@ -22,6 +22,8 @@ library(psmr)
 #load(file.path(DATAPATH,"derived/spragueAllRanks.RData"))
 #load(file.path(DATA_DIR,"ubiome_people/peopleAll.RData"))
 
+
+
 # Convention: "gut" refers to a gut sample of high quality (over 10K reads)
 # "norm" is a normalized object. If no rank is specified, assume genus.
 
@@ -55,6 +57,12 @@ gut.norm <- gut.norm.nodupes
 gut.phylum.norm <- phylum.gut.nodupes
 gut.family.norm <- subset_samples(family.gut.nodupes, Site == "gut")
 
+# generate info about people
+
+people.healthy.gut.genus <- subset_samples(people.norm, Site == "gut" & Condition == "Healthy")
+# family level is useful for comparing diversity and for doing ordinations
+people.healthy.gut.family <- subset_samples(people.family, Site == "gut" & Condition == "Healthy")
+
 people.gut.phylum.norm <- subset_samples(people.phylum, Site == "gut")
 people.gut.norm <- subset_samples(people.norm, Site == "gut")
 
@@ -76,9 +84,3 @@ skin.phylum <- prune_taxa(taxa_sums(skin.phylum)>0,skin.phylum) #remove zeros
 skin.family <- subset_samples(sprague.family.norm, Site == "skin")
 skin.family <- prune_taxa(taxa_sums(skin.family)>0,skin.family) # remove zeros
 
-
-MHG_TOP_DIRECTORY <- getwd() # remember the location of the top directory
-# returns the URL for assetName, usually an image file
-mhg_asset <- function (assetName) {
-  paste0(MHG_TOP_DIRECTORY,"/assets/",assetName)
-}
