@@ -6,9 +6,9 @@ In this experiment, I tried exactly that, using a colon cleanse – the kind you
 
 The bottom line: 
 
-**My gut microbiome recovers pretty quickly.** Unlike antibiotics, which are known to cause long-term (and possibly permanent) changes, losing bacteria this way seems only to affect the total numbers, but they sprout right back just like a haircut. In two weeks I looked like nothing had happened.
+**My gut microbiome recovers pretty quickly.** Unlike antibiotics, which are known to cause long-term (and possibly permanent) changes, losing bacteria this way seems to matter only for a day or two. The missing microbes sprout right back just like a haircut. In two weeks it was as if nothing had happened.
 
-In Figure \@ref(fig:cleansePlot), "CC" is the day of the colon cleanse. Although as expected there is a huge change immediately afterwards, note how quickly things shift right back to where they were.
+Figure \@ref(fig:cleansePlot) is a broad, phylum-level look at how the various microbes shifted in abundance. As you can see, all of these high-level colonies were back to the same proportions that had been before the cleanse.
 
 ```{r cleansePlot, fig.cap="Overall phylum-level summary, from baseline (2 weeks before the cleanse) to CC (colon cleanse) to one month after CC."}
 # cleanseDates <- sample_data(gut.norm) %>% filter("CC" %in% Label) #%>% select(Date) %>% as.vector()  #%in% sample_data(gut.norm)$Date # == as.Date(sample_data(gut.norm)$Date)
@@ -19,67 +19,66 @@ cleanse.phylum.norm <- subset_samples(gut.phylum.norm, Site == "gut" & Date %in%
 cleanse.phylum.norm <- prune_taxa(taxa_sums(cleanse.phylum.norm)>4000,cleanse.phylum.norm)
 
 sample_data(cleanse.phylum.norm)$Label <- c("0 Baseline","1 CC-1wk", "2 CC-1 day", "3 CC", "4 CC+1", "5 CC+2", "6 CC+1wk", "7 CC+2 wks", "8 CC+1 Month")
-# mhg_plot_top_heat(cleanse.norm, label = "Date", n = 25)  + ggthemes::theme_fivethirtyeight(base_size = 8) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + theme(legend.position="none")
 
-# plot_bar(cleanse.phylum.norm, fill = "Phylum", x = "Label") + # ggthemes::theme_fivethirtyeight(base_size = 8) + 
-#  #scale_y_continuous(labels = 1) + #function(x) log10(x)) + 
-#   scale_y_log10(labels = function (x) log10(x)) + 
-#   labs( y = "Abundance (log10 %)")
-#  # facet_grid(Phylum~., scale="free_y", drop=TRUE)
-
-m<- mhg_abundance(cleanse.phylum.norm)
-m_dates <- strftime(colnames(m),format = "%b-%d")
+m<- psmr::mhg_abundance(cleanse.phylum.norm)
 
 c_df <- data.frame(taxa = rownames(m), m)
-colnames(c_df) <- c("taxa",m_dates)
+colnames(c_df) <- c("taxa",colnames(m))
 
 
-c_df <- c_df %>% gather(date,value, -taxa)
-c_df$value <- c_df$value / 10000 # convert to percent
-#c_df$date <- as.Date(c_df$date)
+c_df <- c_df %>% gather(date,value, -taxa) %>% transmute(date = lubridate::as_date(date), taxa, abundance = value/10000)
 
-ggplot(data = c_df, aes(x=date,y=value, fill = taxa)) +
-  geom_bar(stat = "identity") +
-  theme(axis.text.x = element_text(angle=90)) +
-  scale_y_log10(labels = function(x) log10(x) ) +
-  labs(title = "Colon Cleanse",
-       x = "Date",
-       y = "Abundance (%)") +
-  annotate("text",x=6,y=Inf,color = "red", label = "Colon Cleanse") 
+ggplot( data = c_df, aes(x = date, y = abundance, fill = taxa)) +
+  scale_y_log10() + #labels = function(x) log10(x) ) +
+  geom_point(aes(x = date, y = abundance, color = taxa)) + 
+  geom_line(aes(x = date, y = abundance, color = taxa)) +
+  geom_vline(xintercept = as.Date("2015-10-19"), color = "red", size = 2, alpha = .2) + 
+  geom_text(data = c_df %>% filter(date == min(date)),
+            aes(label = taxa, x = as.Date("2015-10-01"), colour = taxa, y = abundance)) + 
+  labs(title = "Phylum-level Changes Before/After a Colon Cleanse", y = "Abundance log10(%)") +
+  xlim(as.Date("2015-09-28"),as.Date("2015-11-17")) + 
+  theme(legend.position = "none", axis.title.x = element_blank()) + 
+  annotate("text",x=as.Date("2015-10-19"),y=0.01,color = "red", label = "Colon\nCleanse") 
 ```
 
-```{r cleansePhylumTableBefore}
+Even at the more detailed, genus-level, whatever shuffling occured didn't look much different than the normal random variation I see in any month-long survey. 
 
-c_df <- c_df %>% tidyr::spread(date, -taxa) 
-# c_dates <- as.Date(names(c_df)[-1]) %>% strftime(format="%b-%d")
-# names(c_df) <- c(names(c_df)[1],c_dates)
-knitr::kable(c_df[,1:5], digits = 2, caption = "Phylum abundances before colon cleanse")
-```
+```{r cleansePlotGenus, fig.cap="Overall Genus-level summary, from baseline (2 weeks before the cleanse) to CC (colon cleanse) to one month after CC."}
+# cleanseDates <- sample_data(gut.norm) %>% filter("CC" %in% Label) #%>% select(Date) %>% as.vector()  #%in% sample_data(gut.norm)$Date # == as.Date(sample_data(gut.norm)$Date)
 
-and after
-```{r cleansePhylumTableAfter}
+cleansePeriod <- seq(from=as.Date("2015-10-01"),to = as.Date("2015-12-01"),by=1)
 
+cleanse.genus.norm <- subset_samples(gut.norm, Site == "gut" & Date %in% cleansePeriod)
+#cleanse.phylum.norm <- prune_taxa(taxa_sums(gut.norm)>4000,cleanse.phylum.norm)
 
-knitr::kable(c_df[,c(1,6:10)], digits = 2, caption = "Phylum abundances after colon cleanse")
-```
+sample_data(cleanse.genus.norm)$Label <- c("0 Baseline","1 CC-1wk", "2 CC-1 day", "3 CC", "4 CC+1", "5 CC+2", "6 CC+1wk", "7 CC+2 wks", "8 CC+1 Month")
 
+m<- psmr::mhg_abundance(cleanse.genus.norm, top = 15)
+#m_dates <- strftime(colnames(m),format = "%b-%d")
 
-
-```{r}
-# Here’s the the summary from uBiome:
-# knitr::include_graphics(paste0(getwd(),"/assets/colonCleanse/colonCleanseBacteria.png"))
-```
+c_df <- data.frame(taxa = rownames(m), m)
+colnames(c_df) <- c("taxa",colnames(m))
 
 
-Notice the big change on the day of the cleanse, followed by a big shift back to normal just a day later.
+c_df <- c_df %>% gather(date,value, -taxa) %>% transmute(date = lubridate::as_date(date), taxa, abundance = value/10000)
 
-
-
-```{r echo=FALSE}
-#Here’s the functional view of the same data:
-
-#knitr::include_graphics("https://farm6.staticflickr.com/5833/22666646263_1a083fe751_z.jpg")
-#knitr::include_graphics(paste0(getwd(),"/assets/colonCleanse/colonCleanseFunctions.png"))
+ggplot( data = c_df, aes(x = date, y = abundance, fill = taxa)) +
+  scale_y_log10() + #labels = function(x) log10(x) ) +
+  geom_point(aes(x = date, y = abundance, color = taxa)) + 
+  geom_line(aes(x = date, y = abundance, color = taxa)) +
+  geom_vline(xintercept = as.Date("2015-10-19"), color = "red", size = 2, alpha = .2) + 
+  geom_text(data = c_df %>% filter(date == min(date)),
+            aes(label = taxa, x = as.Date("2015-10-01"), colour = taxa, y = abundance),
+            check_overlap = TRUE) + 
+    geom_text(data = c_df %>% filter(date == max(date)),
+            aes(label = taxa, x = as.Date("2015-11-17"), colour = taxa, y = abundance),
+            check_overlap = TRUE) + 
+  labs(title = "Genus-level Changes Before/After a Colon Cleanse",
+       subtitle = "Top 15 taxa",
+       y = "Abundance log10(%)") +
+  xlim(as.Date("2015-09-28"),as.Date("2015-11-25")) + 
+  theme(legend.position = "none", axis.title.x = element_blank()) + 
+  annotate("text",x=as.Date("2015-10-19"),y=0.01,color = "red", label = "Colon\nCleanse") 
 ```
 
 
@@ -87,80 +86,36 @@ Notice the big change on the day of the cleanse, followed by a big shift back to
 
 **Amounts and ratios changed, but not the specific organisms**. Of course I lost a bunch of bacteria – that was the point – but surprisingly I didn’t seem to gain anything really new, even after an aggressive attempt at re-seeding. I didn’t gain or lose a single phyla. Other than amounts and ratios, I had to dig down to the Class level of the biological hierarchy to find anything that was permanently lost, and even at the very fine-grained Genus level, only two taxa that had been regularly present beforehand were now extinct. (*Holdemania* and *Methanomassiliicoccus*).
 
-Here's a look at one summary measure of the overall microbiome makeup:
+My overall gut diversity spiked the day of the cleanse and then plunged the following day, but soon it was right back to normal (Figure \@ref(fig:coloncleanseDiversity))
 
+```{r coloncleanseDiversity, fig.cap = "Shannon level diversity measures before and after the cleanse period."}
 
-
-```{r cleanseFBRatio }
-
-cleanse.fb <- subset_taxa(subset_samples(gut.phylum.norm, Site == "gut" & Date %in% cleansePeriod), Phylum %in% c("Firmicutes","Bacteroidetes"))
-
-fb <- mhg_abundance(cleanse.fb)/10000 
-fb <- fb["Firmicutes",]/fb["Bacteroidetes",] # 
-fb <- fb %>% gather(Date,Ratio)
-fb$Date <- as.Date(fb$Date)
-# fb$taxa <- rownames(fb)
-# fb <- fb %>% gather(Date,Abundance,-taxa)
-
-ggplot(data=fb %>% gather(Date,Ratio),aes(x=Date,y=Ratio, group=1)) + geom_point() + geom_line() +
-  scale_x_date(date_labels = "%m-%d (%A)", date_breaks = "1 week", date_minor_breaks = "1 day") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  ggtitle("Firmicutes/Bacteroidetes During Colon Cleanse")
-
-```
-`
-
-
-
-
-**A couple of weird ones, at small amounts, made a brief appearance.** I was especially intrigued by five new taxa that showed up just once, the day after the cleanse, and then disappeared. Maybe I found some that ordinarily get lost in the noise of the microbiome and only show up when the rest of the forest has been cleared. These are some hardy guys and I’m glad I know their names and can watch for them again: *Abiotrophia, Bacillus, Catonella, Christensenella, Parvimonas*.
-
-**It’s pretty hard to make a significant change.** These days a little googling will find plenty of web sites, books, diets, and supplements that claim to “fix” or “change” your microbiome. I’m a healthy, reasonably fit adult, so I’m not as motivated as somebody with a specific health problem, but I thought simply popping probiotics and eating a variety of new and fermented foods would have a big effect. Nope. There are exceptions – my past experience with [sleep hacking](http://www.ubiomeblog.com/my-ubiome-sleep-hacking-update/) demonstrated conclusively to me that I can temporarily change my _Bifidobacterium_ levels for example – but those are harder to find than I had hoped.
-
-Here's another ratio that microbiologists have found useful to see how the gut biome changes:
-
-
-```{r echo=FALSE}
-#knitr::include_graphics(paste0(getwd(),"/assets/colonCleanse/colonCleanseBacteroidetesPrevotella.png"))
-
-cleanse.bp <- subset_taxa(subset_samples(gut.norm, Site == "gut" & Date %in% cleansePeriod), Genus %in% c("Prevotella","Bacteroides"))
-
-bp <- mhg_abundance(cleanse.bp)/10000 
-bp <- bp["Prevotella",]/bp["Bacteroides",] # 
-bp <- bp %>% gather(Date,Ratio)
-bp$Date <- as.Date(bp$Date)
-# fb$taxa <- rownames(fb)
-# fb <- fb %>% gather(Date,Abundance,-taxa)
-
-ggplot(data=bp %>% gather(Date,Ratio),aes(x=Date,y=Ratio, group=1)) + geom_point() + geom_line() +
-  scale_x_date(date_labels = "%m-%d (%A)", date_breaks = "1 week", date_minor_breaks = "1 day") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  ggtitle("Prevotella/Bacteroides During Colon Cleanse")
-
-
+cleanse.family.norm <- subset_samples(gut.family.norm, Site == "gut" & Date %in% cleansePeriod)
+data.frame(sample_data(cleanse.family.norm)[,c("Date")],
+           estimate_richness(cleanse.family.norm, measures = "shannon")) %>%
+  ggplot(.,aes(x=Date, y = Shannon)) +
+  geom_line() + 
+  geom_point() +
+  geom_vline(xintercept = as.Date("2015-10-19"), color = "red", size = 2, alpha = .2) +
+  annotate("text",x=as.Date("2015-10-19"),y=1.6,color = "red", label = "Colon\nCleanse") + 
+  labs(title = "Diversity Before/After a Colon Cleanse",
+       subtitle = "Family level",
+       y = "Shannon Diversity Metric") +
+  theme(legend.position = "none", axis.title.x = element_blank()) 
 ```
 
+**A couple of weird microbers, at small amounts, made a brief appearance.** I was intrigued by five new taxa that showed up just once, the day after the cleanse, and then disappeared. Maybe I found some that ordinarily get lost in the noise of the microbiome and only show up when the rest of the forest has been cleared. These are some hardy guys and I’m glad I know their names and can watch for them again: *Abiotrophia, Bacillus, Catonella, Christensenella, Parvimonas*.
 
-See much change?  Me neither. There's a short spike during the cleanse, but then it just pops back to normal.
+**It’s pretty hard to make a significant change.** These days a little googling will find plenty of web sites, books, diets, and supplements that claim to “fix” or “change” your microbiome. I’m a healthy, reasonably fit adult, so I’m not as motivated as somebody with a specific health problem, but I thought simply popping probiotics and eating a variety of new and fermented foods would have a big effect. Nope. There are exceptions – new microbes will sprout when I drink [homemade Kefir](#experimentKefir), or [travel to China](#chinaTravel) but it's much harder than you'd think.
 
-A paper that carefully studied this notes increases in _Dorea_.^[Read a detailed description of what microbes are noted in a bowel cleansing: @jalanka_effects_2015 ]
+Of course, I'm not the first to study microbiome changes after a colon cleanse. A 2015 European study found increases in _Dorea_.^[Read a detailed description of what microbes are noted in a bowel cleansing: @jalanka_effects_2015 ]
  I find the same thing:
 ```{r}
 
-mhg_taxa_plot(subset_samples(gut.norm,Date %in% cleansePeriod),"Dorea")
+
+psmr::mhg_taxa_plot(subset_samples(gut.norm,Date %in% cleansePeriod),"Dorea") 
 ```
 
-
-Next, let's look at the food I ate during the period:
-
-
-
-Next: analyze the food to see if there is a relationship between various macronutrients and the levels of specific bacteria such as:
-
-* Blautia (which likes sugar)
-* Bacteroidetes (which likes carbs)
-* Bifido (which likes fiber)
-
-
+When I began this experiment I thought for sure I'd find something unusual and perhaps uncover a new way to modify the microbiome. Ultimately the main thing I learned is that the microbiome is incredibly robust. Even a complete reset won't change much.
 
 
