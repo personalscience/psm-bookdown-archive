@@ -6,11 +6,16 @@ documentclass: book
 bibliography: [psm-refs.bib]
 biblio-style: apalike
 link-citations: yes
+cover-image: assets/coverPersonalScience.jpg
 description: "An introduction to Personal Science and uncovering the secrets of your own microbiome."
 ---
 
-
 # Intro {-}
+
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://richardsprague.com'}
+knitr::include_graphics('assets/coverPersonalScience.jpg', dpi = NA)
+```
 
 >>Healthy people are all alike; every unhealthy person is unhealthy in their own way. \
 -- Leo Tolstoy (sort of) _Anna Karenina_.

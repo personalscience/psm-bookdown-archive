@@ -1,8 +1,8 @@
 
 
-bookdown::tufte_html_book:
-  toc: yes
-  css: toc.css
+#bookdown::tufte_html_book:
+#  toc: yes
+#  css: toc.css
 
 bookdown::gitbook:
   css: style.css
