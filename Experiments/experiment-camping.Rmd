@@ -25,7 +25,7 @@ kable(psmr::unique_taxa(camping.after,camping.before)[1:10,][1]/10000, digits = 
 ```
 
 
-Interesting to note the very large increase in the formerly-non-existent _Kluyvera_. This is a branch of microbes that includes _E. Coli_ and the pathogen _Shigella_. Unfortunately, 16S doesn't have enough resolution to distinguish between harmless and pathogenic versions of these taxa, but it is intriguing that they would show up.
+Interesting to note the very large increase in the formerly-non-existent _Kluyvera_. This is a branch of microbes that includes _E. Coli_ and the pathogen _Shigella_. Unfortunately, 16S doesn't have enough resolution to distinguish between harmless and pathogenic versions of these taxa, but it is intriguing that they would show up.^[ @devanga_ragupathi_accurate_2018 and [full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5711669/?fbclid=IwAR33UKcUJ1tXja-OPXdapS9wxd09LctvuksbzJWbleHrcmWU6BMIYw6YNU4)]
 
 Here are the ones I lost on the trip:
 

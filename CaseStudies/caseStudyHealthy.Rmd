@@ -63,6 +63,7 @@ file.remove("junk2.txt")
 
 
 
+
 ```{r}
 # RC are two typical healthy people. Both are vegetarians and both sampled themselves recently on the same date.
 # rc <- subset_samples(people.gut.norm, Username == "rc" )

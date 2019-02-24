@@ -184,6 +184,51 @@ mhg_plot_top_heat(kh.short)
 
 Notice how Kevin's microbiome shifted dramatically a month after arriving in the US.  Soon after that, he began taking a probiotic supplement, but his gut -- while different -- hasn't shifted as much as it did from the international move.
 
+### VSL
+
+The most tested probiotic is VSL#3, and recently a woman sent me her microbiome test results after taking [Optibac](https://www.optibacprobiotics.co.uk/shop/for-women) for 4 days prior to her second test.  (Figure \@ref(fig:experimentProbioticsVSL)).
+
+In this case the abundances of these microbes went up significantly. Is that a coincidence? Hard to tell from a single sample, but perhaps this probiotic is one that makes it through and shows up in the results.
+
+```{r experimentProbioticsVSL}
+
+targetGenus <- c("Bifidobacterium","Lactobacillus")#,"Akkermansia","Roseburia")
+vsl_ssr <- c(1235112,1235115)
+vsl <- subset_samples(people.norm, SSR %in% vsl_ssr )
+
+# 
+# psmr::mhg_df_just_taxa(vsl,targetGenus)
+# 
+# psmr::mhg_plot_top_heat(vsl)
+
+# for(s in sample_data(vsl)$SSR){
+#   ps1 <- subset_samples(vsl, SSR == s)
+#   print(sample_data(ps1)$Label)
+# psmr::mhg_outlier(psmr::mhg_range_for(ps1),
+#                   psmr::mhg_range_for(people.healthy.gut.genus) )%>%
+#   mutate_at(vars(-taxa),function(x) x/10000) %>%
+#   knitr::kable(digits = 3, caption = paste("VSL Outliers",s)) %>% print()
+# cat("\n")
+# }
+
+# Average for all healthy people
+
+b_mean <- mean(psmr::mhg_taxa(people.healthy.gut.genus, "Bifidobacterium") %>% pull(abundance)/10000)
+b_median <- median(psmr::mhg_taxa(people.healthy.gut.genus, "Bifidobacterium") %>% pull(abundance) /10000)
+
+
+plot_bar(subset_taxa(vsl, Genus %in% targetGenus), 
+         #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
+         x = "Date", fill = "Genus")  +
+  geom_hline(yintercept = b_median, color = "green") + 
+  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
+  scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
+  facet_grid(Genus~., scale="free_y", drop=TRUE)
+
+
+```
+
 
 #### (Tentative) Conclusions and next steps
 

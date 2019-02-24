@@ -50,6 +50,23 @@ ggplot(data = h.sprague %>% arrange(desc(mean)) %>% top_n(20), aes(x=reorder(tax
 ```
 
 A complete list of all species ever found in my gut is in the supplemental materials.
+
+Can I learn anything special about differences between healthy and unhealthy people? Let's look at outliers (Figure \@ref(fig:caseStudyHealthyOutliers))
+
+```{r caseStudyHealthyOutliers, "Outliers for healthy and unhealthy people."}
+
+psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.gut.norm,
+                                                     Condition %in% c("Dysbiosis","Lyme","Cancer","Overweight"))),
+                  psmr::mhg_range_for(people.healthy.gut.genus)) %>%
+  mutate_at(vars(-taxa),function(x) x/10000) %>% arrange(taxa)  %>%
+  select(-original, Unhealthy = original) %>% # write.csv(file = "outliers.csv")
+  knitr::kable(digits = 3, caption = "Outliers for Unhealthy people")
+  
+
+```
+
+The "Unhealthy" column shows the largest abundance seen in an unhealthy person. Mean and median values for healthy people might be much lower, but to be on this chart the unhealthy person must have a number above that range.
+
 ```{r generateCSVforgutSpecies}
 # uncomment this section to generate a file with all the species names found in my gut samples
 # gut.species <- sort(taxa_names(sprague.species))
