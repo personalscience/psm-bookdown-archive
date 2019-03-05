@@ -5,8 +5,8 @@
 library(shiny)
 library(tidyverse)
 
-healthy_genus_df <- read.csv("healthy_genus.csv")
-  # read.csv(file.path(here::here(), "R","microbeAbundance","healthy_genus.csv"))
+microbiome_samples_genus_df <- # read.csv("microbiome_samples_genus.csv")
+   read.csv(file.path(here::here(), "R","microbeAbundance","microbiome_samples_genus.csv"))
 
 
 #people.healthy.gut.genus <- phyloseq::subset_samples(psmr::people.norm, Site == "gut" & Condition == "Healthy")
@@ -18,22 +18,35 @@ server <- function(input, output) {
 
     selectInput(inputId = "dataset",
                 label = "Choose a Microbe:",
-                choices = healthy_genus_df %>% filter(abundance > 0) %>% pull(taxa)
+                choices = microbiome_samples_genus_df %>% dplyr::filter(abundance > 0 & condition == "Healthy") %>% pull(taxa)
                 %>% unique() %>% sort() %>% as.vector()
-    )
+    ))
 
+  output$health_condition <- renderUI(
+    selectInput(inputId = "health_status",
+                label = "Health Status:",
+                choices = levels(microbiome_samples_genus_df$condition))
   )
+
+
 
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
     taxa_name <- input$dataset
+    condition <- input$health_status
 
     taxa_name <- ifelse(is.null(taxa_name),"Bifidobacterium",taxa_name)
 
-  healthy_genus_df %>% filter(taxa == taxa_name) %>%
+    microbiome_samples_genus_df %>% dplyr::filter(taxa == taxa_name &
+                                                    condition == ifelse(is.null(input$health_status),
+                                                                        "Healthy",
+                                                                        input$health_status) ) %>%
       ggplot(aes( x = abundance)) +
       geom_histogram(bins = input$bins) +
-      labs(title = paste("Abundance of", taxa_name, "in (Healthy People)"), x = "Abundance (%)")
+      labs(title = paste("Abundance of", taxa_name, "in", condition),
+           x = "Abundance (%)",
+           y = "Frequency") +
+      theme(axis.text.y   = element_blank())
 
 
   })

@@ -23,7 +23,8 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       uiOutput("taxa_names"),
-      numericInput("bins", "Bins:", 5, min = 3, max = 30)
+      uiOutput("health_condition"),
+      sliderInput("bins", "Bins:", value = 5, min = 3, max = 30)
       )
 
   ,
