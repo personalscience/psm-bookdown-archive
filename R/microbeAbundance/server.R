@@ -5,7 +5,8 @@
 library(shiny)
 library(tidyverse)
 
-healthy_genus_df <- read.csv(file.path(here::here(), "R","microbeAbundance","healthy_genus.csv"))
+healthy_genus_df <- read.csv("healthy_genus.csv")
+  # read.csv(file.path(here::here(), "R","microbeAbundance","healthy_genus.csv"))
 
 
 #people.healthy.gut.genus <- phyloseq::subset_samples(psmr::people.norm, Site == "gut" & Condition == "Healthy")
@@ -17,7 +18,8 @@ server <- function(input, output) {
 
     selectInput(inputId = "dataset",
                 label = "Choose a Microbe:",
-                choices = healthy_genus_df %>% filter(abundance > 0) %>% pull(taxa) %>% unique() %>% as.vector()
+                choices = healthy_genus_df %>% filter(abundance > 0) %>% pull(taxa)
+                %>% unique() %>% sort() %>% as.vector()
     )
 
   )
@@ -25,6 +27,8 @@ server <- function(input, output) {
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
     taxa_name <- input$dataset
+
+    taxa_name <- ifelse(is.null(taxa_name),"Bifidobacterium",taxa_name)
 
   healthy_genus_df %>% filter(taxa == taxa_name) %>%
       ggplot(aes( x = abundance)) +
