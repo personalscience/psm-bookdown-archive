@@ -55,7 +55,9 @@ psmr::mhg_taxa(people.healthy.gut.genus,"Gordonibacter")  %>%
 
 ```
 
+See any microbe using this embedded app:
 
+<iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/microbeAbundance/"> </iframe>
 
 ## Species
 
