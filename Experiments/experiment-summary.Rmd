@@ -33,7 +33,7 @@ If Monday were my only test, I may have been disappointed with my 1.83 score. Wa
 
 To get a sense of how much diversity can vary over a year (Figure \@ref(fig:plotOneYearDiversity))
 
-```{r, plotOneYearDiversity, echo= FALSE, warning = FALSE, fig.cap = "Gut diversity varies day-to-day but holds to a recognizable range within a single individual"}
+```{r plotOneYearDiversity, echo= FALSE, warning = FALSE, fig.cap = "Gut diversity varies day-to-day but holds to a recognizable range within a single individual"}
 
 diversityYear.gut.family <- subset_samples(gut.family.norm, Date > "2016-06-01" & Date < "2017-06-01")
 data = data.frame(Diversity = estimate_richness(diversityYear.gut.family, measures=c("Shannon")),
@@ -70,7 +70,7 @@ Another example of an idea that gets too much credit is the concept of a simple 
 
  I confirmed this unreliability for myself, again obvious if you see how much variation there is day-to-day on a typical week (Figure \@ref(fig:plotFirmicutes))
 
-```{r, plotFirmicutes, echo = FALSE, fig.cap="The FB ratio changes significantly day-to-day, making it unclear which point should be relied upon over a ten day period."}
+```{r plotFirmicutes, echo = FALSE, fig.cap="The FB ratio changes significantly day-to-day, making it unclear which point should be relied upon over a ten day period."}
 
 Firmicutes <- subset_taxa(subset_samples(sprague.phylum.norm, Site == "gut"), Phylum %in% c("Firmicutes","Bacteroidetes"))
 
@@ -119,9 +119,9 @@ I tend to have a much higher average abundance than most people. [Later](#caseSt
 ```
 
 
-_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs.
+_Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs. (Figure \@ref(fig:summarPlotBifido)).
 
-```{r summarPlotBifido}
+```{r summarPlotBifido, fig.cap = "Bifidobacterum levels over time.  Red dots indicate period of taking probiotic supplements."}
 #mhg_taxa_plot(subset_samples(gut.norm, Date > "2016-06-01"),"Akkermansia")
 
 probiotic.day <- seq(as.Date("2016-10-23"),length=9, by=1)
