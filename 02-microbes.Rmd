@@ -26,25 +26,9 @@ You're likely to hear most about the genus level because it's the most detail th
 
 _Bifidobacterium_ is a key component of virtually all popular probiotic supplements, partly because it is so easy to manufacture, but also due to its proven association with sleep and other aspects of health. A six month picture of my levels shows some dramatic ups and downs (See Figure \@ref(fig:summarPlotBifido)).
 
-<!-- ```{r summarPlotBifido} -->
-<!-- #mhg_taxa_plot(subset_samples(gut.norm, Date > "2016-06-01"),"Akkermansia") -->
+_Gordonibacter_ produce urolithin A, a compound that apparently protects muscle cells from aging, at least in animals^[See this Reddit thread: https://www.reddit.com/r/Microbiome/comments/4vh6d7/increasing_andor_adding_gordonibacter/  and additional discussion here:  https://www.medicalnewstoday.com/articles/311572.php].
 
-<!-- probiotic.day <- seq(as.Date("2016-10-23"),length=9, by=1) -->
-<!-- plot_bar(subset_taxa(subset_samples(gut.norm, Date %in% seq(as.Date("2016-07-01"), length = 180, by = 1)), -->
-<!--                      Genus == "Bifidobacterium"), x = "Date") +  -->
-<!--   geom_smooth(method = "loess", se = FALSE) + -->
-<!--   annotate("point",x=probiotic.day, y = -0.03, color = "red")+ -->
-<!--   scale_y_continuous(labels = function(x) x / 10000) + ylab("Abundance (%)") + ggtitle("Bifidobacterium") -->
-
-<!-- ``` -->
-
-<!-- Incidentally, the red dots indicate days when I was taking a powerful probiotic supplement that contained _Bifidobacterium_. And that big spike in September? That was during a trip to New Orleans, when I ate a lot of red beans and rice.  At least for me, food seems to work better than taking supplements. -->
-
-_Gordonibacter_ produce urolithin A, a compound that apparently protects muscle cells from aging, at least in animals^[See a discussion in https://www.medicalnewstoday.com/articles/311572.php]
-
-^[See this Reddit thread: https://www.reddit.com/r/Microbiome/comments/4vh6d7/increasing_andor_adding_gordonibacter/].
-
-In our healthy database, we find this microbe is relatively rare. (Figure \@ref(fig:microbesGordonibacter))
+This microbe, it seems, is pretty rare (Figure \@ref(fig:microbesGordonibacter)) in healthy people as well as everyone else.
 
 ```{r microbesGordonibacter, fig.cap = "Gordonibacter abundance in healthy people."}
 
@@ -55,7 +39,9 @@ psmr::mhg_taxa(people.healthy.gut.genus,"Gordonibacter")  %>%
 
 ```
 
-See any microbe using this embedded app:
+See any microbe using [this app](https://personalscience.shinyapps.io/microbeAbundance/).
+
+Select the microbe of interest to see its frequency among different kinds of people (Healthy, Unhealthy, or just compare to Richard Sprague's many samples).  The resulting histogram shows, roughly, how many samples contained that microbe. Adjust the "bins" for higher or lower resolution.
 
 <iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/microbeAbundance/"> </iframe>
 

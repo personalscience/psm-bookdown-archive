@@ -5,6 +5,6 @@ account: personalscience
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 765737
-bundleId: 1917982
+bundleId: 1918285
 url: https://personalscience.shinyapps.io/microbeabundance/
-when: 1551818256.82361
+when: 1551825826.57968
