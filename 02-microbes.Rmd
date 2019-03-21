@@ -28,22 +28,25 @@ _Bifidobacterium_ is a key component of virtually all popular probiotic suppleme
 
 _Gordonibacter_ produce urolithin A, a compound that apparently protects muscle cells from aging, at least in animals^[See this Reddit thread: https://www.reddit.com/r/Microbiome/comments/4vh6d7/increasing_andor_adding_gordonibacter/  and additional discussion here:  https://www.medicalnewstoday.com/articles/311572.php].
 
-This microbe, it seems, is pretty rare (Figure \@ref(fig:microbesGordonibacter)) in healthy people as well as everyone else.
+This microbe, it seems, is pretty rare (Figure \@ref(fig:microbesGordonibacter)) in healthy people as well as everyone else.  See any microbe using [this app](https://personalscience.shinyapps.io/microbeAbundance/).
 
-```{r microbesGordonibacter, fig.cap = "Gordonibacter abundance in healthy people."}
+Select the microbe of interest to see its frequency among different kinds of people (Healthy, Unhealthy, or just compare to Richard Sprague's many samples).  The resulting histogram shows, roughly, how many samples contained that microbe. Adjust the "bins" for higher or lower resolution.
 
+```{r microbesGordonibacter, results = "asis", fig.cap = "Gordonibacter abundance in healthy people."}
+if(knitr::is_html_output()){
+  cat('<iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/microbeabundance/?taxa=Gordonibacter"> </iframe>')
+} else {
 psmr::mhg_taxa(people.healthy.gut.genus,"Gordonibacter")  %>%
   ggplot(aes( x = abundance/10000)) + 
   geom_histogram(bins = 5) +
   labs(title = "Abundance of Gordonibacter (Healthy People)", x = "Abundance (%)")
+}
 
 ```
 
-See any microbe using [this app](https://personalscience.shinyapps.io/microbeAbundance/).
 
-Select the microbe of interest to see its frequency among different kinds of people (Healthy, Unhealthy, or just compare to Richard Sprague's many samples).  The resulting histogram shows, roughly, how many samples contained that microbe. Adjust the "bins" for higher or lower resolution.
 
-<iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/microbeAbundance/"> </iframe>
+<iframe width="900" height="800" scrolling="yes" frameborder="no"  src="https://personalscience.shinyapps.io/microbeabundance/?taxa=Gordonibacter"> </iframe>
 
 ## Species
 

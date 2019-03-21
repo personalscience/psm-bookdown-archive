@@ -29,7 +29,7 @@ ggplot(data = df %>% dplyr::filter(date > as.Date("2016-08-01") & date < as.Date
 fishoil.day <- as.Date(na.omit(rikStats[rikStats$`Fish Oil`>0,]$Date))
 keytaxa.top <- subset_taxa(gut.family.norm, Family %in% c("Lachnospiraceae") )
 
-plot_bar(subset_taxa(subset_samples(gut.family.norm, Date>"2017-01-01" ),   #, Date %in% seq(as.Date("2016-12-01"), length = 60, by = 1)),
+plot_bar(subset_taxa(subset_samples(gut.family.norm, Date>"2016-01-01" ),   #, Date %in% seq(as.Date("2016-12-01"), length = 60, by = 1)),
                      Family == "Lachnospiraceae"), x = "Date") + 
   geom_smooth(method = "loess", se = FALSE) +
   annotate("point",x=fishoil.day, y = -0.03, color = "red")+

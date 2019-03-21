@@ -190,7 +190,7 @@ The most tested probiotic is VSL#3, and recently a woman sent me her microbiome 
 
 In this case the abundances of these microbes went up significantly. Is that a coincidence? Hard to tell from a single sample, but perhaps this probiotic is one that makes it through and shows up in the results.
 
-```{r experimentProbioticsVSL}
+```{r experimentProbioticsVSL, fig.cap = "Change in key microbe levels after a course of VSL#3"}
 
 targetGenus <- c("Bifidobacterium","Lactobacillus")#,"Akkermansia","Roseburia")
 vsl_ssr <- c(1235112,1235115)

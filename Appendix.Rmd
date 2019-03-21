@@ -53,7 +53,7 @@ A complete list of all species ever found in my gut is in the supplemental mater
 
 Can I learn anything special about differences between healthy and unhealthy people? Let's look at outliers (Figure \@ref(fig:caseStudyHealthyOutliers))
 
-```{r caseStudyHealthyOutliers, "Outliers for healthy and unhealthy people."}
+```{r caseStudyHealthyOutliers, fig.cap = "Outliers for healthy and unhealthy people."}
 
 psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.gut.norm,
                                                      Condition %in% c("Dysbiosis","Lyme","Cancer","Overweight"))),

@@ -8,18 +8,22 @@ library(tidyverse)
 microbiome_samples_genus_df <-  read.csv("microbiome_samples_genus.csv")
    #read.csv(file.path(here::here(), "R","microbeAbundance","microbiome_samples_genus.csv"))
 
+query <- "Blautia"  # default value
 
 #people.healthy.gut.genus <- phyloseq::subset_samples(psmr::people.norm, Site == "gut" & Condition == "Healthy")
 
 # Define server logic required to draw food and microbes
-server <- function(input, output) {
+server <- function(input, output, session) {
 
   output$taxa_names <- renderUI(
 
     selectInput(inputId = "dataset",
                 label = "Choose a Microbe:",
-                choices = microbiome_samples_genus_df %>% dplyr::filter(abundance > 0 & condition == "Healthy") %>% pull(taxa)
-                %>% unique() %>% sort() %>% as.vector()
+                choices = microbiome_samples_genus_df %>%
+                  dplyr::filter(abundance > 0 & condition == "Healthy") %>% pull(taxa)
+                %>% unique() %>% sort() %>% as.vector(),
+                selected = ifelse(session$clientData$url_search=="","Bifidobacterium",
+                                  parseQueryString(session$clientData$url_search)$taxa)
     ))
 
   output$health_condition <- renderUI(
@@ -37,6 +41,11 @@ server <- function(input, output) {
                                "Healthy",
                                input$health_status)
 
+    query <- parseQueryString(session$clientData$url_search)$taxa
+    output$urlText <- renderText(query)
+    #taxa_name <- ifelse(is.null(input$dataset),"Bifidobacterium",substring(query,2))
+
+    #taxa_name <- ifelse(is.null(input$dataset),"Bifidobacterium",substring(query,2))
     taxa_name <- ifelse(is.null(taxa_name),"Bifidobacterium",taxa_name)
 
     microbiome_samples_genus_df %>% dplyr::filter(taxa == taxa_name #& condition == health_condition

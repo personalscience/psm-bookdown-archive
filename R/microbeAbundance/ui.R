@@ -24,7 +24,9 @@ shinyUI(fluidPage(
     sidebarPanel(
       uiOutput("taxa_names"),
    #   uiOutput("health_condition"),
-      sliderInput("bins", "Bins:", value = 5, min = 3, max = 30)
+      sliderInput("bins", "Bins:", value = 5, min = 3, max = 30),
+   h3("URL components"),
+   verbatimTextOutput("urlText")
       )
 
   ,
