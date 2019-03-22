@@ -1,0 +1,29 @@
+tax_rank,taxon,tax_name,Min,Max,Avg
+genus,239759,Alistipes,0%,14.26%,1.15%
+genus,397864,Barnesiella,0%,13.94%,0.34%
+genus,1678,Bifidobacterium,0%,64.09%,0.55%
+genus,194,Campylobacter,0%,6.90%,0.06%
+genus,0,Escherichia-Shigella,0%,59.69%,0.46%
+genus,848,Fusobacterium,0%,8.79%,0.03%
+genus,1578,Lactobacillus,0%,95.50%,0.21%
+genus,283168,Odoribacter,0%,8.25%,0.15%
+genus,1481960,Peptoclostridium,0%,3.30%,0.01%
+genus,838,Prevotella,0%,80.66%,7.22%
+genus,841,Roseburia,0%,18.11%,2.52%
+genus,1263,Ruminococcus,0%,29.59%,5.45%
+genus,590,Salmonella,0%,0.09%,0.00%
+genus,29465,Veillonella,0%,17.10%,0.11%
+species,239935,Akkermansia muciniphila,0%,38.80%,0.56%
+species,169435,Anaerotruncus colihominis,0%,1.17%,0.01%
+species,817,Bacteroides fragilis,0%,30.17%,0.41%
+species,45851,Butyrivibrio crossotus,0%,9.86%,0.11%
+species,74426,Collinsella aerofaciens,0%,8.53%,0.25%
+species,901,Desulfovibrio piger,0%,2.01%,0.02%
+species,218538,Dialister invisus,0%,7.45%,0.14%
+species,2173,Methanobrevibacter smithii,0%,5.95%,0.10%
+species,847,Oxalobacter formigenes,0%,0.14%,0.01%
+species,1496,Peptoclostridium difficile,0%,3.30%,0.01%
+species,1264,Ruminococcus albus,0%,0%,0%
+species,28901,Salmonella enterica,0%,0.02%,0.00%
+species,1305,Streptococcus sanguinis,0%,2.88%,0.01%
+species,0,Vibrio cholerae,0%,0.00%,0.00%

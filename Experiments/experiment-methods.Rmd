@@ -1,5 +1,13 @@
 ## Collection methods {#experimentCollection}
 
+
+```{r}
+library(psmr)
+library(phyloseq)
+library(tidyverse)
+library(actino)
+```
+
 To understand a result, we need to know more about the overall variability of the microbiome. As we showed previously, the day-to-day changes can be substantial, but what about variability in the sample itself? To find out, I tried sampling the same, uh, evacuation in several different ways. (Warning: some of the discussion here may get a little precise).
 
 I submitted two swabs to the lab. One of them I simply poked somewhere in the middle of the sample. In the other, I placed the entire sample into a plastic bag and gently "blended" it as best I could, rolling and kneading it back and forth until it was as mixed as I had patience to try. Here are the results at the genus level:
@@ -14,7 +22,7 @@ evac1 <- prune_taxa(taxa_sums(merge_phyloseq(evac1.middle,evac1.blend))>42,
                      merge_phyloseq(evac1.middle,evac1.blend))
 
 
-kable(mhg_abundance(evac1, top = 10)/10000, digits=2,col.names=c("Middle", "Blended"))
+knitr::kable(mhg_abundance(evac1, top = 10)/10000, digits=2,col.names=c("Middle", "Blended"))
 ```
 
 As we can see, there is a significant difference. If you are merely swabbing from a single wipe, it'll clearly matter a great deal that you wipe consistently from sample to sample.
@@ -29,7 +37,7 @@ evac2.second <- subset_samples(sprague.genus.norm, SSR == 74582)
 
 evac2 <- prune_taxa(taxa_sums(merge_phyloseq(evac2.first,evac2.second))>42,
                      merge_phyloseq(evac2.first,evac2.second))
-kable(mhg_abundance(evac2, top = 10)/10000, digits=2,col.names=c("First", "Second"))
+knitr::kable(mhg_abundance(evac2, top = 10)/10000, digits=2,col.names=c("First", "Second"))
 ```
 
 But what if I sample twice on the same day? Although I tend to be a once-a-day guy, there are occasions when I'll need to go more than once and I have a few examples with data from the same day.   
@@ -54,9 +62,9 @@ evac5.second <- subset_samples(sprague.genus.norm, SSR==evac5.ssr[2])
 evac5 <- prune_taxa(taxa_sums(merge_phyloseq(evac5.first,evac5.second))>42,
                      merge_phyloseq(evac5.first,evac5.second))
 
-kable(mhg_abundance(evac3, top = 10)/10000, digits=2,col.names=c("Day 1 Morning", "Day 1 Afternoon"))
-kable(mhg_abundance(evac4, top = 10)/10000, digits=2,col.names=c("Day 2 Morning", "Day 2 Afternoon"))
-kable(mhg_abundance(evac5, top = 10)/10000, digits=2,col.names=c("Day 3 Morning", "Day 3 Afternoon"))
+knitr::kable(mhg_abundance(evac3, top = 10)/10000, digits=2,col.names=c("Day 1 Morning", "Day 1 Afternoon"))
+knitr::kable(mhg_abundance(evac4, top = 10)/10000, digits=2,col.names=c("Day 2 Morning", "Day 2 Afternoon"))
+knitr::kable(mhg_abundance(evac5, top = 10)/10000, digits=2,col.names=c("Day 3 Morning", "Day 3 Afternoon"))
 
 
 ```
@@ -70,7 +78,7 @@ person2.evac1 <- subset_samples(people.norm, SSR == 23771)  # RSpragueFather 201
 person2.evac2 <- subset_samples(people.norm, SSR == 23790)  # 2015-09-15 gut 2
 person2 <- prune_taxa(taxa_sums(merge_phyloseq(person2.evac1,person2.evac2))>42,
                      merge_phyloseq(person2.evac1,person2.evac2))
-kable(mhg_abundance(person2, top = 10)/10000, digits=2,col.names=c("Sameday1", "Sameday 2"))
+knitr::kable(mhg_abundance(person2, top = 10)/10000, digits=2,col.names=c("Sameday1", "Sameday 2"))
 
 ```
 
@@ -85,7 +93,7 @@ Ultimately the real lesson is to be humble about what we can learn from a single
 
 #ggplot(data = data.frame(estimate_richness(evac1, measures = "Shannon"), location= c("Blended","Middle")), aes(x=location,y = Shannon)) + geom_bar(stat="identity")
 
-kable(data.frame(estimate_richness(evac1, measures = "Shannon"), location= c("Blended","Middle")), col.names = c("Diversity","Location"), row.names = FALSE)
+knitr::kable(data.frame(estimate_richness(evac1, measures = "Shannon"), location= c("Blended","Middle")), col.names = c("Diversity","Location"), row.names = FALSE)
 ```
 
 ---
@@ -195,9 +203,9 @@ Let's run the same correlation calculation that uBiome used:
 library(DescTools)
 #DescTools::CCC(p0.ratios$Part1,p0.ratios$Part2)[["rho.c"]][,"est"]
 
-knitr::kable(data_frame(DescTools::CCC(p0.fb$Ratio1,p0.fb$Ratio2)[["rho.c"]][,"est"],
-             DescTools::CCC(p0.fb$Firmicutes1,p0.fb$Firmicutes2)[["rho.c"]][,"est"],
-             DescTools::CCC(p0.fb$Bacteroidetes1,p0.fb$Bacteroidetes2)[["rho.c"]][,"est"]),
+knitr::kable(data_frame(r = DescTools::CCC(p0.fb$Ratio1,p0.fb$Ratio2)[["rho.c"]][,"est"],
+             p = DescTools::CCC(p0.fb$Firmicutes1,p0.fb$Firmicutes2)[["rho.c"]][,"est"],
+             q = DescTools::CCC(p0.fb$Bacteroidetes1,p0.fb$Bacteroidetes2)[["rho.c"]][,"est"]),
             col.names = c("FB Ratio", "Firmicutes", "Bacteroidetes"),
             digits = 2,
             caption = "Lin's Concordance Correlation Coefficience for 25 samples")
@@ -217,16 +225,16 @@ Let's see if I can make a rough estimate that would be similar to their list of 
 
 ```{r measureSampleClinical, echo = FALSE, message = FALSE}
 
-clinical <- readr::read_csv("../assets/clinicalTaxa2016.csv")
-clinical_genus <- (clinical %>% dplyr::filter(tax_rank=="genus"))$tax_name
+#clinical_taxa <- readr::read_csv(file.path(here::here(),"assets","clinicalTaxa2016.csv")) # preloaded by "R/loadMHGData.R"
+clinical_genus <- (clinical_taxa %>% dplyr::filter(tax_rank=="genus"))$tax_name
 
 dupes_dates <- sample_data(me.gut.dupes)$Date %>% strftime(format = "%m-%d")
 
 dupes_dates[seq(1,length(dupes_dates),2)] <- paste0(dupes_dates[seq(1,length(dupes_dates),2)],"A")
 dupes_dates[seq(2,length(dupes_dates),2)] <- paste0(dupes_dates[seq(2,length(dupes_dates),2)],"B")
 
-dupes_dates <- sort(c(paste0("sample",stringr::str_pad(seq(1,25,1),width=2, pad = "0"),"A"),
-                      paste0("sample",stringr::str_pad(seq(1,25,1),width=2, pad = "0"),"B")))
+dupes_dates <- sort(c(paste0("sample",stringr::str_pad(seq(1,26,1),width=2, pad = "0"),"A"),
+                      paste0("sample",stringr::str_pad(seq(1,26,1),width=2, pad = "0"),"B")))
 
 
 # here are the taxa that are found both in uBiome's clinical list and in the Explorer list

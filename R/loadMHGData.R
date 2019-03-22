@@ -22,7 +22,7 @@ library(psmr)
 #load(file.path(DATAPATH,"derived/spragueAllRanks.RData"))
 #load(file.path(DATA_DIR,"ubiome_people/peopleAll.RData"))
 
-
+clinical_taxa <- readr::read_csv(file.path(here::here(),"assets","clinicalTaxa2016.csv"))
 
 # Convention: "gut" refers to a gut sample of high quality (over 10K reads)
 # "norm" is a normalized object. If no rank is specified, assume genus.

@@ -75,24 +75,24 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 ```
 
 
-<!-- ```{r child="Experiments/experiment-methods.Rmd"} -->
-<!-- # How does collection method influence the result? -->
-<!-- ``` -->
+```{r child="Experiments/experiment-methods.Rmd"}
+#How does collection method influence the result?
+```
 
 
-<!-- ```{r child="Experiments/experiment-sites/microbesInSkin.Rmd"} -->
-<!-- # Microbes in the skin -->
-<!-- ``` -->
+```{r child="Experiments/experiment-sites/microbesInSkin.Rmd"}
+# Microbes in the skin
+```
 
 
-<!-- ```{r child="Experiments/experiment-sites/microbesInMouth.Rmd"} -->
-<!-- # Microbes in the mouth -->
-<!-- ``` -->
+```{r child="Experiments/experiment-sites/microbesInMouth.Rmd"}
+# Microbes in the mouth
+```
 
 
-<!-- ```{r child="Experiments/experiment-sites/microbesInNose.Rmd"} -->
-<!-- # Microbes in the nose -->
-<!-- ``` -->
+```{r child="Experiments/experiment-sites/microbesInNose.Rmd"}
+# Microbes in the nose
+```
 
 
 
