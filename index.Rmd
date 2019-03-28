@@ -6,6 +6,7 @@ documentclass: book
 bibliography: [psm-refs.bib]
 biblio-style: apalike
 link-citations: yes
+#output: bookdown::word_document2
 cover-image: assets/coverPersonalScience.jpg
 description: "An introduction to Personal Science and uncovering the secrets of your own microbiome."
 ---

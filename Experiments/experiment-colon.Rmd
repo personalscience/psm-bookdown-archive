@@ -126,6 +126,10 @@ psmr::as_tidyps_df(cleanse.genus.norm) %>% filter(taxa == "Dorea") %>%
 #psmr::mhg_taxa_plot(subset_samples(gut.norm,Date %in% cleansePeriod),"Dorea") 
 ```
 
+A more recent Japanese experiment @nagata_effects_2019 ^[Full text available here: https://www.nature.com/articles/s41598-019-40182-9.pdf] also found, like me, almost no difference after two weeks. They also used a mass spectrometer to study the specific metabolites present in each sample, but again, after two weeks it's as though nothing had happened.
+
+---
+
 When I began this experiment I thought for sure I'd find something unusual and perhaps uncover a new way to modify the microbiome. Ultimately the main thing I learned is that the microbiome is incredibly robust. Even a complete reset won't change much.
 
 
