@@ -262,6 +262,19 @@ psmr::mhg_outlier(psmr::mhg_range_for(sj.species),
 
 ```
 
+### U5
+
+Another user was recently diagnosed as pre-diabetic and began taking Metformin. 
+
+His microbial abundance seems to be in range of healthy people at both genus and species levels.
+
+Interestingly, he had tried a few experiments before going on Metformin: eating an apple daily with yogurt, followed by daily yogurt alone. Here are the results:
+
+```{r}
+ub12.genus <- subset_samples(people.norm,Username == "ub12")
+psmr::mhg_plot_top_heat(ub12.genus)
+
+```
 
 
 ### Mr. C

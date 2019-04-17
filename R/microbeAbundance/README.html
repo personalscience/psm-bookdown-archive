@@ -213,6 +213,35 @@ rsconnect::deployApp('~/dev/psi/psm/R/microbeAbundance')
 <pre><code>&lt;iframe width=&quot;900&quot; height=&quot;800&quot; scrolling=&quot;yes&quot; frameborder=&quot;no&quot;  src=&quot;https://personalscience.shinyapps.io/microbeAbundance/&quot;&gt; &lt;/iframe&gt;
 </code></pre>
 </div>
+<div id="other" class="section level1">
+<h1>Other</h1>
+<p>You will need the microbe abundance dataframe. Here’s how to generate it:</p>
+<pre class="{r}"><code>people.healthy.gut.genus &lt;- subset_samples(people.norm, Site == &quot;gut&quot; &amp; Condition == &quot;Healthy&quot;)
+
+ps &lt;- people.healthy.gut.genus
+
+taxa_df &lt;- function(ps) {
+  t &lt;- otu_table(ps)
+  c_df &lt;- data.frame(taxa = rownames(t), t)
+  colnames(c_df) &lt;- c(&quot;taxa&quot;,ssr = as.character(sample_data(ps)$SSR))
+  c_df %&gt;% gather(ssr,value,-taxa) %&gt;% transmute(ssr, taxa, abundance = value/10000) %&gt;% dplyr::filter(abundance &gt;0)
+}
+
+
+
+unhealthy_genus_df &lt;- taxa_df(subset_samples(people.gut.norm, Condition != &quot;Healthy&quot;))
+
+
+healthy_genus_df &lt;- c_df %&gt;% gather(ssr,value,-taxa) %&gt;% transmute(ssr, taxa, abundance = value/10000) %&gt;% dplyr::filter(abundance &gt;0)
+
+microbiome_samples_df &lt;- rbind(data.frame(condition = &quot;Healthy&quot;, healthy_genus_df),
+      data.frame(condition = &quot;Unhealthy&quot;, unhealthy_genus_df),
+      data.frame(condition = &quot;Sprague&quot;, taxa_df(gut.norm)))
+
+
+write.csv(microbiome_samples_df, file = &quot;microbiome_samples_genus.csv&quot;, row.names = FALSE)
+</code></pre>
+</div>
 
 
 

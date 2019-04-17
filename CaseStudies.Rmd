@@ -32,8 +32,8 @@ Hundreds of people have sent me their microbiome results. Here are some examples
 <!-- ```{r child = "CaseStudies/caseStudyExercise.Rmd"} -->
 <!-- ``` -->
 
-<!-- ```{r child = "CaseStudies/caseStudyParkinsons.Rmd"} -->
-<!-- ``` -->
+```{r child = "CaseStudies/caseStudyParkinsons.Rmd"}
+```
 
 ```{r child = "CaseStudies/caseStudyLyme.Rmd"}
 ```
