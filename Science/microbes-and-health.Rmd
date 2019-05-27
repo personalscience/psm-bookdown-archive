@@ -1,5 +1,6 @@
 ## Microbes and health
 
+THIS CHAPTER IS STILL IN DRAFT
 
 The great French scientist Louis Pasteur, working as a physician in the 1800s, was the first to popularize the idea that the world is covered in *germs*, invisible agents that he associated with food spoilage and disease. Simple steps at hygiene, he discovered, could make conditions inhospitable for them, enabling better food storage and dramatically fewer illnesses. Working as a chemistry professor in the 1850s, one of his students, the son of a local wine manufacturer, sought his help to solve problems with souring. Subsequent investigations led him to conclude that invisible yeasts were the culprit, and that exposure to air could affect the rate of fermentation. Pasteur's emphasis on controlling these microbes led to a general association of germs as pathogens, a bad, even evil force that we must destroy, every single time. The only good germ is a dead germ.
 

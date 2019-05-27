@@ -14,7 +14,7 @@ kombucha.family <- subset_samples(family.gut.nodupes, Site == "gut"  & Date %in%
 
 ```
 
-For healthy bacteria-rich drinks that affect the microbiome, many people immediately think of kombucha. Served chilled during the summer, it has a well-deserved reputation as a natural refreshing alternative to soft drinks. Despite its tangy, mildly sweet taste, it has a surprisingly low amount of sugar: less than two grams in a serving^[Though [one large test](https://www.bevnet.com/news/2016/kombucha-study-raises-sugar-content-questions) by the BevNet industry trade site says the labels may under-report the real amount], compared to more than 20 grams in the same amount of orange juice or 39 grams in a can of Coke.
+For healthy bacteria-rich drinks that affect the microbiome, many people immediately think of kombucha. Served chilled during the summer, it has a well-deserved reputation as a natural refreshing alternative to soft drinks. Despite its tangy, mildly sweet taste, it has a surprisingly low amount of sugar: only six grams in a serving^[Though [one large test](https://www.bevnet.com/news/2016/kombucha-study-raises-sugar-content-questions) by the BevNet industry trade site says the labels may under-report the real amount,and in 2017 a judge approved a settlement to a class action claiming misleading sugar content by one manufacturer], compared to more than 20 grams in the same amount of orange juice or 39 grams in a can of Coke.
 
 
 

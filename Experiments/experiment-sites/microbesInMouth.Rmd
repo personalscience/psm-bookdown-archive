@@ -10,7 +10,7 @@
 The first place that microbes enter is also one of the richest and most variable environments in the body.
 
 
-Scientists added an odorless compound from wine to a culture of known oral bacteria, and sure enough: the bacteria generated compounds that we can smell: terpenes, benzenic compounds and lipid derivatives. Each of us has a unique oral microbiome, and scientists were able to that that this inter-person variability is large enough to explain at least some of the differences in how each of us perceive a glass of wine.^[@munoz-gonzalez_ability_2015]
+Scientists added an odorless compound from wine to a culture of known oral bacteria, and sure enough: the bacteria generated compounds that we can smell: terpenes, benzenic compounds and lipid derivatives. Each of us has a unique oral microbiome, and scientists were able to that that this inter-person variability is large enough to explain at least some of the differences in how each of us perceive a glass of wine.
 
 
 What are the most important species in my mouth?
@@ -18,9 +18,8 @@ What are the most important species in my mouth?
 See the Appendix for an [overall summary of my mouth experiments](#appendixMyMouth)
 
 
+To microbes, your body looks like a hollow tube: skin on the outside, gut on the inside, and a mouth to allow passage between the two. Like purgatory, the mouth is a gatekeeper where new microbes wait before being whisked into the heavenly warm breeding grounds of the digestive system. But it's no easy waiting room either - the mouth contains many highly-distinct eco-systems, each as different from one another as the Sahara desert is to the bottom of the ocean. Most microbiome and genetic tests ask you to swab the inside of the cheek - an easy, straightforward place teeming with bacteria, but the bacteria in the cheeks can be very different from those on the tongue or the lips. I tested them all one morning right after waking up.
 
-
-How much variability is there within the mouth? To find out, I took four samples immediately after waking up one morning. I was careful to swab only in a specific part of the mouth.
 
 ```{r mouthsetup1}
 
@@ -43,11 +42,7 @@ While there is some variation in the cheeks, there is a dramatic difference betw
 plot_richness(mouth.Nov6, measure = "Shannon", x = "Label") + ggtitle("Mouth Microbiome Diversity")
 ```
 
-Let's start with the genus level. How much *Streptococcus* has been in my mouth, and to the degree that we know at the species level, which types of species are there?
-
-Here I find something alarming: a new type of _Streptococcus_ appears to have colonized my mouth, somewhat suddenly, around April of this year. _Streptococcus sp. BS35a_ seems to have been unknown to my mouth until then. Why? And is it really alarming?
-
-I've noticed no change in my health, dental or otherwise, and although I'm doing experiments all the time I can't point to anything in particular that might have caused such a shift in that particular microbe.
+Regular testing of my microbiome often yields unexpected surprises, and this one has me stumped. Beginning in December 2016 and for no apparent reason, my mouth was colonized suddenly by a particular species of _Streptococcus_ that had not been there before. Why? I'm not aware of any major lifestyle or other changes to cause this: same toothpaste, same living conditions. A few dietary experiments here and there, but nothing that coincides with these changes.
 
 
 
@@ -67,6 +62,9 @@ sample_data(sprague.all_ranks.norm)$Date <- as.Date(sample_data(sprague.all_rank
 ```
 
 At the species level, I eliminated all samples with under 10,000 reads.  We see something interesting: for no apparent reason, the species of _Streptococcus_ detected in my mouth has changed. Suddenly, in December 2016 my mouth was colonized by a particular species that had not been there before. Why? I hadn't done anything special; I'm not aware of any major lifestyle or other changes to cause this.
+
+I confirmed with the lab that it's not contamination.
+What's especially odd is that I experienced a shift like this twice now in one year. After comfortably floating along with Species _Streptococcus sp. BS35a_ for more than six months, suddenly in August the balance shifted again, this time to _Streptococcus sp. 11aTha1_. Will it shift again? Who knows?
 
 
 ```{r}
@@ -96,4 +94,18 @@ I confirmed with the lab that it's not contamination.
 
 What's _especially_ odd is that I experienced a shift like this *twice* now in one year. After comfortably floating along with Species _Streptococcus sp. BS35a_ for more than six months, suddenly in August the balance shifted again, this time to _Streptococcus sp. 11aTha1_. Will it shift again? Who knows?
 
+Earth's atmosphere was originally void of oxygen, a poisonous gas to the first, so-called "anaerobic" bacteria who thrived precisely because there was no oxygen. Over eons, as oxygen levels increased these microbes found places to hide: deep, dark pockets inside multicellular creatures who traded an oxygen-free interior for the abundant, exotic metabolites the microbes could synthesize. In humans, these bacterial safe-houses begin in the mouth, where the oxygen is low enough to keep the lights on for the anaerobes, while allowing occasional blooms for the aerobic bacteria that thrive whenever the mouth is open and they find fresh air.
 
+Most of them do apparently need moisture: your salivary glands, strategically located in your cheeks and at the bottom of the mouth, churn out 1–2 liters of saliva per day.
+
+The complexity of the mouth microbiome is compounded by the variety of surfaces, hard and soft, each with its own propensity to allow the formation of biofilms, tenacious clusters that protect microbes against invaders. On teeth, we call it dental plaque, a favorite protective breeding ground of _Streptococcus mutans_, the cavity-causing villain that, once established, is hard to dislodge. I'm fortunate that my mouth microbiome appears to have none of this and it's true that I never have cavities. I've seen levels as high as 2% in some people, who have to visit the dentist no matter how much they brush.
+
+Most microbes go down the hatch to the stomach, of course, but overly-aggressive tooth brushing or dental work can let a few can sneak into the bloodstream directly, where they can find their way to the lungs, the liver, or the heart, sometimes with deadly consequences. The "viridans" streptococci are one well-studied example: beneficial in the mouth, they outcompete other streptococcus enough to prevent strep throat, yet are the leading cause of heart valve infections if they make it into the bloodstream.
+
+These mouth microbes have other interesting properties that may affect much more than we think. When scientists added an odorless compound from wine to a culture of known oral bacteria, the bacteria generated compounds that we can smell: terpenes, benzenic compounds and lipid derivatives.^[@munoz-gonzalez_ability_2015] Each of us has a unique oral microbiome, and the experimenters were able to show that this inter-person variability is large enough to explain at least some of the differences in how each of us perceive a glass of wine.
+
+So what about these odd new ones that showed up in my mouth?
+
+I've looked up their names in every reference I can think of, but have found nothing. That's not too surprising: about a third of oral microbes are known only by their gene sequences.^[https://www.nature.com/articles/sj.bdj.2016.865.pdf] The most satisfying answer from a microbiology expert I consulted is that these are likely to be "passenger microbes", doing nothing in particular helpful or harmful.
+
+In other words, like so many other microbes in our environment, they are just along for the ride.

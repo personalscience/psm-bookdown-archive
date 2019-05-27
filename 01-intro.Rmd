@@ -18,10 +18,15 @@ For Personal Scientists, though, the best part about uBiome is the raw data, whi
 ### Thryve
 Founded after CEO Richard Lin became frustrated at the lack of actionable microbiome insights to cure his own recurrent gut issues, [ThryveInside.com](https://thryveinside.com) is another gut microbiome test that offers full raw downloads for your data. We'll be adding Thryve support soon.  Meanwhile, use the offer code `personalscience15` for 15% off your order.
 
-### Others
+### American Gut
 
-Another crowdsourced testing service is American Gut. ^[which dates from [November 2012](https://domains.google.com/registrar?s=americangut&hl=en#st=a&chp=w&w=americangut.org) ].  Other companies will sequence your microbiome as well, including DayTwo and Viome.  Stay tuned to our site for information about when we can support the raw data from other sites.
+Another citizen science-based testing service is American Gut. ^[which dates from [November 2012](https://domains.google.com/registrar?s=americangut&hl=en#st=a&chp=w&w=americangut.org) If you're interested in studying raw data, please see this detailed post by a bioinformatician: https://cdwscience.blogspot.com/2013/10/open-source-analysis-of-my-raw-american.html].  
 
+### Other
+
+Other companies will sequence your microbiome as well, including DayTwo and Viome.  Stay tuned to our site for information about when we can support the raw data from other sites.
+
+---
 
 So you tested your microbiome and now you want to know what it all means. Later we'll go into much more detail about the sampling process itself: differences between labs, how to get the best sample, how long it will take, etc. but let's start by assuming you've gone through all that. What will you learn?
 

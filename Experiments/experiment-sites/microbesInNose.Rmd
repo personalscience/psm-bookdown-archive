@@ -1,4 +1,4 @@
-## The Nose Microbiome* {#startNose}
+## The Nose Microbiome {#startNose}
 
 Springtime for many people brings hay fever, an allergic reaction [known to be associated with the microbiome](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5378446/). I fortunately don't suffer from the condition, but I wondered if maybe I could find something in my nose microbiome that would show a seasonal shift, perhaps something aligned with allergy season. Even if I don't have symptoms, maybe by finding some of the key microbes involved my data might be useful to others who would like to explore more of the link between their allergies and microbes.
 

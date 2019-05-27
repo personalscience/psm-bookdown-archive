@@ -2,9 +2,9 @@
 
 This is a new field, so much of the written literature remains in academia, but hopefully the following summary of items to read will be helpful.
 
-Here are my suggestions for additional reading.
+Here are my suggestions for additional reading (updated June 2019).
 
-####Twitter
+#### Twitter
 
 The best overall account to follow is [\@MicrobiomDigest](https://twitter.com/microbiomdigest). Elizabeth Bik knows everybody and regularly tweets and retweets about most things you need to know to stay up-to-date.
 
@@ -13,7 +13,7 @@ My list of people who regularly write interesting comments about the microbiome 
 https://twitter.com/sprague/lists/personal-biology
 
 
-####Authors
+### Authors
 
 These popular science writers often write on microbiome-related topics, and you'll find just about anything valuable if their name is attached:
 
@@ -33,9 +33,9 @@ GERMS ARE US  BY MICHAEL SPECTER
 
 
 
-####Web Sites
+#### Web Sites
 
-[*http://www.microbiomedigest.com/*](http://www.microbiomedigest.com/) A daily digest of scientific microbiome papers, by Elisabeth Bik  Twitter: \@microbiomdigest
+[http://www.microbiomedigest.com/](http://www.microbiomedigest.com/) A daily digest of scientific microbiome papers, by Elisabeth Bik  Twitter: \@microbiomdigest
 
 [Gut Microbiota Research and Practice](http://www.gutmicrobiotaforhealth.com/en/observational-study-shows-omega-3-fatty-acids-correlate-gut-microbiota-composition-women/)
 
@@ -43,17 +43,20 @@ GERMS ARE US  BY MICHAEL SPECTER
 
 [The Gut Institute](http://thegutinstitute.com/) The main site for Grace Liu, a PharmD and microbiome nerd. Especially worth listening to her [podcasts from 2015-16](https://thegutinstitute.com/gut-guardians-podcast).
 
-####Podcasts
+Reddit has several forums that are worth watching for latest news:
+
+* https://www.reddit.com/r/HumanMicrobiome/
+
+* https://www.reddit.com/r/microbiome
+
+[The Quantified Body](https://thequantifiedbody.net/microbiome-labs-richard-sprague/) a two-hour discussion about labs for microbiome testing, includes a full transcript and charts for comparison.
 
 
-[Gut Guardians](http://thegutinstitute.com/gut-guardians-podcast) by Grace Liu and Matt Peppin had some good episodes but hasn't been updated since September 2016.
-
-####Courseware
-
+#### Courseware
 
 [Gut Check: Exploring Your Microbiome](https://www.coursera.org/learn/microbiome) from Coursera
 
-####Software
+#### Software
 
 
 [*https://github.com/biocore*](https://github.com/biocore)

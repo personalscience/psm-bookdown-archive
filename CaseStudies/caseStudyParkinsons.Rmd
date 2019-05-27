@@ -8,7 +8,7 @@ Although there is some evidence for a genetic component^[Check out your [LRKK2](
 
 [A 2017 review](http://dx.doi.org/10.1016/j.chom.2017.12.008) finds this:
 
->Since 2015, six studies examining the gut microbiome in Parkinson’s disease (PD) have reported an increase in Akkermansia abundance in PD patients (e.g., Heintz-Buschart et al., 2017; Hill-Burns et al., 2017); indeed, elevated Akkermansia abundance appears to be the most consistently defining feature of the PD microbiome. Likewise, a 2017 study found elevated Akkermansia in individuals with rapid eye movement sleep behavior disor- der, which is considered a pre-motor symptom of PD (Heintz-Buschart et al., 2017). 
+>Since 2015, six studies examining the gut microbiome in Parkinson’s disease (PD) have reported an increase in Akkermansia abundance in PD patients (e.g., Heintz-Buschart et al., 2017; Hill-Burns et al., 2017); indeed, elevated Akkermansia abundance appears to be the most consistently defining feature of the PD microbiome. Likewise, a 2017 study found elevated Akkermansia in individuals with rapid eye movement sleep behavior disorder, which is considered a pre-motor symptom of PD (Heintz-Buschart et al., 2017). 
 
 Is this observable in our samples?
 
@@ -129,6 +129,10 @@ quantile(as.numeric(mhg_abundance(subset_taxa(subset_samples(gut.norm.nodupes,Da
 ```
 
 As you can see, my levels are consistently quite high, and sometimes *extremely* high.
+
+A May 2019 study of 62 million electronic health records showed a slight increase in Parkinsons among people who had appendectomies^[See https://www.cleveland.com/news/2019/05/link-between-appendectomy-and-parkinsons-disease-is-possible-cleveland-study-shows.html], but smaller studies showed a slightly *lower* risk. 
+
+Hard to say...
 
 <to be continued>
 

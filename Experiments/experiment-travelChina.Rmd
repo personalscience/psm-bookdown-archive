@@ -10,7 +10,7 @@ Here's an overall heat plot of my gut, day-to-day before and after the trip \@re
 
 ```{r experimentChinaHeatGut, fig.cap =  "Gut samples before/during/after a trip to Beijing from the US. Dark is 0, lighter colors are higher abundance"}
 
-chinaDates <- rikStats %>% dplyr::filter(Geo=="Beijing") #%>% select(Date) %>% as.vector()  #%in% sample_data(gut.norm)$Date # == as.Date(sample_data(gut.norm)$Date)
+chinaDates <- rikStats %>% dplyr::filter(Geo=="Beijing" & Date < "2018-01-01") #%>% select(Date) %>% as.vector()  #%in% sample_data(gut.norm)$Date # == as.Date(sample_data(gut.norm)$Date)
 
 chinaPeriod <- seq(from=range(as.Date(chinaDates$Date))[1]-3,to = tail(as.Date(chinaDates$Date),1)+3,by=1)
 

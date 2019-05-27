@@ -39,7 +39,7 @@ plot_bar(subset_taxa(subset_samples(gut.family.norm, Date>"2016-01-01" ),   #, D
 
 Another study from the University of Nottingham found that [omega-3 correlates with the microbiome in women](http://www.gutmicrobiotaforhealth.com/en/observational-study-shows-omega-3-fatty-acids-correlate-gut-microbiota-composition-women/).
 
-## Soylent** {#experimentSoylent}
+## Soylent {#experimentSoylent}
 
 A team of undergraduates at the University of California Berkeley conducted an experiment with 14 people to see if the nutrition drink [Soylent](https://soylent.com) would change the microbiome^[@hsu_interventional_2017 and see the [\$6,405 crowd-sourced campaign](https://experiment.com/projects/impact-of-soylent-consumption-on-human-microbiome-composition) that funded it]. They found that it increased the ratio of Bacteroidetes to Firmicutes by a significant amount. How about me?
 
