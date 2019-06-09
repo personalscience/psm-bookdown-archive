@@ -52,7 +52,7 @@ sprague.ext = sprague.nose # merge_phyloseq(sprague.nose,sprague.skin)
 
 
 
-```{r plotSeasonality, fig.cap = "Nose microbiome across seasons. (NMDS ordination, Bray-Curtis similarity at Family rank"}
+```{r plotSeasonality, fig.cap = "My nose microbiome across seasons represented as an NMDS ordination. The X-Y axes are generated from the two most statistically-significant elements when comparing all of the samples (Bray-Curtis similarity at Family rank)."}
 # sink("junk.txt") # to suppress output because ordinate function uses cat
 # sprague.ord.ext = ordinate(sprague.ext, "NMDS", "bray")
 # 
