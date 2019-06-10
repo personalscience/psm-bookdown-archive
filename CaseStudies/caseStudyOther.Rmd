@@ -1,7 +1,14 @@
 ## Other People {#CaseStudyOther}
 
+Here's a person from UK who is out of range on two specific microbes:
 
+```{r caseStudysh1}
 
+psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.norm, Site == "gut" & Username == "sh1")),
+                 psmr::mhg_range_for(people.healthy.gut.genus)) %>% knitr::kable()
+```
+
+Is this good or bad? I don't know.
 
 
 ```{r caseStudySB}
