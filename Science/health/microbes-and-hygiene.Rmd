@@ -19,14 +19,24 @@ We know that fecal matter often harbors pathogenic microbes, and of course the a
 
 Isn't it better to enter and leave the public restroom without touching anything other than yourself?
 
-If you _do_ wash your hands in the restroom, what's the best way to dry your hands afterwards? The short answer: [paper towel](http://conversableeconomist.blogspot.ca/2012/12/paper-towels-v-air-dryers.html). 
+If you _do_ wash your hands in the restroom, what's the best way to dry your hands afterwards? The short answer: [paper towel](http://conversableeconomist.blogspot.ca/2012/12/paper-towels-v-air-dryers.html): the friction from rubbing your hands helps loosen and dislodge microbes, while an air dryer can just spread more germs into the air. If you're concerned about the environment from all that paper towel waste, a careful analysis of the tradeoffs shows that both methods are about equivalent once you take into account manufacturing, installation, electricity, and final disposal costs. 
 
 
 *How to wash food in the kitchen*
 
+By far the most common source of pathogens in food happens during meal preparation. This makes it tempting to wash everything over and over throughout the cooking process, but be careful: you might just be splashing those microbes onto other surfaces throughout the kitchen.
+
+If you wash a whole chicken in your sink, for example, any germs on the exterior will unavoidably find themselves in tiny water molecules that may land anywhere in the kitchen. You'll scrub the counters afterwards, of course, but beware that it's hard to disinfect everywhere: the curtains? the ceiling? 
+
+Like most battles with microbes, there's a tradeoff between killing large numbers in a visible way ("carpet-bombing") and preventing them from gathering in volumes in the first place. 
+
+Generally it's best to leave food untouched if you'll be cooking it. Fruits and vegetables meant for eating raw should be cleaned, but just rinsing with water isn't going to dislodge the serious pathogens. Rinsing in vinegar or other acidic chemicals can kill most of the germs, at the expense of some flavor.
+
+Ultimately the only sure way to beat pathogens in the kitchen is through high heat, so if you have reason to suspect that your food might be contaminated, you should cook it.
 
 
 *The dangers of kitchen sponges*
+
 
 
 

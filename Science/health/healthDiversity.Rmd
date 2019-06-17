@@ -1,6 +1,8 @@
 ### Diversity and health {#scienceDiversity}
 
-Most microbiome discussions begin with the assumption that diversity is good. The intuition is easy to understand: if your body harbors a wide variety of microbes, you'll have a deeper catalog of useful ones that can be applied to new situations. The world around us is constantly changing, and you never know what new threats or opportunities you may encounter. You can respond better if you have an abundant variety of organisms that can meet any challenge.
+Most microbiome discussions begin with the assumption that diversity is good. Virtually any popular book or article about how to improve your health will suggest ways to increase diversity, usually by eating specific foods. For what it's worth, a study of more than 10,000 gut microbiomes found only one sure-fire association with higher gut diversity: people who self-report eating more plants have higher diversity than those who eat fewer types of plants, and this is true no matter their diet type (omnivore, vegan).^[@mcdonald_american_2018]
+
+The intuition is easy to understand: if your body harbors a wide variety of microbes, you'll have a deeper catalog of useful ones that can be applied to new situations. The world around us is constantly changing, and you never know what new threats or opportunities you may encounter. You can respond better if you have an abundant variety of organisms that can meet any challenge.
 
 In practice, diversity is difficult to pin down quantitatively. We know what we mean in principle: having a variety of different microbes seems good, but clearly there are limits. You wouldn't want "variety" to include serious pathogens, for example. We know intuitively that a deciduous forest at sea level, with dozens of differerent tree species, is more diverse than one at a high altitude tree line. But is the one at low altitudes "better"? It depends on where you live!
 

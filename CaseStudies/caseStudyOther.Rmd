@@ -6,6 +6,11 @@ Here's a person from UK who is out of range on two specific microbes:
 
 psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.norm, Site == "gut" & Username == "sh1")),
                  psmr::mhg_range_for(people.healthy.gut.genus)) %>% knitr::kable()
+
+# Subject has been taking Miyarisan probiotic supplements (Clostridium butyricum).  Does it show?
+
+s <- subset_samples(people.norm, Site == "gut" & Username == "sh1")
+#psmr::mhg_taxa(people.species,"Clostridium butyricum")  # none
 ```
 
 Is this good or bad? I don't know.

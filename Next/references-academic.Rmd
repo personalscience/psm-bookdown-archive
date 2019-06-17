@@ -86,16 +86,14 @@ When you're ready to go to the original sources, be careful: there are tens of t
 
 A detailed technical review of how scientists study the microbiome, with an emphasis on how to judge the quality of results. This is a good overview for a smart person who wants an introduction to how we know what we know.
 
-([Full Text (open)](http://www.medscape.com/viewarticle/828715_3))
 
 
-    Tyler, Andrea D, Michelle I Smith, and Mark S Silverberg. “Analyzing the Human Microbiome: A ‘How To’ Guide for Physicians.” The American Journal of Gastroenterology 109, no. 7 (July 2014): 983–93. doi:10.1038/ajg.2014.73.
+<details>
+<summary>@tyler_analyzing_2014 ([Full Text](http://www.medscape.com/viewarticle/828715_3))</summary>
+Tyler, Andrea D, Michelle I Smith, and Mark S Silverberg. “Analyzing the Human Microbiome: A ‘How To’ Guide for Physicians.” The American Journal of Gastroenterology 109, no. 7 (July 2014): 983–93. doi:10.1038/ajg.2014.73.
+</details>
 
 Here is another one:
-
-  
-
-    
     
     Young, Vincent B. “The Role of the Microbiome in Human Health and Disease: An Introduction for Clinicians.” BMJ, March 15, 2017, j831. doi:10.1136/bmj.j831.
 
@@ -103,19 +101,14 @@ Here is another one:
 
 The final paper describing conclusions of the Human Microbiome Project:
 
-  
-
     
     
-    Human, T., Project, M., & Figures, S. (2012). Structure, function and diversity of the healthy human microbiome. Nature, 486(7402), 207–14. http://doi.org/10.1038/nature11234
+```Human, T., Project, M., & Figures, S. (2012). Structure, function and diversity of the healthy human microbiome. Nature, 486(7402), 207–14. http://doi.org/10.1038/nature11234```
 
 ### Self-tracking
 
 Track as much as you can about two people for an entire year: their diet, physical activity, and microbiome; look for correlations. Conclusion: the microbiome is remarkably stable and quickly recovers to its baseline. The "Methods" section is especially interesting because it goes into detail on how to find interesting statistical results with such complicated data.
 
-  
-
-    
     
     David, L. A., Materna, A. C., Friedman, J., Campos-Baptista, M. I., Blackburn, M. C., Perrotta, A., … Alm, E. J. (2014). Host lifestyle affects human microbiota on daily timescales. Genome Biology, 15(7), R89. http://doi.org/10.1186/gb-2014-15-7-r89
 
@@ -124,24 +117,32 @@ Track as much as you can about two people for an entire year: their diet, physic
 Looking for a good overview of studies that link various microbes to diet?
 
 The following two papers are the best summaries:
-  
-    Scott, K. P., Gratz, S. W., Sheridan, P. O., Flint, H. J., & Duncan, S. H. (2013). The influence of diet on the gut microbiota. Pharmacological Research, 69(1), 52–60. <http://doi.org/10.1016/j.phrs.2012.10.020>
 
-and
+<details>
+  <summary>@scott_influence_2013</summary>
+Scott, K. P., Gratz, S. W., Sheridan, P. O., Flint, H. J., & Duncan, S. H. (2013). The influence of diet on the gut microbiota. Pharmacological Research, 69(1), 52–60. <http://doi.org/10.1016/j.phrs.2012.10.020>
+</details>
+<details>
+  <summary>@portune_gut_2017</summary>
+Portune, Kevin J., Alfonso Benítez-Páez, Eva Maria Gomez Del Pulgar, Victor Cerrudo, and Yolanda Sanz. “Gut Microbiota, Diet and Obesity-Related Disorders - the Good, the Bad and the Future Challenges.” Molecular Nutrition & Food Research, June 2016. doi:10.1002/mnfr.201600252.
+</details>
 
-    Portune, Kevin J., Alfonso Benítez-Páez, Eva Maria Gomez Del Pulgar, Victor Cerrudo, and Yolanda Sanz. “Gut Microbiota, Diet and Obesity-Related Disorders - the Good, the Bad and the Future Challenges.” Molecular Nutrition & Food Research, June 2016. doi:10.1002/mnfr.201600252.
-    
     
 
 Here's another one; see the supplements for details about which foods affect which bacteria.
 
-  
+  @david_diet_2014
 
-    
-    
-    David, Lawrence A., Corinne F. Maurice, Rachel N. Carmody, David B. Gootenberg, Julie E. Button, Benjamin E. Wolfe, Alisha V. Ling, et al. “Diet Rapidly and Reproducibly Alters the Human Gut Microbiome.” Nature 505, no. 7484 (December 11, 2013): 559–63. doi:10.1038/nature12820.
+```David, Lawrence A., Corinne F. Maurice, Rachel N. Carmody, David B. Gootenberg, Julie E. Button, Benjamin E. Wolfe, Alisha V. Ling, et al. “Diet Rapidly and Reproducibly Alters the Human Gut Microbiome.” Nature 505, no. 7484 (December 11, 2013): 559–63. doi:10.1038/nature12820.```
 
 ### Population studies
+
+The American Gut project citizen science survey of more than 10,000 microbiome samples,  published its results in 2018, finding very few clear associations between self-reported *anything* (sex, age, diet) and microbial diversity -- except one: people who self-reporting eating the most diverse numbers of plants had higher diversity than those who didn't.
+
+@mcdonald_american_2018
+
+    McDonald, D., Hyde, E., Debelius, J. W., Morton, J. T., Gonzalez, A., Ackermann, G., … Gunderson, B. (2018). American Gut: an Open Platform for Citizen Science Microbiome Research. MSystems, 3(3). https://doi.org/10.1128/mSystems.00031-18
+
 
 ### Enterotypes
 
@@ -200,4 +201,19 @@ A good overview of the current state of how microbiome analysis is performed, fr
 Elizabeth Bik keeps an excellent [Microbiome Papers Collection](https://microbiomedigest.com/microbiome-papers-collection/human-microbiome-paper-collection/) of a few dozen classic academic papers.
 
 and you'll find even more in @tyler_analyzing_2014, which is strongly recommended.
+
+### Software
+
+ANCOM (@mandal_analysis_2015) is an open source software tool^[The R code is here: http://www.niehs.nih.gov/research/resources/software/biostatistics/ancom/index.cfm] to help understand abundances.  
+
+When we compare populations from one ecosystem (e.g. my results on Monday) with another (e.g. my results on Tuesday), there is a fundamental statistical sense in which the two populations are not comparable.
+
+This paper gives the analogy of trying to compare two forests after capturing 100 animals in each: you count 20 bears in one and 30 in the other. There are statistical ways to say with confidence that the first forest is composed of 20% bears and the other 30%, but there is no way to conclude that the second forest has more bears without knowing the total number of animals in each.
+
+A reliance on relative abundances (i.e. percentages) carries other, statistical, problems. For example, the Pearson correlation coefficient is difficult to interpret, since the sum-to-one characteristic of relative abundances requires mathematically that there be some negative correlations. If the numbers were absolute, you wouldn’t necessarily have negative correlations.
+
+
+
+
+
 
