@@ -120,20 +120,22 @@ The following two papers are the best summaries:
 
 <details>
   <summary>@scott_influence_2013</summary>
-Scott, K. P., Gratz, S. W., Sheridan, P. O., Flint, H. J., & Duncan, S. H. (2013). The influence of diet on the gut microbiota. Pharmacological Research, 69(1), 52–60. <http://doi.org/10.1016/j.phrs.2012.10.020>
+<p>Scott, K. P., Gratz, S. W., Sheridan, P. O., Flint, H. J., & Duncan, S. H. (2013). The influence of diet on the gut microbiota. Pharmacological Research, 69(1), 52–60. <http://doi.org/10.1016/j.phrs.2012.10.020></p>
 </details>
 <details>
   <summary>@portune_gut_2017</summary>
-Portune, Kevin J., Alfonso Benítez-Páez, Eva Maria Gomez Del Pulgar, Victor Cerrudo, and Yolanda Sanz. “Gut Microbiota, Diet and Obesity-Related Disorders - the Good, the Bad and the Future Challenges.” Molecular Nutrition & Food Research, June 2016. doi:10.1002/mnfr.201600252.
+<p>Portune, Kevin J., Alfonso Benítez-Páez, Eva Maria Gomez Del Pulgar, Victor Cerrudo, and Yolanda Sanz. “Gut Microbiota, Diet and Obesity-Related Disorders - the Good, the Bad and the Future Challenges.” Molecular Nutrition & Food Research, June 2016. doi:10.1002/mnfr.201600252.</p>
 </details>
 
     
 
 Here's another one; see the supplements for details about which foods affect which bacteria.
 
-  @david_diet_2014
-
-```David, Lawrence A., Corinne F. Maurice, Rachel N. Carmody, David B. Gootenberg, Julie E. Button, Benjamin E. Wolfe, Alisha V. Ling, et al. “Diet Rapidly and Reproducibly Alters the Human Gut Microbiome.” Nature 505, no. 7484 (December 11, 2013): 559–63. doi:10.1038/nature12820.```
+<details>
+  <summary>@david_diet_2014</summary>
+<p>
+```David, Lawrence A., Corinne F. Maurice, Rachel N. Carmody, David B. Gootenberg, Julie E. Button, Benjamin E. Wolfe, Alisha V. Ling, et al. “Diet Rapidly and Reproducibly Alters the Human Gut Microbiome.” Nature 505, no. 7484 (December 11, 2013): 559–63. doi:10.1038/nature12820.```</p>
+</details>
 
 ### Population studies
 
