@@ -26,6 +26,8 @@ Another citizen science-based testing service is American Gut. ^[which dates fro
 
 Other companies will sequence your microbiome as well, including DayTwo and Viome.  Stay tuned to our site for information about when we can support the raw data from other sites.
 
+Check [Lab tests compared](#appendixLabTestsCompared) to see how much the different results are comparable.
+
 ---
 
 So you tested your microbiome and now you want to know what it all means. Later we'll go into much more detail about the sampling process itself: differences between labs, how to get the best sample, how long it will take, etc. but let's start by assuming you've gone through all that. What will you learn?

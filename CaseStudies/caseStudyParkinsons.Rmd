@@ -4,7 +4,7 @@ THIS IS AN UNEDITED EARLY DRAFT. PLEASE DON'T RELY ON IT.
 
 Parkinson's disease is a devastating neurodegenerative disease that affects one in 100 people over age 60, 
 
-Although there is some evidence for a genetic component^[Check out your [LRKK2](https://you.23andme.com/tools/data/?query=LRRK2) status at (23andme)[https://you.23andme.com/reports/ghr.parkinsons/]], environment clearly plays a role as well -- which of course, may point to microbes.
+Although there is some evidence for a genetic component^[Check out your [LRKK2](https://you.23andme.com/tools/data/?query=LRRK2) status at [23andme](https://you.23andme.com/reports/ghr.parkinsons/)], environment clearly plays a role as well -- which of course, may point to microbes.
 
 [A 2017 review](http://dx.doi.org/10.1016/j.chom.2017.12.008) finds this:
 

@@ -1,4 +1,4 @@
-##Experiment: Gut Cleanse* {#experimentCleanse}
+## Experiment: Gut Cleanse* {#experimentCleanse}
 
 Microbiome experiments are complicated by the difficulty of holding everything constant. Even if you are careful with precise amounts of the same food and exercise, you are still dealing with your existing microbiome with all its uncertainties, making it difficult to tell precisely what caused a particular change. What if you could wipe the slate clean; start over with a completely new biome and just track *that,* along with precisely what you eat afterwards? What could you learn?
 

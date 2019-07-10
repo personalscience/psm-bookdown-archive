@@ -73,5 +73,7 @@ Yes, much of that yogurt makes it past the stomach and into the gut.
 
 Short-chain fatty aides (SCFA) created when gut bacteria break down fiber.
 
-Pulverising and juicing reduces fiber content.  e.g. whole wheat grains have 12g, but fine-ground has only 3g.  a 200ml bottle of orange juice has 1.5g fiber, but four oranges has 12.
+Pulverising and juicing reduces fiber content.  e.g. whole wheat grains have 12g, but fine-ground has only 3g.  a 200ml bottle of orange juice has 1.5g fiber, but four oranges has 12.^[see @collen_10_2015 (Chapter 6) and @anderson_effects_1980]
+
+
 

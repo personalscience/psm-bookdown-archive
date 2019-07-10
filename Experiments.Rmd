@@ -41,9 +41,9 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 <!-- ``` -->
 
 
-<!-- ```{r child="Experiments/experiment-activity.Rmd"} -->
-<!-- # Does my microbiome change depending on how much exercise I get? -->
-<!-- ``` -->
+```{r child="Experiments/experiment-activity.Rmd"}
+# Does my microbiome change depending on how much exercise I get?
+```
 
 
 

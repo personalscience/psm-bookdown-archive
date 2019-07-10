@@ -56,6 +56,11 @@ For one thing, this type of sequencing sees only the bacteria in a sample. Other
 
 The thousands of genes in each of the trillion bacteria in your system are doing important work that won't be visible if we sequence a portion of just one of them. Much of the time, this doesn't matter, because the vast majority of the unsequenced portion is genes that are identical to those that have already been sequenced by previous scientists. To use an analogy in the visible world, if you have identified that an organism is a bird, it's very likely -- though not certain -- that it can fly. For nearly all bird species that would be a safe bet, but among the birds _that actually matter to humans_, you'd have an important detail wrong about chickens.
 
+Other problems with 16S microbiome testing technology: it's limited in what it can see, and RNA itself is too unstable. 
+> "16s rRNA predicts genome-wide levels of similarity very well for distantly related prokaryotes, but not for closely related ones”
+
+Lan, Y., Rosen, G., & Hershberg, R. (2016). Marker genes that are less conserved in their sequences are useful for predicting genome-wide similarity levels between closely related prokaryotic strains. Microbiome, 4(1). [https://doi.org/10.1186/s40168-016-0162-5](https://doi.org/10.1186/s40168-016-0162-5)
+
 Worse, there are many important bacteria that share identical 16S sequences yet occupy entirely different ecological niches ^[@jaspers_ecological_2004]. Because the sequences are identical, different labs may arbitrarily assign different names to the same organism. ^[a good summary is in @pollock_madness_2018]
 
 ### Limitations of collection

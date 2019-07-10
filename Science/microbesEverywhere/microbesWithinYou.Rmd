@@ -42,6 +42,8 @@ New research by Emma Barnard (2017)^[  https://www.ncbi.nlm.nih.gov/pubmed/28000
 
 Your body is covered in microscopic _Demodex_, a parasitic mite harbored by all humans, but over-represented in people with rosacea (15x). There is evidence that _Demodex_ is associated with _P. acnes_ ^[see https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3296070/]
 
+Your armpits contain glands whose only purpose is to feed bacteria. Applying antiperspirant or deoderant causes significant changes to the ecology of those microbes, and may actually *cause* more odors by increasing numbers of smelly _Actinobacteria_^[See @callewaert_deodorants_2014 and https://www.realclearscience.com/blog/2014/08/antiperspirants_alter_your_armpit_bacteria_and_could_actually_make_you_smell_worse.html ] 
+
 
 
 
@@ -67,7 +69,9 @@ Diary farmers have a wider variety of nasal microbes than do their urban non-far
 
 Although the noses of farmers and non-farmers are dominated by the same three phyla, _Firmicutes_, _Actinobacteria_, and _Proteobacteria_, the farmers have much more _Bacteroidetes_, _Tenericutes_ and _Verrucomicrobia_. 
 
-When I tested my own nose microbiome, I found that the vast majority of microbes are _Corynebacterium_ and _Moraxella_, with a steady small amounts of _Dolosigranulum_ and _Propionibacterium_.  I occasionally have a spike of _Staphylococcus_, a usually benign and perhaps even beneficial microbe that can turn pathogenic under some circumstances.
+The nasal microbiome appears to change during a viral infection, and the overall microbial composition seems to depend on the types of viruses, and whether the person was vaccinated or not.^[@ding_microbial_2019. Open access study results here: https://mbio.asm.org/content/10/4/e01296-19]  In a study of 200 New Yorkers, healthy people seemed to have an abundance of Corynebacterium and Streptococcus, whereas the people with viruses had much lower _Corynebacterium_ slightly lower _Streptococcus_, and more _Dolosigranulum_.
+
+When [I tested my own nose microbiome](#startNose), I found that the vast majority of microbes are _Corynebacterium_ and _Moraxella_, with a steady small amounts of _Dolosigranulum_ and _Propionibacterium_.  I occasionally have a spike of _Staphylococcus_, a usually benign and perhaps even beneficial microbe that can turn pathogenic under some circumstances.
 
 
 

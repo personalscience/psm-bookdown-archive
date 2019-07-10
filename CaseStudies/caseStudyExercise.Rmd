@@ -3,9 +3,17 @@
 I wanted to see if [this paper](http://www.mdpi.com/2072-6643/9/8/792) is right in concluding that physically-fit women have lower _Eubacterium_. Here's one physically-fit woman I know and sure enough, she has none of this microbe.
 
 Other people I've seen who _do_ have this seem to be either (1) older, or (2) on an unusual diet.
+
+Here's a summary of the ranges I see in healthy people
 ```{r}
 
-summary(as.numeric(otu_table(people.norm)["Eubacterium"]/10000))
+summary(as.numeric(otu_table(people.healthy.gut.genus)["Eubacterium"]/10000))
+
+as.numeric(otu_table(people.healthy.gut.genus)["Eubacterium"]/10000) %>% sort() %>%
+  enframe(name = "user", value = "abundance") %>% 
+  ggplot(aes(x=user,y=abundance)) + geom_bar(stat = "identity") +
+  labs(title = "Distribution of Eubacterium in Healthy People", y = "Abundance (%)")
+
 #kable(mhg_abundance(subset_samples(people.norm, Username == "dr2"), "Eubacterium"))
 
 # mhg_density_for_taxa(people.norm, "Eubacterium") +
@@ -23,3 +31,6 @@ summary(as.numeric(otu_table(people.norm)["Eubacterium"]/10000))
 #   )
 
 ```
+
+Although these people are all healthy, it's possible that those with _Eubacterium_ are more active than those without. That's an investigation for another day.
+

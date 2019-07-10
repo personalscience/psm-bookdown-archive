@@ -120,9 +120,12 @@ psmr::mhg_plot_top(subset_samples(sprague.genus.norm, Site == "nose")) + ylab("L
   scale_y_continuous(trans="log10",labels=function(x) x/10000)
 ```
 
-## Lab Tests Compared
+## Lab Tests Compared {#appendixLabTestsCompared}
 
- When I tested the same sample from two labs, the similarities and differences are in the tables below.
+When I tested the same sample from two labs, the similarities and differences are in the tables below.
+ 
+ 
+### Thryve
  
 uBiome vs Thryve: Table \@ref(tab:thryvePhylum).
 
@@ -172,7 +175,7 @@ knitr::kable(tu[1:15,], digits = 2, col.names = c("Genus","Thryve (%)","uBiome (
 
 ```
 
-
+### DayTwo
 
 At the phylum level, the samples are remarkably similar (Table \@ref(tab:dayTwoBreakdown)), though less so at the genus level  (Table \@ref(tab:dayTwoBreakdownGenus)).
 

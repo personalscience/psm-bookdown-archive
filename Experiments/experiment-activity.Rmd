@@ -13,31 +13,39 @@ To find out, I'll load all my iPhone data and compare my activity levels against
 
 Here's how my activity changes day-to-day:
 
-```{r experimentExerciseOverallPlot}
+```{r experimentExerciseOverallPlot, message = FALSE}
+library(lubridate)
 
 activity <- with(rikActivity,data.frame(Date=Start,Steps=`Steps (count)`))
 
+# %>% group_by(Week = lubridate::week(Date)) %>%  summarize(Steps = sum(Steps)),aes(x=as_date("2016-07-01")
 
-ggplot(data = activity %>% filter(Date>"2016-07-01"),aes(x=Date,y=Steps)) + geom_line() + ggtitle("Overall Activity (Steps)")
+ggplot(data = activity %>% dplyr::filter(Date>as_date("2016-07-01")), aes(x=Date,y=Steps/7)) + geom_line() + ggtitle("Overall Activity (Steps)")
+
+
+# activity %>% dplyr::filter(Date>as_date("2016-07-01")) %>% group_by(Week = lubridate::week(Date), Year = lubridate::year(Date), weekdate = Year + Week * 7) %>% tail()
 
 
 ```
 
 How about my Activity versus the number of calories I consume?
 
-```{r experimentExerciseCalories}
+```{r experimentExerciseCalories, message = FALSE}
 
-rik.calories <- rikfood %>% select(Date,Calories) %>% group_by(Date) %>% summarize(Calories = sum(Calories))
 
-df <- na.omit(rik.calories[rik.calories$Date %in% as.Date(activity$Date),])
-df$Steps <- na.omit(activity[as.Date(activity$Date) %in% rik.calories$Date ,])[["Steps"]]
-rik.motion <- data.frame(Date = df$Date, Calories = df$Calories, Steps = df$Steps)
+rik.calories <-  rikfood %>% select(Date,Calories) %>%  group_by(Date) %>% summarize(Calories = sum(Calories)) %>% 
+  left_join(activity %>% transmute(Date = as_date(Date), Steps = Steps)) %>% group_by(Date, Calories) %>% summarize(Steps = sum(Steps))
 
-ggplot(data=rik.motion %>% gather(Measure,Value,-Date), aes(x=Date,y=Value,color=Measure)) + geom_point() + geom_smooth() +
-  theme(legend.position = "right") + scale_color_hue(l = 40) + scale_y_log10() +
-  annotate("pointrange",x = kefir.day, y = 100, ymin = 100, ymax = 110, color = "blue", size = 0.1) + 
-  annotate("text",y = 150, x =as.Date("2017-04-10"),  label = "Dates I drank kefir", color = "blue") +
-  ggtitle("One Year of Exercise vs Calories Consumed")
+ggplot(data = rik.calories %>% gather(Type, Value, -Date), aes(x = Date, y = Value, color = Type)) + geom_point() +
+  labs(title = "One Year of Exercise vs Calories Consumed")
+
+
+v <- sprague_genus %>% dplyr::filter(tax_name == "Veillonella" & site == "gut" & 
+                                       date> as_date("2016-07-01") & percent < 0.1 & 
+                                       date < as_date("2017-12-31")) %>% select(Date = date,percent) %>% left_join(rik.calories) %>% gather(Type, Value, -Date, -percent)
+
+ggplot(v, aes(x = Date,y = percent)) + geom_bar(stat = "identity") + labs(title = "Veillonella Abundance")
+
 
 
 ```

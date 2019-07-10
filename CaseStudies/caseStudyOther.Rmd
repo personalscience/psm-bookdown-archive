@@ -237,3 +237,39 @@ mhg_outlier(mhg_range_for(gut.norm),mhg_range_for(subset_samples(people.norm, Si
 
 ```
 
+
+## Russians
+
+Are there any microbes that are unique to people of Russian ancestry?
+
+I have a few samples from two Russian immigrant sisters living in the United States, plus another sample from their mother. I'll compare them to a native North American with Russian ancestry
+
+What might they have in common?
+```{r caseStudyRussian1}
+
+
+r <- subset_samples(people.gut.norm, Site == "gut" & ( stringr::str_detect(Username,"^rs")))
+max(sample_data(ub17)$SSR)
+r1 <- subset_samples(r, Username == "rs1")
+  
+ub17 <- subset_samples(people.gut.norm, Site == "gut" &  Username == "ub17")
+
+ub17d <- subset_samples(ub17, SSR == max(sample_data(ub17)$SSR))
+
+
+psmr::make_ord_for(phyloseq::merge_phyloseq(r,ub17))
+
+#ub17 doesn't have the "european" microbe that I usually find associated with living for long periods in the UK
+psmr::mhg_taxa_plot(ub17, "Anaeroplasma")
+
+# taxa found in ub17 but not Russians 
+psmr::unique_taxa(r,ub17)
+
+# ub17 is out of range from the other Russians on these taxa
+psmr::mhg_outlier(psmr::mhg_range_for(ub17),psmr::mhg_range_for(r)) %>%
+  mutate_at(vars(-taxa),function(x) x/10000) %>%
+  knitr::kable(digits = 3,  caption = "ub17 Outliers Compared to Russians")
+
+```
+
+
