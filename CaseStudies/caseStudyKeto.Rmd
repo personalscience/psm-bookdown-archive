@@ -4,7 +4,9 @@ THIS IS A VERY EARLY DRAFT
 
 What happens if you eat a very low-carb, high fat diet ?
 
-This is a person who tried Keto for several weeks.
+One study finds higher levels of _Akkermansia_ and _Parabacteroides_ reduce production of gamma-glutamylation and modulate hippocampal GABA/glutamate ratios.^[@olson_gut_2018 ]
+
+Here is the microbiome of a person who tried Keto for several weeks.
 
 ```{r plotKeto, echo = FALSE, warning = FALSE, message = FALSE}
 
