@@ -4,7 +4,7 @@ Once you've appreciated the importance of the microbiome and its affect on healt
 
 Here are a few interesting other microbiome-related ideas to explore
 
-Ötzi’s microbiome has been sequenced! Yes, scientists have studied the Tyrolean Iceman, who died in an Italian alpine glacier 5300 years ago. Antibiotic-resistance and early pathogenic strains were apparently common way before the dawn of civilization.^[@lugli_ancient_2017]
+Ötzi’s microbiome has been sequenced! Yes, scientists have studied the Tyrolean Iceman, who died in an Italian alpine glacier 5300 years ago. His gut contained a strain of *H. Pylori*, as well as antibiotic-resistance and early pathogenic strains that were apparently common way before the dawn of civilization.^[@lugli_ancient_2017]
 
 
 ---

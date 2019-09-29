@@ -96,6 +96,14 @@ Tyler, Andrea D, Michelle I Smith, and Mark S Silverberg. “Analyzing the Human
 Here is another one:
     
     Young, Vincent B. “The Role of the Microbiome in Human Health and Disease: An Introduction for Clinicians.” BMJ, March 15, 2017, j831. doi:10.1136/bmj.j831.
+    
+    
+### Microbes and Behavior
+
+A 2019 summary of the links between microbes and psychiatry: @ameringen_gut_2019
+
+    Ameringen, M., Turna, J., Patterson, B., Pipe, A., Mao, R. Q., Anglin, R., & Surette, M. G. (2019). The gut microbiome in psychiatry: A primer for clinicians. Depression and Anxiety. https://doi.org/10.1002/da.22936
+
 
 ### Historic Papers
 

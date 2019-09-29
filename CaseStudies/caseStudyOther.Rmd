@@ -272,4 +272,38 @@ psmr::mhg_outlier(psmr::mhg_range_for(ub17),psmr::mhg_range_for(r)) %>%
 
 ```
 
+Here's another one:
+
+```{r}
+
+# analysis of a person with three samples, including nose.
+
+# jd <- subset_samples(people.norm, Username == "jd")
+# jd_gut <- subset_samples(jd,Site == "gut")
+# 
+# 
+# 
+# psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.norm, Site == "gut" & SSR == 357699)),
+#                   psmr::mhg_range_for(people.healthy.gut.genus)) %>% knitr::kable()
+
+# unique to 2017 sample
+# psmr::unique_taxa(subset_samples(jd_gut, SSR == 357699),subset_samples(jd_gut, SSR == 5308) )
+
+# Unique to 2014 sample
+# psmr::unique_taxa(subset_samples(jd_gut, SSR == 5308), subset_samples(jd_gut, SSR == 357699) )
+# 
+# p.family.gut <- subset_samples(people.family, Site=="gut")
+# 
+# sink("junk.txt")
+# ord <- ordinate(p.family.gut,method = "NMDS", distance = "bray")
+# plot_ordination(p.family.gut,ord, color = "Condition", label = "SSR")
+# sink()
+# file.remove("junk.txt")
+
+#psmr::mhg_range_for(subset_samples(people.norm, Site == "nose" & Username == "jd"))
+
+# psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.norm, Site == "nose" & Username == "jd")),
+#                   psmr::mhg_range_for(subset_samples(people.norm, Site == "nose" & Username != "jd")))  %>% knitr::kable()
+                    
+```
 
