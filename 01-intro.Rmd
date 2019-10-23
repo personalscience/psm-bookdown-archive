@@ -7,13 +7,12 @@ The Personal Science app supports raw data from several microbiome companies.
 ## Raw data for your microbiome
 
 ### uBiome
-The most popular laboratory is the San Francisco startup uBiome ^[from September 2012], 
+Until October 2019, the most popular laboratory was the San Francisco startup uBiome ^[from September 2012], 
 that originally began as crowdfunded campaign on
-Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. Order a kit online at the [uBiome web site](https://shop.ubiome.com/pages/buynow).  We recommend the standard "Gut Kit" ($89). Be sure to use the offer code `PERSONALSCIENCE` to get 15% off your order.
+Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. Unfortunately, uBiome sequencing has been suspended. 
 
-Just send them a sample and a few weeks later they give you access to a private web page that will show you a breakdown of the types of bacteria they found.  Read [Go Deeper](#GoDeeper) for an in-depth guide for how to get the most of the uBiome web page.
+Please watch this space for updates on the best sequencing shops post-uBiome.
 
-For Personal Scientists, though, the best part about uBiome is the raw data, which you can easily download and export to our app. (see [our instructions](#downloaduBiome))
 
 ### Thryve
 Founded after CEO Richard Lin became frustrated at the lack of actionable microbiome insights to cure his own recurrent gut issues, [ThryveInside.com](https://thryveinside.com) is another gut microbiome test that offers full raw downloads for your data. We'll be adding Thryve support soon.  Meanwhile, use the offer code `personalscience15` for 15% off your order.
@@ -32,36 +31,5 @@ Check [Lab tests compared](#appendixLabTestsCompared) to see how much the differ
 
 So you tested your microbiome and now you want to know what it all means. Later we'll go into much more detail about the sampling process itself: differences between labs, how to get the best sample, how long it will take, etc. but let's start by assuming you've gone through all that. What will you learn?
 
-## Using uBiome
-
-You just received an email that uBiome has finished processing your sample. Now what do you do?
-
-The first stop is the [uBiome Explorer web dashboard](http://explorer.ubiome.com/), where you'll see an overview of your results. The dashboard is intended to be self-explanatory, so you should feel free to click around to try the various options. The beginning page will look something like this:
-
-
-If you only have one sample, your page will look something like Figure \@ref(fig:explorerStartPage).
-
-```{r explorerStartPage, fig.cap = "uBiome Explorer Insights Overview"}
-knitr::include_graphics(file.path(getwd(),"assets/ubiomeExplorerStartPageSingleSample.jpg"))
-
-```
-
-The colorful pie chart there is your first high-level glimpse of the bacteria found in your sample. Hover over it with your mouse (or tap with your finger if you’re on a phone or iPad), to see a pop-up view of the approximate percentages.
-
-You’re seeing a _phyla_-based view of your microbiome. As [we'll learn in more detail later](#science), this is a very high level summary, a bit like how a Martian might see life on earth from far in outer space. Keep in mind that by “very high level”, we mean _very_ high, the equivalent of seeing life only at the level of “vertebrate” and “invertebrate”. The incomprehensible diversity of bacterial life means that at this level, you don’t even bother separating fish from one another or for that matter, from land animals: just lump all of them together. At the phyla level, mammals, reptiles, fish – they’re all the same. Similarly, when you see the phylum _Firmicutes_, for example, think of it as having as encompassing as much variation as all the vertebrates, from those on land, in the ocean, big, small, harmless, dangerous and everything in between. In other words, this first approximation is pretty crude.
-
-Note that the various phyla are represented as percentages of the whole, so some of them are relegated to tiny slices of the pie. That doesn’t necessarily mean they’re unimportant, though, because in the world of life, even some tiny populations can exert an outsized influence. A wolf is just one of a gazillion different creatures in Yellowstone National Park, but that is little comfort to a rabbit.
-
-Remember too that so far we're treating each individual organism as if it has the same effect as the others, another oversimplification, just like it would be a mistake to assume that elephants matter more because they’re bigger than humans.
-
-All we know at the phylum level is that, proportionately, certain large classes of bacteria are more well-represented than others. That may not sound like much to go on, but as we’ll see, scientists have been able to learn quite a bit from tiny clues like this.
-
-But the real fun happens when we download the raw data and analyze it at the Personal Science site.
-
-
-
-```{r child="using_psicom/how-to-download-ubiome-json.Rmd", warning = FALSE}
-
-```
 
 
