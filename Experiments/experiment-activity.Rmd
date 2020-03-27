@@ -37,6 +37,11 @@ rik.calories <-  rikfood %>% select(Date,Calories) %>%  group_by(Date) %>% summa
   left_join(activity %>% transmute(Date = as_date(Date), Steps = Steps)) %>% group_by(Date, Calories) %>% summarize(Steps = sum(Steps))
 
 ggplot(data = rik.calories %>% gather(Type, Value, -Date), aes(x = Date, y = Value, color = Type)) + geom_point() +
+  scale_y_continuous(trans='log10') +
+  geom_smooth() + 
+  scale_x_date(date_labels = "%B") + 
+  theme(axis.title.x=element_blank()) +
+  annotate("pointrange",x = mhg_food_days(rikfood,"kefir"), y = 500, ymin = 500, ymax = 500, color = "blue", size = 0.1) + annotate("text",y = 700, x =as.Date("2017-04-10"),  label = "Dates I drank kefir", color = "blue") +
   labs(title = "One Year of Exercise vs Calories Consumed")
 
 

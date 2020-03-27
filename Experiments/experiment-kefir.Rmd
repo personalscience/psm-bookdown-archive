@@ -44,7 +44,7 @@ Making it yourself is surprisingly easy. It begins with a bundle of the componen
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("Experiments/assets/kefir_grain.jpg")
+knitr::include_graphics(file.path(here::here(),"Experiments","assets/kefir_grain.jpg"))
 ```
 
 
@@ -59,7 +59,7 @@ I got mine by asking around until I found a neighbor who had been brewing his ow
 The grains themselves contain a combination of lactic acid bacteria (_Lactobacillus_, _Lactococcus_, _Leuconostoc_), acetic acid bacteria (_Acetobacter_), and yeast,  clumped together with casein (milk proteins) and complex sugars in a type of carbohydrate molecule called _kefiran_. The nutritional content apparently varies depending on fermentation time and other factors, but there’s a lot of good stuff in there^[@otles_kefir_2003 http://files.cienciapatodos.webnode.pt/200000022-79ffe7af9e/Kefir.pdf] (Figure \@ref(fig:kefirOltesNutrition)).
 
 ```{r kefirOltesNutrition, fig.cap = "Nutritional content of kefir. [Source: @otles_kefir_2003]"}
-knitr::include_graphics("Experiments/assets/kefir-oltes-nutrition.jpg")
+knitr::include_graphics(file.path(here::here(),"Experiments","assets/kefir-oltes-nutrition.jpg"))
 ```
 
 
@@ -68,7 +68,7 @@ A rigorous microbial analysis by an Irish lab ^[@walsh_microbial_2016. Also [a 2
 
 
 ```{r echo=FALSE}
-knitr::include_graphics(rep("Experiments/assets/kefir-microbial-makeup.jpg"))
+knitr::include_graphics(file.path(here::here(),"Experiments",rep("assets/kefir-microbial-makeup.jpg")))
 ```
 
 The uBiome test I used unfortunately can’t detect yeasts, so I don’t have an easy way to track the non-bacterial microbes in my kefir. But I *can* run the mixture through the same gene sequencing that I use for my other samples. I tested the kefir twice: once by simply dabbing the swab into the mixture that was waiting for me in the morning, and another swab from the same batch after removing the grain for an additional 24-hour "second ferment". This is what I found when I sequenced the kefir from two different batches: (Table \@ref(tab:kefirTable1))

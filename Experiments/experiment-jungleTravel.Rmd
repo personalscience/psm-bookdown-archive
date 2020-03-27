@@ -14,7 +14,7 @@ Here's a selfie I took in front of the incredibly well-preserved thousand-year-o
 
 ```{r}
 #![me at Tikal](https://farm9.staticflickr.com/8594/16063989023_353f14a4dd.jpg)
-knitr::include_graphics("./Experiments/assets/experimentsJungleTikal.jpg")
+knitr::include_graphics(file.path(here::here(),"assets/experimentsJungleTikal.jpg"))
 ```
 
 

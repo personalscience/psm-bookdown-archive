@@ -4,7 +4,7 @@
 You don't have to go to extreme conditions to find unusual microbes. Microbes thrive whereever humans live, and they are in our everyday environment too. The [PathoMap Project](http://www.pathomap.org/), studying DNA collected from the New York City area found that, like the air above, half of the microbes we walk past everyday are unknown to science. ^[@afshinnekoo_geospatial_2015  Afshinnekoo, Ebrahim, Cem Meydan, Shanin Chowdhury, Dyala Jaroudi, Collin Boyer, Nick Bernstein, Julia M. Maritz, et al. “Geospatial Resolution of Human and Bacterial Diversity with City-Scale Metagenomics.” *Cell Systems* 1, no. 1 (n.d.): 72–87. doi:10.1016/j.cels.2015.01.001] Most of the organisms are apparently benign, with no obvious affect on humans one way or another. Even when known pathogens are found, including _Yersinia pestis_ (Bubonic plague) and _Bacillus anthracis_ (anthrax), the lack of reported infections indicates that probably these organisms are busying themselves for some other, unknown, and maybe even useful purpose^[A later, more careful analysis indicates these particular pathogens may not actually be present: http://msystems.asm.org/content/msys/1/3/e00050-16.full.pdf]
 
 ```{r echo=FALSE, fig.cap = "Half of the organisms collected by the Pathomap study are unknown. Source: @afshinnekoo_geospatial_2015 "}
-knitr::include_graphics("Science/assets/scienceNYCSubway.jpg")
+knitr::include_graphics(file.path(here::here(),"Science/assets/scienceNYCSubway.jpg"))
 
 # http://www.cell.com/cms/attachment/2054936429/2060898672/gr1.jpg
 

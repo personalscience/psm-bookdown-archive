@@ -40,7 +40,7 @@ But still. Nobody, not even the most caring and selfless doctor, feels the urgen
 Intriguing new discoveries have been made in the past few years about the relationship between cancer and the microbiome, and Paul asked if I know anything based on my years of near-daily sampling and amateur study. Might we find something in his microbiome, something that perhaps his doctor hasn't thought to consider? Given all that's known about microbiome-healthy diets, maybe if we found something unusual, some out-of-place microbe, is there a chance we might uncover a new, more effective treatment? 
 
 ```{r echo=FALSE, fig.cap = "The culprit? [Courtesy of Dr. Allen-Vercoe, University of Guelph Katz Lab](https://www.flickr.com/photos/92803392@N02/9460876768)"}
-knitr::include_graphics("CaseStudies/images/caseColorectalCancerFusobacterium.jpg")
+knitr::include_graphics(file.path(here::here(),"CaseStudies","images/caseColorectalCancerFusobacterium.jpg"))
 ```
 
 

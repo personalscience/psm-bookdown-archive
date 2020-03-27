@@ -8,7 +8,8 @@ Viruses present several problems for scientists. They’re super-tiny for one: y
 
 ```{r figVirusSize, echo = FALSE, fig.cap = "Viruses are tiny compared to bacteria. Image:[marneechua](https://www.slideshare.net/marneechua/marine-virus-presentation)"}
 
-knitr::include_graphics(file.path(here::here(),"Next/assets/virusSizeAndStructure.jpg"))
+#message("here:",here::here())
+knitr::include_graphics(file.path(here::here(),"Next","assets","virusSizeAndStructure.jpg"))
 # https://www.slideshare.net/marneechua/marine-virus-presentation
 # http://image.slidesharecdn.com/marineviruspresentation-090727100709-phpapp02/95/marine-virus-presentation-3-728.jpg?cb=1248689251
 ```
@@ -21,7 +22,7 @@ Viruses, like bacteria, are everywhere. In fact, just about every human on earth
 
 
 ```{r figVirusInfectEveryone, echo=FALSE, fig.cap = "You already have an infection with these viruses. [Herbert Virgin at 2015 NIH Dyer Lecture](https://www.youtube.com/watch?v=TRVxTBuvChU)"}
-knitr::include_graphics("./Next/assets/virusInfectEveryone.jpg")
+knitr::include_graphics(file.path(here::here(),"Next","assets/virusInfectEveryone.jpg"))
 # https://www.youtube.com/watch?v=TRVxTBuvChU
 ```
 
@@ -41,7 +42,8 @@ Much popular microbiome advice suggests that *more* diversity is better, and int
 
 
 ```{r figVirusEnteric, echo=FALSE}
-knitr::include_graphics(file.path(here::here(),"Next/assets/virusEnteric.jpg"))
+message("Doesn't like: ", file.path(here::here(),"Next","assets/virusEnteric.jpg"))
+knitr::include_graphics(file.path(here::here(),"Next","assets/virusEnteric.jpg"))
 ```
 
 IBD and Crohn’s patients who were carefully studied alongside healthy controls appear to have a wider variety of viruses in their systems. It’s too early to say whether this has any implications for treatment, but it does point out that the story is more complicated than we’d hope.

@@ -1,7 +1,7 @@
 # Microbes to Watch {#Microbes}
 
 
-Your gut as seen by consumer-priced sequencing technology contains many more unique microbial species than you can possibly track, at least hundreds in most people and potentially over 1000. I've seen 1083 different ones in my own results. And that's just using the comparatively crude 16S technology: more comprehensive estimates based on other technology find as many as 36,000 different species^[See @frank_molecular-phylogenetic_2007 or click for the [open access download](http://www.pnas.org/content/104/34/13780.full)]!  With that much variety, how do we find the ones that matter?
+Your gut as seen by consumer-priced sequencing technology contains many more unique microbial species than you can possibly track, at least hundreds in most people and potentially over 1000. I've seen 1083 different ones in my own results. And that's just using the comparatively crude 16S technology. More comprehensive estimates based on other technology find as many as 36,000 different species^[See @frank_molecular-phylogenetic_2007 or click for the [open access download](http://www.pnas.org/content/104/34/13780.full)]!  With that much variety, how do we find the ones that matter?
 
 Fortunately, only about 14 strains of 10 species account for 80% of a typical gut microbiome^[See the detailed estimates here: @kraal_prevalence_2014]
 
@@ -13,7 +13,7 @@ What you're really wondering is how does your sample compare to others? Do you h
 
 This section is under construction
 
-The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroidetes_, which generally make up 80% or more of the total sample.  Most people also have smaller amounts of _Actinobacteria_,  _Proteobacteria_ and _Verrucomicrobia_. This overall composition is so common in healthy people that it's tempting to assume their dominance is "natural" or "normal", but like much else with the microbiome, the situation is different outside the western world, a clue that it's difficult to summarize a single individual's microbiome as "good" or "bad." It all depends.
+The gut microbiome of most westerners is dominated by _Firmicutes_ and _Bacteroidetes_, which together make up 80% or more of the total sample.  Most people also have smaller amounts of _Actinobacteria_,  _Proteobacteria_ and _Verrucomicrobia_. This overall composition is so common in healthy people that it's tempting to assume their dominance is "natural" or "normal", but like much else with the microbiome, the situation is different outside the western world, a clue that it's difficult to summarize a single individual's microbiome as "good" or "bad." It all depends.
 
 
 
@@ -56,5 +56,5 @@ When you hear the term "species", you probably think of a specific kind of creat
 
 But bacteria don't mate: they reproduce by dividing themselves in half. So how do we define a species? In fact, even terms like "parent" or "child" aren't quite appropriate if each new cell is an identical copy of the old one. For very broad categories, like phylum or even genus, the similarities among like cells is high enough that we feel comfortable grouping them together with a common name, but at what point do we reach the lowest, most _specific_ level. 
 
-The answer is tricky for another reason, called _horizontal gene transfer_, a process by which sometimes (in fact, quite often), a microbe will absorb genes from nearby microbes, altering its genome and its corresponding functions, sometimes significantly. Once that happens, the resulting new microbe can itself divide indefinitely, producing more and more copies of itself with the new gene. Although the new microbes still mostly resemble their original ancestor, if the new gene makes a protein that affects your body somehow, it might as well be an entirely different species.
+The answer is tricky for another reason, called _horizontal gene transfer_, a process by which sometimes (in fact, quite often), a microbe will absorb genes from nearby organisms, altering its genome and its corresponding functions, sometimes significantly. Once that happens, the resulting new microbe can itself divide indefinitely, producing more and more copies of itself with the new gene. Although the new microbes still mostly resemble their original ancestor, if the new gene makes a protein that affects your body somehow, it might as well be an entirely different species.
 

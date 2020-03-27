@@ -34,7 +34,7 @@ And what about microbes in the kitchen? When food is contaminated by bacteria, i
 
 ```{r probioticImage, out.width = "200pt", echo = FALSE}
 
-knitr::include_graphics("./Science/assets/Probiotic.jpg")
+knitr::include_graphics(file.path(here::here(),"Science","assets/Probiotic.jpg"))
 ```
 
 

@@ -8,7 +8,7 @@ _T. Gondii_ seem harmless because its hosts appear to show no differences before
 
 ```{r echo=FALSE, fig.cap = "From Vyas 2007"}
 
-knitr::include_graphics("Science/assets/scienceRatsTaxoplasmaF1large.jpg")
+knitr::include_graphics(file.path(here::here(),"Science","assets/scienceRatsTaxoplasmaF1large.jpg"))
 
 # knitr::include_graphics("http://www.pnas.org/content/104/15/6442/F1.large.jpg")
 

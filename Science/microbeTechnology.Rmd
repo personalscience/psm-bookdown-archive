@@ -44,7 +44,7 @@ It's this two-step combination, 16S "skimming" and a database lookup, that makes
 The alternative -- sequence everything in the sample -- provides much more accuracy of course, but the 16S approach comes surprisingly close. Careful studies that compare with the "sequence everything" (aka metagenomic) approach show that 16S is still surprisingly close -- at least 80% and often much more of the entire microbiome can be categorized accurately, even at the species level. (Figure \@ref(fig:microbeTechnologyCompare16SAccuracy))
 
 ```{r microbeTechnologyCompare16SAccuracy, fig.cap="Just 253 base pairs of the V4 subregion are enough to correctly classify more than 80% of the species in a sample. (Source: Jackson Laboratory)"}
-knitr::include_graphics("Science/assets/compare16SAccuracySpecies.jpg")
+knitr::include_graphics(file.path(here::here(),"Science","assets/compare16SAccuracySpecies.jpg"))
 ```
 
 

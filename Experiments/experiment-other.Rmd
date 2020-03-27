@@ -97,7 +97,7 @@ Why would this be?
 The nutritional label gives some possible clues. (Figure \@ref(fig:experimentSoylentLabel))
 
 ```{r experimentSoylentLabel, fig.cap = "Nutritional label and ingredients list from a bottle of Soylent."}
-knitr::include_graphics("Experiments/assets/MHG-experimentSoylentLabel.jpg")
+knitr::include_graphics(file.path(here::here(),"Experiments","assets/MHG-experimentSoylentLabel.jpg"))
 ```
 
 One of the main ingredients, maltodextrin, is a man-made polysaccharide popular as a food additive for its usefulness as a thickener and texturizer. Usually synthesized from corn or wheat, it has been added to food products since the 1950s and is now in something like 60% of all packaged foods. It also has some well-known effects on the microbiome^[See @nickerson_deregulation_2015], at least in mice, and on the ability of some bacteria to form biofilms. I couldn't find any studies in humans that specifically look at the affect on the microbiome, except now this Berkeley study.

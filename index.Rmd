@@ -37,7 +37,21 @@ This book will introduce you to one exciting area of personal science: understan
 
 *NOTE* You're reading an online e-book that will eventually be integrated into the main site. For now, treat it like an instruction manual.  _We want your feedback!_ so please email us at [info@personalscience.com](mailto:info@personalscience.com). To move to the next page, either hit the arrow buttons on your keyboard, or click the arrows at the very bottom of the page.  Enjoy!
 
+
 # What is Personal Science? 
+
+
+The term "personal science" was first popularized by the late Seth Roberts, an Emeritus Professor in the Psychology at University of California, Berkeley. His best-selling book^[@roberts_shangri-diet] and [popular blog](https://sethroberts.net/)^[His blog, active until his death in 2014, is actively discussed on a Facebook Community: https://sethroberts.net/2016/01/13/seth-roberts-community-on-facebook/ ] insisted that much of modern science is too complicated for its own good, that interesting and practical results are often best achieved through personal experimentation. Through multiple examples from his own self-experiments, he used his own data to show non-obvious treatments for better sleep (skip breakfast), lower depression (faces in the morning), and many other situations.^[@roberts_self-experimentation_2004]
+
+---
+
+Most of the examples in this book are based on over 600 near-daily samples I took of my own microbiome over a three year period. Inspired by an experiment conducted at MIT^[@david_host_2014], during most of that time I also carefully tracked the food I ate, my sleep, and other variables like activity and location. Most of my near-daily samples were of my gut, but I also regularly tested my skin, nose, and mouth. Since I’m generally healthy, I didn’t have a specific goal in mind other than to try to understand better what these microbes are doing, so many of my tests were taken while undergoing simple experiments, like eating a specific type of food or traveling to a new place. While not necessarily up to the rigorous standards of a formal scientific trial, these “n of 1” studies on myself helped me discover several new interesting facts about my own microbiome, many of which appear to contradict other published studies. In addition, hundreds of people sent me their own test results, letting me compare many different microbiomes. And of course, I also followed the latest developments in scientific publications and the general press as I eagerly tried to learn more.
+
+This book tells you what I learned -- and how you can learn too.
+
+---
+
+<!-- 
 
 If you suffer from a chronic condition, one of your first struggles is simply *how bad is it?* What is the precise version or name of this disease? What makes you different from a healthy person, or from the healthy person you used to be? Are there other people with the same condition, and if so, how does your situation compare to theirs? Are you getting better or worse?
 
@@ -88,15 +102,8 @@ But what if you could choose your own subset of users with whom you want to comp
 
 That’s why it’s *personal* -- it’s about the one, unique data point that is you -- and why it’s *science* -- democratize the quantitative tools of science to let you understand your condition, for yourself.
 
+-->
 ---
-
-The term "personal science" was first popularized by the late Seth Roberts, an Emeritus Professor in the Psychology at University of California, Berkeley. His best-selling book^[@roberts_shangri-diet] and [popular blog](https://sethroberts.net/)^[His blog, active until his death in 2014, is actively discussed on a Facebook Community: https://sethroberts.net/2016/01/13/seth-roberts-community-on-facebook/ ] insisted that much of modern science is too complicated for its own good, that interesting and practical results are often best achieved through personal experimentation. Through multiple examples from his own self-experiments, he used his own data to show non-obvious treatments for better sleep (skip breakfast), lower depression (faces in the morning), and many other situations.^[@roberts_self-experimentation_2004]
-
----
-
-Most of the examples in this book are based on over 600 near-daily samples I took of my own microbiome over a three year period. Inspired by an experiment conducted at MIT^[@david_host_2014], during most of that time I also carefully tracked the food I ate, my sleep, and other variables like activity and location. Most of my near-daily samples were of my gut, but I also regularly tested my skin, nose, and mouth. Since I’m generally healthy, I didn’t have a specific goal in mind other than to try to understand better what these microbes are doing, so many of my tests were taken while undergoing simple experiments, like eating a specific type of food or traveling to a new place. While not necessarily up to the rigorous standards of a formal scientific trial, these “n of 1” studies on myself helped me discover several new interesting facts about my own microbiome, many of which appear to contradict other published studies. In addition, hundreds of people sent me their own test results, letting me compare many different microbiomes. And of course, I also followed the latest developments in scientific publications and the general press as I eagerly tried to learn more.
-
-This book tells you what I learned.
 
 
 ```{r loadAllData, echo=FALSE, warning = FALSE, message = FALSE}

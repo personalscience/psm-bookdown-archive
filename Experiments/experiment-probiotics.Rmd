@@ -135,7 +135,7 @@ Since doing this experiment on myself, I've spoken with numerous others who've t
 Here's an example, "Jeremy", a healthy man in his 50s took [this probiotic supplement](https://www.florahealth.com/us/products/super-bifido-plus-probiotic/): $42 for one month of pills:
 
 ```{r probioticsSuperBifidoLabel, fig.cap = "Super Bifido Plus Probiotics contains high amounts of live Bifidobacteria and Lactobacillus."}
-knitr::include_graphics("./experiments/assets/labelSuper-Bifido-Plus-Probiotic-30cap.jpg")
+knitr::include_graphics(file.path(here::here(),"Experiments","assets/labelSuper-Bifido-Plus-Probiotic-30cap.jpg"))
 ```
 
 and here's the high level result:

@@ -12,7 +12,7 @@ But how can you tell whether their healthy lifestyle is helping? To find out, he
   Firmicutes       2.26%
 
 ```{r echo=FALSE}
-knitr::include_graphics("./CaseStudies/images/babybiome1.jpg")
+knitr::include_graphics(file.path(here::here(),"images/babybiome1.jpg"))
 ```
 
 
@@ -29,7 +29,7 @@ What does this all mean? Well, the first thing to notice about Molly's microbiom
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("./CaseStudies/images/mombiome1.jpg")
+knitr::include_graphics(file.path(here::here(),"images/mombiome1.jpg"))
 ```
 
 
