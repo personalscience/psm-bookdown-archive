@@ -1,21 +1,10 @@
 ## Collection methods {#experimentCollection}
 
-
-```{r}
-library(psmr)
-library(phyloseq)
-library(tidyverse)
-library(actino)
-```
-
 To understand a result, we need to know more about the overall variability of the microbiome. As we showed previously, the day-to-day changes can be substantial, but what about variability in the sample itself? To find out, I tried sampling the same, uh, evacuation in several different ways. (Warning: some of the discussion here may get a little precise).
 
 I submitted two swabs to the lab. One of them I simply poked somewhere in the middle of the sample. In the other, I placed the entire sample into a plastic bag and gently "blended" it as best I could, rolling and kneading it back and forth until it was as mixed as I had patience to try. Here are the results at the genus level:
 
 ```{r evacuationDifferences}
-
-
-
 evac1.middle <- subset_samples(sprague.genus.norm, SSR == 21189)
 evac1.blend <- subset_samples(sprague.genus.norm, SSR == 22430)
 evac1 <- prune_taxa(taxa_sums(merge_phyloseq(evac1.middle,evac1.blend))>42,
@@ -98,7 +87,7 @@ knitr::kable(data.frame(estimate_richness(evac1, measures = "Shannon"), location
 
 ---
 
-Scientists at uBiome [recently released](https://www.biorxiv.org/content/early/2018/05/15/322677) results from experiments testing the variability of gut samples.  My own experiments show considerable day-to-day variability, so I was interested to see their conclusions, which are based on much more rigorous testing.
+Scientists at uBiome [released](https://www.biorxiv.org/content/early/2018/05/15/322677) results from experiments testing the variability of gut samples.  My own experiments show considerable day-to-day variability, so I was interested to see their conclusions, which are based on much more rigorous testing.
 
 The preprint, titled _Measures of reproducibility in sampling and laboratory processing methods in high-throughput microbiome analysis_ finds these high-level results:
 

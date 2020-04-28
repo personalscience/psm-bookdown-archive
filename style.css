@@ -1,0 +1,13 @@
+body {
+  font-family:  Georgia, Times Roman, serif;
+}
+code {
+  font-family: "Lucida Console", 'Andale Mono', 'STKaiti', 'KaiTi', 'SimKai', monospace;
+}
+pre code {
+  font-family: Consolas, "Lucida Console", Monaco, 'STKaiti', 'KaiTi', 'SimKai', monospace;
+}
+p.caption {
+  font-size: 0.8em;
+  font-weight: bold;
+}
