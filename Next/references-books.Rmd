@@ -4,8 +4,11 @@ The number of books about the microbiome have exploded in the past few years, bu
 
 * Knight, Rob *Follow Your Gut: How the Ecosystem in Your Gut Determines Your Health, Mood, and More*
 
+```{r book-knight}
 
-![](https://images-na.ssl-images-amazon.com/images/I/51eo4PeHPBL._SL160_.jpg)
+include_graphics("https://images-na.ssl-images-amazon.com/images/I/51eo4PeHPBL._SL160_.jpg", error=FALSE)
+```
+
 
 
 At only 120 pages, this is the most concise summary of what’s known — and not known — about the microbiome. Written by one of the scientists behind the American Gut Project, it’s a readable and fascinating overview of the facts and a great first introduction. If you only read one book, this is it.
@@ -24,13 +27,20 @@ The most practical, up-to-date book on what works and doesn’t work. Written fo
 
 * Spector, Tim *The Diet Myth: Why the Secret to Health and Weight Loss is Already in Your Gut*
 
-![](https://images-na.ssl-images-amazon.com/images/I/51MzBLv5PjL._SL160_.jpg)
+```{r book-spector}
+
+include_graphics("https://images-na.ssl-images-amazon.com/images/I/51MzBLv5PjL._SL160_.jpg", error = FALSE)
+```
+
 
 Another excellent one written by a practicing scientist and a good complement to *Follow Your Gut*. The author's concise writing style packs multiple interesting examples and facts on each page. Divided into chapters based on type of food, I learned about what's proven and what's unknown about the effects of different diets on health.
 
 * Collen, Alanna *10% Human: How Your Body's Microbes Hold the Key to Health and Happiness*
 
-![](https://images-na.ssl-images-amazon.com/images/I/51dly8s5QrL._SL160_.jpg)
+```{r book-collen}
+include_graphics("https://images-na.ssl-images-amazon.com/images/I/51dly8s5QrL._SL160_.jpg", error = FALSE)
+```
+
 
 Another great overview that explains to the ordinary person the implications of the microbiome. Well-written, full of interesting facts, but sticks strictly to mainstream science. For example, although the author explains the concept of "leaky gut", she observes it skeptically as an unproven hypothesis, rather than jump whole-hog into diagnoses. Best parts discuss the gut role on behavior ("Mind Control"), with detailed examples from autism research, Whipple's Disease, and more. The book includes a list of the highest-quality references, but unfortunately it's not complete, so many of the facts are hard to follow up.
 
@@ -64,7 +74,13 @@ Well-written, concise overview of what's known about epigenetics and "Fat Genes"
 
 * Campbell, Kristina *The Well-Fed Microbiome Cookbook*
 
-![](https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01HQZZSIU&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=richasprag-20)
+```{r book-campbell}
+
+include_graphics("https://images-na.ssl-images-amazon.com/images/I/91AZxhgkDAL.SR160,240_BG243,243,243.jpg", error=FALSE)
+
+
+```
+
 
 If you'd like a shorter, summarized version of the science as well as practical suggestions for family meals, get this book. The author writes for [gutmicrobiotaforhealth.com](http://gutmicrobiotaforhealth.com), which you should check for more up-to-date information.
 

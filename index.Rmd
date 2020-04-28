@@ -115,7 +115,8 @@ source("R/loadMHGData.R")
 
 library(ggthemes)
 theme_set( theme_light(base_family = "MarkPro"))
-theme_set(theme_economist())# + scale_colour_economist())
+theme_set(theme_economist() +theme(axis.title.x=element_blank()))# + scale_colour_economist())
+
 
 if(Sys.info()["sysname"]=="Darwin"){
   quartzFonts(Candara = quartzFont(rep("Candara",4)), MarkPro = quartzFont(rep("MarkPro",4)))

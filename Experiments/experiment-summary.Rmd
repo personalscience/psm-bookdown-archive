@@ -26,6 +26,7 @@ ggplot(data,aes(x=Date,y=Shannon)) + geom_point() +
   geom_smooth(method = "loess") + 
   scale_x_date(date_labels = "%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
   theme(axis.text.x = element_text(angle=90)) + 
+  theme(axis.title.x=element_blank()) +
   labs(y = "Shannon Alpha Diversity Index", title = "Gut Diversity Changes Day-To-Day")
 ```
 
@@ -40,6 +41,7 @@ data = data.frame(Diversity = estimate_richness(diversityYear.gut.family, measur
                   Date = sample_data(diversityYear.gut.family)$Date)
 ggplot(data,aes(x=Date,y=Shannon)) + geom_point() +
   geom_smooth(method = "loess") + 
+  theme(axis.title.x=element_blank()) +
   scale_x_date(date_labels = "%B", date_breaks = "1 months", date_minor_breaks = "1 month")  +
   theme(axis.text.x = element_text(angle=90)) + 
   labs(y = "Shannon Alpha Diversity Index", title = "Gut Diversity Across One Year")
@@ -84,6 +86,7 @@ fb$Date <- as.Date(fb$Date)
 ggplot(data=fb %>% gather(Date,Ratio),aes(x=Date,y=Ratio, group=1)) + geom_point() + geom_line() +
   scale_x_date(date_labels = "%d (%A)", date_breaks = "1 day", date_minor_breaks = "1 day") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(axis.title.x=element_blank()) +
   ggtitle("Ten Consecutive Days of Firmicutes/Bacteroidetes")
 
 # plot_bar(subset_samples(Firmicutes, Date > "2017-03-15" & Date < "2017-03-27"), fill = "Phylum", x = "Date") +
@@ -168,6 +171,7 @@ kefir.top <- subset_taxa(gut.norm, Genus %in% c("Lactococcus") ) #,"Fusicateniba
 plot_bar(subset_samples(kefir.top, Date > fromDate & Date < toDate), fill = "Genus", x = "Date") +
   ggtitle("Kefir Taxa Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
   annotate("pointrange",x = kefir.day, y = 0, ymin = -0.003, ymax = 0, color = "blue", size = 0.1) + 
+  theme(axis.title.x=element_blank()) +
   scale_x_date(date_labels = "%b20%y",
                 date_breaks = "1 month", date_minor_breaks = "2 weeks")
 

@@ -47,7 +47,8 @@ plot_bar(subset_taxa(ps.short, Genus %in% targetGenus),
          x="Date") +  
   scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + 
   facet_grid(Genus~., scale="free_y", drop=TRUE) + 
-    annotate("point",x=probiotic.day, y = -0.03, color = "red") + theme(legend.position = "none")
+    annotate("point",x=probiotic.day, y = -0.03, color = "red") + 
+  theme(axis.title.x=element_blank()) + theme(legend.position = "none")
 
 
 ```
@@ -72,6 +73,7 @@ plot_bar(subset_taxa(ps.long, Genus %in% targetGenus),
          #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
          x = "Date", fill = "Genus")  +
   scale_x_date(date_labels = "%b", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  theme(axis.title.x=element_blank()) +
   ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
   scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
   facet_grid(Genus~., scale="free_y", drop=TRUE) + 
@@ -160,8 +162,9 @@ plot_bar(subset_taxa(jc.short,
 plot_bar(subset_taxa(subset_samples(jc.short, Date > "2017-01-01"), Genus %in% targetGenus), 
          #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
          x = "Date", fill = "Genus")  +
-  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  scale_x_date(date_labels = "%b", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
   ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
+  theme(axis.title.x=element_blank()) +
   scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
   facet_grid(Genus~., scale="free_y", drop=TRUE)
 
@@ -179,7 +182,8 @@ library(ggplot2)
 kh <- subset_samples(people.norm,Username == "kh")
 kh.short <- prune_taxa(taxa_sums(kh)>100,kh)
 sample_data(kh.short)[,c("Label")] <- c("Europe t=0","USA t+1 mo","USA t+2 mo")
-mhg_plot_top_heat(kh.short)
+mhg_plot_top_heat(kh.short) +
+  theme(axis.title.x=element_blank()) 
 ```
 
 Notice how Kevin's microbiome shifted dramatically a month after arriving in the US.  Soon after that, he began taking a probiotic supplement, but his gut -- while different -- hasn't shifted as much as it did from the international move.
@@ -221,7 +225,7 @@ plot_bar(subset_taxa(vsl, Genus %in% targetGenus),
          #facet_grid = Genus~., #(facets = Genus~., scales = "free_y"),
          x = "Date", fill = "Genus")  +
   geom_hline(yintercept = b_median, color = "green") + 
-  scale_x_date(date_labels = "%b20%y", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
+  scale_x_date(date_labels = "%B", date_breaks = "1 month", date_minor_breaks = "2 weeks") +
   ggtitle("Abundance of Probiotic Bacteria") + theme(legend.position = "none") +
   scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") +
   facet_grid(Genus~., scale="free_y", drop=TRUE)

@@ -9,13 +9,13 @@ The Personal Science app supports raw data from several microbiome companies.
 ### uBiome
 Until October 2019, the most popular laboratory was the San Francisco startup uBiome ^[from September 2012], 
 that originally began as crowdfunded campaign on
-Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. Unfortunately, uBiome sequencing has been suspended. 
+Indiegogo^[https://www.indiegogo.com/projects/ubiome-sequencing-your-microbiome], but has since handled tens of thousands of samples from people like you who are curious to know more about their own microbiome. 
 
-Please watch this space for updates on the best sequencing shops post-uBiome.
+uBiome's assets were sold to [Psomagen](https://psomagen.com/), the US subsidiary of a genomics sequencing company. Psomagen sells gut testing kits: Gene and Gut Biome (\$99 for the same 16S-style testing as uBiome) and GutBiome+ (\$129) a metagenomic test that will describe your microbes down to the species level.
 
 
 ### Thryve
-Founded after CEO Richard Lin became frustrated at the lack of actionable microbiome insights to cure his own recurrent gut issues, [ThryveInside.com](https://thryveinside.com) is another gut microbiome test that offers full raw downloads for your data. We'll be adding Thryve support soon.  Meanwhile, use the offer code `personalscience15` for 15% off your order.
+Founded after CEO Richard Lin became frustrated at the lack of actionable microbiome insights to cure his own recurrent gut issues, [ThryveInside.com](https://thryveinside.com) is another gut microbiome test that offers full raw downloads for your data. Use our offer code `personalscience15` for 15% off your order.
 
 ### American Gut
 
