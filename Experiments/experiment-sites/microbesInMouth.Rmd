@@ -1,4 +1,4 @@
-## The Oral Microbiome* {#startMouth}
+## My Oral Microbiome* {#startMouth}
 
 ```{r}
 # This is now read in loadMHGData.r

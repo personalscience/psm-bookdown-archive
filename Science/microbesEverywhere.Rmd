@@ -8,7 +8,17 @@ Every traditional culture recognizes a role for the invisible, often translated 
 
 The invisible world of microbes is like that, with new, low-cost technologies showing us an incredible, rich, living universes of over 1 trillion species^[Nobody knows for sure, but perhaps the latest, best estimate is @locey_scaling_2016] waiting to be explored. 
 
-The word "microbe" refers to any tiny organism that carries its own genetic information for purposes of propagating itself. Far too small to see with the naked eye, dozens could fit inside a typical human cell. Although it's common to think of microbes synonymously with bacteria, in fact there are at least seven different types of microorganism: bacteria, extremophile life forms called archaea that live and thrive in environments too challenging for bacteria, protozoa, algae, fungi, viruses, and some multi-cellular animal parasites such as helminths. Each of these has its own characteristic body type, means of reproduction, ways of moving around, and a deep, long history that is far older than humans.
+The word "microbe" refers to any tiny organism that carries its own genetic information for purposes of propagating itself. Far too small to see with the naked eye, dozens could fit inside a typical human cell. Although it's common to think of microbes synonymously with bacteria, in fact there are at least seven different types of microorganism:
+
+* bacteria
+* archaea: extremophile life forms that live and thrive in environments too challenging for bacteria
+* protozoa
+* algae 
+* fungi
+* viruses
+* a few multi-cellular animal parasites such as helminths.
+
+Each of these has its own characteristic body type, means of reproduction, ways of moving around, and a deep, long history that is far older than humans.
 
 Let's look next at some of these environments and see the odd places where microbes have been found.
 

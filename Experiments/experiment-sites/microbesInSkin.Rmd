@@ -1,4 +1,4 @@
-## The Skin Microbiome* {#experimentSkin}
+## My Skin Microbiome* {#experimentSkin}
 
 
 Microbes of the gut are important, but many other organisms are crawling all over you too.  What can we learn from studying my skin samples?
@@ -95,7 +95,7 @@ plot_bar(subset_taxa(subset_samples(sprague.all_ranks.norm,
                      grepl("Morax*",Species) ),
          x = "Date", fill = "Genus") + 
   ggtitle("Sprague Skin Microbes Under Moraxellaceae") + 
-  scale_x_date(date_labels = "%B ", date_breaks = "1 months", date_minor_breaks = "2 weeks") +
+  scale_x_date(date_labels = "%B ", date_breaks = "3 months", date_minor_breaks = "1 month") +
   ylab("Abundance (%)") + scale_y_continuous(labels=function(x)x/10000) + ylab("Abundance (%)") + theme(legend.position = "right") 
   
 

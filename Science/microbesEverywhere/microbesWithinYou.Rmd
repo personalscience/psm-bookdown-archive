@@ -61,18 +61,23 @@ Even your enjoyment of wine appears to be related to the types of microbes in yo
 
 **Nose**
 
-Along with the skin, the nose microbiome is one of the sites on your body that is constantly exposed to the outside, unlike the mouth or gut, which have some say over when or how they'll come into contact with new microbes. 
+Like the skin, your nose microbiome is permanently exposed to the outside world so it faces different challenges than the mouth or gut, which have some say over when or how they'll come into contact with new microbes. With every breath, your nose microbiome risks exposure to intruders which, once they are inside, may cause major changes to the rest of the microbiome. Unsurprisingly, noses that are regularly exposed to new and different threats will develop more diverse microbiomes.
 
-There is intriguing evidence that the nose microbiome may be associated with Alzheimer's disease^[Gina Kolata wrote a summary in a [2016 New York Times article](http://www.nytimes.com/2016/05/26/health/alzheimers-disease-infection.html)]. Some early AD symptoms, like a loss of smell, may be clues that the brain has been attacked by something that came from outside.
-
-Dairy farmers have a wider variety of nasal microbes than do their urban non-farming counterparts. Interestingly, one study shows farmers have lower _Staphylococcus_ too, and none of the microbial-resistant kind found in urban dwellers, an indication that the greater competition from all those diverse microbes is actually preventing the emergence of resistance.^[ Full study open access here: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183898]
+Dairy farmers, for example, have a wider variety of nasal microbes than do their urban non-farming counterparts. Interestingly, one study shows farmers have lower _Staphylococcus_ too, and none of the microbial-resistant kind found in urban dwellers, an indication that the greater competition from all those diverse microbes is actually preventing the emergence of resistance.^[ Full study open access here: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0183898]
 
 Although the noses of farmers and non-farmers are dominated by the same three phyla, _Firmicutes_, _Actinobacteria_, and _Proteobacteria_, the farmers have much more _Bacteroidetes_, _Tenericutes_ and _Verrucomicrobia_. 
 
+There is a clear association between the microbiome and smell. Both Alzheimers and Parkinsons researchers have long noted that changes in smell precede symptoms^[Gina Kolata wrote a summary in a [2016 New York Times article](http://www.nytimes.com/2016/05/26/health/alzheimers-disease-infection.html)]. Some early AD symptoms, like a loss of smell, may be clues that the brain has been attacked by something that came from outside.
+
 The nasal microbiome appears to change during a viral infection, and the overall microbial composition seems to depend on the types of viruses, and whether the person was vaccinated or not.^[@ding_microbial_2019. Open access study results here: https://mbio.asm.org/content/10/4/e01296-19]  In a study of 200 New Yorkers, healthy people seemed to have an abundance of _Corynebacterium_ and _Streptococcus_, whereas the people with viruses had much lower _Corynebacterium_ slightly lower _Streptococcus_, and more _Dolosigranulum_.
 
-When [I tested my own nose microbiome](#startNose), I found that the vast majority of microbes are _Corynebacterium_ and _Moraxella_, with a steady small amounts of _Dolosigranulum_ and _Propionibacterium_.  I occasionally have a spike of _Staphylococcus_, a usually benign and perhaps even beneficial microbe that can turn pathogenic under some circumstances.
+Researchers from the University of Graz in Austria published a small study (n=67) @koskinen_nasal_2018^[[The nasal microbiome mirrors and potentially shapes olfactory function](https://www.nature.com/articles/s41598-018-19438-3) in Nature Scientific Reports] that found clear differences between those with normal sense of smell (n=29) and those without (n=10). In particular, "butyric acid-producing microorganisms were found to be associated with impaired olfactory function".
 
+Some of the microbes most associated with poor ability to smellinclude: 
+*Actinomyces*, *Corynebacterium*, *Bacteroides*, *Anaerococcus*, *Faecalibacterium*, *Pseudomonas*, and others.^[Full table here: https://www.nature.com/articles/s41598-018-19438-3/tables/2] 
+
+
+When [I tested my own nose microbiome](#startNose), I found that the vast majority of microbes are _Corynebacterium_ and _Moraxella_, with a steady small amounts of _Dolosigranulum_ and _Propionibacterium_.  I occasionally have a spike of _Staphylococcus_, a usually benign and perhaps even beneficial microbe that can turn pathogenic under some circumstances.
 
 
 ---

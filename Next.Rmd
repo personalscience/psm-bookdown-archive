@@ -28,7 +28,8 @@ Here are a few interesting other microbiome-related ideas to explore
 ```
 
 
-```{r child="Next/references-books.Rmd"}
+
+```{r child=if(knitr::is_html_output())"Next/references-books.Rmd"}
 ```
 
 
