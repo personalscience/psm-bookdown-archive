@@ -29,9 +29,9 @@ mhg_plot_top(gut.norm) + ylab("Sprague Log10 (%) Abundance") +
 
 ## Healthy ranges {#appendixHealthyRanges}
 
-Our collection of `r length(sample_data(subset_samples(people.norm, Condition=="Healthy" & Site=="gut"))$Username)` samples we have determined are from healthy people shows the following ranges for the top 20 genera:
+Our collection of `r length(sample_data(subset_samples(people.norm, Condition=="Healthy" & Site=="gut"))$Username)` samples we have determined are from healthy people shows the following ranges for the top 20 genera (Figure \@ref(fig:appendixComputeHealthy))
 
-```{r appendixComputeHealthy}
+```{r appendixComputeHealthy, fig.cap="Vertical lines show the abundance ranges found in healthy people (log scale)."}
 
 #write.csv(na.omit(mhg_range_for(subset_samples(people.norm,Site=="gut" & Condition == "Healthy"))),file="healthy_ranges.csv")
 
@@ -51,16 +51,18 @@ ggplot(data = h.sprague %>% arrange(desc(mean)) %>% top_n(20), aes(x=reorder(tax
 
 A complete list of all species ever found in my gut is in the supplemental materials.
 
-Can I learn anything special about differences between healthy and unhealthy people? Let's look at outliers (Figure \@ref(fig:caseStudyHealthyOutliers))
+Can I learn anything special about differences between healthy and unhealthy people? Let's look at outliers (Table \@ref(tab:caseStudyHealthyOutliers)). This table shows the typical ranges found in healthy people, plus a column showing the level found in unhealthy people.
 
-```{r caseStudyHealthyOutliers, fig.cap = "Outliers for healthy and unhealthy people."}
+(ref:unhealthyOutliersCaption) Ranges for healthy people. Unhealthy column shows the level found in unhealthy people.
+
+```{r caseStudyHealthyOutliers}
 
 psmr::mhg_outlier(psmr::mhg_range_for(subset_samples(people.gut.norm,
                                                      Condition %in% c("Dysbiosis","Lyme","Cancer","Overweight"))),
                   psmr::mhg_range_for(people.healthy.gut.genus)) %>%
   mutate_at(vars(-taxa),function(x) x/10000) %>% arrange(taxa)  %>%
   select(-original, Unhealthy = original) %>% # write.csv(file = "outliers.csv")
-  knitr::kable(digits = 3, caption = "Outliers for Unhealthy people")
+  knitr::kable(digits = 3, caption = '(ref:unhealthyOutliersCaption)')
   
 
 ```

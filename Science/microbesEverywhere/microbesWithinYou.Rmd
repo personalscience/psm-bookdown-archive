@@ -13,7 +13,9 @@ But the interior of a human looks remarkably similar to the world that bacteria 
 
 And there are a lot of them. You have 40 trillion bacterial cells in your body -- slightly more than the number of human cells. Combined with the viruses, fungi, and other microscopic DNA-carrying organisms inside you, that's close to 5 million unique genes, compared to only 25,000 human ones. ^[See the detailed calculations in @sender_revised_2016]
 
-About 1% of the DNA in your blood is non-human, and at least half of that comes from organisms that have never been studied before.^[@kowarsky_humans_2017]
+
+When Stanford scientists turned a gene sequencer on DNA fragments found floating in human blood, only about 1% came from previously-identified sources. The rest -- the vast majority -- came from organisms that have never been studied before. ^[@kowarsky_humans_2017 as described in https://news.stanford.edu/2017/08/22/nearly-microbes-inside-us-unknown-science/]
+
 
 Now on to the body itself.  The first place to start is with the organ that literally covers us from head to toe.
 

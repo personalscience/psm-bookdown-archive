@@ -14,6 +14,8 @@ knitr::include_graphics(file.path(here::here(),"Science/assets/scienceNYCSubway.
 
 Generally the microbes seem content to exist patiently with no apparent affect on the environment. A station flooded by Hurricane Sandy showed a similarity to a marine environment a year after the disaster.
 
+
+
 Humans are the source of many unusual microbes in our environment. Regularly shedding 1.5 million skin cells per hour, your body's leftover inhabitants can colonize a hotel room in less than six hours.^[http://www.wsj.com/articles/big-data-and-bacteria-mapping-the-new-york-subways-dna-1423159629]
 
 Your household pets carry microbes, of course, but simply having a pet seems associated with different microbes in humans.  One study showed that babies living in a household with pets have more _Clostridiaceae_, _Veillonella_ (especially for dogs), _Peptostreptococcaceae_ and _Coprococcus._ Cats in particular seemed associated with lower _Bifidobacterium_ while dogs seemed to spell doom for _Eggerthella_.^[@azad_infant_2013]

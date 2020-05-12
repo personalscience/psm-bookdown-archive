@@ -2,14 +2,20 @@
 
 THIS CHAPTER IS STILL IN DRAFT
 
-The great French scientist Louis Pasteur, working as a physician in the 1800s, was the first to popularize the idea that the world is covered in *germs*, invisible agents that he associated with food spoilage and disease. Simple steps at hygiene, he discovered, could make conditions inhospitable for them, enabling better food storage and dramatically fewer illnesses. Working as a chemistry professor in the 1850s, one of his students, the son of a local wine manufacturer, sought his help to solve problems with souring. Subsequent investigations led him to conclude that invisible yeasts were the culprit, and that exposure to air could affect the rate of fermentation. Pasteur's emphasis on controlling these microbes led to a general association of germs as pathogens, a bad, even evil force that we must destroy, every single time. The only good germ is a dead germ.
+The great French scientist Louis Pasteur, working as a physician in the 1800s, was the first to popularize the idea that the world is covered in *germs*, invisible agents that he associated with food spoilage and disease. Simple steps at hygiene (the word derives from the Greek, meaning "health"), he discovered, could make conditions inhospitable for them, enabling better food storage and dramatically fewer illnesses. Working as a chemistry professor in the 1850s, one of his students, the son of a local wine manufacturer, sought his help to solve problems with souring. Subsequent investigations led him to conclude that invisible yeasts were the culprit, and that exposure to air could affect the rate of fermentation. Pasteur's emphasis on controlling these microbes led to a general association of germs as pathogens, a bad, even evil force that we must destroy, every single time. The only good germ is a dead germ.
 
 And for good reason. The development of effective disinfectants, and then antibiotics -- germ killers –- was one of the greatest medical achievements of all time, saving the lives of a significant fraction of the human race. Before Pasteur, urban life was a precarious game of chance against diseases that seemed to come and go randomly. Thanks to the development of the Germ Theory of Disease, it was suddenly possible to imagine a world where deadly illnesses and infections could be controlled and perhaps eliminated. Now, every day of your life, modern amenities like running water and flush toilets keep you healthy simply by controlling the growth of microbes.
 
 Some can be quite nasty. The bacterium that causes Cholera, [*Vibrio cholerae*](https://en.wikipedia.org/wiki/Vibrio_cholerae), after infecting the small intestine, promptly hijacks the body’s natural defense systems into sending a large stream of water through the colon to flush out all other bacteria. Normally, this would be an appropriate response to an invasion, but by hiding above the colon, *Vibrio cholerae* continues to breed above the main flow of water. The resulting diarrhea is so fierce that the patient is literally unable to drink enough to make up for the outflow, and dies of dehydration within days. And in a final act of cruelty, that water that the body pushes out so fiercely is itself full of *V. cholerae*, who use the opportunity to infect others who come in contact with the water.
 
-Campylobacter jejuni: food poisoning from raw chicken
+Bacterial gastroenteritis -- more commonly known as "food poisoning" -- is a source of discomfort, abdominal pain, diarrhea, and worse for about 1.5 million Americans each year. Most of the time, it can be traced to *Campylobacter jejuni*, which has a shape and structure ideally suited to penetrating the mucosal layer of your intestines, where it attaches itself and begins to release toxins that activate the immune system and the resulting diarrhea and fever. *C. jejuni* is a natural and benign colonizer of the digestive tracts of many bird species, including poultry, and because most of the time these birds appear perfectly healthy, it's not uncommon for 20% or more of retail chickens to be contaminated. Fewer than 1,000 organisms under the right conditions can cause illness. 
 
+Fortunately, *C. jejuni* is easy to kill. Low pH, for example: 2.3 and they're dead (think lemon juice or vinegar).  The antibiotic erythromycin is quite effective too, with almost no resistance observed so far.  But the best weapon is heat: they strongly prefer the normal body temperature of birds (40$^\circ$ C or 105$^\circ$F ), and reproduce best at 42$^\circ$ (107.5$^\circ$F ), but go much higher than that and they'll slow down and die.
+
+```{r scienceMicrobesHealthBacteriaDeathTable, fig.cap = "How to kill common pathogens.  Source: [@myhrvold_modernist_2011] p.145"}
+
+knitr::include_graphics(file.path(here::here(),"Science/assets/ScienceHealthFoodBacteriaReproduction.jpg"))
+```
 
 The toxins produced by the *Clostridium* genus are among the most dangerous. Botulism (C. *Botulinin*) Tetanus ( _C. tetani_), gangrene (*C. perfringens*), and of course C. *Dificile*.
 
@@ -30,15 +36,23 @@ _Lactobacillus_ is especially good at crowding out pathogens.
 
 The body is pretty good at fighting off many pathogens. Around 94% of people who ingest _Salmonella_ will recover without any medical attention at all.^[Of course, it's difficult to tell how many people _don't_ go to the hospital; this is a risk estimate based on fairly generous assumptions about the amount of the pathogen in eggs and how many people eat them. @hope_overview_2002]
 
-99% of the "A survey of DNA fragments circulating in the blood suggests the microbes living within us are vastly more diverse than previously known. In fact, 99 percent of that DNA has never been seen before."^[https://news.stanford.edu/2017/08/22/nearly-microbes-inside-us-unknown-science/]
+
+### Food Allergies
+
+If you attended elementary school before the 1980s, you can remember a time before nut allergies, when school lunches served peanut butter to everyone without the slightest worry that it might cause problems. Now many schools are forced to strictly limit the allowable kinds of food in their cafeterias, even from kids who bring their own lunches. Besides nuts, people suffer from allergies to milk, corn, eggs, fish, shellfish, soy, wheat, and many others.
+
+Oddly, the very existence of food allergies appears to be an entirely modern problem. Medical journals didn't even mention food allergies until 1969, and examples were extremely rare before that. In fact, the very first mention of a food allergy happened about 100 years ago.^[as mentioned in @spector_diet_2016  referring to Golbert, T.M., J Allergy (Aug 1969); 44(2): 96–107. _Systemic allergic reactions to ingested antigens_ and Schloss, O., Arch Paed (1912); 29: 219. _A case of food allergy_].  Human genetics hasn't changed suddenly in the past half-century, and given the variety of conditions, it seems unlikely that we can blame it on a single toxin or industrial pollutant.
+
+Several intriguing clues point in the direction of microbes as the cause of allergies.  One theory, known as the "hygiene hypothesis", says that our modern environments are too sterile, that the immune systems of growing children need to be challenged by threatening invaders from time to time or they become overly sensitive. Now another idea, the "old friends" hypothesis suggests that it's not the hygienic conditions and lack of microbes _per se_ that drive the autoimmune response, but rather it's that our bodies have evolved, over untold generations, to _expect_  microbes in the environment, some nasty and some friendly, and when the developing immune system of a child is never exposed to these microbes, a breakdown occurs that misrecognizes certain foods as enemies instead. 
+
+Rutgers University scientist Martin Blaser [@blaser_missing_2015] thinks something odd has happened because of the overuse of antibiotics. There are plenty of people in Western societies who suffer  far fewer food allergies, people like the Old Order Amish of Pennsylvania, who for centuries have kept to traditional ways of farming and who live in communities largely unaffected by industrialization. Their significantly greater time spent outdoors, challenged regularly by animal and soil microbial pathogens has made them far less likely to suffer from allergies than the rest of the population. Studies of Amish gut microbiomes show strikingly different profiles, generally with higher diversity and numerous microbes rarely found in urban people^[@zupancic_analysis_2012].
+
+Asthma, another terrible condition likely sparked by  an incorrect balance between hygiene and microbes, points to better times ahead, its numbers of sufferers having peaked in the 1990s and 2000s. In fact, “We have probably seen the worst of the asthma epidemic"^[ @spector_diet_2016] writes scientist Tim Spector, who suggests childhood asthma has been replaced by food allergies.
+
+The good news is that, armed with our understanding of the relationship between microbes and allergies, new discoveries may offer treatments or even cures. 
 
 
-###Food Allergies ***
-
-
-If you attended elementary school before the 1980s, you can remember a time before nut allergies, when school lunches served peanut butter to everyone without the slightest worry that it might cause problems.
-
-*Clostridia* may counter sensitivity to peanuts ^[http://www.sciencemag.org/news/2014/08/gut-microbe-stops-food-allergies]
+Evidence showing that *Clostridia* may counter sensitivity to peanuts ^[http://www.sciencemag.org/news/2014/08/gut-microbe-stops-food-allergies] has led to additional research behind the source of the problem. Now a new drug, Palforzia, is an FDA-approved treatment option for peanut allegies that works by exposing young children to small doses of the key microbe-stimulating compound in peanuts, letting immature immune systems develop a safer relationship with peanuts. Similar studies are underway for other allergies, lending hope that someday food allergies may once again fade into the background and disappear as they did 100 years ago.
 
 
 ### Gluten
@@ -58,18 +72,6 @@ Another clue happens further up the digestive system. Spanish researchers lookin
 So if Celiac disease is caused by a change in the way some microbes function, how did that change happen in the first place? One theory is that it’s a virus.  Researchers at the University of Chicago and University of Pittsburgh were able to supercharge the way mice react to gluten by infecting them with a reovirus that apparently changes something about the body’s immune response in the presence of the gluten protein. ^[http://www.today.com/health/celiac-disease-may-be-caused-virus-new-study-finds-t110119]
 
 
-Where did this modern plague come from?
-
-The first case to appear in medical journal didn’t happen until 1969 (Golbert), and examples were extremely rare before that. In fact, the very first mention of a food allergy happened about 100 years ago (Schloss).
-
-Martin Blaser thinks something odd has happened because of the overuse of antibiotics.
-
-Amish microbes are very diverse google: “Zupancic microbiota Old Order Amish” PLOS 2012
-
-partly because they drink lots of raw milk
-
-
-“We have probably seen the worst of the asthma epidemic which was at its height in the 80s and 90s"^[ @spector_diet_2016]
 
 Members of your household will have more similar microbiomes if there's a dog present.^[see @song_cohabiting_2013 or [open text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3628085/)]
 
