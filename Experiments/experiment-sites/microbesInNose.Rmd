@@ -30,7 +30,10 @@ nose.out <- c(92758,161393,111021,111037,301642)  # eliminate some obvious outli
 sprague.ps <- sprague.family.norm
 
 sample_data(sprague.ps)$Season <- factor(new_season_label(sprague.ps), levels = c("Winter","Spring","Summer","Fall"))
-sample_data(sprague.ps)[sample_data(sprague.ps)$Geo == "Mercer Island",]$Geo <- "Seattle"
+
+sample_data(sprague.ps)$Geo <- if_else(sample_data(sprague.ps)$Geo == "Mercer Island", "Seattle", sample_data(sprague.ps)$Geo)
+
+# sample_data(sprague.ps)[sample_data(sprague.ps)$Geo == "Mercer Island",]$Geo <- "Seattle"
 sprague.nose = subset_samples(sprague.ps,Site=="nose" & !(SSR %in% nose.out)) # & SSR != 52075)# & Season != "Spring")
 sprague.skin = subset_samples(sprague.ps,Site=="skin")
 sprague.ext = sprague.nose # merge_phyloseq(sprague.nose,sprague.skin)
