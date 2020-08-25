@@ -29,16 +29,16 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 ```
 
 
-<!-- ```{r child="Experiments/experiment-travelMexico.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-travelMexico.Rmd"}
+```
 
 
 ```{r child="Experiments/experiment-travelChina.Rmd"}
 ```
 
 
-<!-- ```{r child="Experiments/experiment-camping.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-camping.Rmd"}
+```
 
 
 ```{r child="Experiments/experiment-activity.Rmd"}
@@ -51,8 +51,8 @@ Microbe numbers shift daily in response to your environment, so a single sample 
 ```
 
 
-<!-- ```{r child="Experiments/experiment-dentist.Rmd"} -->
-<!-- ``` -->
+```{r child="Experiments/experiment-dentist.Rmd"}
+```
 
 
 ```{r child="Experiments/experiment-colon.Rmd"}

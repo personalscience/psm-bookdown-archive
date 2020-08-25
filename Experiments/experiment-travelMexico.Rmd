@@ -10,7 +10,7 @@ My favorite drink was *pulque*, a fermented concoction made from the sap of the 
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("./Experiments/assets/experimentTravelMexicoPulque.jpg")
+knitr::include_graphics("./Experiments/assets/experimentTravelMexicoPulque.jpg", error = FALSE)
 
 mexico.ssr <- c(31328,55019,55026) # "2015-12-02" "2016-01-05" "2016-03-29"
   
@@ -99,7 +99,7 @@ I then compared this to uBiome's big database, based on tens of thousands of sam
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("./Experiments/assets/experimentTravelMexicoElusive.jpg")
+knitr::include_graphics("./Experiments/assets/experimentTravelMexicoElusive.jpg", error = FALSE)
 ```
 
 Two of these stand out for me: _Methanomassiliicoccus_ and _Citrobacter_, both of which are rare among uBiome samples and yet they appeared for me just once on a trip to Mexico. Interesting…

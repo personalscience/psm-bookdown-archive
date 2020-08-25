@@ -14,7 +14,7 @@ description: "An introduction to Personal Science and uncovering the secrets of 
 # Intro {-}
 
 
-```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://richardsprague.com'}
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), out.width = "50%", fig.link='https://richardsprague.com'}
 knitr::include_graphics('assets/coverPersonalScience.jpg', dpi = NA)
 ```
 
