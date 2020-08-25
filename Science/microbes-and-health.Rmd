@@ -79,7 +79,7 @@ Members of your household will have more similar microbiomes if there's a dog pr
  
 Humans are able to synthesize just 30 plant-digesting enzymes. Contrast that to the species _Bacteroidetes thetaiotaomicron_ which can break down plant structures using over  260 different enzymes.^[see @spector_diet_2016 p.299]
 
-## Obesity
+### Obesity
 
 Obese and diabetic people are subject to more infections than healthy people, but interestingly it's not the body mass index that drives this, but rather the accompanying hyperglycemia.^[ @thaiss_microbiome_2018 ]
 

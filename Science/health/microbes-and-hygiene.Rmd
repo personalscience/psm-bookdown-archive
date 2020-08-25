@@ -5,13 +5,13 @@ Now for some speculation. I can't prove any of this, but these are some question
 
 What does (underarm) deoderant do?  Although rich people soaked themselves with various colognes for thousands of years, the widespread use of deoderant is less than 100 years old. 
 
-Why do you have sweat glands there in the first place? Sweat is supposed to help cool your body, but not much cooling will happen from a surface that's not exposed to much air. Instead, those glands feed bacteria, 
+Why do you have sweat glands there in the first place? Sweat is supposed to help cool your body, but not much cooling will happen from a surface that's not exposed to much air. Instead, those glands feed bacteria, especially the _Actinobacteria_, including _Corynebacterium_ that generate those molecules that you can smell. ^[see @callewaert_deodorants_2014 and http://www.realclearscience.com/blog/2014/08/antiperspirants_alter_your_armpit_bacteria_and_could_actually_make_you_smell_worse.html]
 
 Similar to the way some people do fecal transplants to modify their gut bacteria, someday it may be possible to do [arm pit bacteria transplants](https://www.fastcompany.com/3066047/armpit-bacteria-transplants-could-end-your-body-odor).
 
 How often should you brush your teeth?
 
-*Washing your hands in a public restroom*
+**Washing your hands in a public restroom**
 
 In Westernized countries for the past hundred years, it's been taken for granted that everyone should wash their hands every time they use the toilet, especially in a public place. Washing with soap and water, of course, is an effective way to remove harmful microbes, but I wonder what happens to your hands _after_ washing, when you turn off the faucet or help yourself to the paper towel machine. Even in a restroom with those fancy automatic on/off devices, you still probably touch the doorknob on your way out.
 
@@ -19,10 +19,10 @@ We know that fecal matter often harbors pathogenic microbes, and of course the a
 
 Isn't it better to enter and leave the public restroom without touching anything other than yourself?
 
-If you _do_ wash your hands in the restroom, what's the best way to dry your hands afterwards? The short answer: [paper towel](http://conversableeconomist.blogspot.ca/2012/12/paper-towels-v-air-dryers.html): the friction from rubbing your hands helps loosen and dislodge microbes, while an air dryer can just spread more germs into the air. If you're concerned about the environment from all that paper towel waste, a careful analysis of the tradeoffs shows that both methods are about equivalent once you take into account manufacturing, installation, electricity, and final disposal costs. 
+If you _do_ wash your hands in the restroom, what's the best way to dry them afterwards? The short answer: [paper towel](http://conversableeconomist.blogspot.ca/2012/12/paper-towels-v-air-dryers.html): the friction from rubbing your hands helps loosen and dislodge microbes, while an air dryer can just spread more germs into the air. If you're concerned about the environment from all that paper towel waste, a careful analysis of the tradeoffs shows that both methods are about equivalent once you take into account manufacturing, installation, electricity, and final disposal costs. 
 
 
-*How to wash food in the kitchen*
+**How to wash food in the kitchen**
 
 By far the most common source of pathogens in food happens during meal preparation. This makes it tempting to wash everything over and over throughout the cooking process, but be careful: you might just be splashing those microbes onto other surfaces throughout the kitchen.
 
@@ -35,12 +35,13 @@ Generally it's best to leave food untouched if you'll be cooking it. Fruits and 
 Ultimately the only sure way to beat pathogens in the kitchen is through high heat, so if you have reason to suspect that your food might be contaminated, you should cook it.
 
 
-*The dangers of kitchen sponges*
+**The dangers of kitchen sponges**
+
+A widely publicized 2017 study claimed that one of the most deadly microbial reservoirs in your kitchen might be the commmon scrub sponge. The porous nature of a sponge, the researchers claimed, let harmful microbes hide and breed, even after running them through a hot dishwasher or microwave oven. But a closer look shows the study used only 17 sponges, and the microbes found were all harmless, generally found on skin (as I confirmed myself in my  [Skin Experiments](#experimentSkin).
 
 
 
-
-*Microbes and cooking*
+**Microbes and cooking**
 
 Few microbes that inhabit human bodies are able to survive long at temperatures over 165 degrees (F). 
 
