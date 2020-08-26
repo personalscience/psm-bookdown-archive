@@ -7,7 +7,11 @@
 
 bookdown::gitbook:
   css: style.css
+  description: "The Personal Science guide to learning about your own microbiome using personalized genetic sequencing"
   cover-image: assets/coverPersonalScience.jpg
+  url: 'https\://psm.personalscience.com'
+  favicon: assets/favicon.ico
+  apple-touch-icon: assets/apple-touch-icon.png
   includes:
     in_header: [google_analytics.html]
 #    after_body: disqus.html
