@@ -3,6 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
 
 *.sh
 *.pdf
@@ -15,3 +16,8 @@ _bookdown_files/
 _bookdown_files/*
 _book/
 junk.txt
+
+publish.*
+*.log
+
+
